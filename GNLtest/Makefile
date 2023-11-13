@@ -1,5 +1,5 @@
-GNL_DIR = $(shell dirname $(shell pwd))/GNL
-LIBFT_DIR = $(shell dirname $(shell pwd))/libft
+GNL_DIR = $(shell dirname $(shell pwd))/GNL/
+LIBFT_DIR = $(shell dirname $(shell pwd))/libft/
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 HEADERS = -I. -I$(GNL_DIR) -I$(LIBFT_DIR)

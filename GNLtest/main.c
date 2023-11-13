@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 09:29:08 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/13 09:34:52 by aduvilla         ###   ########.fr       */
+/*   Created: 2023/11/13 09:36:56 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/13 09:47:36 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "get_next_line.h"
 
-# include "libft.h"
+int	main()
+{
+	char	*result;
+	int		fd;
 
-#define BUFF_SIZE 32
-
-int		get_next_line(const int fd, char **line);
-
-#endif
+	fd = open(test, O_RDONLY);
+	get_next_line(fd, &result);
+	return (0);
+}
