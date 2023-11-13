@@ -11,9 +11,9 @@ SRC = ft_memset.c ft_bzero.c ft_isalpha.c ft_isdigit.c ft_isalnum.c 		\
 	  ft_strnstr.c ft_itoa.c ft_calloc.c ft_strdup.c ft_strtrim.c 			\
 	  ft_strmapi.c ft_strjoin.c ft_striteri.c ft_substr.c ft_split.c
 
-SRC_BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c			\
-			ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c		\
-			ft_lstmap.c
+SRC_BONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c	\
+			ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c	\
+			ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
 
 OBJ = $(SRC:.c=.o)
 
