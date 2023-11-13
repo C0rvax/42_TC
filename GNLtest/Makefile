@@ -9,13 +9,13 @@ UTIL =
 
 all:	verif
 	@$(CC) $(CFLAGS) $(HEADERS) $(SRC) $(MAIN) -L$(LIBFT_DIR) -lft		\
-		&& ./a.out && rm -rf a.out
+		&& ./a.out && rm -rf a.out && make fclean
 
 verif:
-	make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 
 clean:
-	make clean -C $(LIBFT_DIR) && $(RM) a.out*
+	@make clean -C $(LIBFT_DIR) && $(RM) a.out*
 
 fclean:
-	make fclean -C $(LIBFT_DIR) && $(RM) a.out*
+	@make fclean -C $(LIBFT_DIR) && $(RM) a.out*
