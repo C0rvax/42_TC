@@ -5,6 +5,8 @@ int	get_next_line(const int fd, char **line)
 	char buff[BUFF_SIZE];
 
 	read(fd, buff, BUFF_SIZE);
-
+	ft_strlcpy(*line, buff, BUFF_SIZE);
+	printf("valeur lu : %s", *line);
+	return (1);
 	
 }
