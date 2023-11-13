@@ -24,24 +24,28 @@ int	get_next_line(const int fd, char **line)
 	size_t		index;
 
 	read(fd, buff, BUFF_SIZE);
-	index = count_index(buff, BUFF_SIZE) + 1;
-	ft_strlcat(*line, buff, index);
-	tmp = ft_substr(buff, index - 1, BUFF_SIZE - (index - 1));
+	index = count_index(buff, BUFF_SIZE);
+	ft_strlcat(*line, buff, index + 1);
+	tmp = ft_substr(buff, index, BUFF_SIZE - index);
 	printf("Taille a copier : %d\n", count_index(buff, BUFF_SIZE)); 
 	printf("GNL : %s\n", *line);
 	printf("reste du buffer : %s\n", tmp);
 	free(tmp);
 	read(fd, buff, BUFF_SIZE);
-	index = count_index(buff, BUFF_SIZE) + 1;
-	ft_strlcat(*line, buff, index);
-	tmp = ft_substr(buff, index - 1, BUFF_SIZE - (index - 1));
+	index = count_index(buff, BUFF_SIZE);
+	ft_strlcat(*line, buff, index + 1);
+	tmp = ft_substr(buff, index, BUFF_SIZE - index);
 	printf("Taille a copier : %d\n", count_index(buff, BUFF_SIZE)); 
 	printf("GNL : %s\n", *line);
 	printf("reste du buffer : %s\n", tmp);
-	//printf("taille du buff moins avant ligne : %zu\n", ft_strlen(tmp));
-	ft_strlcat(*line, buff, BUFF_SIZE);
-	//ft_strlcat(*line, buff, (BUFF_SIZE - ft_strlen(ft_strchr(buff, '\n'))));
-	//printf("valeur lu : %s\n", *line);
+	free(tmp);
+	read(fd, buff, BUFF_SIZE);
+	index = count_index(buff, BUFF_SIZE);
+	ft_strlcat(*line, buff, index + 1);
+	tmp = ft_substr(buff, index, BUFF_SIZE - index);
+	printf("Taille a copier : %d\n", count_index(buff, BUFF_SIZE)); 
+	printf("GNL : %s\n", *line);
+	printf("reste du buffer : %s\n", tmp);
 	return (1);
 
 }
