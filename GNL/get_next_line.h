@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:29:08 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/13 16:24:36 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/13 17:13:46 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft.h"
 # include <stdio.h>
 
-#define BUFF_SIZE 10
+#define BUFF_SIZE 1
 
 int		get_next_line(const int fd, char **line);
 
