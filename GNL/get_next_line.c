@@ -43,10 +43,9 @@ int	get_next_line(const int fd, char **line)
 	printf("buff : %s\n", buff);
 	while (!isend(buff, BUFF_SIZE))
 	{
-		i = count_index(buff, BUFF_SIZE);
+		i = BUFF_SIZE;
 		index = index + i;
 		ft_strlcat(*line, buff, index + 1);
-		tmp = ft_substr(buff, i, BUFF_SIZE - i);
 		printf("Taille a copier : %zu\n", i); 
 		printf("GNL : %s\n", *line);
 		printf("reste du buffer : %s\n", tmp);
