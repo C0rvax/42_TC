@@ -1,19 +1,19 @@
 #include "get_next_line.h"
 
-static int	isend(char *s, size_t n)
+static int	isend(char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (s[i] && i < n)
+	while (s[i])
 	{
 		if (s[i] == '\n')
 			return (1);
-		i++;
+	i++;
 	}
 	return (0);
 }
-
+/*
 static int	count_index(char *buf, size_t bsize)
 {
 	size_t	i;
@@ -30,29 +30,39 @@ static int	count_index(char *buf, size_t bsize)
 	}
 	return (count);
 }
-
-int	get_next_line(const int fd, char **line)
+*/
+static char	*split_buff(char *s)
 {
-	char		buff[BUFF_SIZE];
-	static char	*tmp;
-	size_t		index;
-	size_t		i;
 
-	index = 0;
-	read(fd, buff, BUFF_SIZE);
+}
+static void	read_to_tmp(char *tmp, const int fd)
+{
+	char	buff[BUFF_SIZE];
+	static int	i;
+
+	i = i + read(fd, buff, BUFF_SIZE);
 	printf("buff : %s\n", buff);
+	printf("lu : %d\n", i);
 	printf("tmp : %s\n", tmp);
-	while (!isend(buff, BUFF_SIZE))
+	ft_strlcat(tmp, buff, i + 1);
+}
+
+char	*get_next_line(const int fd)
+{
+	static char	tmp[255];
+	char		*result;
+
+	if (fd < 0 || BUFF_SIZE <= 0 || read(fd, tmp, 0) < 0)
+		return (NULL);
+	while (!isend(tmp))
 	{
-		i = BUFF_SIZE;
-		index = index + i;
-		ft_strlcat(*line, buff, index + 1);
-		printf("Taille a copier : %zu\n", i); 
-		printf("GNL : %s\n", *line);
-		printf("reste du buffer : %s\n", tmp);
-		read(fd, buff, BUFF_SIZE);
+		read_to_tmp(tmp, fd);
+		printf("tmp : %s\n", tmp);
 	}
-	i = count_index(buff, BUFF_SIZE);
+	result = split_buff(tmp);
+	printf("result : %s\n", result);
+	return (result);
+	/*i = count_index(buff, BUFF_SIZE);
 	index = index + i;
 	ft_strlcat(*line, buff, index + 1);
 	tmp = ft_substr(buff, i, BUFF_SIZE - i);
@@ -60,6 +70,7 @@ int	get_next_line(const int fd, char **line)
 	printf("GNL : %s\n", *line);
 	printf("reste du buffer : %s\n", tmp);
 	read(fd, buff, BUFF_SIZE);
-	return (1);
+	*/
+	return (tmp);
 
 }
