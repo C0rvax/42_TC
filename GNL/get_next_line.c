@@ -8,7 +8,7 @@ static int	isend(char *s)
 	while (s[i])
 	{
 		if (s[i] == '\n')
-			return (1);
+			return (i);
 	i++;
 	}
 	return (0);
@@ -30,11 +30,12 @@ static int	count_index(char *buf, size_t bsize)
 	}
 	return (count);
 }
-*/
 static char	*split_buff(char *s)
 {
 
 }
+*/
+
 static void	read_to_tmp(char *tmp, const int fd)
 {
 	char	buff[BUFF_SIZE];
@@ -50,7 +51,7 @@ static void	read_to_tmp(char *tmp, const int fd)
 char	*get_next_line(const int fd)
 {
 	static char	tmp[255];
-	char		*result;
+//	char		*result;
 
 	if (fd < 0 || BUFF_SIZE <= 0 || read(fd, tmp, 0) < 0)
 		return (NULL);
@@ -59,9 +60,9 @@ char	*get_next_line(const int fd)
 		read_to_tmp(tmp, fd);
 		printf("tmp : %s\n", tmp);
 	}
-	result = split_buff(tmp);
-	printf("result : %s\n", result);
-	return (result);
+//	result = split_buff(tmp);
+//	printf("result : %s\n", result);
+//	return (result);
 	/*i = count_index(buff, BUFF_SIZE);
 	index = index + i;
 	ft_strlcat(*line, buff, index + 1);
