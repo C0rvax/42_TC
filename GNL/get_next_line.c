@@ -41,6 +41,7 @@ int	get_next_line(const int fd, char **line)
 	index = 0;
 	read(fd, buff, BUFF_SIZE);
 	printf("buff : %s\n", buff);
+	printf("tmp : %s\n", tmp);
 	while (!isend(buff, BUFF_SIZE))
 	{
 		i = BUFF_SIZE;
