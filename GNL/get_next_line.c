@@ -26,19 +26,25 @@ char	*read_to_tmp(char *tmp, const int fd)
 		i = read(fd, buff, BUFF_SIZE);
 		if (i < 0)
 		{
+			printf("i inf 0\n");
 			free(tmp);
 			return (NULL);
 		}
 		else if (i == 0)
 			return (tmp);
 		buff[i] = '\0';
+		printf("tmp1 : %s\n", tmp);
 		if (!tmp)
+		{
 			tmp = buff;
+			printf("tmp2 : %s\n", tmp);
+		}
 		else
 		{
 			cpy = tmp;
 			tmp = ft_strjoin(cpy, buff);
-			free(cpy);
+			printf("else cpy\n");
+			//free(cpy);
 			cpy = NULL;
 		}
 		if (isend(buff))
@@ -52,6 +58,7 @@ char	*get_next_line(const int fd)
 	static char	*tmp;
 	char		*result;
 
+	printf("tmp : %s\n", tmp);
 	if (fd < 0 || BUFF_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	result = read_to_tmp(tmp, fd);
