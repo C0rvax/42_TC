@@ -37,7 +37,7 @@ char	*read_to_result(char *result, const int fd)
 		copy = result;
 		result = ft_strjoin(copy, buff);
 		free(copy);
-		if (isend(buff))
+		if (isend(result))
 			break;
 	}
 	return (result);
@@ -45,15 +45,15 @@ char	*read_to_result(char *result, const int fd)
 
 char	*stash_memory(char *result)
 {
-	char	*mem;
+	char	*memory;
 	size_t	i;
 	size_t	len;
 
 	i = isend(result);
 	len = ft_strlen(result);
-	mem = ft_substr(result, i + 1, len - i);
+	memory = ft_substr(result, i + 1, len - i);
 	result[i + 1] = '\0';
-	return (mem);
+	return (memory);
 }
 
 char	*get_next_line(const int fd)
@@ -64,7 +64,10 @@ char	*get_next_line(const int fd)
 	printf("memory start : %s\n", memory);
 	if (fd < 0 || BUFF_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	result = read_to_result(memory, fd);
+	if (memory && isend(memory))
+		result = memory;
+	else
+		result = read_to_result(memory, fd);
 	memory = stash_memory(result);
 	printf("memory finish : %s\n", memory);
 	return (result);
