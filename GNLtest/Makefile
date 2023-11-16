@@ -1,18 +1,13 @@
 GNL_DIR = $(shell dirname $(shell pwd))/GNL/
-LIBFT_DIR = $(shell dirname $(shell pwd))/libft/
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-HEADERS = -I. -I$(GNL_DIR) -I$(LIBFT_DIR)
-SRC = $(GNL_DIR)get_next_line.c
+HEADERS = -I $(GNL_DIR)
+SRC = $(GNL_DIR)get_next_line.c $(GNL_DIR)get_next_line_utils.c
 MAIN = main.c
 UTIL = 
 
-all:	verif
-	@$(CC) $(CFLAGS) $(HEADERS) $(SRC) $(MAIN) -L$(LIBFT_DIR) -lft		\
-		&& ./a.out && rm -rf a.out && make fclean
-
-verif:
-	@make -C $(LIBFT_DIR)
+all:
+	@$(CC) $(CFLAGS) $(HEADERS) $(SRC) $(MAIN) && ./a.out && rm -rf a.out
 
 clean:
 	@make clean -C $(LIBFT_DIR) && $(RM) a.out*
