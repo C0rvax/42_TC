@@ -79,4 +79,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (res);
 }
 
+char	*ft_strnew()
+{
+	char	*res;
 
+	res = malloc(sizeof(char) * 1);
+	if (!res)
+		return (NULL);
+	res[0] = '\0';
+	return (res);
+}

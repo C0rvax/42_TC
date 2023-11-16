@@ -17,6 +17,9 @@ int	main()
 	int		fd;
 
 	fd = open("./test", O_RDONLY);
-	get_next_line(fd);
+	printf("1er gnl : %s\n", get_next_line(fd));
+	printf("2er gnl : %s\n", get_next_line(fd));
+	printf("3er gnl : %s\n", get_next_line(fd));
+	printf("4er gnl : %s\n", get_next_line(fd));
 	return (0);
 }
