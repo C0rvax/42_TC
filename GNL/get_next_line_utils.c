@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 09:40:56 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/16 10:48:46 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/17 10:18:10 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (res);
 }
 
-char	*ft_strnew()
+char	*ft_strnew(void)
 {
 	char	*res;
 

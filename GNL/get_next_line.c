@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/17 10:15:13 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/17 11:56:47 by aduvilla         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-size_t	isend(char *s)
+size_t	ischar(char *s, char c)
 {
 	size_t	i;
 
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == '\n')
+		if (s[i] == c)
 			return (i);
-	i++;
+		i++;
 	}
 	return (0);
 }
@@ -18,27 +30,24 @@ char	*read_to_result(char *result, const int fd)
 {
 	char	buff[BUFF_SIZE + 1];
 	char	*copy;
-	int	i;
+	int		i;
 
 	i = 1;
 	while (i > 0)
 	{
 		i = read(fd, buff, BUFF_SIZE);
 		if (i < 0)
-		{
-			free(result);
-			return (NULL);
-		}
+			return (free(result), NULL);
 		else if (i == 0)
-			break;
+			break ;
 		buff[i] = '\0';
 		if (!result)
 			result = ft_strnew();
 		copy = result;
 		result = ft_strjoin(copy, buff);
 		free(copy);
-		if (isend(result))
-			break;
+		if (ischar(result, '\n'))
+			break ;
 	}
 	return (result);
 }
@@ -49,9 +58,19 @@ char	*stash_memory(char *result)
 	size_t	i;
 	size_t	len;
 
-	i = isend(result);
+	if (ischar(result, '\n'))
+		i = ischar(result, '\n');
+	else
+		i = ischar(result, '\0');
+	if (result[i + 1] == '\0')
+		return (NULL);
 	len = ft_strlen(result);
 	memory = ft_substr(result, i + 1, len - i);
+	if (*memory == '\0')
+	{
+		free(memory);
+		return (NULL);
+	}
 	result[i + 1] = '\0';
 	return (memory);
 }
@@ -61,14 +80,17 @@ char	*get_next_line(const int fd)
 	static char	*memory;
 	char		*result;
 
-	printf("memory start : %s\n", memory);
 	if (fd < 0 || BUFF_SIZE <= 0 || read(fd, 0, 0) < 0)
+	{
+		free(memory);
 		return (NULL);
-	if (memory && isend(memory))
+	}
+	if (memory && ischar(memory, '\n'))
 		result = memory;
 	else
 		result = read_to_result(memory, fd);
+	if (!result)
+		return (NULL);
 	memory = stash_memory(result);
-	printf("memory finish : %s\n", memory);
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:29:08 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/16 10:59:57 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/17 11:26:18 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,13 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-
-
 char	*get_next_line(const int fd);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char *s1, char *s2);
 char	*read_to_result(char *result, const int fd);
-size_t	isend(char *s);
-char	*ft_strnew();
+size_t	ischar(char *s, char c);
+char	*ft_strnew(void);
 char	*stash_memory(char *result);
-
-
 
 #endif
