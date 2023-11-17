@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:36:56 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/15 12:11:13 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:30:08 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,11 @@ int	main()
 	printf("6er gnl : %s\n", get_next_line(fd));
 	printf("7er gnl : %s\n", get_next_line(fd));
 	printf("8er gnl : %s\n", get_next_line(fd));
+	fd = open("./nonl", O_RDONLY);
+	printf("1er gnl : %s\n", get_next_line(fd));
+	printf("2er gnl : %s\n", get_next_line(fd));
+	fd = open("./bible.txt", O_RDONLY);
+	printf("1er gnl : %s\n", get_next_line(fd));
+	printf("2er gnl : %s\n", get_next_line(fd));
 	return (0);
 }

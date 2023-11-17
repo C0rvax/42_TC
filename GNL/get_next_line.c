@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 10:15:13 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/17 11:56:47 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:43:00 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,20 @@ char	*stash_memory(char *result)
 	size_t	len;
 
 	if (ischar(result, '\n'))
+	{
 		i = ischar(result, '\n');
+		//if (result[i + 1] == '\0')
+		//{
+		//	result[i] = '\0';
+		//}
+	}
 	else
 		i = ischar(result, '\0');
 	if (result[i + 1] == '\0')
+	{
+		//result[i] = '\0';
 		return (NULL);
+	}
 	len = ft_strlen(result);
 	memory = ft_substr(result, i + 1, len - i);
 	if (*memory == '\0')
