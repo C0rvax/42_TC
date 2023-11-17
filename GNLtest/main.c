@@ -21,5 +21,9 @@ int	main()
 	printf("2er gnl : %s\n", get_next_line(fd));
 	printf("3er gnl : %s\n", get_next_line(fd));
 	printf("4er gnl : %s\n", get_next_line(fd));
+	printf("5er gnl : %s\n", get_next_line(fd));
+	printf("6er gnl : %s\n", get_next_line(fd));
+	printf("7er gnl : %s\n", get_next_line(fd));
+	printf("8er gnl : %s\n", get_next_line(fd));
 	return (0);
 }
