@@ -12,8 +12,9 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 42
 # endif
 
 # include <unistd.h>
@@ -21,13 +22,13 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-char	*get_next_line(const int fd);
-char	*ft_substr(char *s, unsigned int start, size_t len);
-size_t	ft_strlen(const char *s);
-char	*ft_strjoin(char *s1, char *s2);
-char	*read_to_result(char *result, const int fd);
 int		isend(char *s);
-char	*ft_strnew(void);
+char	*read_to_result(char *result, const int fd);
 char	*stash_memory(char *result);
+char	*get_next_line(const int fd);
+size_t	ft_strlen(const char *s);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strnew(void);
 
 #endif
