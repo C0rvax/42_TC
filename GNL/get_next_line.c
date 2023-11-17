@@ -80,10 +80,7 @@ char	*get_next_line(const int fd)
 	char		*result;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-	{
-		free(memory);
-		return (NULL);
-	}
+		return (free(memory), NULL);
 	if (memory && isend(memory))
 		result = memory;
 	else
