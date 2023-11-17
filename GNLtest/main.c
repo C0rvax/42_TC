@@ -31,5 +31,7 @@ int	main()
 	fd = open("./bible.txt", O_RDONLY);
 	printf("1er gnl : %s\n", get_next_line(fd));
 	printf("2er gnl : %s\n", get_next_line(fd));
+	//fd = open("./nonl", O_RDONLY);
+	//printf("1er gnl : %s\n", gnl(fd));
 	return (0);
 }
