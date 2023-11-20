@@ -7,7 +7,8 @@ MAIN = main.c
 UTIL = 
 
 all:
-	@$(CC) $(CFLAGS) $(HEADERS) $(SRC) $(MAIN) && ./a.out && rm -rf a.out
+	@$(CC) $(CFLAGS) $(HEADERS) $(SRC) $(MAIN) && valgrind ./a.out		\
+		&& rm -rf a.out
 
 clean:
 	@make clean -C $(LIBFT_DIR) && $(RM) a.out*

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 10:15:13 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/17 13:43:00 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/20 13:54:09 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*read_to_result(char *result, const int fd)
 	{
 		i = read(fd, buff, BUFFER_SIZE);
 		if (i < 0)
-			return (free(result), NULL);
+			return (free(result), free(buff), NULL);
 		else if (i == 0)
 			break ;
 		buff[i] = '\0';
@@ -80,7 +80,11 @@ char	*get_next_line(const int fd)
 	char		*result;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-		return (free(memory), NULL);
+	{
+		free(memory);
+		memory = NULL;
+		return (NULL);
+	}
 	if (memory && isend(memory))
 		result = memory;
 	else
