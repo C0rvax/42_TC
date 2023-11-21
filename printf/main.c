@@ -1,39 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 16:34:42 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/21 17:14:18 by aduvilla         ###   ########.fr       */
+/*   Created: 2023/11/21 15:21:29 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/21 16:45:48 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_printf(const char *s, ...)
+int	main()
 {
-	int	i;
-	int	count;
-	va_list	arg;
+	int i;
 
-	if (!s)
-		return (-1);
-	va_start(arg, s);
-	count = 0;
 	i = 0;
-	while (s[i])
-	{
-		if (s[i] == '%')
-		{
-			i++;
-			count = count + ifforest(s[i], arg);
-		}
-		else
-			count = count + print_putchar(s[i]);
-		i++;
-	}
-	va_end(arg);
-	return (count);
+	i = ft_printf("le code marche avec que du texte !\n");
+	printf("taille : %i\n", i);
+	i = ft_printf("avec %d decimal et %i int\n", 1, 1);
+	printf("taille : %i\n", i);
 }

@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   print_unsigned.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 16:34:42 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/21 17:14:18 by aduvilla         ###   ########.fr       */
+/*   Created: 2023/11/21 13:03:35 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/21 13:06:24 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_printf(const char *s, ...)
+int	print_unsigned(unsigned int n)
 {
-	int	i;
-	int	count;
-	va_list	arg;
+	int i;
 
-	if (!s)
-		return (-1);
-	va_start(arg, s);
-	count = 0;
 	i = 0;
-	while (s[i])
+	if (n > 9)
 	{
-		if (s[i] == '%')
-		{
-			i++;
-			count = count + ifforest(s[i], arg);
-		}
-		else
-			count = count + print_putchar(s[i]);
 		i++;
+		print_unsigned(n / 10);
 	}
-	va_end(arg);
-	return (count);
+	i = i + print_putchar(n % 10 + '0');
+	return (i);
 }

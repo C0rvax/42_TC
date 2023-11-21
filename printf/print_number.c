@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   print_number.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 16:34:42 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/21 17:14:18 by aduvilla         ###   ########.fr       */
+/*   Created: 2023/11/21 12:52:12 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/21 17:13:56 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_printf(const char *s, ...)
+int	print_number(int n)
 {
 	int	i;
-	int	count;
-	va_list	arg;
 
-	if (!s)
-		return (-1);
-	va_start(arg, s);
-	count = 0;
 	i = 0;
-	while (s[i])
+	if (n == -2147483648)
 	{
-		if (s[i] == '%')
-		{
-			i++;
-			count = count + ifforest(s[i], arg);
-		}
-		else
-			count = count + print_putchar(s[i]);
-		i++;
+		i = print_putstr("-2147483648");
+		return (i);
 	}
-	va_end(arg);
-	return (count);
+	if (n < 0)
+	{
+		n *= -1;
+		i = i + print_putchar('-');
+	}
+	if (n > 9)
+	{
+		//i++;
+		print_number(n / 10);
+	}
+	i = i + print_putchar(n % 10 + '0');
+	return (i);
 }

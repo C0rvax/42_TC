@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   print_putstr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 16:34:42 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/21 17:14:18 by aduvilla         ###   ########.fr       */
+/*   Created: 2023/11/21 12:48:03 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/21 12:51:38 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_printf(const char *s, ...)
+int	print_putstr(char *s)
 {
 	int	i;
-	int	count;
-	va_list	arg;
 
-	if (!s)
-		return (-1);
-	va_start(arg, s);
-	count = 0;
 	i = 0;
+	if (!s)
+		return (i);
 	while (s[i])
 	{
-		if (s[i] == '%')
-		{
-			i++;
-			count = count + ifforest(s[i], arg);
-		}
-		else
-			count = count + print_putchar(s[i]);
+		print_putchar(s[i]);
 		i++;
 	}
-	va_end(arg);
-	return (count);
+	return (i);
 }
