@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:30:44 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/21 17:14:42 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/21 18:29:53 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	ifforest(char c, va_list arg)
 	else if (c == 'u')
 		i = print_unsigned(va_arg(arg, unsigned int));
 	else if (c == 'x')
-		i = print_hex(va_arg(arg, int), 0);
+		i = print_hex(va_arg(arg, unsigned int), 0);
 	else if (c == 'X')
-		i = print_hex(va_arg(arg, int), 1);
+		i = print_hex(va_arg(arg, unsigned int), 1);
 	else if (c == '%')
 		i = print_putchar('%');
 	else

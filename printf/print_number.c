@@ -6,32 +6,53 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:52:12 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/21 17:13:56 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:47:18 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	print_number(int n)
+static int	ft_nbrlen(int n)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	if (n == -2147483648)
-	{
-		i = print_putstr("-2147483648");
-		return (i);
-	}
+		return (11);
 	if (n < 0)
 	{
 		n *= -1;
-		i = i + print_putchar('-');
+		i++;
 	}
-	if (n > 9)
+	while (n >= 10)
 	{
-		//i++;
-		print_number(n / 10);
+		n /= 10;
+		i++;
 	}
-	i = i + print_putchar(n % 10 + '0');
 	return (i);
+}
+
+int	print_number(int n)
+{
+	int		res;
+	long	power;
+	long	nbr;
+
+	nbr = n;
+	res = ft_nbrlen(n);
+	if (nbr < 0)
+	{
+		print_putchar('-');
+		nbr *= -1;
+	}
+	power = 1;
+	while (power * 10 <= nbr)
+		power *= 10;
+	while(power)
+	{
+		print_putchar(nbr / power + '0');
+		nbr = nbr % power;
+		power /= 10;
+	}
+	return (res);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/21 17:16:07 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/21 18:29:41 by aduvilla         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
@@ -12,6 +24,6 @@ int		print_putchar(char c);
 int		print_putstr(char *s);
 int		print_number(int n);
 int		print_unsigned(unsigned int n);
-int		print_hex(int nbr, int mode);
+int		print_hex(unsigned int nbr, int mode);
 
 #endif

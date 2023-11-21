@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 16:34:42 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/21 17:14:18 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:16:31 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_printf(const char *s, ...)
 {
-	int	i;
-	int	count;
+	int		i;
+	int		count;
 	va_list	arg;
 
 	if (!s)

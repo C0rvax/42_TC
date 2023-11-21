@@ -6,40 +6,33 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:50:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/21 15:04:35 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/21 18:31:25 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	print_hex(int nbr, int mode)
+int	print_hex(unsigned int nbr, int mode)
 {
 	char	*basel;
 	char	*baseu;
-	int		i;
+	unsigned long	power;
+	int				count;
 
-	i = 0;
 	basel = "0123456789abcdef";
 	baseu = "0123456789ABCDEF";
-	if (nbr < 0)
-	{
-		i = i + print_putchar('-');
-		nbr = nbr * -1;
-	}
-	if (nbr >= 16)
-	{
-		print_hex((nbr / 16), mode);
-		if (mode == 1)
-			i = i + print_putchar(baseu[nbr % 16]);
-		else
-			i = i + print_putchar(basel[nbr % 16]);
-	}
-	else
+	count = 0;
+	power = 1;
+	while (power * 16 <= nbr)
+		power *= 16;
+	while (power)
 	{
 		if (mode == 1)
-			i = i + print_putchar(baseu[nbr]);
+			count += print_putchar(baseu[nbr / power]);
 		else
-			i = i + print_putchar(basel[nbr]);
+			count += print_putchar(basel[nbr / power]);
+		nbr = nbr % power;
+		power /= 16;
 	}
-	return (i);
+	return (count);
 }
