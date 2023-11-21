@@ -1,0 +1,22 @@
+			LLDB | GDB
+
+compiler avec le flag -g
+lancer le programme en écrivant lldb ./a.out | gdb ./a.out
+help -> affiche les options de lldb
+run -> lance le programme
+b [ligne][fonction] | br
+	exemples : b 24 ou b main
+n -> passer au step d'après (ne rentre pas dans la fonction)
+ni -> paaser à l'instruction d'après
+s -> passer au step d'après (rentre dans la fonction)
+bt -> backtrace (comment en est-on arrivés à cette étape)
+gui -> lance l'interface graphique
+q -> quit
+list -> affiche les qq lignes de code de là où on est
+start -> run un step
+ctrl+x + 1 -> lance l'interface graphique de GDB
+file [name] -> si quand déjà dans GDB, lance le prog name
+print [variable] -> affiche l'adresse et la valeur de la variable
+ctrl+x + o -> si en mode graphique de GDB, switch entre les fenetres
+info args -> affiche les arguments de la fonction dans laquelle on se trouve
+info breakpoint -> affiche les infos du breakpoint
