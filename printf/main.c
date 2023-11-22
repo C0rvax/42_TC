@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:21:29 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/22 12:24:45 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:42:49 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,9 @@ int	main(void)
 	i = ft_printf(" NULL %s NULL ", NULL);
 	printf("taille : %i\n", i);
 	i = printf(" NULL %s NULL ", (char *)NULL);
+	printf("taille : %i\n", i);
+	i = ft_printf("avec les unsigned %u\n", -25);
+	printf("taille : %i\n", i);
+	i = printf("avec les unsigned %u\n", -25);
 	printf("taille : %i\n", i);
 }
