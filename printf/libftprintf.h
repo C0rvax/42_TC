@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 17:16:07 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/21 18:29:41 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:21:44 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int		print_putstr(char *s);
 int		print_number(int n);
 int		print_unsigned(unsigned int n);
 int		print_hex(unsigned int nbr, int mode);
+int		print_pointer(void *ptr);
 
 #endif
