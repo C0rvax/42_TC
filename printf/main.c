@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:21:29 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/21 18:30:43 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:24:45 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,9 @@ int	main(void)
 	i = ft_printf("avec %s string\n", "toute les");
 	printf("taille : %i\n", i);
 	i = ft_printf("avec %s string\n", "toute les");
+	printf("taille : %i\n", i);
+	i = ft_printf(" NULL %s NULL ", NULL);
+	printf("taille : %i\n", i);
+	i = printf(" NULL %s NULL ", (char *)NULL);
 	printf("taille : %i\n", i);
 }

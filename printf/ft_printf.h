@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_putstr.c                                     :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 12:48:03 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/22 12:31:03 by aduvilla         ###   ########.fr       */
+/*   Created: 2023/11/21 17:16:07 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/21 18:29:41 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
 
-int	print_putstr(char *s)
-{
-	int	i;
+# include <stdarg.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
 
-	i = 0;
-	if (!s)
-	{
-		print_putstr("(null)");
-		return (6);
-	}
-	while (s[i])
-	{
-		print_putchar(s[i]);
-		i++;
-	}
-	return (i);
-}
+int		ft_printf(const char *s, ...);
+int		ifforest(char c, va_list arg);
+int		print_putchar(char c);
+int		print_putstr(char *s);
+int		print_number(int n);
+int		print_unsigned(unsigned int n);
+int		print_hex(unsigned int nbr, int mode);
+
+#endif

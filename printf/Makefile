@@ -1,24 +1,34 @@
-LDIR = libft/
-
 CC = cc
-AR = ar rc
-RM = rm -rf
-
-CFLAGS = -Wall -Wextra -Werror -I. -I$(LDIR)
-
+CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
+RM = rm -rf
+AR = ar rc
+SRC = ft_printf.c ifforest.c print_hex.c print_number.c print_putchar.c		\
+	  print_putstr.c print_unsigned.c
 
-SRC = ft_printf.c
+SRC_BONUS = 
 
 OBJ = $(SRC:.c=.o)
 
-all:		$(NAME)
+OBJ_B = $(SRC_BONUS:.c=.o)
 
-$(NAME):	$(OBJ) $(LIBFT)
-	$(AR) $(NAME) $?
+all: $(NAME)
 
-makelibft:
-	make -C $(LDIR)
+$(NAME):	$(OBJ)
+	$(AR) $(NAME) $^
 
+%.o: %.c
+	$(CC) -I. -c $^ -o $@ $(CFLAGS)
 
+bonus:		$(OBJ_B)
+	$(AR) $(NAME) $(OBJ_B)
 
+clean:
+	$(RM) $(OBJ) $(OBJ_B)
+
+fclean:	clean
+	$(RM) $(NAME)
+
+re:	fclean all
+
+.PHONY: bonus all clean fclean re

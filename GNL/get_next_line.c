@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 10:15:13 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/20 13:54:09 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/22 11:27:44 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*read_to_result(char *result, const int fd)
 	{
 		i = read(fd, buff, BUFFER_SIZE);
 		if (i < 0)
-			return (free(result), free(buff), NULL);
+			return (free(result), free(buff), buff = NULL, NULL);
 		else if (i == 0)
 			break ;
 		buff[i] = '\0';
@@ -52,7 +52,7 @@ char	*read_to_result(char *result, const int fd)
 		if (isend(result))
 			break ;
 	}
-	return (free(buff), result);
+	return (free(buff), buff = NULL, result);
 }
 
 char	*stash_memory(char *result)
@@ -69,7 +69,7 @@ char	*stash_memory(char *result)
 	size = ft_strlen(result) - i;
 	memory = ft_substr(result, i + 1, size);
 	if (!memory)
-		return (free(memory), NULL);
+		return (free(memory), memory = NULL, NULL);
 	result[i + 1] = '\0';
 	return (memory);
 }
