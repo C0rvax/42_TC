@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	isend(char *s)
 {
@@ -76,21 +76,21 @@ char	*stash_memory(char *result)
 
 char	*get_next_line(const int fd)
 {
-	static char	*memory;
+	static char	*memory[FD_MAX];
 	char		*result;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		free(memory);
-		memory = NULL;
+		free(memory[fd]);
+		memory[fd] = NULL;
 		return (NULL);
 	}
-	if (memory && isend(memory))
-		result = memory;
+	if (memory[fd] && isend(memory[fd]))
+		result = memory[fd];
 	else
-		result = read_to_result(memory, fd);
+		result = read_to_result(memory[fd], fd);
 	if (!result)
 		return (NULL);
-	memory = stash_memory(result);
+	memory[fd] = stash_memory(result);
 	return (result);
 }
