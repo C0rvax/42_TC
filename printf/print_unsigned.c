@@ -6,22 +6,39 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:03:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/21 13:06:24 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/22 15:27:04 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
+static int	ft_nbrlen(unsigned int n)
+{
+	int	i;
+
+	i = 1;
+	while (n >= 10)
+	{
+		n /= 10;
+		i++;
+	}
+	return (i);
+}
+
 int	print_unsigned(unsigned int n)
 {
-	int i;
+	unsigned int i;
+	unsigned long	power;
 
-	i = 0;
-	if (n > 9)
+	i = ft_nbrlen(n);
+	power = 1;
+	while (power * 10 <= n)
+		power *= 10;
+	while(power)
 	{
-		i++;
-		print_unsigned(n / 10);
+		print_putchar(n / power + '0');
+		n = n % power;
+		power /= 10;
 	}
-	i = i + print_putchar(n % 10 + '0');
 	return (i);
 }
