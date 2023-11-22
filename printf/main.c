@@ -15,6 +15,7 @@
 int	main(void)
 {
 	int	i;
+	char *ptr = "hello";
 
 	i = 0;
 	i = ft_printf(0);
@@ -40,5 +41,9 @@ int	main(void)
 	i = ft_printf("avec les unsigned %u\n", -25);
 	printf("taille : %i\n", i);
 	i = printf("avec les unsigned %u\n", -25);
+	printf("taille : %i\n", i);
+	i = ft_printf("avec les adresses de pointeurs : %p\n", ptr);
+	printf("taille : %i\n", i);
+	i = printf("avec les adresses de pointeurs : %p\n", ptr);
 	printf("taille : %i\n", i);
 }

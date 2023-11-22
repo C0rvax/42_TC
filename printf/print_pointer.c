@@ -37,7 +37,9 @@ int	print_pointer(void *ptr)
 {
 	int	i;
 
-	i = 0;
-	i = print_hexp((size_t)ptr);
+	if (!ptr)
+		return (0);
+	i = print_putstr("0x");
+	i += print_hexp((size_t)ptr);
 	return (i);
 }
