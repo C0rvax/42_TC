@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:29:08 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/20 15:07:10 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:32:41 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# define FD_MAX 1024
+# ifndef FD_MAX
+#  define FD_MAX 1024
+# endif
+
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
