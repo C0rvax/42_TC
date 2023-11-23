@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:30:44 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/23 16:09:38 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:14:16 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ifforest(char c, va_list arg)
 	else if (c == 's')
 		i = print_putstr(va_arg(arg, char *));
 	else if (c == 'p')
-		i = print_pointer(va_arg(arg, size_t));
+		i = print_pointer(va_arg(arg, unsigned long));
 	else if (c == 'd' || c == 'i')
 		i = print_number(va_arg(arg, int));
 	else if (c == 'u')
