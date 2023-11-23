@@ -7,7 +7,7 @@ MAIN = main.c
 UTIL = 
 
 all:
-	@$(CC) $(CFLAGS) $(HEADERS) $(SRC) $(MAIN) && valgrind lldb ./a.out		\
+	@$(CC) $(CFLAGS) $(HEADERS) $(SRC) $(MAIN) && ./a.out		\
 		&& rm -rf a.out
 
 clean:

@@ -6,11 +6,13 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:36:56 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/20 13:07:41 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:16:23 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
+#include <fcntl.h>
 
 int	main()
 {
