@@ -6,16 +6,16 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:48:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/22 16:24:17 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:55:31 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static int	print_hexp(size_t n)
+static int	print_hexp(unsigned long n)
 {
 	char	*base;
-	size_t	power;
+	unsigned long	power;
 	int		count;
 
 	base = "0123456789abcdef";
@@ -38,8 +38,8 @@ int	print_pointer(void *ptr)
 	int	i;
 
 	if (!ptr)
-		return (0);
+		return (print_putstr("(nil)"));
 	i = print_putstr("0x");
-	i += print_hexp((size_t)ptr);
+	i += print_hexp((unsigned long)ptr);
 	return (i);
 }

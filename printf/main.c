@@ -6,11 +6,12 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:21:29 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/22 14:47:38 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:03:17 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include <limits.h>
 
 int	main(void)
 {
@@ -45,5 +46,13 @@ int	main(void)
 	i = ft_printf("avec les adresses de pointeurs : %p\n", ptr);
 	printf("taille : %i\n", i);
 	i = printf("avec les adresses de pointeurs : %p\n", ptr);
+	printf("taille : %i\n", i);
+	i = ft_printf("avec les adresses de pointeurs : %p\n", 0);
+	printf("taille : %i\n", i);
+	i = printf("avec les adresses de pointeurs : %p\n", (void *)0);
+	printf("taille : %i\n", i);
+	i = printf("avec les adresses de pointeurs : %p\n", (void *)LONG_MAX);
+	printf("taille : %i\n", i);
+	i = ft_printf("avec les adresses de pointeurs : %p\n", LONG_MAX);
 	printf("taille : %i\n", i);
 }
