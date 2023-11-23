@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:52:12 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/21 17:47:18 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:18:30 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	print_number(int n)
 	power = 1;
 	while (power * 10 <= nbr)
 		power *= 10;
-	while(power)
+	while (power)
 	{
 		print_putchar(nbr / power + '0');
 		nbr = nbr % power;

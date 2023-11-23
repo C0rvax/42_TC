@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:50:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/21 18:31:25 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:18:00 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	print_hex(unsigned int nbr, int mode)
 {
-	char	*basel;
-	char	*baseu;
+	char			*basel;
+	char			*baseu;
 	unsigned long	power;
 	int				count;
 

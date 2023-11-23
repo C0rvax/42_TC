@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:48:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/23 12:55:31 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:20:37 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	print_hexp(unsigned long n)
 {
-	char	*base;
+	char			*base;
 	unsigned long	power;
-	int		count;
+	int				count;
 
 	base = "0123456789abcdef";
 	count = 0;
@@ -24,14 +24,13 @@ static int	print_hexp(unsigned long n)
 	while (power * 16 <= n)
 		power *= 16;
 	while (power)
-		{
-			count += print_putchar(base[n / power]);
-			n = n % power;
-			power /= 16;
-		}
+	{
+		count += print_putchar(base[n / power]);
+		n = n % power;
+		power /= 16;
+	}
 	return (count);
 }
-
 
 int	print_pointer(void *ptr)
 {
