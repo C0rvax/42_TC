@@ -22,7 +22,7 @@ int	ifforest(char c, va_list arg)
 	else if (c == 's')
 		i = print_putstr(va_arg(arg, char *));
 	else if (c == 'p')
-		i = print_pointer(va_arg(arg, unsigned long));
+		i = print_pointer(va_arg(arg, size_t));
 	else if (c == 'd' || c == 'i')
 		i = print_number(va_arg(arg, int));
 	else if (c == 'u')

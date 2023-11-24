@@ -37,7 +37,7 @@ int	main(void)
 	printf("taille : %i\n", i);
 	i = ft_printf(" NULL %s NULL ", NULL);
 	printf("taille : %i\n", i);
-	i = printf(" NULL %s NULL ", (char *)NULL);
+//	i = printf(" NULL %s NULL ", (char *)NULL);
 	printf("taille : %i\n", i);
 	i = ft_printf("avec les unsigned %u\n", -25);
 	printf("taille : %i\n", i);

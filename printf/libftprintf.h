@@ -25,6 +25,6 @@ int		print_putstr(char *s);
 int		print_number(int n);
 int		print_unsigned(unsigned int n);
 int		print_hex(unsigned int nbr, int mode);
-int		print_pointer(unsigned long ptr);
+int		print_pointer(size_t ptr);
 
 #endif
