@@ -35,7 +35,7 @@ int	ifforest(char c, va_list arg)
 		i = print_putchar('%');
 	else
 	{
-		printf("error");
+		ft_printf("error");
 		return (-1);
 	}
 	return (i);

@@ -16,7 +16,6 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 int		ft_printf(const char *s, ...);
 int		ifforest(char c, va_list arg);
