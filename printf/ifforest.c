@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 17:30:44 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/23 18:14:16 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:51:36 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	ifforest(char c, va_list arg)
 		i = print_putchar('%');
 	else
 	{
-		ft_printf("error");
-		return (-1);
+		i += print_putchar('%');
+		i += print_putchar(c);
 	}
 	return (i);
 }
