@@ -20,12 +20,12 @@ int	main()
 	char	*copy;
 
 	fd = open("./bible.txt", O_RDONLY);
-	while (1)
+	while (copy)
 	{
 		copy = get_next_line(fd);
-		printf("copy : %s\n", copy);
 		if (!copy)
-			break ;
+			return (1);
+		printf("copy : %s\n", copy);
 		free(copy);
 	}
 	// fd = open("./test", O_RDONLY);

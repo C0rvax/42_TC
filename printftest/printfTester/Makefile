@@ -6,7 +6,8 @@ SHELL			= bash
 UTILS_PATH		= utils/
 UTILS			= $(addprefix $(UTILS_PATH), sigsegv.cpp color.cpp check.cpp leaks.cpp)
 
-PRINT_DIR		= /home/aduvilla/Code/TC/printf/
+PRINT_DIR		= /home/aduvilla/goinfre/testvogprintf/
+#PRINT_DIR		= /home/aduvilla/Code/TC/printf/
 #PRINT_DIR		= /home/c0rvax/Code/42/TC/printf/
 
 TESTS_PATH		= tests/
@@ -15,7 +16,7 @@ MANDATORY		= c s p d i u x upperx percent mix
 BONUS			= minus 0 dot sharp space +
 
 CC				= clang++ -std=c11 -Wno-everything
-CFLAGS			= -g3 -ldl -std=c++11 -I utils/ -I$(PRINT_DIR) $(addprefix -I, $(shell find .. -regex ".*/.*\.h" | grep -oh ".*\/"))
+CFLAGS			= -g3 -ldl -std=c++11 -I utils/ -I$(PRINT_DIR) $(addprefix -I, $(shell find $(PRINT_DIR) -regex ".*/.*\.h" | grep -oh ".*\/"))
 
 TEST_NUMBER := $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
 $(eval $(TEST_NUMBER):;@:)
