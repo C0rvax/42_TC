@@ -1,4 +1,4 @@
-SRC_DIR = /home/c0rvax/Code/42/TC/printf/
+SRC_DIR = "../printf/"
 CC = cc
 CFLAGS = -I$(SRC_DIR)
 MAIN = main.c

@@ -1,5 +1,6 @@
 #include "ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 int main()
 {
@@ -19,9 +20,21 @@ int main()
     printf("Taille : %i\n", i);
     i = printf("OG  : Ca marche avec des pointeurs : %p  ", &i);
     printf("Taille : %i\n", i);
+    i = ft_printf("FT  : Ca marche avec des pointeurs : %p  ", 0);
+    printf("Taille : %i\n", i);
+    i = printf("OG  : Ca marche avec des pointeurs : %p  ", 0);
+    printf("Taille : %i\n", i);
+    i = ft_printf("FT  : Ca marche avec des pointeurs : %p  ", LONG_MAX);
+    printf("Taille : %i\n", i);
+    i = printf("OG  : Ca marche avec des pointeurs : %p  ", LONG_MAX);
+    printf("Taille : %i\n", i);
     i = ft_printf("FT  : Ca marche avec des parametres vide : %s  ", (char *)NULL);
     printf("Taille : %i\n", i);
     i = printf("OG  : Ca marche avec des parametres vide : %s  ", (char *)NULL);
+    printf("Taille : %i\n", i);
+    i = ft_printf("FT  : Ca marche avec des parametres vide : %s  ", NULL);
+    printf("Taille : %i\n", i);
+    i = printf("OG  : Ca marche avec des parametres vide : %s  ", NULL);
     printf("Taille : %i\n", i);
     i = ft_printf("FT  : Ca marche avec des unsigned : %u  ", -10);
     printf("Taille : %i\n", i);
@@ -38,6 +51,10 @@ int main()
     i = ft_printf("");
     printf("Taille : %i\n", i);
     i = printf("");
+    printf("Taille : %i\n", i);
+    i = ft_printf(0);
+    printf("Taille : %i\n", i);
+    i = printf(0);
     printf("Taille : %i\n", i);
     i = ft_printf(nu);
     printf("Taille : %i\n", i);
