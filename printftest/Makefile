@@ -1,4 +1,5 @@
 SRC_DIR = "../printf/"
+#SRC_DIR	= /home/aduvilla/Code/Rendu/ft_printf_00/
 CC = cc
 CFLAGS = -I$(SRC_DIR)
 MAIN = main.c

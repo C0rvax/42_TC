@@ -6,6 +6,9 @@ int main()
 {
     int i;
     char *nu = NULL;
+    char    *pourc = "%%%%";
+    char    *pourc2 = "%";
+    char    *pourc3 = "%%()%";
 
     i = 0;
     i = ft_printf("FT  : Ca marche avec des int : %i et des dec : %d  ", 25, 450);
@@ -67,6 +70,22 @@ int main()
     i = ft_printf("Avec %%%r et %%%%%%%% r ");
     printf("Taille : %i\n", i);
     i = printf("Avec %%%r et %%%%%%%% r ");
+    printf("Taille : %i\n", i);
+    i = ft_printf("FT  : Ca marche avec des pointeurs : %");
+    printf("Taille : %i\n", i);
+    i = printf("OG  : Ca marche avec des pointeurs : %");
+    printf("Taille : %i\n", i);
+    i = ft_printf(pourc);
+    printf("Taille : %i\n", i);
+    i = printf(pourc);
+    printf("Taille : %i\n", i);
+    i = ft_printf(pourc2);
+    printf("Taille : %i\n", i);
+    i = printf(pourc2);
+    printf("Taille : %i\n", i);
+    i = ft_printf(pourc3);
+    printf("Taille : %i\n", i);
+    i = printf(pourc3);
     printf("Taille : %i\n", i);
     return (0);
 }

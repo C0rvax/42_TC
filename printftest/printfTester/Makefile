@@ -6,7 +6,8 @@ SHELL			= bash
 UTILS_PATH		= utils/
 UTILS			= $(addprefix $(UTILS_PATH), sigsegv.cpp color.cpp check.cpp leaks.cpp)
 
-PRINT_DIR		= /home/aduvilla/goinfre/testvogprintf/
+#PRINT_DIR		= /home/aduvilla/goinfre/testvogprintf/
+PRINT_DIR		= /home/aduvilla/Code/Rendu/ft_printf_00/
 #PRINT_DIR		= /home/aduvilla/Code/TC/printf/
 #PRINT_DIR		= /home/c0rvax/Code/42/TC/printf/
 
