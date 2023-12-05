@@ -87,5 +87,9 @@ int main()
     printf("Taille : %i\n", i);
     i = printf(pourc3);
     printf("Taille : %i\n", i);
+    i = ft_printf("Avec des accents : à é è ");
+    printf("Taille : %i\n", i);
+    i = printf("Avec des accents : à é è ");
+    printf("Taille : %i\n", i);
     return (0);
 }
