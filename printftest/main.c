@@ -91,5 +91,9 @@ int main()
     printf("Taille : %i\n", i);
     i = printf("Avec des accents : à é è ");
     printf("Taille : %i\n", i);
+    i = ft_printf("%())");
+    printf("Taille : %i\n", i);
+    i = printf("%())");
+    printf("Taille : %i\n", i);
     return (0);
 }
