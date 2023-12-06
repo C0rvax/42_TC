@@ -95,5 +95,6 @@ int main()
     printf("Taille : %i\n", i);
     i = printf("%())");
     printf("Taille : %i\n", i);
+	printf("%ld", LONG_MAX);
     return (0);
 }
