@@ -2,20 +2,18 @@ set 30.8Gb
 partitioning method : Manual
 SCII [0.0.0] (sda) ....
 partitioning disks : Yes
-pri/log 33.1 GB FREE SPACE
+pri/log 33.1 GB FREE SPACE			/ 12.9gb
 Create a new partition
 new partition size = 500m
 type : primary
 loction of the partition : begining
-mountPoint : /
-boot
+mountPoint : /boot
 done setting up partition
-Pri/log 32.6 GB FREE SPACE
+Pri/log 32.6 GB FREE SPACE			/ 12.4gb
 create a new partition
 new partition size = max
 logical
-mountPoint : /
-do not mount it
+mountPoint : / do not mount it
 done setting up the partition
 configure encrypted volume
 partition disks : Yes
@@ -23,7 +21,7 @@ create encrypted volume
 dev sda5...
 done setting up the partition
 finish
-really erase the data on ... partition no5
+really erase the data on ... partition no5 : Yes
 configure the logical volume manager
 partition disks : Yes
 create volume group
@@ -32,31 +30,31 @@ device for the new volume group : /dev/mapper/sda5_crypt
 create logical volume
 LVMGroup
 logical volume name : root
-size : 10g
+size : 10g					/ 3gb
 create logical volume
 volume group name : LVMGroup
 logical volume name : swap
-size : 2.3g
+size : 2.3g					/ 2.3gb
 create logical volume
 volume group name : LVMGroup
 logical volume name : home
-size : 5g
+size : 5g					/ 2gb
 create logical volume
 volume group name : LVMGroup
 logical volume name : var
-size : 3g
+size : 3g					/ 1gb
 create logical volume
 volume group name : LVMGroup
 logical volume name : srv
-size : 3g
+size : 3g					/ 1gb
 create logical volume
 volume group name : LVMGroup
 logical volume name : tmp
-size : 3g
+size : 3g					/ 1gb
 create logical volume
 volume group name : LVMGroup
 logical volume name : var-log
-size : 4g
+size : 4g					/ 1.2gb
 finish
 #1 5gb (home)
 use as ext4 journaling file system
