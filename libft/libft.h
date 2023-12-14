@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:09:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/13 09:49:18 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/12/14 13:02:11 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
+int		ft_isblank(int c);
+int		ft_iscntrl(int c);
+int		ft_isgraph(int c);
+int		ft_islower(int c);
+int		ft_isspace(int c);
+int		ft_isupper(int c);
+int		ft_isxdigit(int c);
 size_t	ft_strlen(const char *s);
 void	*ft_memset(void *s, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
@@ -56,6 +63,10 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+void	ft_putchar(char c);
+void	ft_putendl(char *s);
+void	ft_putnbr(int n);
+void	ft_purstr(char *s);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);

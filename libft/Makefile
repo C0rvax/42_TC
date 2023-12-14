@@ -9,7 +9,10 @@ SRC = ft_memset.c ft_bzero.c ft_isalpha.c ft_isdigit.c ft_isalnum.c 		\
 	  ft_memcpy.c ft_memmove.c ft_memchr.c ft_memcmp.c ft_strlen.c 			\
 	  ft_strchr.c ft_strrchr.c ft_strncmp.c ft_strlcpy.c ft_strlcat.c		\
 	  ft_strnstr.c ft_itoa.c ft_calloc.c ft_strdup.c ft_strtrim.c 			\
-	  ft_strmapi.c ft_strjoin.c ft_striteri.c ft_substr.c ft_split.c
+	  ft_strmapi.c ft_strjoin.c ft_striteri.c ft_substr.c ft_split.c		\
+	  ft_putchar.c ft_putendl.c ft_putnbr.c ft_putstr.c ft_isblank.c		\
+	  ft_iscntrl.c ft_isgraph.c ft_islower.c ft_isspace.c ft_isupper.c		\
+	  ft_isxdigit.c
 
 SRC_BONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c	\
 			ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c	\
