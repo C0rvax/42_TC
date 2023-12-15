@@ -8,22 +8,30 @@ CC 			= gcc
 
 CFLAGS		= -Wextra -Wall #-Werror
 
+HEADERS		= -Imlx -Iprintf -Ilibft 
+
+LIBRARIES	= -Lmlx -lmlx -Lprintf -lft_printf -Llibft -l:libft.a -lXext -lX11 -lm -lz -lft
+
 all			: $(NAME)
 
 $(NAME)		: $(OBJ)
-	$(CC) $(CFLAGS) $^ -Lmlx -lmlx -Llib -Imlx -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(CFLAGS) $^ $(LIBRARIES) -Imlx -o $(NAME)
 
-%.o			: %.c mmlx
-	$(CC) $(CFLAGS) -Imlx -Iheaders -O3 -c $< -o $@
+%.o			: %.c makelib
+	$(CC) $(CFLAGS) $(HEADERS) -O3 -c $< -o $@
 
-mmlx		:
+makelib		:
 	make -C mlx
+	make -C printf
+	make -C libft
 
 clean		:
 	rm -f $(OBJ)
 
 fclean		: clean
-	make clean -C mlx/
+	make clean -C mlx
+	make clean -C printf
+	make clean -C libft
 	rm -f $(NAME)
 	
 re			: fcleam all
