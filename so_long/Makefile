@@ -10,8 +10,8 @@ CFLAGS		= -Wextra -Wall #-Werror
 
 HEADERS		= -Imlx -Iprintf -Ilibft 
 
-LIBRARIES	= -Lmlx -lmlx -Lprintf -l:libftprintf.a -Llibft -l:libft.a		\
-	-lXext -lX11 -lm -lz -lft
+LIBRARIES	= -Lmlx -lmlx printf/libftprintf.a libft/libft.a 			\
+			  -lXext -lX11 -lm -lz
 
 all			: $(NAME)
 
@@ -35,5 +35,5 @@ fclean		: clean
 	make clean -C libft
 	rm -f $(NAME)
 	
-re			: fcleam all
+re			: fclean all
 
