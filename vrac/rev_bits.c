@@ -30,13 +30,8 @@ unsigned char	reverse_bits(unsigned char octet)
 		tab[i] >>= i;
 		i++;
 	}
-	i = 0;
-//	res = tab[1] | tab[2] | tab[3] | tab[0] | tab[4] | tab[5] | tab [6] | tab[7];
-	while (i <= 7)
-	{
+	while (i--)
 		res |= tab[i];
-		i++;
-	}
 	return (res);
 }
 
