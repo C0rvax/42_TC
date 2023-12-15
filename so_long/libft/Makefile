@@ -25,10 +25,10 @@ OBJ_B = $(SRC_BONUS:.c=.o)
 all: $(NAME)
 
 $(NAME):	$(OBJ)
-	$(AR) $(NAME) $^
+	$(AR) $(NAME) $?
 
 %.o: %.c
-	$(CC) -I. -c $^ -o $@ $(CFLAGS)
+	$(CC) -I. -c $? -o $@ $(CFLAGS)
 
 bonus:		$(OBJ) $(OBJ_B)
 	$(AR) $(NAME) $(OBJ) $(OBJ_B)
