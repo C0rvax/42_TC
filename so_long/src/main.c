@@ -9,6 +9,7 @@ int	main(void)
 
 	mlx = mlx_init();
 	ft_putstr("maybe\n");
+	print_putstr("allez\n");
 //	ft_printf("Youhou ca marche");
 	mlx_win = mlx_new_window(mlx, 800, 600, "Hello world!");
 	mlx_loop(mlx);

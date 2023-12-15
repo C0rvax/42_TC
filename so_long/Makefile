@@ -10,7 +10,8 @@ CFLAGS		= -Wextra -Wall #-Werror
 
 HEADERS		= -Imlx -Iprintf -Ilibft 
 
-LIBRARIES	= -Lmlx -lmlx -Lprintf -lft_printf -Llibft -l:libft.a -lXext -lX11 -lm -lz -lft
+LIBRARIES	= -Lmlx -lmlx -Lprintf -l:libftprintf.a -Llibft -l:libft.a		\
+	-lXext -lX11 -lm -lz -lft
 
 all			: $(NAME)
 
