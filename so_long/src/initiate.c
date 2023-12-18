@@ -13,8 +13,9 @@ void	init_sprite(t_data *game)
 {
 	game->sprite.height = 32;
 	game->sprite.width = 32;
-	game->sprite.floor = mlx_xpm_file_to_image(game->init, "./textures/floor.png",
-		&game->sprite.width, &game->sprite.height);
+	char	*floor = "./textures/floor.png";
+	game->sprite.floor = mlx_xpm_file_to_image(game->init, floor,
+		&(game->sprite.width), &(game->sprite.height));
 	game->sprite.wall = mlx_xpm_file_to_image(game->init, "./textures/wall.png",
 		&game->sprite.width, &game->sprite.height);
 	game->sprite.chicken = mlx_xpm_file_to_image(game->init, 

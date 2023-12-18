@@ -7,6 +7,8 @@ void	display_sprite(t_data *game, void *sprite, int x, int y)
 
 	width = game->sprite.width * x;
 	height = game->sprite.height * y;
+	ft_printf("x = %d y = %d\n", x, y);
+	ft_printf("width = %d height = %d\n", width, height);
 	mlx_put_image_to_window(game->init, game->window, sprite, width, height);
 }
 
@@ -23,7 +25,10 @@ void	display_back(t_data *game)
 		{
 			ft_printf("dans back");
 			if (game->map[y][x] == game->sign.floor)
+			{
+				ft_printf("dans le display");
 				display_sprite(game, game->sprite.floor, x, y);
+			}
 			x++;
 		}
 		y++;
