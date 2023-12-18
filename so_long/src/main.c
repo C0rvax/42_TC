@@ -1,17 +1,22 @@
-#include "libft.h"
-#include "ft_printf.h"
-#include <mlx.h>
+#include "so_long.h"
 
-int	main(void)
+int	main(int ac, char **ag)
 {
-	void	*mlx;
-//	void	*mlx_win;
+	t_data	game;
 
-	mlx = mlx_init();
-	ft_putstr("maybe\n");
-	print_putstr("allez\n");
-//	ft_printf("Youhou ca marche");
-	mlx_new_window(mlx, 800, 600, "Hello world!");
-	mlx_loop(mlx);
+	if (ac != 2)
+	{
+		ft_printf("Error\nSo_long need a .ber as argument !\n");
+		return (0);
+	}
+	game.map = init_map(ag[1], &game);
+	if (!game.map)
+		return (0);
+	game.turns = 0;
+	game.init = mlx_init();
+	init_sign(&game);
+	init_sprite(&game);
+	main_loop(&game);
+	return (1);
 }
 

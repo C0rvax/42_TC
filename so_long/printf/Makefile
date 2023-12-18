@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-NAME = libftprintf.a
+NAME = ft_printf.a
 RM = rm -rf
 AR = ar rc
 SRC = ft_printf.c ifforest.c print_hex.c print_number.c print_putchar.c		\
