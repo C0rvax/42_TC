@@ -1,4 +1,5 @@
 #include "so_long.h"
+#include <mlx.h>
 
 void	init_sign(t_data *game)
 {
@@ -13,16 +14,15 @@ void	init_sprite(t_data *game)
 {
 	game->sprite.height = 32;
 	game->sprite.width = 32;
-	char	*floor = "./textures/floor.png";
-	game->sprite.floor = mlx_xpm_file_to_image(game->init, floor,
+	game->sprite.floor = mlx_xpm_file_to_image(game->init, "./textures/floor.xpm",
 		&(game->sprite.width), &(game->sprite.height));
-	game->sprite.wall = mlx_xpm_file_to_image(game->init, "./textures/wall.png",
+	game->sprite.wall = mlx_xpm_file_to_image(game->init, "./textures/wall.xpm",
 		&game->sprite.width, &game->sprite.height);
 	game->sprite.chicken = mlx_xpm_file_to_image(game->init, 
-		"./textures/chicken.png", &game->sprite.width, &game->sprite.height);
+		"./textures/chicken.xpm", &game->sprite.width, &game->sprite.height);
 	game->sprite.player = mlx_xpm_file_to_image(game->init,
-		"./textures/player.png", &game->sprite.width, &game->sprite.height);
-	game->sprite.exit = mlx_xpm_file_to_image(game->init, "./textures/exit.png",
+		"./textures/player.xpm", &game->sprite.width, &game->sprite.height);
+	game->sprite.exit = mlx_xpm_file_to_image(game->init, "./textures/exit.xpm",
 		&game->sprite.width, &game->sprite.height);
 }
 
