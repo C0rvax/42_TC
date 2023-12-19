@@ -63,15 +63,15 @@ void	display_sprite(t_data *game, void *sprite, int x, int y);
 void	display_back(t_data *game, t_frame *frame);
 void	display_frame(t_data *game, t_frame *frame, int x, int y);
 void	display_frame_top(t_data *game, t_frame *frame, int x);
-void	display_frame_bot(t_data *game, t_frame *frame, int y);
+void	display_frame_bot(t_data *game, t_frame *frame, int x, int y);
 void	display_frame_mid(t_data *game, t_frame *frame, int x, int y);
 int		display(t_data *game);
 void	main_loop(t_data *game, t_frame *frame);
-int		input_key(int keysym, t_data *game);
+int		input_key(int keysym, t_data *game, t_frame *frame);
 void	move_top(t_data *game);
 void	move_down(t_data *game);
 void	move_left(t_data *game);
 void	move_right(t_data *game);
-int		end_game(t_data *game);
+int		end_game(t_data *game, t_frame *frame);
 
 #endif

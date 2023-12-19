@@ -49,5 +49,5 @@ void	main_loop(t_data *game, t_frame *frame)
 	mlx_hook(game->window, KeyRelease, KeyReleaseMask, &input_key, game);
 	mlx_hook(game->window, 17, 0, &end_game, game);
 	mlx_loop(game->init);
-	end_game(game);
+	end_game(game, frame);
 }

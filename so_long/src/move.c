@@ -1,9 +1,9 @@
 #include "so_long.h"
 
-int	input_key(int keysym, t_data *game)
+int	input_key(int keysym, t_data *game, t_frame *frame)
 {
 	if (keysym == XK_Escape)
-		end_game(game);
+		end_game(game, frame);
 	if (keysym == XK_w)
 		move_top(game);
 	if (keysym == XK_s)

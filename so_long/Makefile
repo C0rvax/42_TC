@@ -1,6 +1,7 @@
 NAME		= so_long
 
-SRC			= $(addprefix src/, main.c initiate.c main_loop.c display.c move.c)
+SRC			= $(addprefix src/, main.c initiate.c main_loop.c display.c		\
+			  display_back.c move.c)
 
 GNL_SRC		= $(addprefix gnl/, get_next_line.c get_next_line_utils.c)
 
