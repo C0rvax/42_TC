@@ -12,10 +12,7 @@ int	main(int ac, char **ag)
 	game.map = init_map(ag[1], &game);
 	if (!game.map)
 		return (0);
-	game.turns = 0;
-	game.init = mlx_init();
-	init_sign(&game);
-	init_sprite(&game);
+	initialize_game(&game);
 	main_loop(&game);
 	return (1);
 }

@@ -32,15 +32,11 @@ void	main_loop(t_data *game)
 
 	x = game->width * game->sprite.width;
 	y = game->height * game->sprite.height;
-	ft_printf("x : %d y : %d\n", x, y);
 	game->window = mlx_new_window(game->init, x, y, "So_long");
-	ft_printf("ici");
 	if (!game->window)
 		return (free(game->init));
 	display_back(game);
-	ft_printf("la");
 	display_wall(game);
-	ft_printf("end");
 	mlx_loop_hook(game->init, &display, game);
 	mlx_hook(game->window, KeyRelease, KeyReleaseMask, &input_key, game);
 	mlx_hook(game->window, 17, 0, &end_game, game);

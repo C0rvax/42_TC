@@ -43,6 +43,18 @@ typedef struct data_s
 	t_sign		sign;
 }			t_data;
 
+typedef struct frame_s
+{
+	void	*ul;
+	void	*u;
+	void	*ur;
+	void	*l;
+	void	*r;
+	void	*dl;
+	void	*d;
+	void	*dr;
+}			t_frame;
+
 void	init_sign(t_data *game);
 void	init_sprite(t_data *game);
 char	**init_map(char *ber, t_data *game);

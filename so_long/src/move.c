@@ -6,11 +6,11 @@ int	input_key(int keysym, t_data *game)
 		end_game(game);
 	if (keysym == XK_w)
 		move_top(game);
-	if (keysym == XK_d)
+	if (keysym == XK_s)
 		move_down(game);
 	if (keysym == XK_a)
 		move_left(game);
-	if (keysym == XK_s)
+	if (keysym == XK_d)
 		move_right(game);
 	return (0);
 }
