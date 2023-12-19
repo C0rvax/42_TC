@@ -1,6 +1,6 @@
 # include "so_long.h"
 
-int	end_game(t_data *game)
+int	end_game(t_data *game, t_frame *frame)
 {
 	int		i;
 
@@ -18,6 +18,14 @@ int	end_game(t_data *game)
 		mlx_destroy_image(game->init, game->sprite.chicken);
 		mlx_destroy_image(game->init, game->sprite.player);
 		mlx_destroy_image(game->init, game->sprite.exit);
+		mlx_destroy_image(game->init, frame->ul);
+		mlx_destroy_image(game->init, frame->ur);
+		mlx_destroy_image(game->init, frame->u);
+		mlx_destroy_image(game->init, frame->l);
+		mlx_destroy_image(game->init, frame->r);
+		mlx_destroy_image(game->init, frame->dl);
+		mlx_destroy_image(game->init, frame->dr);
+		mlx_destroy_image(game->init, frame->d);
 		mlx_destroy_window(game->init, game->window);
 	}
 	mlx_destroy_display(game->init);
@@ -25,7 +33,7 @@ int	end_game(t_data *game)
 	exit(0);
 }
 
-void	main_loop(t_data *game)
+void	main_loop(t_data *game, t_frame *frame)
 {
 	int	x;
 	int	y;
@@ -35,8 +43,8 @@ void	main_loop(t_data *game)
 	game->window = mlx_new_window(game->init, x, y, "So_long");
 	if (!game->window)
 		return (free(game->init));
-	display_back(game);
-	display_wall(game);
+	display_back(game, frame);
+	//display_wall(game);
 	mlx_loop_hook(game->init, &display, game);
 	mlx_hook(game->window, KeyRelease, KeyReleaseMask, &input_key, game);
 	mlx_hook(game->window, 17, 0, &end_game, game);

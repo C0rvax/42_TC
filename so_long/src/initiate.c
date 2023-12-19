@@ -48,16 +48,13 @@ void	init_frame(t_data *game, t_frame *frame)
 		&game->sprite.width, &game->sprite.height);
 }
 
-void	initialize_game(t_data *game)
+void	initialize_game(t_data *game, t_frame *frame)
 {
-	t_frame	frame;
-
 	game->turns = 0;
 	game->init = mlx_init();
 	init_sign(game);
 	init_sprite(game);
-	init_frame(game, &frame);
-
+	init_frame(game, frame);
 }
 
 char	**init_map(char *ber, t_data *game)

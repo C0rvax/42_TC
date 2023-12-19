@@ -55,14 +55,18 @@ typedef struct frame_s
 	void	*dr;
 }			t_frame;
 
+void	initialize_game(t_data *game, t_frame *frame);
 void	init_sign(t_data *game);
 void	init_sprite(t_data *game);
 char	**init_map(char *ber, t_data *game);
 void	display_sprite(t_data *game, void *sprite, int x, int y);
-void	display_back(t_data *game);
-void	display_wall(t_data *game);
+void	display_back(t_data *game, t_frame *frame);
+void	display_frame(t_data *game, t_frame *frame, int x, int y);
+void	display_frame_top(t_data *game, t_frame *frame, int x);
+void	display_frame_bot(t_data *game, t_frame *frame, int y);
+void	display_frame_mid(t_data *game, t_frame *frame, int x, int y);
 int		display(t_data *game);
-void	main_loop(t_data *game);
+void	main_loop(t_data *game, t_frame *frame);
 int		input_key(int keysym, t_data *game);
 void	move_top(t_data *game);
 void	move_down(t_data *game);
