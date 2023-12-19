@@ -1,41 +1,41 @@
 #include "so_long.h"
 
-void	display_frame_top(t_data *game, t_frame *frame, int x)
+void	display_frame_top(t_data *game, int x)
 {
-	display_sprite(game, frame->ul, 0, 0);
-	display_sprite(game, frame->ur, x, 0);
+	display_sprite(game, game->frame.ul, 0, 0);
+	display_sprite(game, game->frame.ur, x, 0);
 	while (x-- > 1)
-		display_sprite(game, frame->u, x, 0);
+		display_sprite(game, game->frame.u, x, 0);
 }
 
-void	display_frame_mid(t_data *game, t_frame *frame, int x, int y)
+void	display_frame_mid(t_data *game, int x, int y)
 {
 	int	i;
 
 	i = 0;
-	while(++i < y)
+	while (++i < y)
 	{
-		display_sprite(game, frame->l, 0, i);
-		display_sprite(game, frame->r, x, i);
+		display_sprite(game, game->frame.l, 0, i);
+		display_sprite(game, game->frame.r, x, i);
 	}
 }
 
-void	display_frame_bot(t_data *game, t_frame *frame, int x, int y)
+void	display_frame_bot(t_data *game, int x, int y)
 {
-	display_sprite(game, frame->dl, 0, y);
-	display_sprite(game, frame->dr, x, y);
+	display_sprite(game, game->frame.dl, 0, y);
+	display_sprite(game, game->frame.dr, x, y);
 	while (x-- > 1)
-		display_sprite(game, frame->d, x, y);
+		display_sprite(game, game->frame.d, x, y);
 }
 
-void	display_frame(t_data *game, t_frame *frame, int x, int y)
+void	display_frame(t_data *game, int x, int y)
 {
-	display_frame_top(game, frame, x);
-	display_frame_bot(game, frame, x, y);
-	display_frame_mid(game, frame, x, y);
+	display_frame_top(game, x);
+	display_frame_bot(game, x, y);
+	display_frame_mid(game, x, y);
 }
 
-void	display_back(t_data *game, t_frame *frame)
+void	display_back(t_data *game)
 {
 	int	x;
 	int	y;
@@ -59,7 +59,7 @@ void	display_back(t_data *game, t_frame *frame)
 		}
 	}
 	if (x > 2 && y > 2)
-		display_frame(game, frame, x, y);
+		display_frame(game, x, y);
 }
 
 // reduire en faisant ++y et ++x dans les conditions

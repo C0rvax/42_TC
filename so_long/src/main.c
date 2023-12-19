@@ -3,7 +3,6 @@
 int	main(int ac, char **ag)
 {
 	t_data	game;
-	t_frame	frame;
 
 	if (ac != 2)
 	{
@@ -13,8 +12,7 @@ int	main(int ac, char **ag)
 	game.map = init_map(ag[1], &game);
 	if (!game.map)
 		return (0);
-	initialize_game(&game, &frame);
-	main_loop(&game, &frame);
+	initialize_game(&game);
+	main_loop(&game);
 	return (1);
 }
-

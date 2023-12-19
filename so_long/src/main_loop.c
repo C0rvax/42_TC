@@ -1,6 +1,23 @@
-# include "so_long.h"
+#include "so_long.h"
 
-int	end_game(t_data *game, t_frame *frame)
+void	free_image(t_data *game)
+{
+		mlx_destroy_image(game->init, game->sprite.wall);
+		mlx_destroy_image(game->init, game->sprite.floor);
+		mlx_destroy_image(game->init, game->sprite.chicken);
+		mlx_destroy_image(game->init, game->sprite.player);
+		mlx_destroy_image(game->init, game->sprite.exit);
+		mlx_destroy_image(game->init, game->frame.ul);
+		mlx_destroy_image(game->init, game->frame.ur);
+		mlx_destroy_image(game->init, game->frame.u);
+		mlx_destroy_image(game->init, game->frame.l);
+		mlx_destroy_image(game->init, game->frame.r);
+		mlx_destroy_image(game->init, game->frame.dl);
+		mlx_destroy_image(game->init, game->frame.dr);
+		mlx_destroy_image(game->init, game->frame.d);
+}
+
+int	end_game(t_data *game)
 {
 	int		i;
 
@@ -13,19 +30,7 @@ int	end_game(t_data *game, t_frame *frame)
 			i++;
 		}
 		free(game->map);
-		mlx_destroy_image(game->init, game->sprite.wall);
-		mlx_destroy_image(game->init, game->sprite.floor);
-		mlx_destroy_image(game->init, game->sprite.chicken);
-		mlx_destroy_image(game->init, game->sprite.player);
-		mlx_destroy_image(game->init, game->sprite.exit);
-		mlx_destroy_image(game->init, frame->ul);
-		mlx_destroy_image(game->init, frame->ur);
-		mlx_destroy_image(game->init, frame->u);
-		mlx_destroy_image(game->init, frame->l);
-		mlx_destroy_image(game->init, frame->r);
-		mlx_destroy_image(game->init, frame->dl);
-		mlx_destroy_image(game->init, frame->dr);
-		mlx_destroy_image(game->init, frame->d);
+		free_image(game);
 		mlx_destroy_window(game->init, game->window);
 	}
 	mlx_destroy_display(game->init);
@@ -33,7 +38,7 @@ int	end_game(t_data *game, t_frame *frame)
 	exit(0);
 }
 
-void	main_loop(t_data *game, t_frame *frame)
+void	main_loop(t_data *game)
 {
 	int	x;
 	int	y;
@@ -43,11 +48,11 @@ void	main_loop(t_data *game, t_frame *frame)
 	game->window = mlx_new_window(game->init, x, y, "So_long");
 	if (!game->window)
 		return (free(game->init));
-	display_back(game, frame);
+	display_back(game);
 	//display_wall(game);
 	mlx_loop_hook(game->init, &display, game);
 	mlx_hook(game->window, KeyRelease, KeyReleaseMask, &input_key, game);
 	mlx_hook(game->window, 17, 0, &end_game, game);
 	mlx_loop(game->init);
-	end_game(game, frame);
+	end_game(game);
 }
