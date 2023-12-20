@@ -35,23 +35,25 @@ int	end_game(t_data *game)
 	}
 	mlx_destroy_display(game->init);
 	free(game->init);
+	ft_printf("Quit succesfull\n");
 	exit(0);
 }
 
-void	main_loop(t_data *game)
+void	main_loop(t_data *game, char *title)
 {
 	int	x;
 	int	y;
 
 	x = game->width * game->sprite.width;
 	y = game->height * game->sprite.height;
-	game->window = mlx_new_window(game->init, x, y, "So_long");
+	game->window = mlx_new_window(game->init, x, y, title);
 	if (!game->window)
 		return (free(game->init));
 	display_back(game);
 	mlx_loop_hook(game->init, &display, game);
-	mlx_hook(game->window, KeyRelease, KeyReleaseMask, &input_key, game);
-	mlx_hook(game->window, 17, 0, &end_game, game);
+	mlx_hook(game->window, KeyPress, KeyPressMask, &input_key, game);
+//	mlx_hook(game->window, KeyRelease, KeyReleaseMask, &input_key, game);
+	mlx_hook(game->window, DestroyNotify, NoEventMask, &end_game, game);
 	mlx_loop(game->init);
 	end_game(game);
 }

@@ -13,6 +13,6 @@ int	main(int ac, char **ag)
 	if (!game.map)
 		return (0);
 	initialize_game(&game);
-	main_loop(&game);
+	main_loop(&game, ag[0]);
 	return (1);
 }

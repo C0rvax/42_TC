@@ -68,7 +68,7 @@ void	display_frame_top(t_data *game, int x);
 void	display_frame_bot(t_data *game, int x, int y);
 void	display_frame_mid(t_data *game, int x, int y);
 int		display(t_data *game);
-void	main_loop(t_data *game);
+void	main_loop(t_data *game, char *title);
 int		input_key(int keysym, t_data *game);
 void	move_top(t_data *game);
 void	move_down(t_data *game);
