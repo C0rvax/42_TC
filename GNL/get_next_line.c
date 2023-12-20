@@ -45,9 +45,9 @@ char	*read_to_result(char *result, const int fd)
 			break ;
 		buff[i] = '\0';
 		if (!result)
-			result = ft_strnew();
+			result = gnl_strnew();
 		copy = result;
-		result = ft_strjoin(copy, buff);
+		result = gnl_strjoin(copy, buff);
 		free(copy);
 		if (isend(result))
 			break ;
@@ -66,8 +66,8 @@ char	*stash_memory(char *result)
 		i++;
 	if (result[i] == '\0' || result[i + 1] == '\0')
 		return (NULL);
-	size = ft_strlen(result) - i;
-	memory = ft_substr(result, i + 1, size);
+	size = gnl_strlen(result) - i;
+	memory = gnl_substr(result, i + 1, size);
 	if (!memory)
 		return (free(memory), memory = NULL, NULL);
 	result[i + 1] = '\0';

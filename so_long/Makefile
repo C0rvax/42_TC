@@ -1,30 +1,33 @@
 NAME		= so_long
 
-SRC			= $(addprefix src/, main.c initiate.c main_loop.c display.c		\
-			  display_back.c check_exit.c move.c)
+vpath %.c src/ gnl/
 
-GNL_SRC		= $(addprefix gnl/, get_next_line.c get_next_line_utils.c)
+SRC			= main.c initiate.c main_loop.c display.c		\
+			  display_back.c check_exit.c move.c
+
+GNL_SRC		= get_next_line.c get_next_line_utils.c
 
 OBJ			:= $(SRC:%.c=%.o)
 
 GNL_OBJ		:= $(GNL_SRC:%.c=%.o)
 
-CC 			= gcc
+CC 			= cc
 
-CFLAGS		= -Wextra -Wall #-Werror
+CFLAGS		= -Wextra -Wall -Werror
 
 HEADERS		= -Imlx -Iprintf -Ilibft -Ignl -I.
 
-LIBRARIES	= -Lmlx -lmlx printf/ft_printf.a libft/libft.a 			\
+LIBRARIES	= -Lmlx -lmlx -L./printf -lftprintf -L./libft -lft \
 			  -lXext -lX11 -lm -lz
+#printf/ft_printf.a libft/libft.a 			\
 
-all			: $(NAME)
+all			: makelib $(NAME)
 
 $(NAME)		: $(OBJ) $(GNL_OBJ)
-	$(CC) $(CFLAGS) $^ $(LIBRARIES) -Imlx -o $@
+	$(CC) $(CFLAGS) $^ $(LIBRARIES) -o $@
 
-%.o			: %.c makelib
-	$(CC) $(CFLAGS) $(HEADERS) -O3 -c $< -o $@
+%.o			: %.c
+	$(CC) $(CFLAGS) $(HEADERS) -O3 -c $? -o $@
 
 makelib		:
 	make -C mlx
