@@ -51,7 +51,8 @@ void	main_loop(t_data *game, char *title)
 		return (free(game->init));
 	display_back(game);
 	mlx_loop_hook(game->init, &display, game);
-	mlx_hook(game->window, KeyPress, KeyPressMask, &input_key, game);
+	mlx_key_hook(game->window, &input_key, game);
+//	mlx_hook(game->window, KeyPress, KeyPressMask, &input_key, game);
 //	mlx_hook(game->window, KeyRelease, KeyReleaseMask, &input_key, game);
 	mlx_hook(game->window, DestroyNotify, NoEventMask, &end_game, game);
 	mlx_loop(game->init);
