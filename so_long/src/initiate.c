@@ -52,8 +52,8 @@ void	initialize_game(t_data *game)
 {
 	game->turns = 0;
 	game->player_x = 1;
-	game->player_y = 2;
-	game->chicks = 2;
+	game->player_y = 1;
+	game->chicks = 4;
 	game->init = mlx_init();
 	init_sign(game);
 	init_sprite(game);
@@ -65,9 +65,10 @@ char	**init_map(char *ber, t_data *game)
 	int		fd;
 	char	**res;
 
-	res = ft_split("WWWWWWWWWWeWC000000EWeWP00CW0WWWeWWWWWWWWWW", 'e');
-	game->width = 10;
-	game->height = 4;
+	//res = ft_split("WWWWWWWWWWeWC000000EWeWP00CW0WWWeWWWWWWWWWW", 'e');
+	res = ft_split("WWWWWWWWWWWWWWWWWWWWeWP0WWWWWWWWWWWWWWWWWeWWC0WWWWWWWWWWWWWWWWeWWW00WWWWWWWWWWWWWWWeWWWW0CWWWWWWWWWWWWWWeWWWWW00WWWWWWWWWWWWWeWWWWWW000000000000WWeWWWWWWWWWWWWCWWCW0WWeWWE00000000WWWWWW0WWeWWWWWWWWWW00000000WWeWWWWWWWWWWWWWWWWWWWW", 'e');
+	game->width = 20;
+	game->height = 11;
 	game->map = res;
 	return (game->map);
 	fd = open(ber, O_RDONLY);
