@@ -19,7 +19,6 @@ HEADERS		= -Imlx -Iprintf -Ilibft -Ignl -I.
 
 LIBRARIES	= -Lmlx -lmlx -L./printf -lftprintf -L./libft -lft \
 			  -lXext -lX11 -lm -lz
-#printf/ft_printf.a libft/libft.a 			\
 
 all			: makelib $(NAME)
 
@@ -27,7 +26,7 @@ $(NAME)		: $(OBJ) $(GNL_OBJ)
 	$(CC) $(CFLAGS) $^ $(LIBRARIES) -o $@
 
 %.o			: %.c
-	$(CC) $(CFLAGS) $(HEADERS) -O3 -c $? -o $@
+	$(CC) $(CFLAGS) $(HEADERS) -O3 -c $< -o $@
 
 makelib		:
 	make -C mlx
@@ -46,5 +45,4 @@ fclean		: clean
 	make fclean -C printf
 	make fclean -C libft
 	
-re			: fclean all
-
+re			: fclean all clean makelib

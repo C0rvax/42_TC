@@ -3,7 +3,7 @@
 void	init_sign(t_data *game)
 {
 	game->sign.floor = '0';
-	game->sign.wall = 'W';
+	game->sign.wall = '1';
 	game->sign.chicken = 'C';
 	game->sign.player = 'P';
 	game->sign.exit = 'E';
