@@ -2,19 +2,19 @@
 
 void	free_image(t_data *game)
 {
-		mlx_destroy_image(game->init, game->sprite.wall);
-		mlx_destroy_image(game->init, game->sprite.floor);
-		mlx_destroy_image(game->init, game->sprite.chicken);
-		mlx_destroy_image(game->init, game->sprite.player);
-		mlx_destroy_image(game->init, game->sprite.exit);
-		mlx_destroy_image(game->init, game->frame.ul);
-		mlx_destroy_image(game->init, game->frame.ur);
-		mlx_destroy_image(game->init, game->frame.u);
-		mlx_destroy_image(game->init, game->frame.l);
-		mlx_destroy_image(game->init, game->frame.r);
-		mlx_destroy_image(game->init, game->frame.dl);
-		mlx_destroy_image(game->init, game->frame.dr);
-		mlx_destroy_image(game->init, game->frame.d);
+	mlx_destroy_image(game->init, game->sprite.wall);
+	mlx_destroy_image(game->init, game->sprite.floor);
+	mlx_destroy_image(game->init, game->sprite.chicken);
+	mlx_destroy_image(game->init, game->sprite.player);
+	mlx_destroy_image(game->init, game->sprite.exit);
+	mlx_destroy_image(game->init, game->frame.ul);
+	mlx_destroy_image(game->init, game->frame.ur);
+	mlx_destroy_image(game->init, game->frame.u);
+	mlx_destroy_image(game->init, game->frame.l);
+	mlx_destroy_image(game->init, game->frame.r);
+	mlx_destroy_image(game->init, game->frame.dl);
+	mlx_destroy_image(game->init, game->frame.dr);
+	mlx_destroy_image(game->init, game->frame.d);
 }
 
 int	end_game(t_data *game)
@@ -49,7 +49,6 @@ void	main_loop(t_data *game)
 	if (!game->window)
 		return (free(game->init));
 	display_back(game);
-	//display_wall(game);
 	mlx_loop_hook(game->init, &display, game);
 	mlx_hook(game->window, KeyRelease, KeyReleaseMask, &input_key, game);
 	mlx_hook(game->window, 17, 0, &end_game, game);

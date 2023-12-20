@@ -1,6 +1,4 @@
 #include "so_long.h"
-//#include <mlx.h>
-
 
 void	init_sign(t_data *game)
 {
@@ -64,14 +62,27 @@ char	**init_map(char *ber, t_data *game)
 {
 	int		fd;
 	char	**res;
+	char	*buf;
+	char	*line;
+	char	*copy;
 
-	//res = ft_split("WWWWWWWWWWeWC000000EWeWP00CW0WWWeWWWWWWWWWW", 'e');
-	res = ft_split("WWWWWWWWWWWWWWWWWWWWeWP0WWWWWWWWWWWWWWWWWeWWC0WWWWWWWWWWWWWWWWeWWW00WWWWWWWWWWWWWWWeWWWW0CWWWWWWWWWWWWWWeWWWWW00WWWWWWWWWWWWWeWWWWWW000000000000WWeWWWWWWWWWWWWCWWCW0WWeWWE00000000WWWWWW0WWeWWWWWWWWWW00000000WWeWWWWWWWWWWWWWWWWWWWW", 'e');
 	game->width = 20;
 	game->height = 11;
-	game->map = res;
-	return (game->map);
 	fd = open(ber, O_RDONLY);
 	if (fd < 0)
 		return (ft_printf("Error\nCan't open map !\n"), NULL);
+	line = ft_strdup("");
+	while (1)
+	{
+		buf = get_next_line(fd);
+		if (!buf)
+			break ;
+		copy = line;
+		line = ft_strjoin(line, buf);
+		free(copy);
+		free(buf);
+	}
+	res = ft_split(line, '\n');
+	game->map = res;
+	return (game->map);
 }
