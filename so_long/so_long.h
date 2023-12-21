@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:27:15 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/21 17:27:17 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/12/21 17:52:51 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ int		end_game(t_data *game);
 char	**tab_dup(char **tab);
 void	ft_free_tab(char **tab);
 void	ft_error(char c);
+char	*get_all_lines(char *ber);
 
 #endif

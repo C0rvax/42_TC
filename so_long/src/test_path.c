@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 12:53:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/21 17:27:32 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/12/21 18:05:19 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ int	check_tiles(t_data *game, int p, int e)
 	int	x;
 	int	y;
 
-	y = 0;
-	while(game->map[y])
+	y = -1;
+	while (game->map[++y])
 	{
-		x = 0;
-		while(game->map[y][x])
+		x = -1;
+		while (game->map[y][++x])
 		{
 			if (game->map[y][x] == game->sign.player)
 			{
@@ -43,13 +43,10 @@ int	check_tiles(t_data *game, int p, int e)
 				game->player_y = y;
 			}
 			if (game->map[y][x] == game->sign.exit)
-			//if (game->map[y][x] == 'E')
 				e++;
 			if (game->map[y][x] == game->sign.chicken)
 				game->chicks++;
-			x++;
 		}
-		y++;
 	}
 	if (!check_tile_number(game, p, e))
 		return (0);
@@ -70,8 +67,8 @@ int	check_tile_number(t_data *game, int p, int e)
 int	check_map(t_data *game)
 {
 	char	**copy;
-	int	x;
-	int y;
+	int		x;
+	int		y;
 
 	copy = tab_dup(game->map);
 	if (!check_wall(game))

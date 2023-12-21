@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:20:59 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/21 17:27:21 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/12/21 17:55:39 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	init_sign(t_data *game)
 {
 	game->turns = 0;
 	game->chicks = 0;
+	game->width = 0;
+	game->height = 0;
 	game->sign.floor = '0';
 	game->sign.wall = '1';
 	game->sign.chicken = 'C';
@@ -69,31 +71,7 @@ void	initialize_game(t_data *game)
 
 char	**init_map(char *ber, t_data *game)
 {
-	int		fd;
-	char	**res;
-	char	*buf;
-	char	*line;
-	char	*copy;
-
-	game->width = 0;
-	game->height = 0;
-	fd = open(ber, O_RDONLY);
-	if (fd < 0)
-		return (ft_printf("Error\nCan't open map !\n"), NULL);
-	line = ft_strdup("");
-	while (1)
-	{
-		buf = get_next_line(fd);
-		if (!buf)
-			break ;
-		copy = line;
-		line = ft_strjoin(line, buf);
-		free(copy);
-		free(buf);
-	}
-	close(fd);
-	res = ft_split(line, '\n');
-	game->map = res;
+	game->map = ft_split(get_all_lines(ber), '\n');
 	if (!check_map(game))
 		return (NULL);
 	return (game->map);
