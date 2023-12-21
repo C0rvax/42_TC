@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/21 17:27:15 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/12/21 17:27:17 by aduvilla         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -65,6 +77,7 @@ int		check_map(t_data *game);
 int		check_tiles(t_data *game, int p, int e);
 int		check_tile_number(t_data *game, int p, int e);
 int		check_wall(t_data *game);
+int		check_wall_line(char *s);
 void		flood_test(char **map, int x, int y);
 void	display_sprite(t_data *game, void *sprite, int x, int y);
 void	display_back(t_data *game);
@@ -85,5 +98,6 @@ void	free_image(t_data *game);
 int		end_game(t_data *game);
 char	**tab_dup(char **tab);
 void	ft_free_tab(char **tab);
+void	ft_error(char c);
 
 #endif

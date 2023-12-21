@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 12:53:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/21 15:13:15 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/12/21 17:27:32 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	flood_test(char **map, int x, int y)
 {
-	if (map[y][x] == '0' || map[y][x] == 'P' || map[y][x] == 'E')
+	if (map[y][x] == '0' || map[y][x] == 'P' || map[y][x] == 'E' ||
+		map[y][x] == 'C')
 	{
 		map[y][x] = '1';
 		flood_test(map, x - 1, y);
@@ -58,18 +59,12 @@ int	check_tiles(t_data *game, int p, int e)
 int	check_tile_number(t_data *game, int p, int e)
 {
 	if (e != 1)
-		return (ft_printf("Error\nInvalid map : need 1 exit !"), 0);
+		return (ft_error('e'), 0);
 	if (p != 1)
-		return (ft_printf("Error\nInvalid map : need 1 player !"), 0);
+		return (ft_error('p'), 0);
 	if (game->chicks < 1)
-		return (ft_printf("Error\nInvalid map : minimum 1 chicken !"), 0);
+		return (ft_error('c'), 0);
 	return (1);
-}
-int	check_wall(t_data *game)
-{
-	if (game->map)
-		return (1);
-	return (0);
 }
 
 int	check_map(t_data *game)
@@ -91,7 +86,7 @@ int	check_map(t_data *game)
 		while (copy[y][x])
 		{
 			if (copy[y][x] == game->sign.exit)
-				return (ft_printf("Error\nInvalid map : no path to exit !"),
+				return (ft_error('f'),
 					ft_free_tab(game->map), ft_free_tab(copy), 0);
 			x++;
 		}

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:20:59 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/21 14:21:06 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/12/21 17:27:21 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	init_sign(t_data *game)
 {
+	game->turns = 0;
+	game->chicks = 0;
 	game->sign.floor = '0';
 	game->sign.wall = '1';
 	game->sign.chicken = 'C';
@@ -60,10 +62,6 @@ void	init_frame(t_data *game)
 
 void	initialize_game(t_data *game)
 {
-	game->turns = 0;
-	//game->player_x = 1;
-	//game->player_y = 1;
-	game->chicks = 0;
 	game->init = mlx_init();
 	init_sprite(game);
 	init_frame(game);
@@ -77,8 +75,8 @@ char	**init_map(char *ber, t_data *game)
 	char	*line;
 	char	*copy;
 
-	game->width = 20;
-	game->height = 11;
+	game->width = 0;
+	game->height = 0;
 	fd = open(ber, O_RDONLY);
 	if (fd < 0)
 		return (ft_printf("Error\nCan't open map !\n"), NULL);
