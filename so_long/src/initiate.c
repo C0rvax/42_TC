@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:20:59 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/21 17:55:39 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/12/22 00:43:03 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ void	initialize_game(t_data *game)
 
 char	**init_map(char *ber, t_data *game)
 {
+	char	*line;
+
+	line = get_all_lines(ber);
+	if (!line)
+		return (perror("hmm"), NULL);
 	game->map = ft_split(get_all_lines(ber), '\n');
 	if (!check_map(game))
 		return (NULL);

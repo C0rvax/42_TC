@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:35:00 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/21 17:53:36 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/12/22 00:45:05 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*get_all_lines(char *ber)
 
 	fd = open(ber, O_RDONLY);
 	if (fd < 0)
-		return (ft_printf("Error\nCan't open map !\n"), NULL);
+		return (NULL);
 	line = ft_strdup("");
 	while (1)
 	{

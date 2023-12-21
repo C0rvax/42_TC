@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:27:15 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/21 17:52:51 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/12/22 00:39:55 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include <fcntl.h>
+# include <stdio.h>
 # include <mlx.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
