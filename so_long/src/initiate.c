@@ -49,9 +49,9 @@ void	init_frame(t_data *game)
 void	initialize_game(t_data *game)
 {
 	game->turns = 0;
-	game->player_x = 1;
-	game->player_y = 1;
-	game->chicks = 4;
+	//game->player_x = 1;
+	//game->player_y = 1;
+	game->chicks = 0;
 	game->init = mlx_init();
 	init_sign(game);
 	init_sprite(game);
@@ -84,5 +84,7 @@ char	**init_map(char *ber, t_data *game)
 	}
 	res = ft_split(line, '\n');
 	game->map = res;
+	if (!check_map(game))
+		return (ft_printf("Error\nInvalid Map !\n"), NULL);
 	return (game->map);
 }
