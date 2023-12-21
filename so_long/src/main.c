@@ -9,10 +9,11 @@ int	main(int ac, char **ag)
 		ft_printf("Error\nSo_long need a .ber as argument !\n");
 		return (0);
 	}
-	initialize_game(&game);
+	init_sign(&game);
 	game.map = init_map(ag[1], &game);
 	if (!game.map)
 		return (0);
+	initialize_game(&game);
 	main_loop(&game, ag[0]);
 	return (1);
 }

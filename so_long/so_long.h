@@ -83,5 +83,7 @@ void	add_chicks(t_data *game);
 void	check_exit(t_data *game);
 void	free_image(t_data *game);
 int		end_game(t_data *game);
+char	**tab_dup(char **tab);
+void	ft_free_tab(char **tab);
 
 #endif

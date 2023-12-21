@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initiate.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/21 14:20:59 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/12/21 14:21:06 by aduvilla         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	init_sign(t_data *game)
@@ -53,7 +65,6 @@ void	initialize_game(t_data *game)
 	//game->player_y = 1;
 	game->chicks = 0;
 	game->init = mlx_init();
-	init_sign(game);
 	init_sprite(game);
 	init_frame(game);
 }
@@ -82,9 +93,10 @@ char	**init_map(char *ber, t_data *game)
 		free(copy);
 		free(buf);
 	}
+	close(fd);
 	res = ft_split(line, '\n');
 	game->map = res;
 	if (!check_map(game))
-		return (ft_printf("Error\nInvalid Map !\n"), NULL);
+		return (NULL);
 	return (game->map);
 }
