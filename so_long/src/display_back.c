@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:37:16 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/21 17:37:18 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/12/26 23:56:14 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,3 @@ void	display_back(t_data *game)
 	if (x > 2 && y > 2)
 		display_frame(game, x, y);
 }
-
-// reduire en faisant ++y et ++x dans les conditions
