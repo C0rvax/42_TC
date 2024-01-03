@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:37:48 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/03 15:00:07 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:57:07 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ void	main_loop(t_data *game, char *title)
 		return (ft_free_tab(game->map), free(game->init));
 	display_back(game);
 	mlx_loop_hook(game->init, &display, game);
-	mlx_key_hook(game->window, &input_key, game);
+	mlx_hook(game->window, KeyPress, KeyPressMask, &input_key, game);
 	mlx_hook(game->window, DestroyNotify, NoEventMask, &end_game, game);
 	mlx_loop(game->init);
 	end_game(game);
 }
-//	mlx_hook(game->window, KeyPress, KeyPressMask, &input_key, game);
+//	mlx_key_hook(game->window, &input_key, game);
 //	mlx_hook(game->window, KeyRelease, KeyReleaseMask, &input_key, game);
 
 int	main(int ac, char **ag)
