@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:37:48 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/03 13:09:54 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:00:07 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	free_image(t_data *game)
 	mlx_destroy_image(game->init, game->sprite.chicken);
 	mlx_destroy_image(game->init, game->sprite.player);
 	mlx_destroy_image(game->init, game->sprite.exit);
+	mlx_destroy_image(game->init, game->sprite.ennemy);
 	mlx_destroy_image(game->init, game->frame.ul);
 	mlx_destroy_image(game->init, game->frame.ur);
 	mlx_destroy_image(game->init, game->frame.u);

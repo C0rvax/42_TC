@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:36:00 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/21 17:36:02 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:55:09 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	display(t_data *game)
 				display_sprite(game, game->sprite.player, x, y);
 			if (game->map[y][x] == game->sign.floor)
 				display_sprite(game, game->sprite.floor, x, y);
+			if (game->map[y][x] == game->sign.ennemy)
+				display_sprite(game, game->sprite.ennemy, x, y);
 		}
 	}
 	return (1);

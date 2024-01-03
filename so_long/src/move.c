@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:35:41 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/21 17:35:43 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:57:10 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	move_top(t_data *game)
 	{
 		if (game->map[y - 1][x] == game->sign.chicken)
 			add_chicks(game);
+		if (game->map[y - 1][x] == game->sign.ennemy)
+			end_game(game);
 		if (game->map[y - 1][x] != game->sign.exit)
 		{
 			game->map[y - 1][x] = game->sign.player;
@@ -62,6 +64,8 @@ void	move_down(t_data *game)
 	{
 		if (game->map[y + 1][x] == game->sign.chicken)
 			add_chicks(game);
+		if (game->map[y + 1][x] == game->sign.ennemy)
+			end_game(game);
 		if (game->map[y + 1][x] != game->sign.exit)
 		{
 			game->map[y + 1][x] = game->sign.player;
@@ -86,6 +90,8 @@ void	move_left(t_data *game)
 	{
 		if (game->map[y][x - 1] == game->sign.chicken)
 			add_chicks(game);
+		if (game->map[y][x - 1] == game->sign.ennemy)
+			end_game(game);
 		if (game->map[y][x - 1] != game->sign.exit)
 		{
 			game->map[y][x - 1] = game->sign.player;
@@ -110,6 +116,8 @@ void	move_right(t_data *game)
 	{
 		if (game->map[y][x + 1] == game->sign.chicken)
 			add_chicks(game);
+		if (game->map[y][x + 1] == game->sign.ennemy)
+			end_game(game);
 		if (game->map[y][x + 1] != game->sign.exit)
 		{
 			game->map[y][x + 1] = game->sign.player;

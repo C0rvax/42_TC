@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:20:59 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/03 13:09:52 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:01:33 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_sign(t_data *game)
 	game->sign.chicken = 'C';
 	game->sign.player = 'P';
 	game->sign.exit = 'E';
+	game->sign.ennemy = 'M';
 }
 
 void	init_sprite(t_data *game)
@@ -40,6 +41,8 @@ void	init_sprite(t_data *game)
 			"./textures/player.xpm", &game->sprite.width, &game->sprite.height);
 	game->sprite.exit = mlx_xpm_file_to_image(game->init, "./textures/exit.xpm",
 			&game->sprite.width, &game->sprite.height);
+	game->sprite.ennemy = mlx_xpm_file_to_image(game->init,
+			"./textures/ennemy.xpm", &game->sprite.width, &game->sprite.height);
 }
 
 void	init_frame(t_data *game)

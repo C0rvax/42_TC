@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:27:15 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/22 00:39:55 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:56:01 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct sprite_s
 	void	*chicken;
 	void	*player;
 	void	*exit;
+	void	*ennemy;
 }			t_sprite;
 
 typedef struct sign_s
@@ -40,6 +41,7 @@ typedef struct sign_s
 	char	chicken;
 	char	player;
 	char	exit;
+	char	ennemy;
 }			t_sign;
 
 typedef struct frame_s
