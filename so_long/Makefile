@@ -11,7 +11,7 @@ OBJ			:= $(SRC:%.c=%.o)
 
 GNL_OBJ		:= $(GNL_SRC:%.c=%.o)
 
-CC 			= cc
+CC 			= cc -g3
 
 CFLAGS		= -Wextra -Wall -Werror
 

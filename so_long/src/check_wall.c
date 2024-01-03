@@ -45,7 +45,6 @@ int	check_wall(t_data *game)
 			game->map[game->height][i - 1] != '1')
 			return (ft_error('w'), 0);
 	}
-	i = 0;
 	if (!check_wall_line(game->map[game->height - 1]))
 		return (ft_error('w'), 0);
 	return (1);

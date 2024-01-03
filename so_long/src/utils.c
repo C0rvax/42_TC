@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:35:00 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/22 00:45:05 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:45:22 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ char	**tab_dup(char **tab)
 	i = 0;
 	while (tab[i])
 		i++;
-	res = malloc(sizeof(char *) * i + 1);
+	res = malloc(sizeof(char *) * (i + 1));
 	if (!res)
 		return (NULL);
 	i = 0;
-	while (tab[i])
+	while (tab[i] != NULL)
 	{
 		res[i] = ft_strdup(tab[i]);
 		i++;
@@ -43,6 +43,7 @@ void	ft_free_tab(char **tab)
 		free(tab[i]);
 		i++;
 	}
+	free(tab[i]);
 	free(tab);
 }
 
@@ -57,6 +58,8 @@ char	*get_all_lines(char *ber)
 	if (fd < 0)
 		return (NULL);
 	line = ft_strdup("");
+	if (!line)
+		return (NULL);
 	while (1)
 	{
 		buf = get_next_line(fd);
@@ -64,6 +67,8 @@ char	*get_all_lines(char *ber)
 			break ;
 		copy = line;
 		line = ft_strjoin(line, buf);
+		if (!line)
+			return (free(buf),free(copy), NULL);
 		free(copy);
 		free(buf);
 	}
