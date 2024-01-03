@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:37:48 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/03 15:57:07 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:21:10 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ int	end_game(t_data *game)
 	free(game->init);
 	ft_printf("Quit succesfull\n");
 	exit(0);
+}
+
+void	game_over(t_data *game)
+{
+	ft_printf("\n      GAME OVER\n");
+	end_game(game);
 }
 
 void	main_loop(t_data *game, char *title)

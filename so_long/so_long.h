@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:27:15 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/03 14:56:01 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:21:42 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	move_right(t_data *game);
 void	add_chicks(t_data *game);
 void	check_exit(t_data *game);
 void	free_image(t_data *game);
+void	game_over(t_data *game);
 int		end_game(t_data *game);
 char	**tab_dup(char **tab);
 void	ft_free_tab(char **tab);
