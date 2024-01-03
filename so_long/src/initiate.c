@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:20:59 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/27 00:03:07 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/03 13:09:52 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	init_frame(t_data *game)
 void	initialize_game(t_data *game)
 {
 	game->init = mlx_init();
+	if (!game->init)
+		return (ft_free_tab(game->map));
 	init_sprite(game);
 	init_frame(game);
 }

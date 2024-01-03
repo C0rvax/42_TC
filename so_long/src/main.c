@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:37:48 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/21 18:12:16 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/03 13:09:54 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,10 @@ void	free_image(t_data *game)
 
 int	end_game(t_data *game)
 {
-	int		i;
-
-	i = 0;
 	if (game->map)
-	{
-		while (game->map[i])
-		{
-			free(game->map[i]);
-			i++;
-		}
-		free(game->map);
-		free_image(game);
-		mlx_destroy_window(game->init, game->window);
-	}
+		ft_free_tab(game->map);
+	free_image(game);
+	mlx_destroy_window(game->init, game->window);
 	mlx_destroy_display(game->init);
 	free(game->init);
 	ft_printf("Quit succesfull\n");
@@ -60,7 +50,7 @@ void	main_loop(t_data *game, char *title)
 	y = game->height * game->sprite.height;
 	game->window = mlx_new_window(game->init, x, y, title);
 	if (!game->window)
-		return (free(game->init));
+		return (ft_free_tab(game->map), free(game->init));
 	display_back(game);
 	mlx_loop_hook(game->init, &display, game);
 	mlx_key_hook(game->window, &input_key, game);
@@ -78,13 +68,13 @@ int	main(int ac, char **ag)
 	if (ac != 2)
 	{
 		ft_printf("Error\nSo_long need a .ber as argument !\n");
-		return (0);
+		return (1);
 	}
 	init_sign(&game);
 	game.map = init_map(ag[1], &game);
 	if (!game.map)
-		return (0);
+		return (1);
 	initialize_game(&game);
 	main_loop(&game, ag[0]);
-	return (1);
+	return (0);
 }
