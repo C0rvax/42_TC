@@ -81,9 +81,10 @@ char	**init_map(char *ber, t_data *game)
 	line = get_all_lines(ber);
 	if (!line)
 		return (perror("Error"), NULL);
-	game->map = ft_split(get_all_lines(ber), '\n');
+	game->map = ft_split(line, '\n');
 	if (!game->map)
 		return (perror("Error"), NULL);
+	free(line);
 	if (!check_map(game))
 		return (NULL);
 	return (game->map);

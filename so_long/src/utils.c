@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:35:00 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/03 17:45:22 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/04 09:12:44 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*get_all_lines(char *ber)
 		copy = line;
 		line = ft_strjoin(line, buf);
 		if (!line)
-			return (free(buf),free(copy), NULL);
+			return (free(buf), free(copy), NULL);
 		free(copy);
 		free(buf);
 	}
