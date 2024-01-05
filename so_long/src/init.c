@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initiate.c                                         :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:20:59 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/03 15:01:33 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:25:18 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ char	**init_map(char *ber, t_data *game)
 	if (!line)
 		return (perror("Error"), NULL);
 	game->map = ft_split(line, '\n');
+	free(line);
 	if (!game->map)
 		return (perror("Error"), NULL);
-	free(line);
 	if (!check_map(game))
 		return (NULL);
 	return (game->map);

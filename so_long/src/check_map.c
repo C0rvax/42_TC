@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_path.c                                        :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 12:53:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/27 00:03:06 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:36:20 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	check_map(t_data *game)
 		while (copy[y][x])
 		{
 			if (copy[y][x] == game->sign.exit)
-				return (ft_error('f'),
-					ft_free_tab(game->map), ft_free_tab(copy), 0);
+				return (ft_error('f'), ft_free_tab(game->map),
+					ft_free_tab(copy), 0);
 			x++;
 		}
 		y++;

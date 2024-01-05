@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:37:48 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/05 10:59:21 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:44:34 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	main_loop(t_data *game, char *title)
 	y = game->height * game->sprite.height;
 	game->window = mlx_new_window(game->init, x, y, title);
 	if (!game->window)
-		return (ft_free_tab(game->map), free(game->init));
+		return (ft_free_tab(game->map), mlx_destroy_display(game->init),
+			free(game->init));
 	display_back(game);
 	mlx_loop_hook(game->init, &display, game);
 	mlx_hook(game->window, KeyPress, KeyPressMask, &input_key, game);
