@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:38:47 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/21 17:39:28 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/05 11:02:27 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,8 @@ void	ft_error(char c)
 		ft_printf("Error\nInvalid map : need minimum 1 chicken !");
 	if (c == 's')
 		ft_printf("Error\nInvalid map : not rectangular !");
+	if (c == 'a')
+		ft_printf("Error\nThis program need 1 argument !");
+	if (c == 'b')
+		ft_printf("Error\nNeed a .ber extension as argument !");
 }

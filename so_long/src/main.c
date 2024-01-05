@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:37:48 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/03 16:21:10 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/05 10:59:21 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,9 @@ int	main(int ac, char **ag)
 	t_data	game;
 
 	if (ac != 2)
-	{
-		ft_printf("Error\nSo_long need a .ber as argument !\n");
-		return (1);
-	}
+		return (ft_error('a'), 1);
+	if (!ft_strstr(ag[1], ".ber"))
+		return (ft_error('b'), 1);
 	init_sign(&game);
 	game.map = init_map(ag[1], &game);
 	if (!game.map)
