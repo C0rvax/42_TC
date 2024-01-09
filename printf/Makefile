@@ -11,10 +11,10 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME):	$(OBJ)
-	$(AR) $(NAME) $^
+	$(AR) $(NAME) $?
 
 %.o: %.c
-	$(CC) -I. -c $^ -o $@ $(CFLAGS)
+	$(CC) -I. -c $? -o $@ $(CFLAGS)
 
 clean:
 	$(RM) $(OBJ)

@@ -12,7 +12,7 @@ SRC = ft_memset.c ft_bzero.c ft_isalpha.c ft_isdigit.c ft_isalnum.c 		\
 	  ft_strmapi.c ft_strjoin.c ft_striteri.c ft_substr.c ft_split.c		\
 	  ft_putchar.c ft_putendl.c ft_putnbr.c ft_putstr.c ft_isblank.c		\
 	  ft_iscntrl.c ft_isgraph.c ft_islower.c ft_isspace.c ft_isupper.c		\
-	  ft_isxdigit.c
+	  ft_isxdigit.c ft_strstr.c
 
 SRC_BONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c	\
 			ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c	\
@@ -25,10 +25,10 @@ OBJ_B = $(SRC_BONUS:.c=.o)
 all: $(NAME)
 
 $(NAME):	$(OBJ)
-	$(AR) $(NAME) $^
+	$(AR) $(NAME) $?
 
 %.o: %.c
-	$(CC) -I. -c $^ -o $@ $(CFLAGS)
+	$(CC) -I. -c $? -o $@ $(CFLAGS)
 
 bonus:		$(OBJ) $(OBJ_B)
 	$(AR) $(NAME) $(OBJ) $(OBJ_B)
