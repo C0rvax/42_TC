@@ -11,7 +11,7 @@ OBJ			:= $(SRC:%.c=%.o)
 
 GNL_OBJ		:= $(GNL_SRC:%.c=%.o)
 
-CC 			= cc -g3
+CC 			= cc
 
 CFLAGS		= -Wextra -Wall -Werror
 
@@ -43,4 +43,6 @@ fclean		: clean
 	make fclean -C printf
 	make fclean -C libft
 	
-re			: fclean all clean makelib
+re			: fclean all
+
+.PHONY		: all clean fclean makelib re
