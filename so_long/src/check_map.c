@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 12:53:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/05 12:36:20 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:58:15 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	flood_test(char **map, int x, int y)
 {
-	if (map[y][x] == '0' || map[y][x] == 'P' || map[y][x] == 'E' ||
-		map[y][x] == 'C')
+	if (map[y][x] == '0' || map[y][x] == 'P' ||	map[y][x] == 'C')
 	{
 		map[y][x] = '1';
 		flood_test(map, x - 1, y);
@@ -23,6 +22,8 @@ void	flood_test(char **map, int x, int y)
 		flood_test(map, x, y - 1);
 		flood_test(map, x, y + 1);
 	}
+	if (map[y][x] == 'E')
+		map[y][x] = '2';
 }
 
 int	check_tiles(t_data *game, int p, int e)
@@ -82,7 +83,7 @@ int	check_map(t_data *game)
 		x = 0;
 		while (copy[y][x])
 		{
-			if (copy[y][x] == game->sign.exit)
+			if (copy[y][x] == 'E' || copy[y][x] == 'C')
 				return (ft_error('f'), ft_free_tab(game->map),
 					ft_free_tab(copy), 0);
 			x++;

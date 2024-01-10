@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:37:48 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/05 12:44:34 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:39:16 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	main(int ac, char **ag)
 
 	if (ac != 2)
 		return (ft_error('a'), 1);
-	if (!ft_strstr(ag[1], ".ber"))
+	if (!check_ext(ag[1], ".ber"))
 		return (ft_error('b'), 1);
 	init_sign(&game);
 	game.map = init_map(ag[1], &game);

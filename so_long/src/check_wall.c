@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:27:07 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/12/21 17:34:28 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:45:30 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ int	check_wall(t_data *game)
 {
 	int	i;
 
-	i = 0;
 	while (game->map[0][game->width])
 		game->width++;
 	if (!check_wall_line(game->map[0]))
 		return (ft_error('w'), 0);
 	while (game->map[++game->height])
 	{
+		i = 0;
 		while (game->map[game->height][i])
 			i++;
 		if (i != game->width)
