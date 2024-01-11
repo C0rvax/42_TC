@@ -45,4 +45,4 @@ fclean		: clean
 	
 re			: fclean all
 
-.PHONY		: all clean fclean makelib re
+.PHONY		: all clean fclean re
