@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aduvilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/11 18:19:19 by aduvilla         ###   ########.fr       */
+/*   Created: 2023/11/07 16:09:03 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/07 16:12:12 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	int		i;
-	t_data	data;
+	size_t	i;
 
 	i = 0;
-	init_struct(data, ac, av, env);
-//	if (ac < 5)
-//		return (ft_printf("Error\n"), 1);
-	while (env[i])
+	if (size == 0)
+		return (ft_strlen(src));
+	while (i < size - 1 && src[i])
 	{
-		ft_printf("%s\n", env[i]);
+		dst[i] = src[i];
 		i++;
 	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }

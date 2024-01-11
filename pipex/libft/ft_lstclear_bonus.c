@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/11 18:19:19 by aduvilla         ###   ########.fr       */
+/*   Created: 2023/11/10 14:46:56 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/10 14:51:05 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	int		i;
-	t_data	data;
+	t_list	*buf;
 
-	i = 0;
-	init_struct(data, ac, av, env);
-//	if (ac < 5)
-//		return (ft_printf("Error\n"), 1);
-	while (env[i])
+	while (*lst)
 	{
-		ft_printf("%s\n", env[i]);
-		i++;
+		buf = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = buf;
 	}
+	free(*lst);
+	*lst = NULL;
 }

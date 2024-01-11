@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/11 18:19:19 by aduvilla         ###   ########.fr       */
+/*   Created: 2023/11/20 16:34:42 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/12/04 15:50:10 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "ft_printf.h"
 
-int	main(int ac, char **av, char **env)
+int	ft_printf(const char *s, ...)
 {
 	int		i;
-	t_data	data;
+	int		count;
+	va_list	arg;
 
+	if (!s)
+		return (-1);
+	va_start(arg, s);
+	count = 0;
 	i = 0;
-	init_struct(data, ac, av, env);
-//	if (ac < 5)
-//		return (ft_printf("Error\n"), 1);
-	while (env[i])
+	while (s[i])
 	{
-		ft_printf("%s\n", env[i]);
+		if (s[i] == '%' && s[i + 1] == '\0')
+			return (va_end(arg), -1);
+		else if (s[i] == '%')
+		{
+			i++;
+			count = count + ifforest(s[i], arg);
+		}
+		else
+			count = count + print_putchar(s[i]);
 		i++;
 	}
+	va_end(arg);
+	return (count);
 }

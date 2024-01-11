@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/11 18:19:19 by aduvilla         ###   ########.fr       */
+/*   Created: 2023/11/10 15:02:16 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/13 11:45:15 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int		i;
-	t_data	data;
+	t_list	*new_list;
+	t_list	*elem;
 
-	i = 0;
-	init_struct(data, ac, av, env);
-//	if (ac < 5)
-//		return (ft_printf("Error\n"), 1);
-	while (env[i])
+	if (!lst || !f || !del)
+		return (NULL);
+	new_list = NULL;
+	while (lst)
 	{
-		ft_printf("%s\n", env[i]);
-		i++;
+		elem = ft_lstnew(f(lst->content));
+		if (!elem)
+		{
+			ft_lstclear(&new_list, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&new_list, elem);
+		lst = lst->next;
 	}
+	return (new_list);
 }

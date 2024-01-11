@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/11 18:19:19 by aduvilla         ###   ########.fr       */
+/*   Created: 2023/11/21 17:16:07 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/23 18:13:56 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int	main(int ac, char **av, char **env)
-{
-	int		i;
-	t_data	data;
+# include <stdarg.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-	i = 0;
-	init_struct(data, ac, av, env);
-//	if (ac < 5)
-//		return (ft_printf("Error\n"), 1);
-	while (env[i])
-	{
-		ft_printf("%s\n", env[i]);
-		i++;
-	}
-}
+int		ft_printf(const char *s, ...);
+int		ifforest(char c, va_list arg);
+int		print_putchar(char c);
+int		print_putstr(char *s);
+int		print_number(int n);
+int		print_unsigned(unsigned int n);
+int		print_hex(unsigned int nbr, int mode);
+int		print_pointer(size_t ptr);
+
+#endif

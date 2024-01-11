@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 17:03:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/11 17:40:14 by aduvilla         ###   ########.fr       */
+/*   Created: 2023/11/13 09:29:08 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/23 13:13:53 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 # include <unistd.h>
-# include <fcntl.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include "libft.h"
-# include "ft_printf.h"
-# include "get_next_line.h"
+# include <stdlib.h>
 
-typedef	struct	data_s
-{
-	int		ac;
-	char	**ag;
-	char	**env;
-}				t_data;
+int		isend(char *s);
+char	*read_to_result(char *result, const int fd);
+char	*stash_memory(char *result);
+char	*get_next_line(const int fd);
+size_t	gnl_strlen(const char *s);
+char	*gnl_substr(char *s, unsigned int start, size_t len);
+char	*gnl_strjoin(char *s1, char *s2);
+char	*gnl_strnew(void);
 
 #endif

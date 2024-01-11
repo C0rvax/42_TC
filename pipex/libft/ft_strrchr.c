@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aduvilla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/11 18:19:19 by aduvilla         ###   ########.fr       */
+/*   Created: 2023/11/07 16:01:30 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/07 16:04:06 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+char	*ft_strrchr(const char *s, int c)
 {
-	int		i;
-	t_data	data;
+	size_t	size;
 
-	i = 0;
-	init_struct(data, ac, av, env);
-//	if (ac < 5)
-//		return (ft_printf("Error\n"), 1);
-	while (env[i])
+	size = ft_strlen(s) + 1;
+	while (size)
 	{
-		ft_printf("%s\n", env[i]);
-		i++;
+		size--;
+		if (s[size] == (unsigned char)c)
+			return ((char *)&s[size]);
 	}
+	return (NULL);
 }

@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/11 18:19:19 by aduvilla         ###   ########.fr       */
+/*   Created: 2024/01/05 10:51:18 by aduvilla          #+#    #+#             */
+/*   Updated: 2024/01/05 10:57:59 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+char	*ft_strstr(const char *big, const char *little)
 {
-	int		i;
-	t_data	data;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
-	init_struct(data, ac, av, env);
-//	if (ac < 5)
-//		return (ft_printf("Error\n"), 1);
-	while (env[i])
+	if (!big)
+		return (NULL);
+	if (little[0] == '\0')
+		return ((char *)big);
+	while (big[i])
 	{
-		ft_printf("%s\n", env[i]);
+		j = 0;
+		while (big[i + j] && big[i + j] == little[j])
+		{
+			j++;
+			if (little[j] == '\0')
+				return ((char *)&big[i]);
+		}
 		i++;
 	}
+	return (NULL);
 }
