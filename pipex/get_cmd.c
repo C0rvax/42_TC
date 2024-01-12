@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 14:59:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/12 16:01:03 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:09:57 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ char	**get_path(t_data data)
 	{
 		if (ft_strnstr(data.env[i], "PATH=", 5) != NULL)
 			path = data.env[i];
+		if (path)
+		{
+			path = ft_substr(path, 5, ft_strlen(path));
+			break;
+		}
 		i++;
 	}
 	res = ft_split(path, ':');
