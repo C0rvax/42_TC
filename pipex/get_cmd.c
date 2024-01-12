@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/12 15:41:12 by aduvilla         ###   ########.fr       */
+/*   Created: 2024/01/12 14:59:45 by aduvilla          #+#    #+#             */
+/*   Updated: 2024/01/12 16:01:03 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int ac, char **av, char **env)
+char	**get_path(t_data data)
 {
 	int		i;
-	t_data	data;
+	char	*path;
+	char	**res;
 
 	i = 0;
-	data = init_struct(ac, av, env);
-	while (data.paths[i])
+	path = NULL;
+	while (data.env[i])
 	{
-		ft_printf("%s\n", data.paths[i]);
+		if (ft_strnstr(data.env[i], "PATH=", 5) != NULL)
+			path = data.env[i];
 		i++;
 	}
+	res = ft_split(path, ':');
+	return (res);
 }

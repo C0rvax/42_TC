@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:03:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/11 17:40:14 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/12 15:11:46 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@
 typedef	struct	data_s
 {
 	int		ac;
-	char	**ag;
+	char	**av;
 	char	**env;
+	char	**paths;
 }				t_data;
+
+t_data	init_struct(int ac, char **av, char **env);
+char	**get_path(t_data data);
 
 #endif

@@ -4,7 +4,7 @@ NAME		= pipex
 
 vpath %.c src/ gnl/
 
-SRC			= main.c
+SRC			= main.c init.c get_cmd.c
 
 GNL_SRC		= get_next_line.c get_next_line_utils.c
 
