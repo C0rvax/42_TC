@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:03:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/12 15:11:46 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/13 01:52:45 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,24 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 
-typedef	struct	data_s
+typedef struct data_s
 {
-	int		ac;
 	char	**av;
 	char	**env;
 	char	**paths;
+	char	**argv1;
+	char	**argv2;
+	char	*cmd1;
+	char	*cmd2;
+	int		*fd;
+	int		*pipefd;
 }				t_data;
 
-t_data	init_struct(int ac, char **av, char **env);
-char	**get_path(t_data data);
+t_data	init_struct(char **av, char **env);
+void	get_paths(t_data *data);
+char	*get_cmd(char *cmd, t_data *data);
+void	open_file(t_data *data);
+void	close_file(t_data *data);
+void	clean_exit(t_data *data);
 
 #endif
