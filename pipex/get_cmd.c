@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 14:59:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/13 01:51:07 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:52:06 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	get_paths(t_data *data)
 {
 	int		i;
 	char	*path;
-	char	**tmp;
 
 	i = 0;
 	path = NULL;
@@ -42,15 +41,14 @@ void	get_paths(t_data *data)
 	{
 		if (ft_strnstr(data->env[i], "PATH=", 5))
 		{
-			path = ft_substr(data->env[i], 5, ft_strlen(path));
+			path = ft_substr(data->env[i], 5, ft_strlen(data->env[i]));
 			if (!path)
 				return ;
-			tmp = ft_split(path, ':');
+			data->paths = ft_split(path, ':');
 			free(path);
-			if (!tmp)
+			if (!data->paths)
 				return ;
-			data->paths = add_slash(tmp);
-			ft_freetab(tmp);
+			data->paths = add_slash(data->paths);
 			return ;
 		}
 		i++;

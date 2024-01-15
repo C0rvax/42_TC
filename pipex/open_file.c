@@ -30,7 +30,12 @@ void	close_file(t_data *data)
 	i = 0;
 	while (i < 2)
 	{
+		ft_printf("fd av : $d\n", data->fd[i]);
 		close(data->fd[i]);
+		ft_printf("fd ap : $d\n", data->fd[i]);
+		ft_printf("pi av : $d\n", data->pipefd[i]);
 		close(data->pipefd[i]);
+		ft_printf("pi ap : $d\n", data->pipefd[i]);
+		i++;
 	}
 }

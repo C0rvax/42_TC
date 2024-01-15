@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_puttstr_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 17:37:28 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/15 13:46:59 by aduvilla         ###   ########.fr       */
+/*   Created: 2024/01/15 13:42:35 by aduvilla          #+#    #+#             */
+/*   Updated: 2024/01/15 13:44:44 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_puttstr_fd(char **tab, int fd)
 {
 	unsigned int	i;
 
 	i = 0;
-	if (!s)
+	if (!tab)
 		return ;
-	while (s[i])
+	while (tab[i])
 	{
-		ft_putchar_fd(s[i], fd);
+		ft_putstr_fd(tab[i], fd);
+		ft_putchar_fd('\n', fd);
 		i++;
 	}
 }

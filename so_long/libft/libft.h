@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:09:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/12 21:42:13 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/15 13:46:40 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	ft_putchar(char c);
 void	ft_putendl(char *s);
 void	ft_putnbr(int n);
 void	ft_putstr(char *s);
+void	ft_puttstr_fd(char **tab, int fd);
+void	ft_puttstr(char **tab);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
