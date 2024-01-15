@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 23:19:50 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/15 17:49:08 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:25:26 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,9 @@ void	close_file(t_data *data)
 	i = 0;
 	while (i < 2)
 	{
-		ft_printf("fd av : %d\n", data->fd[i]);
 		close(data->fd[i]);
-		ft_printf("fd ap : %d\n", data->fd[i]);
-		ft_printf("pi av : %i\n", data->pipefd[i]);
+		close(data->fd[i]);
 		close(data->pipefd[i]);
-		ft_printf("pi ap : %i\n", data->pipefd[i]);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/15 17:08:16 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:18:40 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,17 @@ static void	first_cmd(t_data *data)
 	int e;
 
 	close(data->pipefd[0]);
-	ft_printf("test child : %d\n", data->test);
 	data->test = 3;
-	ft_printf("pid child : %d\n", data->pid);
-	ft_printf("arrive dans le child\n");
-	ft_printf("fd in : %d\n", data->fd[0]);
 	in = dup2(data->fd[0], 0);
-	ft_printf("fd in : %d\n", data->fd[0]);
-	ft_printf("d de dup : %i\n", in);
 	if (in == -1)
 		clean_exit(data);
-	ft_printf("ici\n");
-	ft_printf("pifd : %i\n", data->pipefd[1]);
 	out = dup2(data->pipefd[1], 1);
-	ft_printf("ALLLOOOOO !!!!!\n");
-	ft_printf("d de dup : %i\n", out);
 	if (out == -1)
 		clean_exit(data);
 	close_file(data);
-	ft_printf("avant exec");
 	e = execve(data->cmd1, data->argv1, data->env);
 	if (e == -1)
 		clean_exit(data);
-	ft_printf("child finish");
 }
 
 static void	sec_cmd(t_data *data)
