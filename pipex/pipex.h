@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:03:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/13 01:52:45 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:24:45 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct data_s
 	char	*cmd2;
 	int		*fd;
 	int		*pipefd;
+	int		pid;
+	int		test;
 }				t_data;
 
 t_data	init_struct(char **av, char **env);
