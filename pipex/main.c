@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/15 18:18:40 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/16 12:15:38 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	main(int ac, char **av, char **env)
 	else
 	{
 		waitpid(0, &status, 0);
+		ft_printf("status : %d\n", status);
 		sec_cmd(&data);
 	}
 	return (0);

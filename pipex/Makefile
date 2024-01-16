@@ -12,7 +12,7 @@ OBJ			:= $(SRC:%.c=%.o)
 
 CFLAGS		= -Wextra -Wall -Werror
 
-HEADERS		= -I. -Iprintf -Ilibft -Ignl
+HEADERS		= -I./Include
 
 LIBRARIES	= -L./printf -lftprintf -L./libft -lft
 
