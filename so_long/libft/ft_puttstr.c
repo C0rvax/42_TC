@@ -6,13 +6,13 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:40:41 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/15 13:41:54 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/17 01:28:04 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_puttstr(char **tab)
+void	ft_puttstr(char **tab, char sep)
 {
-	ft_puttstr_fd(tab, 1);
+	ft_puttstr_fd(tab, sep, 1);
 }
