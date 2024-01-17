@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 01:31:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/16 17:49:39 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:43:31 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_pipe(t_data *data)
 
 static void	init_argv(t_data *data)
 {
-	data->argv = malloc(sizeof(char **) * 2);
+	data->argv = malloc(sizeof(char **) * 3);
 	if (!data->argv)
 		clean_exit(data);
 	data->argv[0] = ft_split(data->av[2], ' ');
@@ -35,6 +35,7 @@ static void	init_argv(t_data *data)
 	data->argv[1] = ft_split(data->av[3], ' ');
 	if (!data->argv[1])
 		clean_exit(data);
+	data->argv[2] = NULL;
 	data->cmd = malloc(sizeof(char *) * 3);
 	if (!data->cmd)
 		clean_exit(data);
@@ -56,8 +57,11 @@ t_data	init_struct(char **av, char **env)
 	get_paths(&data);
 	if (!data.paths)
 		clean_exit(&data);
+	ft_printf("path ok\n");
 	init_argv(&data);
+	ft_printf("argv ok\n");
 	open_file(&data);
 	init_pipe(&data);
+	ft_printf("init ok\n");
 	return (data);
 }

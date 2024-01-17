@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/17 01:43:04 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:40:17 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int	main(int ac, char **av, char **env)
 	if (ac != 5)
 		return (1);
 	data = init_struct(av, env);
-	ft_puttstr(data.paths, 'q');
 	data.cmd_n = 0;
+	data.pid = malloc(sizeof(int) * 2);
 	ft_printf("pid avant : %d\n", getpid());
 	while (data.cmd_n < 2)
 	{
