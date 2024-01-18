@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 01:31:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/17 16:46:57 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:05:59 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,8 @@ t_data	init_struct(char **av, char **env)
 	get_paths(&data);
 	if (!data.paths)
 		clean_exit(&data);
-	ft_printf("path ok\n");
 	init_argv(&data);
-	ft_printf("argv ok\n");
 	open_file(&data);
 	init_pipe(&data);
-	ft_printf("init ok\n");
 	return (data);
 }

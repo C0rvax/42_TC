@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/17 16:40:17 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:13:59 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,23 @@ static void	exec_cmd(t_data *data)
 	error = execve(data->cmd[data->cmd_n], data->argv[data->cmd_n], data->env);
 	if (error == -1)
 		clean_exit(data);
+	ft_printf("trop\n");
 }
 
-static void finish_cmd(t_data *data)
+static void	finish_cmd(t_data *data)
 {
 	int		status;
 
 	close_file(data);
-	ft_printf("au finish pid 1 cmd : %d\n", data->pid[0]);
-	ft_printf("au finish pid 2 cmd : %d\n", data->pid[1]);
-	waitpid(data->pid[data->cmd_n], &status, 0);
-	ft_printf("status : %d\n", status);
+	data->cmd_n--;
+	while (data->cmd_n >= 0)
+	{
+		ft_printf("au finish pid 1 cmd : %d\n", data->pid[0]);
+		ft_printf("au finish pid 2 cmd : %d\n", data->pid[1]);
+		waitpid(data->pid[data->cmd_n], &status, 0);
+		ft_printf("status : %d\n", status);
+		data->cmd_n--;
+	}
 }
 
 int	main(int ac, char **av, char **env)

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puttstr.c                                       :+:      :+:    :+:   */
+/*   ft_putar.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 13:40:41 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/17 01:28:04 by aduvilla         ###   ########.fr       */
+/*   Created: 2024/01/18 13:15:14 by aduvilla          #+#    #+#             */
+/*   Updated: 2024/01/18 13:16:56 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_puttstr(char **tab, char sep)
+void	ft_putar(char **tab)
 {
-	ft_puttstr_fd(tab, sep, 1);
+	ft_putars(tab, '\n');
 }
