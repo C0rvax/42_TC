@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/18 13:13:59 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:21:54 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,24 @@ static void	exec_cmd(t_data *data)
 	{
 		error = dup2(data->fd[0], 0);
 		if (error == -1)
-			clean_exit(data);
+			clean_exit(data, 'd');
 		error = dup2(data->pipefd[1], 1);
 		if (error == -1)
-			clean_exit(data);
+			clean_exit(data, 'd');
 	}
 	else
 	{
 		error = dup2(data->pipefd[0], 0);
 		if (error == -1)
-			clean_exit(data);
+			clean_exit(data, 'd');
 		error = dup2(data->fd[1], 1);
 		if (error == -1)
-			clean_exit(data);
+			clean_exit(data, 'd');
 	}
 	close_file(data);
 	error = execve(data->cmd[data->cmd_n], data->argv[data->cmd_n], data->env);
 	if (error == -1)
-		clean_exit(data);
-	ft_printf("trop\n");
+		clean_exit(data, 'e');
 }
 
 static void	finish_cmd(t_data *data)
@@ -50,12 +49,11 @@ static void	finish_cmd(t_data *data)
 	data->cmd_n--;
 	while (data->cmd_n >= 0)
 	{
-		ft_printf("au finish pid 1 cmd : %d\n", data->pid[0]);
-		ft_printf("au finish pid 2 cmd : %d\n", data->pid[1]);
 		waitpid(data->pid[data->cmd_n], &status, 0);
 		ft_printf("status : %d\n", status);
 		data->cmd_n--;
 	}
+	free_struct(data);
 }
 
 int	main(int ac, char **av, char **env)
@@ -66,13 +64,11 @@ int	main(int ac, char **av, char **env)
 		return (1);
 	data = init_struct(av, env);
 	data.cmd_n = 0;
-	data.pid = malloc(sizeof(int) * 2);
-	ft_printf("pid avant : %d\n", getpid());
 	while (data.cmd_n < 2)
 	{
 		data.pid[data.cmd_n] = fork();
 		if (data.pid[data.cmd_n] == -1)
-			clean_exit(&data);
+			clean_exit(&data, 'f');
 		if (data.pid[data.cmd_n] == 0)
 			exec_cmd(&data);
 		data.cmd_n++;
