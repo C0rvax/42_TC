@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/19 12:39:18 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:46:02 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static void	exec_cmd(t_data *data)
 	int	error;
 
 	close(data->pipefd[data->cmd_n]);
-	init_argv(data);
 	if (data->cmd_n == 0)
 		set_first(data);
 	else
 		set_last(data);
 	close_file(data);
+	free_struct(data);
 	error = execve(data->cmd, data->argv, data->env);
 	if (error == -1)
 		clean_exit(data, 'e');
@@ -79,11 +79,15 @@ int	main(int ac, char **av, char **env)
 	data.cmd_n = 0;
 	while (data.cmd_n < 2)
 	{
+		init_argv(&data);
 		data.pid[data.cmd_n] = fork();
 		if (data.pid[data.cmd_n] == -1)
 			clean_exit(&data, 'f');
 		if (data.pid[data.cmd_n] == 0)
 			exec_cmd(&data);
+		ft_freetab(data.argv);
+		if (data.cmd)
+			free(data.cmd);
 		data.cmd_n++;
 	}
 	finish_cmd(&data);
