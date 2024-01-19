@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 14:59:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/15 18:00:38 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/19 20:44:34 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,41 +30,42 @@ static char	**add_slash(char **path)
 	return (path);
 }
 
-void	get_paths(t_data *data)
+char	**get_paths(char **env)
 {
 	int		i;
-	char	*path;
+	char	*line;
+	char	**path;
 
 	i = 0;
-	path = NULL;
-	while (data->env[i])
+	while (env[i])
 	{
-		if (ft_strnstr(data->env[i], "PATH=", 5))
+		if (ft_strnstr(env[i], "PATH=", 5))
 		{
-			path = ft_substr(data->env[i], 5, ft_strlen(data->env[i]));
+			line = ft_substr(env[i], 5, ft_strlen(env[i]));
+			if (!line)
+				return (NULL);
+			path = ft_split(line, ':');
+			free(line);
 			if (!path)
-				return ;
-			data->paths = ft_split(path, ':');
-			free(path);
-			if (!data->paths)
-				return ;
-			data->paths = add_slash(data->paths);
-			return ;
+				return (NULL);
+			path = add_slash(path);
+			return (path);
 		}
 		i++;
 	}
+	return (NULL);
 }
 
-char	*get_cmd(char *cmd, t_data *data)
+char	*get_cmd(char *cmd, char **paths)
 {
 	int		i;
 	int		a;
 	char	*path;
 
 	i = 0;
-	while (data->paths[i])
+	while (paths[i])
 	{
-		path = ft_strjoin(data->paths[i], cmd);
+		path = ft_strjoin(paths[i], cmd);
 		if (!path)
 			return (NULL);
 		a = access(path, F_OK | X_OK);
