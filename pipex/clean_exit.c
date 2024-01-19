@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:53:39 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/19 12:40:52 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:49:09 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	free_struct(t_data *data)
 {
-	ft_freetab(data->argv);
+//	ft_freetab(data->argv);
 //	ft_freetab(data->paths);
-	if (data->cmd)
-		free(data->cmd);
+//	if (data->cmd)
+//		free(data->cmd);
 	if (data->fd)
 		free(data->fd);
 	if (data->pipefd)
