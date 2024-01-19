@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 01:31:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/18 17:20:49 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:42:25 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,18 @@ static void	init_pipe(t_data *data)
 		clean_exit(data, 'p');
 }
 
-static void	init_argv(t_data *data)
+void	init_argv(t_data *data)
 {
-	int i;
-
-	i = 0;
-	data->argv = malloc(sizeof(char **) * 3);
+	get_paths(data);
+	if (!data->paths)
+		clean_exit(data, 'm');
+	data->argv = ft_split(data->av[data->cmd_n + 2], ' ');
 	if (!data->argv)
 		clean_exit(data, 'm');
-	data->cmd = malloc(sizeof(char *) * 3);
+	data->cmd = get_cmd(data->argv[0], data);
 	if (!data->cmd)
-		clean_exit(data, 'm');
-	while (i < 2)
-	{
-		data->argv[i] = ft_split(data->av[i + 2], ' ');
-		if (!data->argv[i])
-			clean_exit(data, 'm');
-		data->cmd[i] = get_cmd(data->argv[i][0], data);
-		if (!data->cmd[i])
-			clean_exit(data, 'c');
-		i++;
-	}
-	data->argv[i] = NULL;
-	data->cmd[i] = NULL;
+		clean_exit(data, 'c');
+	ft_freetab(data->paths);
 }
 
 t_data	init_struct(char **av, char **env)
@@ -71,11 +60,7 @@ t_data	init_struct(char **av, char **env)
 
 	data.av = av;
 	data.env = env;
-	get_paths(&data);
-	if (!data.paths)
-		clean_exit(&data, 'm');
 	init_malloc(&data);
-	init_argv(&data);
 	open_file(&data);
 	init_pipe(&data);
 	return (data);
