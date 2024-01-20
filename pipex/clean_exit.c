@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:53:39 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/20 15:03:00 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/20 15:06:23 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,3 @@ void	clean_exit(t_data *data, char c)
 	free_struct(data);
 	exit(EXIT_FAILURE);
 }
-

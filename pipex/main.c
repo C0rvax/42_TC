@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/20 14:57:24 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/20 15:10:53 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	set_first(t_data *data)
 {
-	int error;
+	int	error;
 
 	error = dup2(data->fd[0], 0);
 	if (error == -1)
@@ -22,7 +22,6 @@ static void	set_first(t_data *data)
 	error = dup2(data->pipefd[1], 1);
 	if (error == -1)
 		clean_exit(data, 'd');
-
 }
 
 static void	set_last(t_data *data)
@@ -35,7 +34,6 @@ static void	set_last(t_data *data)
 	error = dup2(data->fd[1], 1);
 	if (error == -1)
 		clean_exit(data, 'd');
-
 }
 
 static void	exec_cmd(t_data *data)
@@ -57,18 +55,18 @@ static void	exec_cmd(t_data *data)
 
 static void	wait_and_clean(t_data *data)
 {
-	int		status;
-	int 	statusCode;
+	int	status;
+	int	status_code;
 
-	statusCode = 0;
+	status_code = 0;
 	close_file(data);
 	data->cmd_n--;
 	while (data->cmd_n >= 0)
 	{
 		waitpid(data->pid[data->cmd_n], &status, 0);
 		if (WIFEXITED(status))
-			statusCode = WEXITSTATUS(status);	
-		ft_printf("status : %d\n", statusCode);
+			status_code = WEXITSTATUS(status);
+		ft_printf("status : %d\n", status_code);
 		data->cmd_n--;
 	}
 	free_struct(data);
