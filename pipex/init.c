@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 01:31:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/20 14:58:05 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/20 17:30:52 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,13 @@ void	init_argv(t_data *data)
 	}
 }
 
-t_data	init_struct(char **av, char **env)
+t_data	init_struct(int ac, char **av, char **env)
 {
 	t_data	data;
 
 	data.av = av;
 	data.env = env;
+	data.cmd_max = ac - 3;
 	data.paths = NULL;
 	data.argv = NULL;
 	data.cmd = NULL;

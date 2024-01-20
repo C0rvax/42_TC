@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:03:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/19 12:37:33 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/20 17:34:09 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,21 @@ typedef struct data_s
 	char	**argv;
 	char	*cmd;
 	int		cmd_n;
+	int		cmd_max;
 	int		*fd;
 	int		*pipefd;
 	int		*pid;
 }				t_data;
 
-t_data	init_struct(char **av, char **env);
+t_data	init_struct(int ac, char **av, char **env);
 void	get_paths(t_data *data);
 void	init_argv(t_data *data);
 void	free_struct(t_data *data);
 char	*get_cmd(char *cmd, t_data *data);
+void	exec_cmd(t_data *data);
 void	open_file(t_data *data);
 void	close_file(t_data *data);
 void	clean_exit(t_data *data, char c);
+void	print_error(char *s1, char *s2);
 
 #endif
