@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:03:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/20 17:34:09 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/20 18:54:02 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct data_s
 	int		cmd_n;
 	int		cmd_max;
 	int		*fd;
-	int		*pipefd;
+	int		**pipefd;
 	int		*pid;
 }				t_data;
 

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:53:39 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/20 15:06:23 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:16:35 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,22 @@
 
 void	free_struct(t_data *data)
 {
+	int	i;
+
+	i = 0;
 	if (data->paths)
 		ft_freetab(data->paths);
 	if (data->fd)
 		free(data->fd);
 	if (data->pipefd)
+	{
+		while (i < data->cmd_max - 1)
+		{
+			free(data->pipefd[i]);
+			i++;
+		}
 		free(data->pipefd);
+	}
 	if (data->pid)
 		free(data->pid);
 }
@@ -51,7 +61,6 @@ void	clean_exit(t_data *data, char c)
 	if (c == 'o')
 		print_error(strerror(errno), data->av[4]);
 	close_file(data);
-	ft_printf("va tu la \n");
 	free_struct(data);
 	exit(EXIT_FAILURE);
 }

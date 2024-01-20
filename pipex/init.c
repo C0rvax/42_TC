@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 01:31:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/20 17:30:52 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:12:24 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,27 @@
 
 static void	init_malloc(t_data *data)
 {
+	int	i;
+
+	i = 0;
 	data->fd = malloc(sizeof(int) * 2);
 	if (!data->fd)
 		clean_exit(data, 'm');
 	data->fd[0] = -2;
 	data->fd[1] = -2;
-	data->pipefd = malloc(sizeof(int) * 2);
+	data->pipefd = malloc(sizeof(int *) * (data->cmd_max - 1));
 	if (!data->pipefd)
 		clean_exit(data, 'm');
-	data->pipefd[0] = -2;
-	data->pipefd[1] = -2;
-	data->pid = malloc(sizeof(int) * 2);
+	while (i < data->cmd_max - 1)
+	{
+		data->pipefd[i] = malloc(sizeof(int) * 2);
+		if (!data->pipefd[i])
+			clean_exit(data, 'm');
+		data->pipefd[i][0] = -2;
+		data->pipefd[i][1] = -2;
+		i++;
+	}
+	data->pid = malloc(sizeof(int) * data->cmd_max);
 	if (!data->pid)
 		clean_exit(data, 'm');
 	data->pid[0] = -2;
@@ -34,10 +44,16 @@ static void	init_malloc(t_data *data)
 static void	init_pipe(t_data *data)
 {
 	int	p;
+	int	i;
 
-	p = pipe(data->pipefd);
-	if (p == -1)
-		clean_exit(data, 'p');
+	i = 0;
+	while (i < data->cmd_max - 1)
+	{
+		p = pipe(data->pipefd[i]);
+		if (p == -1)
+			clean_exit(data, 'p');
+		i++;
+	}
 }
 
 void	init_argv(t_data *data)

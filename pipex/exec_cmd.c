@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:33:23 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/20 17:37:17 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:11:32 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@ static void	set_first(t_data *data)
 {
 	int	error;
 
+	close(data->pipefd[data->cmd_n][0]);
 	error = dup2(data->fd[0], 0);
 	if (error == -1)
 		clean_exit(data, 'd');
-	error = dup2(data->pipefd[1], 1);
+	error = dup2(data->pipefd[data->cmd_n][1], 1);
 	if (error == -1)
 		clean_exit(data, 'd');
 }
@@ -28,7 +29,8 @@ static void	set_last(t_data *data)
 {
 	int	error;
 
-	error = dup2(data->pipefd[0], 0);
+	close(data->pipefd[data->cmd_n - 1][1]);
+	error = dup2(data->pipefd[data->cmd_n - 1][0], 0);
 	if (error == -1)
 		clean_exit(data, 'd');
 	error = dup2(data->fd[1], 1);
@@ -40,10 +42,12 @@ static void	set_middle(t_data *data)
 {
 	int	error;
 
-	error = dup2(data->pipefd[data->cmd_max], 0);
+	close(data->pipefd[data->cmd_n - 1][1]);
+	close(data->pipefd[data->cmd_n][0]);
+	error = dup2(data->pipefd[data->cmd_n - 1][0], 0);
 	if (error == -1)
 		clean_exit(data, 'd');
-	error = dup2(data->pipefd[data->cmd_max], 0);
+	error = dup2(data->pipefd[data->cmd_n][1], 1);
 	if (error == -1)
 		clean_exit(data, 'd');
 }
@@ -52,16 +56,12 @@ void	exec_cmd(t_data *data)
 {
 	int	error;
 
-	close(data->pipefd[data->cmd_n]);
 	if (data->cmd_n == 0)
 		set_first(data);
 	else if (data->cmd_n == data->cmd_max - 1)
 		set_last(data);
 	else
-	{
-		ft_printf("cmd_max : %d\n", data->cmd_max);
 		set_middle(data);
-	}
 	init_argv(data);
 	close_file(data);
 	free_struct(data);
