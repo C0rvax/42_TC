@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/19 19:48:47 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/20 14:57:24 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,27 @@ static void	exec_cmd(t_data *data)
 	else
 		set_last(data);
 	close_file(data);
-	free_struct(data);
+	init_argv(data);
+//	free_struct(data);
 	error = execve(data->cmd, data->argv, data->env);
 	if (error == -1)
 		clean_exit(data, 'e');
 }
 
-static void	finish_cmd(t_data *data)
+static void	wait_and_clean(t_data *data)
 {
 	int		status;
+	int 	statusCode;
 
+	statusCode = 0;
 	close_file(data);
 	data->cmd_n--;
 	while (data->cmd_n >= 0)
 	{
 		waitpid(data->pid[data->cmd_n], &status, 0);
-		ft_printf("status : %d\n", status);
+		if (WIFEXITED(status))
+			statusCode = WEXITSTATUS(status);	
+		ft_printf("status : %d\n", statusCode);
 		data->cmd_n--;
 	}
 	free_struct(data);
@@ -79,17 +84,16 @@ int	main(int ac, char **av, char **env)
 	data.cmd_n = 0;
 	while (data.cmd_n < 2)
 	{
-		init_argv(&data);
 		data.pid[data.cmd_n] = fork();
 		if (data.pid[data.cmd_n] == -1)
 			clean_exit(&data, 'f');
 		if (data.pid[data.cmd_n] == 0)
 			exec_cmd(&data);
-		ft_freetab(data.argv);
-		if (data.cmd)
-			free(data.cmd);
+//		ft_freetab(data.argv);
+//		free(data.cmd);
+//		data.cmd = NULL;
 		data.cmd_n++;
 	}
-	finish_cmd(&data);
+	wait_and_clean(&data);
 	return (0);
 }

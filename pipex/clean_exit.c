@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:53:39 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/19 19:15:44 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/20 15:03:00 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 void	free_struct(t_data *data)
 {
-	if (data->argv)
-		ft_freetab(data->argv);
 	if (data->paths)
 		ft_freetab(data->paths);
-	if (data->cmd)
-		free(data->cmd);
 	if (data->fd)
 		free(data->fd);
 	if (data->pipefd)
@@ -43,11 +39,11 @@ void	clean_exit(t_data *data, char c)
 	if (c == 'p')
 		print_error("pipe", "Failure");
 	if (c == 'c')
-		print_error("command not found", data->argv[0]);
+		print_error("command not found", data->av[data->cmd_n + 2]);
 	if (c == 'd')
 		print_error("dup2", "Failure");
 	if (c == 'e')
-		print_error(data->argv[0], strerror(errno));
+		print_error(data->av[data->cmd_n + 2], strerror(errno));
 	if (c == 'f')
 		print_error("fork", strerror(errno));
 	if (c == 'i')
