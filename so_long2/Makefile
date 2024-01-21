@@ -3,7 +3,7 @@ NAME		= so_long
 vpath %.c src/ gnl/
 
 SRC			= main.c init.c display.c check_wall.c move.c check_map.c		\
-			  utils.c ft_error.c
+			  utils.c
 
 GNL_SRC		= get_next_line.c get_next_line_utils.c
 

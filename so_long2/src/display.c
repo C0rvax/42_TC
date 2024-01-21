@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_back.c                                     :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:37:16 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/21 20:07:57 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/21 22:55:24 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,8 @@ static void display_frame(t_data *game, int x, int y)
 
 }
 
-int	display(t_data *game)
+static void	display_center(int x, int y, t_data *game)
 {
-	int	x;
-	int	y;
-
-	x = 0;
-	y = 0;
-	while (game->map[++y + 1])
-	{
-		x = 0;
-		while (game->map[y + 1][++x + 1])
-		{
 			if (game->map[y][x] == '0')
 				display_sprite(game, game->sprite.floor, x, y);
 			if (game->map[y][x] == 'C')
@@ -68,6 +58,21 @@ int	display(t_data *game)
 				display_sprite(game, game->sprite.wall, x, y);
 			if (game->map[y][x] == 'M')
 				display_sprite(game, game->sprite.ennemy, x, y);
+}
+
+int	display(t_data *game)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (game->map[++y + 1])
+	{
+		x = 0;
+		while (game->map[y + 1][++x + 1])
+		{
+			display_center(x, y, game);
 		}
 	}
 	display_frame(game, x, y);
