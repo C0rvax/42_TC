@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 12:53:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/10 16:58:15 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:00:07 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	flood_test(char **map, int x, int y)
 {
-	if (map[y][x] == '0' || map[y][x] == 'P' ||	map[y][x] == 'C')
+	if (map[y][x] == '0' || map[y][x] == 'P' || map[y][x] == 'C')
 	{
 		map[y][x] = '1';
 		flood_test(map, x - 1, y);
