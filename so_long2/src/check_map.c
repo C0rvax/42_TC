@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 12:53:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/21 19:26:56 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:19:42 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	check_tiles(t_data *game, int p, int e)
 	return (1);
 }
 
-int	check_map(t_data *game)
+static int	check_map(t_data *game)
 {
 	char	**copy;
 	int		x;
@@ -92,4 +92,20 @@ int	check_map(t_data *game)
 	}
 	ft_freetab(copy);
 	return (1);
+}
+
+char	**init_map(char *ber, t_data *game)
+{
+	char	*line;
+
+	line = get_all_lines(ber);
+	if (!line)
+		return (perror("Error"), NULL);
+	game->map = ft_split(line, '\n');
+	free(line);
+	if (!game->map)
+		return (perror("Error"), NULL);
+	if (!check_map(game))
+		return (NULL);
+	return (game->map);
 }

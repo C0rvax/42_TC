@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:35:00 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/21 22:44:35 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:37:36 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,21 @@
 void	ft_error(char c)
 {
 	if (c == 'w')
-		ft_printf("Error\nInvalid map : not surrounded by walls !");
+		ft_putstr_fd("Error\nInvalid map: not surrounded by walls !\n", 2);
 	if (c == 'f')
 		ft_putstr_fd("Error\nInvalid map: no path to exit!\n", 2);
-//		ft_printf("Error\nInvalid map : no path to exit !");
 	if (c == 'e')
-		ft_printf("Error\nInvalid map : need 1 exit !");
+		ft_putstr_fd("Error\nInvalid map: need 1 exit!\n", 2);
 	if (c == 'p')
-		ft_printf("Error\nInvalid map : need 1 player !");
+		ft_putstr_fd("Error\nInvalid map: need 1 player!\n", 2);
 	if (c == 'c')
-		ft_printf("Error\nInvalid map : need minimum 1 chicken !");
+		ft_putstr_fd("Error\nInvalid map: need minimum 1 chicken!\n", 2);
 	if (c == 's')
-		ft_printf("Error\nInvalid map : not rectangular !");
+		ft_putstr_fd("Error\nInvalid map: not rectangular!\n", 2);
 	if (c == 'a')
-		ft_printf("Error\nThis program need 1 argument !");
+		ft_putstr_fd("Error\nThis program need 1 argument!\n", 2);
 	if (c == 'b')
-		ft_printf("Error\nNeed a .ber extension as argument !");
+		ft_putstr_fd("Error\nNeed a .ber extension as argument!\n", 2);
 }
 
 char	**tab_dup(char **tab)
@@ -90,7 +89,7 @@ void	check_exit(t_data *game)
 	if (game->chicks == 0)
 	{
 		game->turns++;
-		ft_printf("\nYou Win !!!\nTurns : %d\n", game->turns);
+		ft_printf("\n        You Win !!!\nTurns : %d\n", game->turns);
 		end_game(game);
 	}
 }

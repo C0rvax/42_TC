@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:37:16 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/21 22:55:24 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:37:50 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	display_sprite(t_data *game, void *sprite, int x, int y)
 	int	width;
 	int	height;
 
-	width = game->sprite.width * x;
-	height = game->sprite.height * y;
+	width = game->w_img * x;
+	height = game->h_img * y;
 	mlx_put_image_to_window(game->init, game->window, sprite, width, height);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:27:15 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/21 20:07:30 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:35:32 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 
 typedef struct sprite_s
 {
-	int		height;
-	int		width;
 	void	*floor;
 	void	*wall;
 	void	*chicken;
@@ -50,19 +48,21 @@ typedef struct data_s
 {
 	void		*init;
 	void		*window;
+	char		**map;
 	int			height;
 	int			width;
+	int			w_img;
+	int			h_img;
 	int			player_x;
 	int			player_y;
 	int			turns;
 	int			chicks;
-	char		**map;
 	t_sprite	sprite;
 	t_frame		frame;
 }			t_data;
 
-int		init_struct(t_data *game, char *title);
-int		check_map(t_data *game);
+int		init_game(char *title, t_data *game);
+char	**init_map(char *title, t_data *game);
 int		check_wall(t_data *game);
 int		check_ext(char *file, char *ext);
 int		display(t_data *game);
