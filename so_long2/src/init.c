@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:20:59 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/22 14:34:36 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:00:04 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,10 @@ static void	init_frame2(t_data *game)
 		end_game(game);
 }
 
-int	init_game(char *title, t_data *game)
+int	init_game(char *map, t_data *game)
 {
 	init_struct(game);
-	game->map = init_map(title, game);
+	game->map = init_map(map, game);
 	if (!game->map)
 		return (1);
 	game->init = mlx_init();

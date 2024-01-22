@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:27:15 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/22 14:35:32 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:06:01 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ typedef struct data_s
 	t_frame		frame;
 }			t_data;
 
-int		init_game(char *title, t_data *game);
-char	**init_map(char *title, t_data *game);
+int		init_game(char *map, t_data *game);
+char	**init_map(char *ber, t_data *game);
 int		check_wall(t_data *game);
 int		check_ext(char *file, char *ext);
 int		display(t_data *game);
