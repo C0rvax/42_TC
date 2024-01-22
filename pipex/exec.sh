@@ -16,12 +16,10 @@ for ARG in "${ARGS[@]}"; do
 	echo test de "${ARG}" "${ARG2}"
 	valgrind --leak-check=full --trace-children=yes ./pipex infile "${ARG}" "${ARG2}" outfile2
 	#valgrind --leak-check=full --trace-children=yes ${ARGB}
-	echo outfile2
-	cat outfile2
 	#	< infile "${ARG}" | "${ARG2}" > outfile
-	"${TEST}"
+	#	"${TEST}"
 	valgrind --leak-check=full --trace-children=yes grep 'la' <infile | wc -w >outfile
-	echo outfile
+	cat outfile2
 	cat outfile
 done
 
