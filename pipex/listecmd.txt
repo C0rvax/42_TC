@@ -1,3 +1,0 @@
-grep 'la' <infile | wc -w >outfile
-ls -la | wc -w >outfile
-ls -la | grep '-' >outfile
