@@ -1,26 +1,18 @@
 #!/bin/bash
 
-ARGS=(
-	'grep la'
-	'wc -w'
-)
-
-ARG2=(
-	'wc -w'
-)
-TEST= '< infile grep la | wc -w > outfile'
-
 make
 
-for ARG in "${ARGS[@]}"; do
-	echo test de "${ARG}" "${ARG2}"
-	valgrind --leak-check=full --trace-children=yes ./pipex infile "${ARG}" "${ARG2}" outfile2
-	#valgrind --leak-check=full --trace-children=yes ${ARGB}
-	#	< infile "${ARG}" | "${ARG2}" > outfile
-	#	"${TEST}"
-	valgrind --leak-check=full --trace-children=yes grep 'la' <infile | wc -w >outfile
-	cat outfile2
-	cat outfile
-done
+valgrind --leak-check=full --trace-children=yes ./pipex infile "${CMD1[i]}" "${CMD2[i]}" outfile2
+
+valgrind --leak-check=full --trace-children=yes ./pipex infile "${CMD1[i]}" "${CMD2[i]}" outfile2
+
+diff --brief <(sort file1) <(sort file2) >/dev/null
+comp_value=$?
+
+if [ $comp_value -eq 1 ]; then
+	echo "do something because they're different"
+else
+	echo "do something because they're identical"
+fi
 
 make fclean
