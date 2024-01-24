@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 12:53:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/24 16:09:57 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:23:25 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,28 +72,28 @@ static int	check_map(t_data *game)
 	int		y;
 
 	copy = tab_dup(game->map);
+	if (!copy)
+		return (ft_freetab(game->map), 0);
 	if (!check_wall(game))
 		return (ft_freetab(game->map), ft_freetab(copy), 0);
 	if (!check_tiles(game, 0, 0))
 		return (ft_freetab(game->map), ft_freetab(copy), 0);
 	flood_test(copy, game->player_x, game->player_y);
-	y = 0;
-	while (copy[y])
+	y = -1;
+	while (copy[++y])
 	{
-		x = 0;
-		while (copy[y][x])
+		x = -1;
+		while (copy[y][++x])
 		{
 			if (copy[y][x] == 'E' || copy[y][x] == 'C')
 				return (ft_error('f'), ft_freetab(game->map),
 					ft_freetab(copy), 0);
-			x++;
 		}
-		y++;
 	}
 	ft_freetab(copy);
 	return (1);
 }
-
+// check char dans la nouvelle fonction et check trous
 char	**init_map(char *ber, t_data *game)
 {
 	char	*line;
@@ -102,9 +102,9 @@ char	**init_map(char *ber, t_data *game)
 	if (!line)
 		return (perror("Error"), NULL);
 	game->map = ft_split(line, '\n');
-	free(line);
 	if (!game->map)
-		return (perror("Error"), NULL);
+		return (free(line), perror("Error"), NULL);
+	free(line);
 	if (!check_map(game))
 		return (NULL);
 	return (game->map);
