@@ -6,13 +6,13 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:27:07 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/24 18:23:31 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:45:30 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static int	check_wall_line(char *s)
+int	check_wall_line(char *s)
 {
 	int	i;
 
@@ -23,8 +23,6 @@ static int	check_wall_line(char *s)
 			return (0);
 		i++;
 	}
-	if (i < 3)
-		return (0);
 	return (1);
 }
 
@@ -50,9 +48,4 @@ int	check_wall(t_data *game)
 	if (!check_wall_line(game->map[game->height - 1]))
 		return (ft_error('w'), 0);
 	return (1);
-}
-
-int	check_map_char(t_data *game, char *line, char **map)
-{
-
 }

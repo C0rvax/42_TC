@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 12:53:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/24 18:23:25 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:47:30 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ static int	check_map(t_data *game)
 	return (1);
 }
 // check char dans la nouvelle fonction et check trous
+
 char	**init_map(char *ber, t_data *game)
 {
 	char	*line;
