@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 12:53:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/22 14:19:42 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:09:57 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	flood_test(char **map, int x, int y)
 {
 	if (map[y][x] == '0' || map[y][x] == 'P' || map[y][x] == 'C')
 	{
-		map[y][x] = '1';
+		map[y][x] = 'X';
 		flood_test(map, x - 1, y);
 		flood_test(map, x + 1, y);
 		flood_test(map, x, y - 1);
