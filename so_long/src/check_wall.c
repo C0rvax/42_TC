@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:27:07 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/25 01:17:17 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:29:47 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_wall(t_data *game)
 	return (1);
 }
 
-int	check_map_char(t_data *game, char *line, char **map)
+int	check_map_char(char *line, char **map)
 {
 	int	i;
 	int	count;
@@ -63,13 +63,16 @@ int	check_map_char(t_data *game, char *line, char **map)
 	{
 		if (line[i] == '\n')
 			count++;
+		if (line[i] != '1' && line[i] != '0' && line[i] != 'P' && line[i] != 'E'
+			&& line[i] != 'C' && line[i] != 'M' && line[i] != '\n')
+			return (ft_error('l'), 1);
 		i++;
 	}
 	i = 0;
 	while (map[i])
 		i++;
 	if (count != i)
-		return (0);
+		return (ft_error('s'), 1);
 	else
-		return (1);
+		return (0);
 }

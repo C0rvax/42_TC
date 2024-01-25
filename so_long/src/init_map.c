@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 12:53:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/24 18:47:30 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:27:42 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	check_map(t_data *game)
 
 	copy = tab_dup(game->map);
 	if (!copy)
-		return (ft_freetab(game->map), 0);
+		return (perror("Error"), ft_freetab(game->map), 0);
 	if (!check_wall(game))
 		return (ft_freetab(game->map), ft_freetab(copy), 0);
 	if (!check_tiles(game, 0, 0))
@@ -93,7 +93,6 @@ static int	check_map(t_data *game)
 	ft_freetab(copy);
 	return (1);
 }
-// check char dans la nouvelle fonction et check trous
 
 char	**init_map(char *ber, t_data *game)
 {
@@ -105,6 +104,8 @@ char	**init_map(char *ber, t_data *game)
 	game->map = ft_split(line, '\n');
 	if (!game->map)
 		return (free(line), perror("Error"), NULL);
+	if (check_map_char(line, game->map))
+		return (free(line), ft_freetab(game->map), NULL);
 	free(line);
 	if (!check_map(game))
 		return (NULL);

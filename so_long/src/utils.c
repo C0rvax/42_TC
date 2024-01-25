@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:35:00 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/24 17:51:27 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:25:12 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	ft_error(char c)
 	if (c == 'c')
 		ft_putstr_fd("Error\nInvalid map: need minimum 1 chicken!\n", 2);
 	if (c == 's')
-		ft_putstr_fd("Error\nInvalid map: not rectangular!\n", 2);
+		ft_putstr_fd("Error\nInvalid map: invalid shape!\n", 2);
+	if (c == 'l')
+		ft_putstr_fd("Error\nInvalid map: use only: 1 0 P E M C \n", 2);
 	if (c == 'a')
 		ft_putstr_fd("Error\nThis program need 1 argument!\n", 2);
 	if (c == 'b')
@@ -38,6 +40,8 @@ char	**tab_dup(char **tab)
 	char	**res;
 
 	i = 0;
+	if (!tab)
+		return (NULL);
 	while (tab[i])
 		i++;
 	res = malloc(sizeof(char *) * (i + 1));
