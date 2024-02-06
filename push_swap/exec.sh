@@ -16,6 +16,8 @@ ERRC="45 35f 76 99"
 
 ERRM="56 08 2147483648 43"
 
+ERRD="56 98 809 34 45 56"
+
 echo -e "${bleu}test 1 : Arg : $ARG${neutre}"
 ./push_swap $ARG
 
@@ -24,5 +26,8 @@ echo -e "${bleu}test 1 : Arg : $ERRC${neutre}"
 
 echo -e "${bleu}test 1 : Arg : $ERRM${neutre}"
 ./push_swap $ERRM
+
+echo -e "${bleu}test 1 : Arg : $ERRD${neutre}"
+./push_swap $ERRD
 
 make fclean >/dev/null

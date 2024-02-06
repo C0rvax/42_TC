@@ -6,22 +6,19 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 18:27:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/06 21:20:15 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/06 23:02:54 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	check_int(char **av, int ac)
+static int	check_int(char **av, int size)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	j = 0;
-	if (!av)
-		return (0);
-	while (i < ac)
+	while (i < size)
 	{
 		j = 0;
 		if (av[i][j] == '-' || av[i][j] == '+')
@@ -37,24 +34,43 @@ static int	check_int(char **av, int ac)
 	return (1);
 }
 
-int	*check_list(char **av, int ac)
+static int	check_dup(int *a, int size)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		j = i + 1;
+		while (j < size)
+		{
+			if (a[i] == a[j])
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	*check_list(char **av, int size)
 {
 	int		i;
 	int		*a;
 
-	if (!check_int(av, ac))
-	{
-		ft_printf("error\n");
-		return (NULL);
-	}
-	a = malloc(sizeof(int) * ac);
+	if (!check_int(av, size))
+		return (ft_printf("Error\nint!\n"), NULL);
+	a = malloc(sizeof(int) * size);
 	if (!a)
 		return (NULL);
 	i = 0;
-	while (i < ac)
+	while (i < size)
 	{
 		a[i] = ft_atoi(av[i]);
 		i++;
 	}
+	if (!check_dup(a, size))
+		return (ft_printf("Error\ndup!\n"), NULL);
 	return (a);
 }
