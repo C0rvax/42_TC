@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:06:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/06 11:37:30 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:40:08 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,12 @@ void	ft_listadd_back(t_lst **lst, t_lst *new)
 		buf = ft_listlast(*lst);
 		buf->next = new;
 	}
+}
+
+void	ft_listadd_front(t_lst **lst, t_lst *new)
+{
+	if (!lst || !new)
+		return ;
+	new->next = *lst;
+	*lst = new;
 }
