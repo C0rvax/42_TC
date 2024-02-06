@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/06 19:10:56 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:07:25 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct data_s
 	int		b_max;
 }			t_data;
 
-int		*check_list(char **av, int ac);
+int		*check_list(char **av, int size);
 t_lst	*ft_listnew(int content);
 t_lst	*ft_listlast(t_lst *lst);
 void	ft_listadd_back(t_lst **lst, t_lst *new);
