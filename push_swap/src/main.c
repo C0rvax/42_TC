@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/06 19:26:11 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/06 20:29:32 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,32 @@ int	main(int ac, char **av)
 {
 	int	i;
 	int	*a;
+	int	size_list;
+	char	**tab;
 
+	tab = NULL;
 	if (ac < 2)
 		return (0);
-	a = check_list(av, ac);
+	size_list = 0;
+	if (ac == 2)
+	{
+		tab = ft_split(av[1], ' ');
+		if (!tab)
+			return (0);
+		while (tab[size_list])
+			size_list++;
+	}
+	else
+	{
+		av++;
+		tab = av;
+		size_list = ac - 1;
+	}
+	a = check_list(tab, size_list);
 	if (!a)
 		return (1);
 	i = 0;
-	while (i < ac - 1)
+	while (i < size_list)
 	{
 		ft_printf("a[%d] = %d\n", i, a[i]);
 		i++;

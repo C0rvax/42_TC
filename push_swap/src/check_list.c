@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 18:27:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/06 19:20:59 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/06 20:29:34 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	check_int(char **av, int ac)
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	j = 0;
 	if (!av)
 		return (0);
@@ -47,15 +47,16 @@ int	*check_list(char **av, int ac)
 		ft_printf("error\n");
 		return (NULL);
 	}
-	a = malloc(sizeof(int) * (ac - 1));
+	ft_printf("ac : %d\n", ac);
+	a = malloc(sizeof(int) * ac);
 	if (!a)
 		return (NULL);
 	i = 0;
 	ft_printf("ac = %d\n", ac);
-	while (i < ac - 1)
+	while (i < ac)
 	{
-		ft_printf("av : %s\n", av[i + 1]);
-		a[i] = ft_atoi(av[i + 1]);
+		ft_printf("av : %s\n", av[i]);
+		a[i] = ft_atoi(av[i]);
 		i++;
 	}
 	return (a);
