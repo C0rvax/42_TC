@@ -4,7 +4,7 @@ NAME		= push_swap
 
 vpath %.c src/ gnl/
 
-SRC			= main.c init.c get_cmd.c open_file.c clean_exit.c exec_cmd.c
+SRC			= main.c list.c
 
 GNL_SRC		= get_next_line.c get_next_line_utils.c
 
@@ -12,7 +12,7 @@ OBJ			:= $(SRC:%.c=%.o)
 
 CFLAGS		= -Wextra -Wall -Werror
 
-HEADERS		= -I./Include
+HEADERS		= -I./include
 
 LIBRARIES	= -L./printf -lftprintf -L./libft -lft
 
