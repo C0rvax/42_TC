@@ -10,24 +10,11 @@ neutre='\e[0;m'
 
 make >/dev/null
 
-ARG="4 67 3 087 23"
+ARG=("4 67 3 087 23" "45 35f 76 99" "56 08 2147483648 43" "56 98 809 34 45 56")
 
-ERRC="45 35f 76 99"
-
-ERRM="56 08 2147483648 43"
-
-ERRD="56 98 809 34 45 56"
-
-echo -e "${bleu}test 1 : Arg : $ARG${neutre}"
-./push_swap $ARG
-
-echo -e "${bleu}test 1 : Arg : $ERRC${neutre}"
-./push_swap $ERRC
-
-echo -e "${bleu}test 1 : Arg : $ERRM${neutre}"
-./push_swap $ERRM
-
-echo -e "${bleu}test 1 : Arg : $ERRD${neutre}"
-./push_swap $ERRD
+for i in "${ARG[@]}"; do
+	echo -e "${bleu}With arg : $i${neutre}"
+	./push_swap $i
+done
 
 make fclean >/dev/null
