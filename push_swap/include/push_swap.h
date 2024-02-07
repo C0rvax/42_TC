@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/06 21:07:25 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/07 22:51:17 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,17 @@ typedef struct s_lst
 	struct s_lst	*next;
 }		t_lst;
 
+typedef struct stack_s
+{
+	int		*stack;
+	int		size;
+	int		max;
+}			t_stack;
+
 typedef struct data_s
 {
-	char	**av;
-	int		*a;
-	int		*b;
-	int		a_max;
-	int		b_max;
+	t_stack	*a;
+	t_stack	*b;
 }			t_data;
 
 int		*check_list(char **av, int size);

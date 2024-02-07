@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/06 20:29:32 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/07 22:13:32 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(int ac, char **av)
 {
-	int	i;
-	int	*a;
-	int	size_list;
+	int		i;
+	int		*a;
+	int		size_list;
 	char	**tab;
 
 	tab = NULL;

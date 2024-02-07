@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 18:27:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/06 23:02:54 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/07 22:23:43 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,75 @@ static int	check_dup(int *a, int size)
 	return (1);
 }
 
-int	*check_list(char **av, int size)
+static int	check_max(char **tab)
+{
+	int		i;
+	char	*max;
+	size_t	len;
+
+	i = 0;
+	len = 10;
+	max = "+2147483647";
+	while (tab[i])
+	{
+		if (tab[i][0] != '-')
+		{
+			if (tab[i][0] == '+')
+				len++;
+			if (ft_strlen(tab[i]) > len)
+				return (ft_printf("Error\nmax!\n"), 0);
+			else if (ft_strlen(tab[i]) == len)
+			{
+				if ((len == 10 && ft_strncmp(tab[i], "2147483647", 10) > 0)
+					|| (len == 11 && ft_strncmp(tab[i], max, 11) > 0))
+					return (ft_printf("Error\nmax\n"), 0);
+			}
+		}
+		i++;
+	}
+	return (1);
+}
+
+static int	check_min(char **tab)
+{
+	int		i;
+	char	*min;
+
+	i = 0;
+	min = "-2147483648";
+	while (tab[i])
+	{
+		if (tab[i][0] == '-')
+		{
+			if (ft_strlen(tab[i]) > 11)
+				return (ft_printf("Error\nmin!\n"), 0);
+			else if (ft_strlen(tab[i]) == 11)
+			{
+				if (ft_strncmp(tab[i], min, 11) > 0)
+					return (ft_printf("Error\nmin!\n"), 0);
+			}
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	*check_list(char **args, int size)
 {
 	int		i;
 	int		*a;
 
-	if (!check_int(av, size))
+	if (!check_int(args, size))
 		return (ft_printf("Error\nint!\n"), NULL);
+	if (!check_min(args) || !check_max(args))
+		return (NULL);
 	a = malloc(sizeof(int) * size);
 	if (!a)
 		return (NULL);
 	i = 0;
 	while (i < size)
 	{
-		a[i] = ft_atoi(av[i]);
+		a[i] = ft_atoi(args[i]);
 		i++;
 	}
 	if (!check_dup(a, size))

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:06:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/06 16:40:08 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/07 22:16:14 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_listclear(t_lst **lst)
 {
 	t_lst	*buf;
 
-	while(lst)
+	while (lst)
 	{
 		buf = (*lst)->next;
 		free(*lst);
