@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   list_vs_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 10:13:55 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/06 16:54:35 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/09 09:16:43 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,16 @@ int	main()
 {
 	int i;
 	int	maxi;
+	int	rounds;
 	t_lst	*list;
 	t_lst	*new;
+	t_lst	*copy;
 	time_t	sec;
 	time_t	sec2;
 
 	i = 0;
-	maxi = 100000000;
+	rounds = 1000000;
+	maxi = 100000;
 	list = NULL;
 	new = NULL;
 	time(&sec);
@@ -95,21 +98,32 @@ int	main()
 	ft_printf("creation tableau : %d\n", sec2 - sec);
 	ft_printf("ici \n");
 	time(&sec);
-	while (list)
+	i = 0;
+	while (i < rounds)
 	{
-		if (list->content == 9999)
-			ft_printf("i : %d\n", list->content);
-		list = list->next;
+		copy = list;
+		while (copy)
+		{
+			if (i == 9999 && copy->content == 9999)
+				ft_printf("i : %d\n", copy->content);
+			copy = copy->next;
+		}
+		i++;
 	}
 	time(&sec2);
 	ft_printf("parcours liste : %d\n", sec2 - sec);
 	time(&sec);
-	j = 1;
-	while (tab[j])
+	i = 0;
+	while (i < rounds)
 	{
-		if (tab[j] == 9999)
-			ft_printf("j : %d\n", tab[j]);
-		j++;
+		j = 1;
+		while (tab[j])
+		{
+			if (i == 9999 && tab[j] == 9999)
+				ft_printf("j : %d\n", tab[j]);
+			j++;
+		}
+		i++;
 	}
 	time(&sec2);
 	ft_printf("parcours tableau : %d\n", sec2 - sec);
