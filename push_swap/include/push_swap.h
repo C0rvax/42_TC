@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/07 22:51:17 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:59:07 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <errno.h>
+# include <stdio.h>
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
@@ -34,11 +35,14 @@ typedef struct stack_s
 
 typedef struct data_s
 {
-	t_stack	*a;
-	t_stack	*b;
+	t_stack	a;
+	t_stack	b;
 }			t_data;
 
 int		*check_list(char **av, int size);
+int		exec_swap(int print, int *stack);
+int		exec_rotate(int print, int *stack, int size);
+int		exec_reverse(int print, int *stack, int size);
 t_lst	*ft_listnew(int content);
 t_lst	*ft_listlast(t_lst *lst);
 void	ft_listadd_back(t_lst **lst, t_lst *new);

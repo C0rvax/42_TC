@@ -118,7 +118,7 @@ int	*check_list(char **args, int size)
 		return (NULL);
 	a = malloc(sizeof(int) * size);
 	if (!a)
-		return (NULL);
+		return (perror("Error\n"), NULL);
 	i = 0;
 	while (i < size)
 	{

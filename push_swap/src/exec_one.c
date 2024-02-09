@@ -6,51 +6,54 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 22:24:05 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/07 23:18:19 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:40:40 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	exec_swap(t_stack *stack)
+int	exec_swap(int p, int *stack)
 {
 	int	buf;
 
-	buf = stack->stack[0];
-	stack->stack[0] = stack->stack[1];
-	stack->stack[1] = buf;
+	buf = stack[0];
+	stack[0] = stack[1];
+	stack[1] = buf;
+	return (p);
 }
-
+/*
 void	exec_push(t_stack *take, t_stack *push)
 {
 }
-
-void	exec_rotate(t_stack *stack)
+*/
+int	exec_rotate(int p, int *stack, int size)
 {
 	int	i;
 	int	buf;
 
 	i = 0;
-	buf = stack->stack[0];
-	while (i < stack->size - 1)
+	buf = stack[0];
+	while (i < size - 1)
 	{
-		stack->stack[i] = stack->stack[i + 1];
+		stack[i] = stack[i + 1];
 		i++;
 	}
-	stack->stack[i] = buf;
+	stack[i] = buf;
+	return (p);
 }
 
-void	exec_reverse(t_stack *stack)
+int	exec_reverse(int p,int *stack, int size)
 {
 	int	i;
 	int	buf;
 
-	i = stack->size - 1;
-	buf = stack->stack[i];
+	i = size - 1;
+	buf = stack[i];
 	while (i)
 	{
-		stack->stack[i] = stack->stack[i - 1];
+		stack[i] = stack[i - 1];
 		i--;
 	}
-	stack->stack[i] = buf;
+	stack[i] = buf;
+	return (p);
 }
