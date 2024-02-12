@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:35:00 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/25 14:25:12 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/12 12:59:55 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	ft_error(char c)
 		ft_putstr_fd("Error\nThis program need 1 argument!\n", 2);
 	if (c == 'b')
 		ft_putstr_fd("Error\nNeed a .ber extension as argument!\n", 2);
+	if (c == 'm')
+		ft_putstr_fd("Error\nThe map is empty!\n", 2);
 }
 
 char	**tab_dup(char **tab)
