@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 12:53:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/12 15:25:32 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:51:02 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,12 @@ char	**init_map(char *ber, t_data *game)
 
 	line = get_all_lines(ber);
 	if (!line)
-		return (perror("Error"), NULL);
+		return (perror("Error\n"), NULL);
 	if (ft_strncmp(line, "", 1) == 0)
 		return (ft_error('m'), NULL);
 	game->map = ft_split(line, '\n');
 	if (!game->map)
-		return (free(line), perror("Error"), NULL);
+		return (free(line), perror("Error\n"), NULL);
 	if (check_map_char(line, game->map))
 		return (free(line), ft_freetab(game->map), NULL);
 	free(line);
