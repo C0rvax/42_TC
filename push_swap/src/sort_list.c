@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:33:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/14 10:24:43 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:31:03 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ static int	u_never_know(t_data *a)
 
 	i = 0;
 	list = a->list;
-	ft_printf("ici\n");
 	while (i < a->size)
 	{
-		ft_printf("content : %d\n", list->content);
 		if (list->content < list->next->content)
 			return (0);
 		list = list->next;
@@ -58,24 +56,25 @@ static void	sort_3(t_data *data)
 
 }
 
+//static void	
 static void	sort_5(t_data *a, t_data *b)
 {
 	while (a->size > 3)
 		exec_push(ft_printf("pa\n"), a, b);
+	ft_printf("size b : %d\n", b->size);
+	ft_printf("b cont : %d\n",b->list->content);
+	print_list(a);
+	print_list(b);
 	sort_3(a);
 	while (b->size)
 	{
-
+		exec_push(ft_printf("pb\n"), b, a);
 	}
 }
 void	sort_list(t_data *a, t_data *b)
 {
 	if (u_never_know(a))
-	{
-		ft_printf("never n\n");
 		return ;
-	}
-	ft_printf("ok\n");
 	if (a->size == 3)
 	{
 		sort_3(a);

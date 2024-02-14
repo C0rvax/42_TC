@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 22:24:05 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/14 10:25:54 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:53:40 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,51 +24,64 @@ int	exec_swap(int p, t_data *data)
 
 int	exec_rotate(int p, t_lst **list)
 {
-	if (p == 2)
+	if (p == 3)
 		*list = (*list)->next;
 	else
 		*list = (*list)->prev;
 	return (p);
 }
 
-void	set_max(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->size)
-	{
-		if (data->list->content > data->max)
-			data->max = data->list->content;
-		data->list = data->list->next;
-	}
-}
-
 int	exec_push(int p, t_data *in, t_data *out)
 {
-	t_lst	*buf_n;
 	t_lst	*buf_p;
 	t_lst	*node;
+/*	t_lst	*buf_p;
 
 	node = in->list;
-	buf_n = in->list->next;
-	buf_p = in->list->prev;
-	buf_n->prev = buf_p;
-	buf_p->next = buf_n;
+	if (in->size == 1)
+		in->list = NULL;
+	else
+	{
+		buf_n = in->list->next;
+		buf_p = in->list->prev;
+		in->list = buf_n;
+		node->next = NULL;
+		node->prev = NULL;
+		if (in->size > 2)
+		{
+			buf_n->prev = buf_p;
+			buf_p->next = buf_n;
+		}
+		if (in->size == 2)
+		{
+			buf_n->prev = NULL;
+			buf_n->next = NULL;
+		}
+	}
 	in->size--;
-	ft_printf("push1\n");
-	ft_printf("max : %d\n", in->max);
-	if (node->content == in->max)
-		set_max(in);
-	ft_printf("la\n");
-	buf_p = out->list->prev;
-	buf_p->next = node;
-	out->list->prev = node;
-	ft_printf("la2\n");
+	*/
+	node = extract_from_list(in);
+	if (node->content == in->max && in->size > 0)
+		set_list_max(in);
+	if (out->size == 1)
+	{
+		out->list->prev = node;
+		out->list->next = node;
+		node->next = out->list;
+		node->prev = out->list;
+	}
+	else if (out->size > 1)
+	{
+		buf_p = out->list->prev;
+		buf_p->next = node;
+		out->list->prev = node;
+		node->next = out->list;
+		node->prev = buf_p;
+	}
+	out->list = node;
 	out->size++;
-	ft_printf("la2\n");
 	if (node->content > out->max)
-		set_max(out);
+		set_list_max(out);
 	return (p);
 }
 

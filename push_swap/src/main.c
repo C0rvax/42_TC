@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/13 19:16:17 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:27:12 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static int	init_list_a(t_data *a, int ac, char **av)
 		return (0);
 	fill_list(a, buf);
 	free(buf);
+	set_list_max(a);
 	return (1);
 }
 
@@ -86,6 +87,7 @@ int	main(int ac, char **av)
 	init_data(&a, &b);
 	if (!init_list_a(&a, ac, av))
 		return (1);
+	ft_printf("a max : %d\n", a.max);
 	sort_list(&a, &b);
 	i = 0;
 	while (i < a.size)

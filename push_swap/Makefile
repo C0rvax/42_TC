@@ -4,7 +4,8 @@ NAME		= push_swap
 
 vpath %.c src/ gnl/
 
-SRC			= main.c check_list.c sort_list.c exec_one.c list.c
+SRC			= main.c check_list.c sort_list.c exec_one.c list.c utils.c		\
+			  exec_two.c
 
 GNL_SRC		= get_next_line.c get_next_line_utils.c
 
