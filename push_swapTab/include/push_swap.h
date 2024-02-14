@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/13 19:11:49 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:07:37 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,28 @@ typedef struct s_lst
 	int				content;
 	struct s_lst	*next;
 	struct s_lst	*prev;
-}			t_lst;
+}		t_lst;
+
+typedef struct stack_s
+{
+	int		*stack;
+	int		size;
+	int		max;
+}			t_stack;
 
 typedef struct data_s
 {
-	t_lst	*list;
-	int		size;
-	int		max;
+	t_stack	a;
+	t_stack	b;
 }			t_data;
 
 int		*check_list(char **av, int size);
-void	sort_list(t_data *a, t_data *b);
-int		exec_swap(int print, t_data *data);
-int		exec_rotate(int print, t_lst *list);
+int		exec_swap(int print, int *stack);
+int		exec_rotate(int print, int *stack, int size);
 int		exec_reverse(int print, int *stack, int size);
-int		exec_push(int print, t_data *in, t_data *out);
 t_lst	*ft_listnew(int content);
+t_lst	*ft_listlast(t_lst *lst);
+void	ft_listadd_back(t_lst **lst, t_lst *new);
 void	ft_listclear(t_lst **lst);
-void	ft_listadd_front(t_data *data, t_lst *new);
+void	ft_listadd_front(t_lst **lst, t_lst *new);
 #endif

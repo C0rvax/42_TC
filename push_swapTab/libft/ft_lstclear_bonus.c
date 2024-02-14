@@ -1,50 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/06 11:06:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/13 17:16:14 by aduvilla         ###   ########.fr       */
+/*   Created: 2023/11/10 14:46:56 by aduvilla          #+#    #+#             */
+/*   Updated: 2023/11/10 14:51:05 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_listclear(t_lst **lst)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_lst	*buf;
+	t_list	*buf;
 
-	while (lst)
+	while (*lst)
 	{
 		buf = (*lst)->next;
-		free(*lst);
+		ft_lstdelone(*lst, del);
 		*lst = buf;
 	}
 	free(*lst);
 	*lst = NULL;
-}
-
-t_lst	*ft_listnew(int content)
-{
-	t_lst	*new;
-
-	new = malloc(sizeof(t_lst) * 1);
-	if (!new)
-		return (NULL);
-	new->content = content;
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
-}
-
-void	ft_listadd_front(t_data *data, t_lst *new)
-{
-
-	if (!new)
-		return ;
-	new->next = data->list;
-	data->list->prev = new;
-	data->list = new;
 }

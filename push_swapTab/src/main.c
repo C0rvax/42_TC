@@ -6,54 +6,28 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/13 19:16:17 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/09 18:01:00 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	init_data(t_data *a, t_data *b)
+static t_data	init_data(void)
 {
-	a->list = NULL;
-	a->size = 0;
-	a->max = 0;
-	b->list = NULL;
-	b->size = 0;
-	b->max = 0;
+	t_data	data;
+
+	data.a.stack = NULL;
+	data.a.size = 0;
+	data.a.max = 0;
+	data.b.stack = NULL;
+	data.b.size = 0;
+	data.b.max = 0;
+	return (data);
 }
 
-static void	loop_list(t_lst **a)
-{
-	t_lst	*buf;
-
-	buf = *a;
-	while (buf->next)
-		buf = buf->next;
-	(*a)->prev = buf;
-	buf->next = *a;
-}
-
-static void	fill_list(t_data *a, int *buf)
-{
-	int		i;
-	t_lst	*new;
-
-	i = a->size - 1;
-	a->list = ft_listnew(buf[i]);
-	i--;
-	while (i >= 0)
-	{
-		new = ft_listnew(buf[i]);
-		ft_listadd_front(a, new);
-		i--;
-	}
-	loop_list(&a->list);
-}
-
-static int	init_list_a(t_data *a, int ac, char **av)
+static int	init_stack(t_data *data, int ac, char **av)
 {
 	char	**charlist;
-	int		*buf;
 
 	if (ac == 2)
 	{
@@ -63,35 +37,31 @@ static int	init_list_a(t_data *a, int ac, char **av)
 	}
 	else
 		charlist = av + 1;
-	while (charlist[a->size])
-		a->size++;
-	buf = check_list(charlist, a->size);
+	data->a.size = 0;
+	while (charlist[data->a.size])
+		data->a.size++;
+	data->a.stack = check_list(charlist, data->a.size);
 	if (ac == 2)
 		ft_freetab(charlist);
-	if (!buf)
+	if (!data->a.stack)
 		return (0);
-	fill_list(a, buf);
-	free(buf);
 	return (1);
 }
 
 int	main(int ac, char **av)
 {
 	int		i;
-	t_data	a;
-	t_data	b;
+	t_data	data;
 
 	if (ac < 2)
 		return (0);
-	init_data(&a, &b);
-	if (!init_list_a(&a, ac, av))
+	data = init_data();
+	if (!init_stack(&data, ac, av))
 		return (1);
-	sort_list(&a, &b);
 	i = 0;
-	while (i < a.size)
+	while (i < data.a.size)
 	{
-		ft_printf("a[%d] = %d\n", i, a.list->content);
-		a.list = a.list->next;
+		ft_printf("a[%d] = %d\n", i, data.a.stack[i]);
 		i++;
 	}
 	return (0);

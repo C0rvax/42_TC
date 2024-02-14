@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:06:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/13 17:16:14 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:11:52 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,35 @@ t_lst	*ft_listnew(int content)
 	return (new);
 }
 
-void	ft_listadd_front(t_data *data, t_lst *new)
+t_lst	*ft_listlast(t_lst *lst)
 {
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
 
-	if (!new)
+void	ft_listadd_back(t_lst **lst, t_lst *new)
+{
+	t_lst	*buf;
+
+	if (!lst || !new)
 		return ;
-	new->next = data->list;
-	data->list->prev = new;
-	data->list = new;
+	if (*lst == NULL)
+		*lst = new;
+	else
+	{
+		buf = ft_listlast(*lst);
+		buf->next = new;
+		(*lst)->prev = new;
+	}
+}
+
+void	ft_listadd_front(t_lst **lst, t_lst *new)
+{
+	if (!lst || !new)
+		return ;
+	new->next = *lst;
+	*lst = new;
 }
