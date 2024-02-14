@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 22:24:05 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/14 01:39:41 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:25:54 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	exec_swap(int p, t_data *data)
 	return (p);
 }
 
-int	exec_rotate(int p, t_lst *list)
+int	exec_rotate(int p, t_lst **list)
 {
 	if (p == 2)
-		list = list->next;
+		*list = (*list)->next;
 	else
-		list = list->prev;
+		*list = (*list)->prev;
 	return (p);
 }
 

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/13 19:11:49 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:24:04 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct data_s
 int		*check_list(char **av, int size);
 void	sort_list(t_data *a, t_data *b);
 int		exec_swap(int print, t_data *data);
-int		exec_rotate(int print, t_lst *list);
+int		exec_rotate(int print, t_lst **list);
 int		exec_reverse(int print, int *stack, int size);
 int		exec_push(int print, t_data *in, t_data *out);
 t_lst	*ft_listnew(int content);

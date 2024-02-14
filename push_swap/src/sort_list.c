@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:33:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/13 19:28:50 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:24:43 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ static void	sort_3(t_data *data)
 	if (x > y && y > z && z < x)
 	{
 		exec_swap(ft_printf("sa\n"), data);
-		exec_rotate(ft_printf("rra\n"), data->list);
+		exec_rotate(ft_printf("rra\n"), &data->list);
 	}
 	if (x > y && y < z && z < x)
-		exec_rotate(ft_printf("ra\n"), data->list);
+		exec_rotate(ft_printf("ra\n"), &data->list);
 	if (x < y && y > z && z > x)
 	{
 		exec_swap(ft_printf("sa\n"), data);
-		exec_rotate(ft_printf("ra\n"), data->list);
+		exec_rotate(ft_printf("ra\n"), &data->list);
 	}
 	if (x < y && y > z && z < x)
-		exec_rotate(ft_printf("rra\n"), data->list);
+		exec_rotate(ft_printf("rra\n"), &data->list);
 
 }
 
