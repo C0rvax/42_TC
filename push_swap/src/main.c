@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/14 16:27:12 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:41:11 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@ static void	init_data(t_data *a, t_data *b)
 {
 	a->list = NULL;
 	a->size = 0;
-	a->max = 0;
+	a->max = -2147483648;
+	a->min = 2147483647;
 	b->list = NULL;
 	b->size = 0;
-	b->max = 0;
+	b->max = -2147483648;
+	b->min = 2147483647;
+
 }
 
 static void	loop_list(t_lst **a)

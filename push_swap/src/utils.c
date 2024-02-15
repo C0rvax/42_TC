@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:53:41 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/14 17:36:01 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:30:28 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	set_list_max(t_data *data)
 	{
 		if (buf->content > data->max)
 			data->max = buf->content;
+		if (buf->content < data->min)
+			data->min = buf->content;
 		buf = buf->next;
 		i++;
 	}
