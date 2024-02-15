@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:39:53 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/15 15:21:00 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:08:50 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ int	find_in_a(t_data *a, t_data *b)
 			buf = buf->next;
 		}
 	}
+	/*
 	else
 	{
-		while (j < a->max)
+		while (j <= a->max)
 		{
 			i = 0;
 			while (i < a->size)
@@ -50,7 +51,6 @@ int	find_in_a(t_data *a, t_data *b)
 					ft_printf("a size div 2 = %d\n", a->size /2);
 					if (i > (a->size / 2))
 					{
-						ft_printf("i = %d", i);
 						i = i - a->size;
 					}
 					return (i);
@@ -59,6 +59,22 @@ int	find_in_a(t_data *a, t_data *b)
 				buf = buf->next;
 			}
 			j++;
+		}
+	}
+*/
+	else
+	{
+		while (i < a->size)
+		{
+			if (b->list->content > buf->prev->content &&
+				b->list->content < buf->content)
+			{
+				if (i > a->size / 2)
+					i = i - a->size;
+				return (i);
+			}
+			i++;
+			buf = buf->next;
 		}
 	}
 	return (i);

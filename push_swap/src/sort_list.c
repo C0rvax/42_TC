@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:33:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/15 14:33:12 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/15 15:47:58 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ static void	sort_5(t_data *a, t_data *b)
 	while (a->size > 3)
 		exec_push(ft_printf("pa\n"), a, b);
 	ft_printf("size b : %d\n", b->size);
-	ft_printf("b cont : %d\n",b->list->content);
 	print_list(a);
 	print_list(b);
 	sort_3(a);
+	ft_printf("size a : %d\n", a->size);
 	while (b->size)
 	{
 		i = find_in_a(a, b);
