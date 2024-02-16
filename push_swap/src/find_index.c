@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:39:53 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/16 18:36:38 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:02:59 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ int	find_content(t_data *data, int value)
 		i++;
 		lst = lst->next;
 	}
-	return (ft_printf("Error\nPas trouvé dans a!"));
+	return (ft_printf("Error\nPas trouvé la value!"));
 }

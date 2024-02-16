@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 22:24:05 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/16 17:36:35 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:11:34 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	exec_push(int p, t_data *in, t_data *out)
 	in->size--;
 	*/
 	node = extract_from_list(in);
-	if (node->content == in->max && in->size > 0)
+	if ((node->content == in->max || node->content == in->min) && in->size > 0)
 		set_list_max(in);
 	if (out->size == 1)
 	{
@@ -80,7 +80,7 @@ int	exec_push(int p, t_data *in, t_data *out)
 	}
 	out->list = node;
 	out->size++;
-	if (node->content > out->max)
+	if (node->content > out->max || node->content < out->min)
 		set_list_max(out);
 	return (p);
 }
