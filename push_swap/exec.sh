@@ -16,6 +16,7 @@ ARG=(
 	"42  07 54"
 	"42 24 38"
 	"4 67 3 087 23"
+	"42 ++24 38"
 	"45 35f 76 99"
 	"56 08 2147483648 43"
 	"56 08 2147483647 43"
@@ -30,7 +31,7 @@ ARG=(
 
 for i in "${ARG[@]}"; do
 	echo -e "${bleu}With arg : $i${neutre}"
-	./push_swap $i
+	valgrind --leak-check=full --track-fds=yes --track-origins=yes ./push_swap $i
 done
 
 make fclean >/dev/null

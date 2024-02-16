@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/15 14:41:11 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:56:05 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	init_list_a(t_data *a, int ac, char **av)
 
 int	main(int ac, char **av)
 {
-	int		i;
+//	int		i;
 	t_data	a;
 	t_data	b;
 
@@ -90,8 +90,9 @@ int	main(int ac, char **av)
 	init_data(&a, &b);
 	if (!init_list_a(&a, ac, av))
 		return (1);
-	ft_printf("a max : %d\n", a.max);
 	sort_list(&a, &b);
+	ft_listclear(&a);
+	/*
 	i = 0;
 	while (i < a.size)
 	{
@@ -99,5 +100,6 @@ int	main(int ac, char **av)
 		a.list = a.list->next;
 		i++;
 	}
+	*/
 	return (0);
 }

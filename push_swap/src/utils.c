@@ -18,6 +18,8 @@ void	set_list_max(t_data *data)
 	t_lst	*buf;
 
 	i = 0;
+	data->max = -2147483648;
+	data->min = 2147483647;
 	buf = data->list;
 	if (buf->content > data->max)
 		data->max = buf->content;

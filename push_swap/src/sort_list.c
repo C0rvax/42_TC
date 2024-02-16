@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:33:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/15 17:42:51 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:38:24 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ static void	sort_5(t_data *a, t_data *b)
 	i = 0;
 	while (a->size > 3)
 		exec_push(ft_printf("pa\n"), a, b);
-	print_list(a);
-	print_list(b);
+//	print_list(a);
+//	print_list(b);
 	sort_3(a);
 	while (b->size)
 	{

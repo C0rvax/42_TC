@@ -6,24 +6,27 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:06:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/13 17:16:14 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:02:01 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_listclear(t_lst **lst)
+void	ft_listclear(t_data *data)
 {
+	int		i;
 	t_lst	*buf;
 
-	while (lst)
+	i = 0;
+	while (i < data->size - 1)
 	{
-		buf = (*lst)->next;
-		free(*lst);
-		*lst = buf;
+		buf = data->list->next;
+		free(data->list);
+		data->list = buf;
+		i++;
 	}
-	free(*lst);
-	*lst = NULL;
+	free(data->list);
+	data->list = NULL;
 }
 
 t_lst	*ft_listnew(int content)

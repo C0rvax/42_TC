@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 18:27:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/07 22:23:43 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:06:41 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,6 @@ int	*check_list(char **args, int size)
 		i++;
 	}
 	if (!check_dup(a, size))
-		return (ft_printf("Error\ndup!\n"), NULL);
+		return (ft_printf("Error\ndup!\n"), free(a), NULL);
 	return (a);
 }
