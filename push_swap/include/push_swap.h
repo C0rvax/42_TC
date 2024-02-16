@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/16 17:52:13 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:32:38 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int		exec_swap(int print, t_data *data);
 int		exec_rotate(int print, t_lst **list);
 int		exec_reverse(int print, int *stack, int size);
 t_lst	*extract_from_list(t_data *data);
-int		find_in_a(t_data *a, t_data *b);
+int		find_in_a(t_data *a, int bcontent);
+int		find_content(t_data *data, int value);
 int		exec_push(int print, t_data *in, t_data *out);
 t_lst	*ft_listnew(int content);
 void	ft_listclear(t_data *data);

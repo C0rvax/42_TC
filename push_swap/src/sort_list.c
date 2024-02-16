@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:33:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/16 17:38:24 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:36:41 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,27 @@ static void	sort_3(t_data *data)
 
 }
 
-//static void	
+static void	rotate_list(t_data *data, int i)
+{
+	if (i < 0)
+	{
+		i *= -1;
+		while (i > 0)
+		{
+			exec_rotate(ft_printf("rra\n"), &data->list);
+			i--;
+		}
+	}
+	else
+	{
+		while (i > 0)
+		{
+			exec_rotate(ft_printf("ra\n"), &data->list);
+			i--;
+		}
+	}
+}
+
 static void	sort_5(t_data *a, t_data *b)
 {
 	int	i;
@@ -64,31 +84,15 @@ static void	sort_5(t_data *a, t_data *b)
 	i = 0;
 	while (a->size > 3)
 		exec_push(ft_printf("pa\n"), a, b);
-//	print_list(a);
-//	print_list(b);
 	sort_3(a);
 	while (b->size)
 	{
-		i = find_in_a(a, b);
-		if (i < 0)
-		{
-			i = i * -1;
-			while (i > 0)
-			{
-				exec_rotate(ft_printf("rra\n"), &a->list);
-				i--;
-			}
-		}
-		else
-		{
-			while (i > 0)
-			{
-				exec_rotate(ft_printf("ra\n"), &a->list);
-				i--;
-			}
-		}
+		i = find_in_a(a, b->list->content);
+		rotate_list(a, i);
 		exec_push(ft_printf("pb\n"), b, a);
 	}
+	i = find_content(a, a->min);
+	rotate_list(a, i);
 }
 
 void	sort_list(t_data *a, t_data *b)

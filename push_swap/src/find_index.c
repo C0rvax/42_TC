@@ -6,20 +6,20 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:39:53 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/16 17:36:24 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:36:38 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_in_a(t_data *a, t_data *b)
+int	find_in_a(t_data *a, int bcontent)
 {
 	int		i;
 	t_lst	*buf;
 
 	i = 0;
 	buf = a->list;
-	if (b->list->content < a->min || b->list->content > a->max)
+	if (bcontent < a->min || bcontent > a->max)
 	{
 		while (i < a->size)
 		{
@@ -37,8 +37,7 @@ int	find_in_a(t_data *a, t_data *b)
 	{
 		while (i < a->size)
 		{
-			if (b->list->content > buf->prev->content &&
-				b->list->content < buf->content)
+			if (bcontent > buf->prev->content && bcontent < buf->content)
 			{
 				if (i > a->size / 2)
 					i = i - a->size;
@@ -48,5 +47,26 @@ int	find_in_a(t_data *a, t_data *b)
 			buf = buf->next;
 		}
 	}
-	return (i);
+	return (ft_printf("Error\nPas trouvé dans a!"));
+}
+
+int	find_content(t_data *data, int value)
+{
+	int		i;
+	t_lst	*lst;
+
+	i = 0;
+	lst = data->list;
+	while (i < data->size)
+	{
+		if (lst->content == value)
+		{
+			if (i > data->size / 2)
+				i = i - data->size;
+			return (i);
+		}
+		i++;
+		lst = lst->next;
+	}
+	return (ft_printf("Error\nPas trouvé dans a!"));
 }
