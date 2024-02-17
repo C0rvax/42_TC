@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 18:27:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/16 18:06:41 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/17 18:42:17 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ static int	check_max(char **tab)
 			if (tab[i][0] == '+')
 				len++;
 			if (ft_strlen(tab[i]) > len)
-				return (ft_printf("Error\nmax!\n"), 0);
+				return (ft_putstr_fd("Error\n", 2), 0);
 			else if (ft_strlen(tab[i]) == len)
 			{
 				if ((len == 10 && ft_strncmp(tab[i], "2147483647", 10) > 0)
 					|| (len == 11 && ft_strncmp(tab[i], max, 11) > 0))
-					return (ft_printf("Error\nmax\n"), 0);
+					return (ft_putstr_fd("Error\n", 2), 0);
 			}
 		}
 		i++;
@@ -95,11 +95,11 @@ static int	check_min(char **tab)
 		if (tab[i][0] == '-')
 		{
 			if (ft_strlen(tab[i]) > 11)
-				return (ft_printf("Error\nmin!\n"), 0);
+				return (ft_putstr_fd("Error\n", 2), 0);
 			else if (ft_strlen(tab[i]) == 11)
 			{
 				if (ft_strncmp(tab[i], min, 11) > 0)
-					return (ft_printf("Error\nmin!\n"), 0);
+					return (ft_putstr_fd("Error\n", 2), 0);
 			}
 		}
 		i++;
@@ -113,7 +113,7 @@ int	*check_list(char **args, int size)
 	int		*a;
 
 	if (!check_int(args, size))
-		return (ft_printf("Error\nint!\n"), NULL);
+		return (ft_putstr_fd("Error\n", 2), NULL);
 	if (!check_min(args) || !check_max(args))
 		return (NULL);
 	a = malloc(sizeof(int) * size);
@@ -126,6 +126,6 @@ int	*check_list(char **args, int size)
 		i++;
 	}
 	if (!check_dup(a, size))
-		return (ft_printf("Error\ndup!\n"), free(a), NULL);
+		return (ft_putstr_fd("Error\n", 2), free(a), NULL);
 	return (a);
 }

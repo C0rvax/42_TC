@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/16 17:56:05 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:32:31 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ int	main(int ac, char **av)
 	if (!init_list_a(&a, ac, av))
 		return (1);
 	sort_list(&a, &b);
+//	print_list(&a);
+	if (!u_never_know(&a))
+		ft_printf("wrong!\n");
 	ft_listclear(&a);
 	/*
 	i = 0;
