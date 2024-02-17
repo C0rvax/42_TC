@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 14:20:59 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/24 18:47:00 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/17 23:15:43 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ static void	init_frame2(t_data *game)
 
 int	init_game(char *map, t_data *game)
 {
+	ft_bzero(game, sizeof(t_data));
 	init_struct(game);
 	game->map = init_map(map, game);
 	if (!game->map)
