@@ -18,6 +18,7 @@ printf ${YELLOW}"\n\t\tTEST CREATED BY: "${DEF_COLOR}
 printf ${CYAN}"GEMARTIN\t\n"${DEF_COLOR}
 printf ${BLUE}"\n-------------------------------------------------------------\n"${DEF_COLOR}
 
+make >/dev/null
 rm -rf traces.txt
 rm -rf 0
 
@@ -4053,3 +4054,4 @@ if [ -z "$1" ] || [ $1 != -b ]; then
 	rm -rf 0
 	make fclean >/dev/null
 fi
+make fclean >/dev/null
