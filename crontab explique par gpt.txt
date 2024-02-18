@@ -1,21 +1,7 @@
- 
-awk '{ft += $2} END {print ft}'
-
-Cette commande utilise Awk, un langage de traitement de texte et un utilitaire de lignes de commande. Voici ce que fait chaque partie de la commande:
-
-- `awk`: C'est le programme Awk qui est invoqué.
-
-- `'{ft += $2} END {print ft}'`: C'est le script Awk lui-même. Voici une décomposition de ce script:
-
-  - `{ft += $2}`: Cela crée une variable appelée "ft" et ajoute la valeur de la deuxième colonne (représentée par `$2`) à cette variable. Ce code est exécuté pour chaque ligne du fichier d'entrée.
-
-  - `END {print ft}`: Une fois que toutes les lignes du fichier d'entrée ont été traitées, le bloc `END` est exécuté. Il imprime la valeur accumulée de la variable "ft". Ainsi, la commande renvoie la somme de toutes les valeurs de la deuxième colonne du fichier d'entrée.
-
-En résumé, cette commande Awk additionne les valeurs de la deuxième colonne de chaque ligne dans un fichier, puis imprime la somme totale à la fin du traitement du fichier.
-
-                --------------------------------------------------------------------------------
 
 awk '{ut += $3} {ft+= $2} END {printf("%d"), ut/ft*100}'
+
+Cette commande utilise Awk, un langage de traitement de texte et un utilitaire de lignes de commande. Voici ce que fait chaque partie de la commande:
 
 Cette commande Awk effectue plusieurs opérations sur un fichier d'entrée, en utilisant les valeurs des colonnes 2 et 3. Voici une explication détaillée:
 
