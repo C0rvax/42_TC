@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 18:27:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/17 18:42:17 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:17:44 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ static int	check_int(char **av, int size)
 	{
 		j = 0;
 		if (av[i][j] == '-' || av[i][j] == '+')
+		{
 			j++;
+			if (!av[i][j])
+				return (0);
+		}
 		while (av[i][j])
 		{
 			if (!ft_isdigit(av[i][j]))

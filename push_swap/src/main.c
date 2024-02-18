@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/17 15:32:31 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:22:36 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	main(int ac, char **av)
 
 	if (ac < 2)
 		return (0);
+	if (ac == 2 && av[1][0] == '\0')
+		return (ft_putstr_fd("Error\n", 2), 1);
 	init_data(&a, &b);
 	if (!init_list_a(&a, ac, av))
 		return (1);
