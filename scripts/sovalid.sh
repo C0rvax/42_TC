@@ -30,7 +30,8 @@ for i in "${ARG[@]}"; do # on parcours la liste d'argument ARG
 	echo -e "        ${vert}$i${neutre}" # nom de l'argument (map)
 
 	valgrind --track-fds=yes --leak-check=full ./so_long ./maps/valid/$i 2>tmp >/dev/null # on copie stderr (2) vers un fichier temporaire (tmp) et stdout vers null
-	error=$(cat tmp | grep "ERROR" | wc -l)                                               # on recupère le resultat de grep error sur tmp dans une variable : error
+	error=$(cat tmp | grep "segmentation fault" | wc -l)                                  # on recupère le resultat de grep error sur tmp dans une variable : error
+	errjump=$(cat tmp | grep "Conditional jump" | wc -l)                                  # on recupère le resultat de grep error sur tmp dans une variable : error
 	leaks=$(cat tmp | grep "no leaks are possible" | wc -l)
 	fdclose=$(cat tmp | grep "FILE DESCRIPTOR" | awk '{gsub(/\(/, "", $6); print $6}')
 	fdopen=$(cat tmp | grep "FILE DESCRIPTOR" | awk '{print $4}')
@@ -42,10 +43,10 @@ for i in "${ARG[@]}"; do # on parcours la liste d'argument ARG
 	fi
 
 	printf ${bleu}"   Error : "
-	if [ $error -eq 1 ]; then # si grep égale 1 alors ok
-		printf ${vert}"[OK]"${neutre}
-	else
+	if [ $error -eq 1 ] || [ $errjump -eq 1 ]; then # si grep égale 1 alors ok
 		printf ${rouge}"[KO]"${neutre}
+	else
+		printf ${vert}"[OK]"${neutre}
 	fi
 
 	printf ${bleu}"   Leaks : "

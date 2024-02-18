@@ -34,11 +34,11 @@ for i in "${ARG[@]}"; do # on parcours la liste d'argument ARG
 
 	valgrind --track-fds=yes --leak-check=full ./so_long ./maps/invalid/$i 2>tmp >/dev/null # on copie stderr (2) vers un fichier temporaire (tmp) et stdout vers null
 	error=$(cat tmp | grep "Error" | wc -l)                                                 # on recupère le resultat de grep error sur tmp dans une variable : error
-	leaks=$(cat tmp | grep "no leaks are possible" | wc -l)
-	fdclose=$(cat tmp | grep "FILE DESCRIPTOR" | awk '{gsub(/\(/, "", $6); print $6}')
+	leaks=$(cat tmp | grep "no leaks are possible" | wc -l)                                 # on recupere la chaine entre "" dans leaks
+	fdclose=$(cat tmp | grep "FILE DESCRIPTOR" | awk '{gsub(/\(/, "", $6); print $6}')      # gsub (global substitution) remplace tous ce qu'il y a entre les 2 / ( \) car ) est protegee) par "" dans la colonne 6
 	fdopen=$(cat tmp | grep "FILE DESCRIPTOR" | awk '{print $4}')
 
-	if [ $fdopen -ne $fdclose ]; then
+	if [ $fdopen -ne $fdclose ]; then # si fdopen est different de fdclose
 		success=${rouge}
 	else
 		success=${vert}
