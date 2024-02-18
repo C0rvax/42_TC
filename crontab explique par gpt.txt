@@ -1,0 +1,107 @@
+ 
+awk '{ft += $2} END {print ft}'
+
+Cette commande utilise Awk, un langage de traitement de texte et un utilitaire de lignes de commande. Voici ce que fait chaque partie de la commande:
+
+- `awk`: C'est le programme Awk qui est invoqué.
+
+- `'{ft += $2} END {print ft}'`: C'est le script Awk lui-même. Voici une décomposition de ce script:
+
+  - `{ft += $2}`: Cela crée une variable appelée "ft" et ajoute la valeur de la deuxième colonne (représentée par `$2`) à cette variable. Ce code est exécuté pour chaque ligne du fichier d'entrée.
+
+  - `END {print ft}`: Une fois que toutes les lignes du fichier d'entrée ont été traitées, le bloc `END` est exécuté. Il imprime la valeur accumulée de la variable "ft". Ainsi, la commande renvoie la somme de toutes les valeurs de la deuxième colonne du fichier d'entrée.
+
+En résumé, cette commande Awk additionne les valeurs de la deuxième colonne de chaque ligne dans un fichier, puis imprime la somme totale à la fin du traitement du fichier.
+
+                --------------------------------------------------------------------------------
+
+awk '{ut += $3} {ft+= $2} END {printf("%d"), ut/ft*100}'
+
+Cette commande Awk effectue plusieurs opérations sur un fichier d'entrée, en utilisant les valeurs des colonnes 2 et 3. Voici une explication détaillée:
+
+- `awk`: C'est le programme Awk qui est utilisé.
+
+- `'{ut += $3} {ft+= $2} END {printf("%d"), ut/ft*100}'`: C'est le script Awk. Décomposons chaque partie :
+
+  - `{ut += $3}` : Pour chaque ligne, cela ajoute la valeur de la troisième colonne (représentée par `$3`) à une variable appelée "ut".
+
+  - `{ft += $2}` : Pour chaque ligne, cela ajoute la valeur de la deuxième colonne (représentée par `$2`) à une variable appelée "ft".
+
+  - `END {printf("%d"), ut/ft*100}` : Une fois que toutes les lignes du fichier d'entrée ont été traitées, le bloc `END` est exécuté. Il imprime le résultat du calcul (ut/ft * 100) en utilisant la fonction `printf` avec le format spécifié ("%d" pour un entier).
+
+En résumé, cette commande Awk calcule la somme des valeurs de la troisième colonne dans la variable "ut", la somme des valeurs de la deuxième colonne dans la variable "ft", puis imprime le résultat de la division de "ut" par "ft" multiplié par 100 à la fin du traitement du fichier.
+
+                --------------------------------------------------------------------------------
+
+awk '{printf("%.1f%%"), $1 + $3}'
+
+Cette commande Awk utilise la fonction `printf` pour formater et afficher la somme de la première et de la troisième colonne d'un fichier d'entrée, avec une précision d'une décimale et suivi du symbole pourcentage (%).
+
+- `awk`: C'est le programme Awk qui est utilisé.
+
+- `'{printf("%.1f%%"), $1 + $3}'`: C'est le script Awk. Décomposons chaque partie :
+
+  - `{printf("%.1f%%")}` : Cela utilise la fonction `printf` pour formater la sortie. `%.1f` spécifie que le nombre à afficher aura une seule décimale. Le `%f` indique un nombre à virgule flottante. Le `%%` est utilisé pour afficher le symbole pourcentage lui-même.
+
+  - `$1 + $3` : Cela représente la somme de la première colonne (`$1`) et de la troisième colonne (`$3`) pour chaque ligne du fichier d'entrée.
+
+En résumé, cette commande Awk affiche la somme de la première et de la troisième colonne avec une décimale de précision, suivi du symbole pourcentage, pour chaque ligne du fichier d'entrée.
+
+                --------------------------------------------------------------------------------
+
+awk '$1 == "system" {print $3 " " $4}'
+
+Cette commande Awk filtre les lignes du fichier d'entrée où la première colonne est égale à la chaîne "system" et imprime la troisième et la quatrième colonne de ces lignes.
+
+- `awk`: C'est le programme Awk qui est utilisé.
+
+- `'$1 == "system" {print $3 " " $4}'`: C'est le script Awk. Décomposons chaque partie :
+
+  - `$1 == "system"` : C'est une condition qui teste si la première colonne est égale à la chaîne "system".
+
+  - `{print $3 " " $4}` : Si la condition précédente est vraie, cela imprime la troisième colonne (`$3`) suivie d'un espace, puis de la quatrième colonne (`$4`). Cela affiche donc la troisième et la quatrième colonne des lignes où la première colonne est "system".
+
+En résumé, cette commande Awk extrait et imprime la troisième et la quatrième colonne des lignes où la première colonne est égale à la chaîne "system" dans le fichier d'entrée.
+
+                --------------------------------------------------------------------------------
+
+admettons que je recupere la ligne suivante :
+
+==36556== FILE DESCRIPTORS: 3 open (3 std) at exit.
+
+J'aimerais imprimmer avec la commande 'awk' ce qu'il y a dans la colonne du premier '3', pour ca c'est facile en faisant '{print $4} aui affichera : 3, par contre comment faire pour imprimmer ce qu'il y a dans $6 sans la parenthese devant ?
+
+Si vous souhaitez imprimer le contenu de la colonne `$6` sans la parenthèse devant, vous pouvez utiliser des fonctions de traitement de chaînes dans Awk. Voici comment vous pourriez le faire :
+
+```bash
+awk '$1 == "==36556==" && $2 == "FILE" && $3 == "DESCRIPTORS:" {gsub(/\(/, "", $6); print $6}' fichier.txt
+```
+
+Explication :
+
+- `$1 == "==36556==" && $2 == "FILE" && $3 == "DESCRIPTORS:"` : Cela spécifie la condition pour filtrer les lignes que vous souhaitez traiter.
+
+- `{gsub(/\(/, "", $6); print $6}` : Cela utilise la fonction `gsub` pour supprimer la parenthèse ouvrante de la colonne `$6` (sixième colonne) et ensuite imprime la colonne modifiée.
+
+Ainsi, cette commande Awk filtre les lignes qui correspondent à votre condition et imprime le contenu de la colonne `$6` sans la parenthèse ouvrante. Assurez-vous d'ajuster le fichier ou la source de données en conséquence.
+
+                --------------------------------------------------------------------------------
+
+{gsub(/\(/, "", $6)
+
+La portion de code `{gsub(/\(/, "", $6)` dans Awk utilise la fonction `gsub` pour effectuer une substitution globale dans la sixième colonne (`$6`) de la ligne en cours de traitement.
+
+Voici une explication plus détaillée :
+
+- `{`: Le début d'un bloc de code Awk.
+
+- `gsub(/\(/, "", $6)`: C'est la fonction `gsub` qui signifie "global substitution" (substitution globale). Elle recherche toutes les occurrences du motif spécifié entre les deux barres obliques (`/\(`) dans la sixième colonne (`$6`) et les remplace par une chaîne vide (`""`).
+
+  - `\(` : Le motif à rechercher. Dans ce contexte, le caractère `\` est utilisé pour échapper la parenthèse ouvrante `(`, car la parenthèse a une signification spéciale dans les expressions régulières.
+
+  - `""` : La chaîne par laquelle les occurrences du motif seront remplacées, ici, une chaîne vide indiquant qu'elles doivent être supprimées.
+
+- `}`: La fin du bloc de code Awk.
+
+En résumé, cette partie du code supprime toutes les parenthèses ouvrantes (`(`) de la sixième colonne de la ligne en cours de traitement. Cela est utile si vous souhaitez extraire un nombre ou un texte qui peut être entouré de parenthèses dans cette colonne.
+

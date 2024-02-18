@@ -35,25 +35,29 @@ for i in "${ARG[@]}"; do # on parcours la liste d'argument ARG
 	valgrind --track-fds=yes --leak-check=full ./so_long ./maps/invalid/$i 2>tmp >/dev/null # on copie stderr (2) vers un fichier temporaire (tmp) et stdout vers null
 	error=$(cat tmp | grep "Error" | wc -l)                                                 # on recupère le resultat de grep error sur tmp dans une variable : error
 	leaks=$(cat tmp | grep "no leaks are possible" | wc -l)
-	fds=$(cat tmp | grep "FILE DESCRIPTOR" | awk '{print $4, $6}')
+	fdclose=$(cat tmp | grep "FILE DESCRIPTOR" | awk '{gsub(/\(/, "", $6); print $6}')
+	fdopen=$(cat tmp | grep "FILE DESCRIPTOR" | awk '{print $4}')
 
-	if [ $error -eq 1 ] && [ $leaks -eq 1 ]; then # si grep égale 1 alors ok
-		echo -e "${bleu}   Error : ${vert}[OK]${bleu}    Leaks : ${vert}[OK]${neutre}"
-	elif [ $error -eq 1 ] && [ $leaks -ne 1 ]; then
-		echo -e "${bleu}   Error : ${vert}[OK]${bleu}    Leaks : ${rouge}[KO]${neutre}"
-	elif [ $error -ne 1 ] && [ $leaks -eq 1 ]; then
-		echo -e "${bleu}   Error : ${rouge}[KO]${bleu}   Leaks : ${vert}[OK]${neutre}"
+	if [ $fdopen -ne $fdclose ]; then
+		success=${rouge}
 	else
-		echo -e "${bleu}   Error : ${rouge}[KO]${bleu}   Leaks : ${rouge}[KO]${neutre}"
+		success=${vert}
 	fi
-	echo -e "${bleu}-----------------------------------------------------------${neutre}"
 
 	./so_long ./maps/invalid/$i 2>&1 >/dev/null | grep ":" # 2>&1 redirige stderr (2) vers stdout (1) puis envoie stdout dans null mais garde la redirection pour le pipe de grep
-	echo $fds
-	rm tmp
 
+	if [ $error -eq 1 ] && [ $leaks -eq 1 ]; then # si grep égale 1 alors ok
+		echo -e "${bleu}   Error : ${vert}[OK]${bleu}    Leaks : ${vert}[OK]${bleu}   FDs : ${success}$fdclose/$fdopen${neutre}"
+	elif [ $error -eq 1 ] && [ $leaks -ne 1 ]; then
+		echo -e "${bleu}   Error : ${vert}[OK]${bleu}    Leaks : ${rouge}[KO]${bleu}   FDs : ${success}$fdclose/$fdopen${neutre}"
+	elif [ $error -ne 1 ] && [ $leaks -eq 1 ]; then
+		echo -e "${bleu}   Error : ${rouge}[KO]${bleu}   Leaks : ${vert}[OK]${bleu}   FDs : ${success}$fdclose/$fdopen${neutre}"
+	else
+		echo -e "${bleu}   Error : ${rouge}[KO]${bleu}   Leaks : ${rouge}[KO]${bleu}   FDs : ${success}$fdclose/$fdopen${neutre}"
+	fi
 	echo -e "${bleu}-----------------------------------------------------------${neutre}"
 	echo ""
+	rm tmp
 
 done
 rm maps.sh                                                                      # on efface le fichier maps.sh
