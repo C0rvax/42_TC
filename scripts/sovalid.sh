@@ -41,15 +41,22 @@ for i in "${ARG[@]}"; do # on parcours la liste d'argument ARG
 		success=${vert}
 	fi
 
-	if [ $error -eq 1 ] && [ $leaks -eq 1 ]; then # si grep égale 1 alors ok
-		echo -e "${bleu}   Error : ${vert}[OK]${bleu}    Leaks : ${vert}[OK]${bleu}   FDs : ${success}$fdclose/$fdopen${neutre}"
-	elif [ $error -eq 1 ] && [ $leaks -ne 1 ]; then
-		echo -e "${bleu}   Error : ${vert}[OK]${bleu}    Leaks : ${rouge}[KO]${bleu}   FDs : ${success}$fdclose/$fdopen${neutre}"
-	elif [ $error -ne 1 ] && [ $leaks -eq 1 ]; then
-		echo -e "${bleu}   Error : ${rouge}[KO]${bleu}   Leaks : ${vert}[OK]${bleu}   FDs : ${success}$fdclose/$fdopen${neutre}"
+	printf ${bleu}"   Error : "
+	if [ $error -eq 1 ]; then # si grep égale 1 alors ok
+		printf ${vert}"[OK]"${neutre}
 	else
-		echo -e "${bleu}   Error : ${rouge}[KO]${bleu}   Leaks : ${rouge}[KO]${bleu}   FDs : ${success}$fdclose/$fdopen${neutre}"
+		printf ${rouge}"[KO]"${neutre}
 	fi
+
+	printf ${bleu}"   Leaks : "
+	if [ $leaks -eq 1 ]; then # si grep égale 1 alors ok
+		printf ${vert}"[OK]"${neutre}
+	else
+		printf ${rouge}"[KO]"${neutre}
+	fi
+
+	printf ${bleu}"   FDs : "
+	printf ${success}"$fdclose/$fdopen${neutre}\n"
 	echo -e "${bleu}-----------------------------------------------------------${neutre}"
 	echo ""
 	rm tmp

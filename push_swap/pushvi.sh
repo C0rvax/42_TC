@@ -9,11 +9,8 @@ vert='\e[1;32m'
 neutre='\e[0;m'
 
 make >/dev/null
-cd push_swap_tester
-make >/dev/null
-check=(../checker)
-./complexity $1 $2 $3
+cd push_swap_visualizer/build/
+./bin/visualizer
+cd ../..
 
-make fclean >/dev/null
-cd ..
 make fclean >/dev/null
