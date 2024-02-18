@@ -58,19 +58,20 @@ EOF
 		echo -e "${neutre}"
 	fi
 
-	make 2>/dev/null >/dev/null              # make et stdout et stderr redirigé vers null cad empeche l'affichage
-	cd maps/invalid                          # on se déplace dans le fichier des maps non valides
-	echo "ARG=(" >>../../maps.sh             # on creer le fichier maps.sh qui sert de liste d'arguments (ARG)
-	ls | sed 's/^/"/;s/$/"/' >>../../maps.sh # on le rempli avec la list du dossier et ajoute des double quotes aux extremités avec sed
-	echo ")" >>../../maps.sh
-	cd ../.. # on revient a la racine
-
-	source maps.sh # on source le fichier creer plus haut qui contient en ARG tous les noms des maps
+	make 2>/dev/null >/dev/null                        # make et stdout et stderr redirigé vers null cad empeche l'affichage
+	cd maps/invalid                                    # on se déplace dans le fichier des maps non valides
+	echo "ARG=(" >>../../maps.sh                       # on creer le fichier maps.sh qui sert de liste d'arguments (ARG)
+	ls | sed 's/^/"/;s/$/"/' >>../../maps.sh           # on le remplis avec la list du dossier et ajoute des double quotes aux extremités avec sed
+	echo '"this-map-doesnt-exist.ber"' >>../../maps.sh # ajout d'une ligne entre double quote grace au single quotes
+	echo "\"neither-this-one\"" >>../../maps.sh        # même resultat qu'au dessus mais qvec le backslash
+	echo ")" >>../../maps.sh                           # on ferme la parenthèse de la liste d'argument
+	cd ../..                                           # on revient a la racine
+	source maps.sh                                     # on source le fichier crée plus haut qui contient en ARG tous les noms des maps
 
 	for i in "${ARG[@]}"; do # on parcours la liste d'argument ARG
 		if [ $1 -eq 1 ]; then
 			echo -e "        ${vert}$i${neutre}"
-			./so_long ./maps/invalid/$i 2>&1 >/dev/null | grep ":"
+			./so_long ./maps/invalid/$i 2>&1 >/dev/null | grep ":" # 2>&1 redirige stderr (2) vers stdout (1) puis envoie stdout dans null mais garde la redirection pour le pipe de grep
 			echo -e "${bleu}-----------------------------------------------------------${neutre}"
 
 		elif [ $1 -eq 2 ]; then
@@ -92,6 +93,11 @@ EOF
 				echo -e "${rouge}   Leak [KO]${neutre}"
 			fi
 			rm tmp
+
+		elif [ $1 -eq 4 ]; then
+			echo -e "        ${vert}$i${neutre}"
+			valgrind --track-fds=yes ./so_long ./maps/invalid/$i 2>&1 >/dev/null | grep "FILE DESCRIPTOR"
+			echo -e "${bleu}-----------------------------------------------------------${neutre}"
 
 		else
 			echo -e "${rouge}-----------------------------------------------------------"
