@@ -17,14 +17,16 @@ echo -e "███████║╚██████╔╝██████�
 echo -e "╚══════╝ ╚═════╝ ╚══════╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ "
 echo -e "${neutre}"
 
-echo -e "${bleu} ----------- ${vert}SELECT TEST ${bleu}-----------"
-echo -e "${bleu} -----------------------------------"
-echo -e "${bleu} ---- ${vert}Invalid Maps : Type I/i ${bleu}------"
-echo -e "${bleu} -----------------------------------"
-echo -e "${bleu} ------ ${vert}Valid Maps : Type V/v ${bleu}------"
-echo -e "${bleu} -----------------------------------"
+echo -e "${bleu} ---------------------- ${vert}SELECT TEST ${bleu}----------------------"
+echo -e "${bleu}-----------------------------------------------------------${neutre}"
+echo -e "${bleu} --------------- ${vert}Invalid Maps : Type I/i ${bleu}-----------------"
+echo -e "${bleu}-----------------------------------------------------------${neutre}"
+echo -e "${bleu} ----------------- ${vert}Valid Maps : Type V/v ${bleu}-----------------"
+echo -e "${bleu}-----------------------------------------------------------${neutre}"
+echo -e "${bleu} -------------------- ${vert}All : Type A/a ${bleu}---------------------"
+echo -e "${bleu}-----------------------------------------------------------${neutre}"
 echo -e "${vert}"
-read -p "                [v/i]" rep
+read -p "                [v/i/a]" rep
 case $rep in
 V)
 	mode=1
@@ -38,11 +40,17 @@ I)
 i)
 	mode=2
 	;;
-*)
+A)
 	mode=3
 	;;
+a)
+	mode=3
+	;;
+*)
+	mode=4
+	;;
 esac
-if [ $mode -eq 1 ]; then
+if [ $mode -eq 1 ] || [ $mode -eq 3 ]; then
 	make 2>/dev/null >/dev/null              # make et stdout et stderr redirigé vers null cad empeche l'affichage
 	cd maps/valid                            # on se déplace dans le fichier des maps non valides
 	echo "ARG=(" >>../../maps.sh             # on creer le fichier maps.sh qui sert de liste d'arguments (ARG)
@@ -91,7 +99,8 @@ if [ $mode -eq 1 ]; then
 	done
 	rm maps.sh # on efface le fichier maps.sh
 	make fclean >/dev/null
-elif [ $mode -eq 2 ]; then
+fi
+if [ $mode -eq 2 ] || [ $mode -eq 3 ]; then
 	make 2>/dev/null >/dev/null                           # make et stdout et stderr redirigé vers null cad empeche l'affichage
 	cd maps/invalid                                       # on se déplace dans le fichier des maps non valides
 	chmod 000 dir-no-permission.ber map-no-permission.ber # supprime toutes les permissions des maps et maps/dir pour les tests
