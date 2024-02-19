@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:27:07 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/19 12:10:58 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:11:38 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	check_map_char(char *line)
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'P' && line[i] != 'E'
 			&& line[i] != 'C' && line[i] != 'M' && line[i] != '\n')
-			return (ft_error('l'), 1);
+			return (1);
 		i++;
 	}
 	return (0);
