@@ -116,6 +116,23 @@ elif [ $mode -eq 3 ]; then
 		"3+3"
 		"42 42"
 		"42 -42 -42 "
+		"4222-4222"
+		"99999999999999999999999999"
+		"-99999999999999999999999999"
+		"0 -0 1 -1"
+		"0 +0 1 -1"
+		"111+111 -4 3"
+		"-"
+		"+"
+		"--123 1 321"
+		"++123 1 321"
+		"0000000000000000000000009 000000000000000000000009"
+		"00000001 1 9 3"
+		"00000003 003 9 1"
+		"--21345"
+		"1 01"
+		"-000 -0000"
+		"-00042 -000042"
 	)
 	printf ${BLUE}"\n-------------------------------------------------------------\n"${DEF_COLOR}
 	printf ${BLUE}"\n\t\t\tCONTROL ERRORS\t\n"${DEF_COLOR}
@@ -152,5 +169,80 @@ elif [ $mode -eq 3 ]; then
 		printf "${RED}$n.[KO] ${DEF_COLOR}\n"
 	fi
 	rm -rf test_check.txt
+	rm -rf 0
+	ARG2=(
+		"2 1"
+		"1 3 2"
+		"2 3 1"
+		"2 1 3"
+		"3 1 2"
+		"3 2 1"
+	)
+	n=1
+	for i in "${ARG2[@]}"; do # on parcours la liste d'argument ARG
+		N=$(./push_swap $i | wc -l)
+		if [ $N -lt 4 ]; then
+			printf "${GREEN}$n.[OK] ${DEF_COLOR}"
+		else
+			printf "${RED}$n.[KO]${DEF_COLOR}"
+			printf "${WHITE} TEST: "
+			echo -n "$ARG "
+		fi
+		((n = n + 1))
+		S=$(./push_swap $i | ./checker_linux $ARG)
+		if [ $S == "OK" ]; then
+			printf "${GREEN}$n.[OK] ${DEF_COLOR}"
+		else
+			printf "${RED}$n.[KO]${DEF_COLOR}"
+		fi
+		rm -rf test_check.txt
+		rm -rf 0
+		((n = n + 1))
+	done
+	ARG3=(
+		"1 2 4 3"
+		"1 3 2 4"
+		"1 3 4 2"
+		"1 4 3 2"
+		"1 4 2 3"
+		"2 3 4 1"
+		"2 4 3 1"
+		"2 1 4 3"
+		"2 1 3 4"
+		"2 3 1 4"
+		"2 4 1 3"
+		"3 4 1 2"
+		"3 4 2 1"
+		"3 2 1 4"
+		"3 1 2 4"
+		"3 1 2 4"
+		"3 2 4 1"
+		"3 1 4 2"
+		"4 1 2 3"
+		"4 1 3 2"
+		"4 2 1 3"
+		"4 2 3 1"
+		"4 3 1 2"
+		"4 3 2 1"
+	)
+	for i in "${ARG3[@]}"; do # on parcours la liste d'argument ARG
+		N=$(./push_swap $i | wc -l)
+		if [ $N -lt 13 ]; then
+			printf "${GREEN}$n.[OK] ${DEF_COLOR}"
+		else
+			printf "${RED}$n.[KO]${DEF_COLOR}"
+			printf "${WHITE} TEST: "
+			echo -n "$ARG "
+		fi
+
+		((n = n + 1))
+		S=$(./push_swap $i | ./checker_linux $ARG)
+		if [ $S == "OK" ]; then
+			printf "${GREEN}$n.[OK] ${DEF_COLOR}"
+		else
+			printf "${RED}$n.[KO]${DEF_COLOR}"
+		fi
+		((n = n + 1))
+	done
 	make fclean >/dev/null
 fi
