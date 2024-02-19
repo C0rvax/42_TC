@@ -168,6 +168,7 @@ elif [ $mode -eq 3 ]; then
 	else
 		printf "${RED}$n.[KO] ${DEF_COLOR}\n"
 	fi
+	((n = n + 1))
 	rm -rf test_check.txt
 	rm -rf 0
 	ARG2=(
@@ -178,7 +179,11 @@ elif [ $mode -eq 3 ]; then
 		"3 1 2"
 		"3 2 1"
 	)
-	n=1
+
+	printf ${BLUE}"\n-------------------------------------------------------------\n"${DEF_COLOR}
+	printf ${BLUE}"\n\t\t\tBasic input\t\t\n"${DEF_COLOR}
+	printf ${BLUE}"\n-------------------------------------------------------------\n\n"${DEF_COLOR}
+
 	for i in "${ARG2[@]}"; do # on parcours la liste d'argument ARG
 		N=$(./push_swap $i | wc -l)
 		if [ $N -lt 4 ]; then
@@ -225,6 +230,7 @@ elif [ $mode -eq 3 ]; then
 		"4 3 1 2"
 		"4 3 2 1"
 	)
+
 	for i in "${ARG3[@]}"; do # on parcours la liste d'argument ARG
 		N=$(./push_swap $i | wc -l)
 		if [ $N -lt 13 ]; then
@@ -235,6 +241,61 @@ elif [ $mode -eq 3 ]; then
 			echo -n "$ARG "
 		fi
 
+		((n = n + 1))
+		S=$(./push_swap $i | ./checker_linux $ARG)
+		if [ $S == "OK" ]; then
+			printf "${GREEN}$n.[OK] ${DEF_COLOR}"
+		else
+			printf "${RED}$n.[KO]${DEF_COLOR}"
+		fi
+		((n = n + 1))
+	done
+
+	ARG4=(
+		ARG="1 2 3 5 4"
+		ARG="1 2 4 3 5"
+		ARG="1 2 4 5 3"
+		ARG="1 2 5 3 4"
+		ARG="1 2 5 4 3"
+		ARG="1 3 2 4 5"
+		ARG="1 3 2 5 4"
+		ARG="1 3 4 2 5"
+		ARG="1 3 4 5 2"
+		ARG="1 3 5 2 4"
+		ARG="1 3 5 4 2"
+		ARG="1 4 2 3 5"
+		ARG="1 4 2 5 3"
+		ARG="1 4 3 2 5"
+		ARG="1 4 3 5 2"
+		ARG="1 4 5 2 3"
+		ARG="1 4 5 3 2"
+		ARG="1 5 2 3 4"
+		ARG="1 5 2 4 3"
+		ARG="1 5 3 2 4"
+		ARG="1 5 3 4 2"
+		ARG="1 5 3 4 2"
+		ARG="1 5 4 2 3"
+		ARG="1 5 4 3 2"
+		ARG="2 1 3 4 5"
+		ARG="2 1 3 5 4"
+		ARG="2 1 4 3 5"
+		ARG="2 1 4 5 3"
+		ARG="2 1 5 3 4"
+		ARG="2 1 5 4 3"
+	)
+	printf ${BLUE}"\n\n-------------------------------------------------------------\n\n"${DEF_COLOR}
+	printf ${BLUE}"\n\t\t\tSize 5\t\t\n"${DEF_COLOR}
+	printf ${BLUE}"\n-------------------------------------------------------------\n\n"${DEF_COLOR}
+
+	for i in "${ARG4[@]}"; do # on parcours la liste d'argument ARG
+		N=$(./push_swap $i | wc -l)
+		if [ $N -lt 13 ]; then
+			printf "${GREEN}$n.[OK] ${DEF_COLOR}"
+		else
+			printf "${RED}$n.[KO]${DEF_COLOR}"
+			printf "${WHITE} TEST: "
+			echo -n "$ARG "
+		fi
 		((n = n + 1))
 		S=$(./push_swap $i | ./checker_linux $ARG)
 		if [ $S == "OK" ]; then

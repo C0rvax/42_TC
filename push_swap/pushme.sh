@@ -7,6 +7,16 @@ bleu='\e[1;34m'
 violet='\e[1;35m'
 vert='\e[1;32m'
 neutre='\e[0;m'
+DEF_COLOR='\033[0;39m'
+BLACK='\033[0;30m'
+RED='\033[1;91m'
+GREEN='\033[1;92m'
+YELLOW='\033[0;93m'
+BLUE='\033[0;94m'
+MAGENTA='\033[0;95m'
+CYAN='\033[0;96m'
+GRAY='\033[0;90m'
+WHITE='\033[0;97m'
 
 echo -e "${bleu} ----------- ${vert}SELECT MODE ${bleu}-----------"
 echo -e "${bleu} -----------------------------------"
@@ -74,19 +84,6 @@ elif [ $mode -eq 2 ]; then
 	make fclean >/dev/null
 
 elif [ $mode -eq 3 ]; then
-
-	# -=-=-=-=-	CLRS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
-
-	DEF_COLOR='\033[0;39m'
-	BLACK='\033[0;30m'
-	RED='\033[1;91m'
-	GREEN='\033[1;92m'
-	YELLOW='\033[0;93m'
-	BLUE='\033[0;94m'
-	MAGENTA='\033[0;95m'
-	CYAN='\033[0;96m'
-	GRAY='\033[0;90m'
-	WHITE='\033[0;97m'
 
 	printf ${BLUE}"\n-------------------------------------------------------------\n"${DEF_COLOR}
 	printf ${YELLOW}"\n\t\tTEST CREATED BY: "${DEF_COLOR}
