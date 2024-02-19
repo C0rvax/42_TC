@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 17:27:15 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/16 16:41:39 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/19 12:11:20 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ char	**init_map(char *ber, t_data *game);
 int		check_wall(t_data *game);
 int		check_ext(char *file, char *ext);
 int		is_a_directory(char *ber);
-int		check_map_char(char *line, char **map);
+int		check_map_char(char *line);
+int		is_no_empty_line(char *line);
 int		display(t_data *game);
 int		input_key(int keysym, t_data *game);
 void	check_exit(t_data *game);
