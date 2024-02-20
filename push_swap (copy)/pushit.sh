@@ -648,5 +648,6 @@ elif [ $mode -eq 3 ]; then
 	if [ $res_1 != $val ]; then
 		printf "${CYAN}\nCheck traces $PWD/traces.txt\n"
 	fi
+	rm -rf 0
 	make fclean >/dev/null
 fi

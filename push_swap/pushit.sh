@@ -18,16 +18,27 @@ CYAN='\033[0;96m'
 GRAY='\033[0;90m'
 WHITE='\033[0;97m'
 
-echo -e "${bleu} ----------- ${vert}SELECT MODE ${bleu}-----------"
-echo -e "${bleu} -----------------------------------"
-echo -e "${bleu} ---- ${vert}Tests em Mass : Type M/m ${bleu}-----"
-echo -e "${bleu} -----------------------------------"
-echo -e "${bleu} ----- ${vert}Test Général : Type G/g ${bleu}-----"
-echo -e "${bleu} -----------------------------------"
-echo -e "${bleu} ------ ${vert}Visualizer : Type V/v ${bleu}------"
-echo -e "${bleu} -----------------------------------"
+echo -e "${bleu}"
+echo -e "██████╗ ██╗   ██╗███████╗██╗  ██╗    ██╗████████╗"
+echo -e "██╔══██╗██║   ██║██╔════╝██║  ██║    ██║╚══██╔══╝"
+echo -e "██████╔╝██║   ██║███████╗███████║    ██║   ██║   "
+echo -e "██╔═══╝ ██║   ██║╚════██║██╔══██║    ██║   ██║   "
+echo -e "██║     ╚██████╔╝███████║██║  ██║    ██║   ██║   "
+echo -e "╚═╝      ╚═════╝ ╚══════╝╚═╝  ╚═╝    ╚═╝   ╚═╝   "
+echo -e "${neutre}"
+
+echo -e "${bleu} ---------------------- ${vert}SELECT TEST ${bleu}----------------------"
+echo -e "${bleu}-----------------------------------------------------------${neutre}"
+echo -e "${bleu} --------------- ${vert}Test Général : Type G/g ${bleu}-----------------"
+echo -e "${bleu}-----------------------------------------------------------${neutre}"
+echo -e "${bleu} ----------------- ${vert}Mass Tests : Type M/m ${bleu}-----------------"
+echo -e "${bleu}-----------------------------------------------------------${neutre}"
+echo -e "${bleu} ----------------- ${vert}Visualizer : Type V/v ${bleu}-----------------"
+echo -e "${bleu}-----------------------------------------------------------${neutre}"
+echo -e "${bleu} -------------------- ${vert}All : Type A/a ${bleu}---------------------"
+echo -e "${bleu}-----------------------------------------------------------${neutre}"
 echo -e "${vert}"
-read -p "                [m/g/v]" rep
+read -p "                [m/g/v/a]" rep
 echo -e "${bleu}"
 case $rep in
 M)
@@ -48,12 +59,18 @@ G)
 g)
 	mode=3
 	;;
-*)
+A)
 	mode=4
+	;;
+a)
+	mode=4
+	;;
+*)
+	mode=5
 	;;
 esac
 
-if [ $mode -eq 1 ]; then
+if [ $mode -eq 1 ] || [ $mode -eq 4 ]; then
 
 	# set best scores limits
 	lim3=3
@@ -65,16 +82,16 @@ if [ $mode -eq 1 ]; then
 	cd push_swap_tester
 	make >/dev/null
 
-	./complexity 3 500 $lim3
-	./complexity 5 500 $lim5
-	./complexity 100 500 $lim100
-	./complexity 500 100 $lim500
+	./complexity 3 500 $lim3 ../checker_linux
+	./complexity 5 500 $lim5 ../checker_linux
+	./complexity 100 500 $lim100 ../checker_linux
+	./complexity 500 100 $lim500 ../checker_linux
 
 	make fclean >/dev/null
 	cd ..
 	make fclean >/dev/null
-
-elif [ $mode -eq 2 ]; then
+fi
+if [ $mode -eq 2 ] || [ $mode -eq 4 ]; then
 
 	make >/dev/null
 	cd push_swap_visualizer/build/
@@ -82,7 +99,8 @@ elif [ $mode -eq 2 ]; then
 	cd ../..
 
 	make fclean >/dev/null
-elif [ $mode -eq 3 ]; then
+fi
+if [ $mode -eq 3 ] || [ $mode -eq 4 ]; then
 
 	make >/dev/null
 	rm -rf traces.txt
@@ -648,6 +666,91 @@ elif [ $mode -eq 3 ]; then
 	if [ $res_1 != $val ]; then
 		printf "${CYAN}\nCheck traces $PWD/traces.txt\n"
 	fi
+
+	printf ${BLUE}"\n-------------------------------------------------------------\n\n"${DEF_COLOR}
+	printf ${BLUE}"\n\t\t  Order nums\t\t\n"${DEF_COLOR}
+	printf ${BLUE}"\n-------------------------------------------------------------\n\n"${DEF_COLOR}
+
+	ARG5=(
+		""
+		"1 2 3 4 5 6 7 8 9"
+		"1 2 3"
+		"1"
+		"0 1 2 3 4"
+		"1 2"
+		"1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30"
+		"6 7 8"
+		"2147483645 2147483646 2147483647"
+		"-2147483648 -2147483647 -2147483646"
+		"1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50"
+		"1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77"
+	)
+	n=1
+	for i in "${ARG5[@]}"; do # on parcours la liste d'argument ARG
+		N=$(./push_swap $i | wc -l)
+		if [ $N -eq 0 ]; then
+			printf "${GREEN}$n. [OK]${DEF_COLOR}"
+		else
+			printf "${RED}$n. [KO]${DEF_COLOR}"
+		fi
+		R=$(valgrind --log-fd=1 ./push_swap $i | grep -Ec 'no leaks are possible|ERROR SUMMARY: 0')
+		if [[ $R == 2 ]]; then
+			printf "${GREEN}[MOK] ${DEF_COLOR}\n"
+		else
+			printf "${RED} [KO LEAKS] ${DEF_COLOR}\n"
+		fi
+		((n = n + 1))
+	done
+
+	printf ${BLUE}"\n-------------------------------------------------------------\n\n"${DEF_COLOR}
+	printf ${BLUE}"\n\t\t  Random test with big nums\t\t\n"${DEF_COLOR}
+	printf ${BLUE}"\n-------------------------------------------------------------\n\n"${DEF_COLOR}
+
+	ARG6=(
+		"puts (-2147483648..-2147483149).to_a.shuffle.join(' ')"
+		"puts (-2147483648..-2147483149).to_a.shuffle.join(' ')"
+		"puts (0..499).to_a.shuffle.join(' ')"
+		"puts (0..499).to_a.shuffle.join(' ')"
+		"puts (0..498).to_a.shuffle.join(' ')"
+		"puts (0..498).to_a.shuffle.join(' ')"
+		"puts (0..497).to_a.shuffle.join(' ')"
+		"puts (0..497).to_a.shuffle.join(' ')"
+		"puts (-1..498).to_a.shuffle.join(' ')"
+		"puts (5000..5499).to_a.shuffle.join(' ')"
+		"puts (50000..50499).to_a.shuffle.join(' ')"
+		"puts (500000..500499).to_a.shuffle.join(' ')"
+		"puts (5000000..5000499).to_a.shuffle.join(' ')"
+		"puts (50000000..50000499).to_a.shuffle.join(' ')"
+		"puts (500000000..500000499).to_a.shuffle.join(' ')"
+		"puts (0..450).to_a.shuffle.join(' ')"
+		"puts (250..720).to_a.shuffle.join(' ')"
+		"puts (10000..10460).to_a.shuffle.join(' ')"
+		"puts (100..250).to_a.shuffle.join(' ')"
+		"puts (90000..90460).to_a.shuffle.join(' ')"
+		"puts (-500..-9).to_a.shuffle.join(' ')"
+		"puts (-50000..-49510).to_a.shuffle.join(' ')"
+	)
+	for i in "${ARG6[@]}"; do # on parcours la liste d'argument ARG
+		TMP=$(ruby -e "$i")
+		N=$(./push_swap $TMP | wc -l)
+		if [ $N -lt 5500 ]; then
+			printf "${GREEN}[OK][5/5]${DEF_COLOR}"
+		elif [ $N -gt 5500 ] && [ $N -lt 7000 ]; then
+			printf "${YELLOW}[OK][4/5]${DEF_COLOR}"
+		elif [ $N -gt 7000 ] && [ $N -lt 8500 ]; then
+			printf "${RED}[KO][3/5]${DEF_COLOR}"
+		elif [ $N -gt 8500 ] && [ $N -lt 10000 ]; then
+			printf "${RED}[KO][2/5]${DEF_COLOR}"
+		elif [ $N -gt 11500 ]; then
+			printf "${RED}[KO][1/5]${DEF_COLOR}"
+		fi
+		S=$(./push_swap $TMP | ./checker_linux $TMP)
+		if [ $S == "OK" ]; then
+			printf "${GREEN} [OK]${DEF_COLOR}\n"
+		else
+			printf "${RED} [KO]${DEF_COLOR}\n"
+		fi
+	done
 	rm -rf 0
 	make fclean >/dev/null
 fi
