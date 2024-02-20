@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:33:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/20 16:20:54 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:19:35 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,12 +139,15 @@ static void	push_in_b(t_data *a, t_data *b)
 	int	val;
 
 	med = (a->max - a->min) / 2;
+	ft_printf("med : %d\n", med);
 	while (a->size > 3)
 	{
 		val = a->list->content;
+		ft_printf("val : %d\n", val);
 		exec_push(ft_printf("pb\n"), a, b);
-		if (val >= med)
+		if (val >= med && b->size > 1)
 			rotate_list(&b->list, &a->list, 1, 3);
+		ft_printf("val : %d\n", val);
 	}
 }
 
