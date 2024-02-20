@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/17 15:00:11 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:07:25 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	rotate_list(t_lst **first, t_lst **sec, int i, int mode);
 int		cost_max_min(int i, int j);
 void	check_cost_up(t_data *a, t_data *b, int *rota, int *rotb, int *cost);
 void	check_cost_down(t_data *a, t_data *b, int *rota, int *rotb, int *cost);
-void	all_in_b(t_data *a, t_data *b);
+void	all_in_a(t_data *a, t_data *b);
 int		find_in_b(t_data *b, int acontent);
 void	rotate_list_mute(t_lst **first, t_lst **sec, int i, int mode);
 int		exec_push(int print, t_data *in, t_data *out);

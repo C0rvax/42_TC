@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:39:53 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/17 22:36:50 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:34:39 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,21 @@ void	check_cost_up(t_data *a, t_data *b, int *rota, int *rotb, int *cost)
 
 
 	i = 0;
-	lst = a->list;
-	while (i <= a->size)
+	lst = b->list;
+	if (b->size < 2)
 	{
-		j = find_in_b(b, lst->content);
+		*rotb = 0;
+		*rota = find_in_a(a, lst->content);
+		*cost = cost_max_min(*rota, *rotb);
+		return ;
+	}
+	while (i <= b->size)
+	{
+		j = find_in_a(a, lst->content);
 		if (cost_max_min(i, j) < *cost)
 		{
-			*rota = i;
-			*rotb = j;
+			*rotb = i;
+			*rota = j;
 			*cost = cost_max_min(i, j);
 		}
 		i++;
@@ -94,14 +101,14 @@ void	check_cost_down(t_data *a, t_data *b, int *rota, int *rotb, int *cost)
 	t_lst	*lst;
 
 	i = -1;
-	lst = a->list->prev;
+	lst = b->list->prev;
 	while (i >= -*cost)
 	{
-		j = find_in_b(b, lst->content);
+		j = find_in_a(a, lst->content);
 		if (cost_max_min(i, j) < *cost)
 		{
-			*rota = i;
-			*rotb = j;
+			*rotb = i;
+			*rota = j;
 			*cost = cost_max_min(i, j);
 		}
 		i--;
@@ -117,15 +124,24 @@ int	get_max_min(int i, int j)
 		return (j);
 }
 
-void	all_in_b(t_data *a, t_data *b)
+void	all_in_a(t_data *a, t_data *b)
 {
 	int	rota;
 	int	rotb;
 	int	cost;
 
 	cost = a->size / 2 + b->size / 2;
-	check_cost_up(a, b, &rota, &rotb, &cost);
-	check_cost_down(a, b, &rota, &rotb, &cost);
+	if (b->size < 2)
+	{
+		rota = 0;
+		rotb = find_in_a(a , b->list->content);
+		cost = cost_max_min(rota, rotb);
+	}
+	else
+	{
+		check_cost_up(a, b, &rota, &rotb, &cost);
+		check_cost_down(a, b, &rota, &rotb, &cost);
+	}
 	if ((rota >= 0 && rotb < 0) || (rota < 0 && rotb >=0))
 	{
 		rotate_list(&a->list, &b->list, rota, 1);
