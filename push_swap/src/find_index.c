@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:39:53 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/20 16:34:39 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/21 02:46:36 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	check_cost_up(t_data *a, t_data *b, int *rota, int *rotb, int *cost)
 		*cost = cost_max_min(*rota, *rotb);
 		return ;
 	}
-	while (i <= b->size)
+	while (i < b->size)
 	{
 		j = find_in_a(a, lst->content);
 		if (cost_max_min(i, j) < *cost)
@@ -102,7 +102,7 @@ void	check_cost_down(t_data *a, t_data *b, int *rota, int *rotb, int *cost)
 
 	i = -1;
 	lst = b->list->prev;
-	while (i >= -*cost)
+	while (i >= -*cost && i >= -b->size)
 	{
 		j = find_in_a(a, lst->content);
 		if (cost_max_min(i, j) < *cost)
@@ -130,11 +130,11 @@ void	all_in_a(t_data *a, t_data *b)
 	int	rotb;
 	int	cost;
 
-	cost = a->size / 2 + b->size / 2;
+	cost = a->size + b->size ;
 	if (b->size < 2)
 	{
-		rota = 0;
-		rotb = find_in_a(a , b->list->content);
+		rotb = 0;
+		rota = find_in_a(a , b->list->content);
 		cost = cost_max_min(rota, rotb);
 	}
 	else

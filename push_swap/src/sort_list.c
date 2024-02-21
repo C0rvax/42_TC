@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:33:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/20 17:19:35 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/21 02:43:33 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,29 +139,31 @@ static void	push_in_b(t_data *a, t_data *b)
 	int	val;
 
 	med = (a->max - a->min) / 2;
-	ft_printf("med : %d\n", med);
 	while (a->size > 3)
 	{
 		val = a->list->content;
-		ft_printf("val : %d\n", val);
 		exec_push(ft_printf("pb\n"), a, b);
 		if (val >= med && b->size > 1)
 			rotate_list(&b->list, &a->list, 1, 3);
-		ft_printf("val : %d\n", val);
 	}
 }
 
 static void	sort_big(t_data *a, t_data *b)
 {
 	int	i;
+//	int	min;
 
 	i = 0;
+	set_list_max(a);
 	push_in_b(a, b);
 	sort_3(a);
 	while (b->size)
 	{
 		all_in_a(a, b);
+//		min = a->min;
 		exec_push(ft_printf("pa\n"), b, a);
+//		if (min != a->min)
+//			rotate_list(&a->list, &b->list, -1, 1);
 	}
 	i = find_content(a, a->min);
 	rotate_list(&a->list, &b->list, i, 1);
