@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:33:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/21 12:34:10 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:53:59 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	push_in_b(t_data *a, t_data *b)
 	int	med;
 	int	val;
 
-	med = (a->max - a->min) / 2;
+	med = get_med(a, a->min, a->max);
 	while (a->size > 3)
 	{
 		val = a->list->content;

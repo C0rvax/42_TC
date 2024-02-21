@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/21 12:39:08 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:50:14 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int		find_in_b(t_data *b, int acontent);
 void	rotate_list_mute(t_lst **first, t_lst **sec, int i, int mode);
 int		exec_push(int print, t_data *in, t_data *out);
 t_lst	*ft_listnew(int content);
+int		get_med(t_data *data, int min, int max);
 void	ft_listclear(t_data *data);
 void	ft_listadd_front(t_data *data, t_lst *new);
 void	print_list(t_data *data);
