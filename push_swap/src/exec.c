@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_one.c                                         :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 22:24:05 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/21 11:11:28 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:42:40 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,46 @@ int	exec_swap(int p, t_data *data)
 	return (p);
 }
 
-int	exec_rotate(int p, t_lst **list)
+static int	exec_rotate(int p, t_lst **list)
 {
 	if (p == 3)
 		*list = (*list)->next;
 	else
 		*list = (*list)->prev;
 	return (p);
+}
+
+void	rotate_list(t_lst **first, t_lst **sec, int i, int mode)
+{
+	if (i < 0)
+	{
+		i *= -1;
+		while (i > 0)
+		{
+			if (mode == 2)
+				exec_rotate(ft_printf("rrr\n"), sec);
+			else if (mode == 3)
+				ft_printf("rrb\n");
+			else
+				ft_printf("rra\n");
+			exec_rotate(4, first);
+			i--;
+		}
+	}
+	else
+	{
+		while (i > 0)
+		{
+			if (mode == 2)
+				exec_rotate(ft_printf("rr\n"), sec);
+			else if (mode == 3)
+				ft_printf("rb\n");
+			else
+				ft_printf("ra\n");
+			exec_rotate(3, first);
+			i--;
+		}
+	}
 }
 
 static t_lst	*extract_from_list(t_data *data)
@@ -83,3 +116,29 @@ int	exec_push(int p, t_data *in, t_data *out)
 		set_list_max(out);
 	return (p);
 }
+/*
+void	rotate_list_mute(t_lst **first, t_lst **sec, int i, int mode)
+{
+	if (i < 0)
+	{
+		i *= -1;
+		while (i > 0)
+		{
+			if (mode == 2)
+				exec_rotate(4, sec);
+			exec_rotate(4 , first);
+			i--;
+		}
+	}
+	else
+	{
+		while (i > 0)
+		{
+			if (mode == 2)
+				exec_rotate(3, sec);
+			exec_rotate(3, first);
+			i--;
+		}
+	}
+}
+*/
