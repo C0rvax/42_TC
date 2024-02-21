@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:53:41 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/20 17:20:39 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:04:18 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ void	set_list_max(t_data *data)
 	}
 }
 
+void	set_pointers_to_null(t_lst **p1, t_lst **p2)
+{
+	*p1 = NULL;
+	*p2 = NULL;
+}
+
+void	set_2p(t_lst **p1, t_lst *p2, t_lst **pt1, t_lst *pt2)
+{
+	*p1 = p2;
+	*pt1 = pt2;
+}
 void	print_list(t_data *data)
 {
 	int	i;

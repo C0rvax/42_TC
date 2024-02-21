@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/20 16:07:25 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:17:02 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int		*check_list(char **av, int size);
 void	sort_list(t_data *a, t_data *b);
 int		exec_swap(int print, t_data *data);
 int		exec_rotate(int print, t_lst **list);
-int		exec_reverse(int print, int *stack, int size);
-t_lst	*extract_from_list(t_data *data);
 int		find_in_a(t_data *a, int bcontent);
 int		find_content(t_data *data, int value);
 int		check_cost(t_data *in, t_data *out);
@@ -58,4 +56,5 @@ void	ft_listclear(t_data *data);
 void	ft_listadd_front(t_data *data, t_lst *new);
 void	print_list(t_data *data);
 void	set_list_max(t_data *data);
+void	set_2p(t_lst **p1, t_lst *p2, t_lst **pt1, t_lst *pt2);
 #endif
