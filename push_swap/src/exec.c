@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 22:24:05 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/21 17:46:16 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/23 00:03:43 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,21 @@ int	exec_push(int p, t_data *in, t_data *out)
 	if (node->content > out->max || node->content < out->min)
 		set_list_max(out);
 	return (p);
+}
+
+void	push_in_b(t_data *a, t_data *b)
+{
+	int	med;
+	int	val;
+
+	med = get_med(a, a->min, a->max);
+	while (a->size > 3)
+	{
+		val = a->list->content;
+		exec_push(ft_printf("pb\n"), a, b);
+		if (val >= med && b->size > 1)
+			rotate_list(&b->list, &a->list, 1, 3);
+	}
 }
 /*
 void	rotate_list_mute(t_lst **first, t_lst **sec, int i, int mode)

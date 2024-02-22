@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:33:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/22 23:26:56 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/23 00:17:34 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,7 @@ static void	sort_5(t_data *a, t_data *b)
 	rotate_list(&a->list, &b->list, i, 1);
 }
 
-static void	push_in_b(t_data *a, t_data *b)
-{
-	int	med;
-	int	val;
-
-	med = get_med(a, a->min, a->max);
-	while (a->size > 3)
-	{
-		val = a->list->content;
-		exec_push(ft_printf("pb\n"), a, b);
-		if (val >= med && b->size > 1)
-			rotate_list(&b->list, &a->list, 1, 3);
-	}
-}
-
-static void	sort_big(t_data *a, t_data *b)
+static void	sort_500(t_data *a, t_data *b)
 {
 	int	i;
 
@@ -92,6 +77,33 @@ static void	sort_big(t_data *a, t_data *b)
 	rotate_list(&a->list, &b->list, i, 1);
 }
 
+static void	sort_100(t_data *a, t_data *b)
+{
+	int	i;
+	int	min;
+
+	i = 0;
+	exec_push(ft_printf("pb\n"), a, b);
+	exec_push(ft_printf("pb\n"), a, b);
+	while (a->size > 3)
+	{
+		all_in_b(a, b);
+		min = b->min;
+		exec_push(ft_printf("pb\n"), a, b);
+		if (b->min != min)
+			rotate_list(&b->list, &a->list, 1, 3);
+	}
+	sort_3(a);
+	while (b->size)
+	{
+		i = find_in_a(a, b->list->content);
+		rotate_list(&a->list, &b->list, i, 1);
+		exec_push(ft_printf("pa\n"), b, a);
+	}
+	i = find_content(a, a->min);
+	rotate_list(&a->list, &b->list, i, 1);
+}
+
 void	sort_list(t_data *a, t_data *b)
 {
 	if (u_never_know(a))
@@ -102,6 +114,9 @@ void	sort_list(t_data *a, t_data *b)
 		sort_3(a);
 	else if (a->size <= 5)
 		sort_5(a, b);
+	else if (a->size <= 100)
+		sort_100(a, b);
+//		sort_500(a, b);
 	else
-		sort_big(a, b);
+		sort_500(a, b);
 }
