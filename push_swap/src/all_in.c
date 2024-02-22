@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   all_in.c                                           :+:      :+:    :+:   */
+/*   all_in2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:03:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/21 12:39:06 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/22 23:32:29 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,95 +43,51 @@ static int	cost_max_min(int i, int j)
 		return (j);
 }
 
-static void	check_cost_up(t_data *a, t_data *b, int *rota, int *rotb, int *cost)
+static void	check_cost(t_data *a, t_data *b, int *cost)
 {
 	int		i;
 	int		j;
 	t_lst	*lst;
 
-	i = 0;
 	lst = b->list;
-	if (b->size < 2)
-	{
-		*rotb = 0;
-		*rota = find_in_a(a, lst->content);
-		*cost = cost_max_min(*rota, *rotb);
-		return ;
-	}
-	while (i < b->size)
+	i = -1;
+	while (++i < b->size / 2)
+		lst = lst->prev;
+	i = -(b->size / 2);
+	while (i < ((b->size / 2) + 1))
 	{
 		j = find_in_a(a, lst->content);
-		if (cost_max_min(i, j) < *cost)
+		if (cost_max_min(i, j) < cost[0])
 		{
-			*rotb = i;
-			*rota = j;
-			*cost = cost_max_min(i, j);
+			cost[1] = i;
+			cost[2] = j;
+			cost[0] = cost_max_min(i, j);
 		}
 		i++;
 		lst = lst->next;
 	}
 }
 
-static void	check_cost_down(t_data *a, t_data *b, int *rota, int *rotb, int *cost)
-{
-	int		i;
-	int		j;
-	t_lst	*lst;
-
-	i = -1;
-	lst = b->list->prev;
-	while (i >= -*cost && i >= -b->size)
-	{
-		j = find_in_a(a, lst->content);
-		if (cost_max_min(i, j) < *cost)
-		{
-			*rotb = i;
-			*rota = j;
-			*cost = cost_max_min(i, j);
-		}
-		i--;
-		lst = lst->prev;
-	}
-}
-
 void	all_in_a(t_data *a, t_data *b)
 {
-	int	rota;
-	int	rotb;
-	int	cost;
+	int	*cost;
 
-	cost = a->size + b->size ;
-	if (b->size < 2)
+	cost = malloc(sizeof(int) * 3);
+	cost[0] = a->size + b->size ;
+	check_cost(a, b, cost);
+	if ((cost[2] >= 0 && cost[1] < 0) || (cost[2] < 0 && cost[1] >= 0))
 	{
-		rotb = 0;
-		rota = find_in_a(a, b->list->content);
-		cost = cost_max_min(rota, rotb);
+		rotate_list(&a->list, &b->list, cost[2], 1);
+		rotate_list(&b->list, &a->list, cost[1], 3);
 	}
 	else
 	{
-		check_cost_up(a, b, &rota, &rotb, &cost);
-		check_cost_down(a, b, &rota, &rotb, &cost);
-	}
-	if ((rota >= 0 && rotb < 0) || (rota < 0 && rotb >= 0))
-	{
-		rotate_list(&a->list, &b->list, rota, 1);
-		rotate_list(&b->list, &a->list, rotb, 3);
-	}
-	else
-	{
-		cost = get_max_min(rotb, rota);
-		rotate_list(&a->list, &b->list, cost, 2);
-		if (cost == rotb)
-			rotate_list(&a->list, &b->list, rota - cost, 1);
+		cost[0] = get_max_min(cost[1], cost[2]);
+		rotate_list(&a->list, &b->list, cost[0], 2);
+		if (cost[0] == cost[1])
+			rotate_list(&a->list, &b->list, cost[2] - cost[0], 1);
 		else
-			rotate_list(&b->list, &b->list, rotb - cost, 3);
+			rotate_list(&b->list, &b->list, cost[1] - cost[0], 3);
 	}
+	free (cost);
 }
-/*
-		if (rota >= rotb)
-			rotate_list(&a->list, &b->list, rotb, 2);
-			rotate_list(&a->list, &b->list, rota - rotb, 1);
-		else
-			rotate_list(&a->list, &b->list, rotb, 2);
-			rotate_list(&a->list, &b->list, rota - rotb, 1);
-*/

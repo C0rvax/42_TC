@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:33:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/21 17:53:59 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/22 23:26:56 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,14 @@ static void	sort_big(t_data *a, t_data *b)
 	set_list_max(a);
 	push_in_b(a, b);
 	sort_3(a);
-	while (b->size)
+	while (b->size > 1)
 	{
 		all_in_a(a, b);
 		exec_push(ft_printf("pa\n"), b, a);
 	}
+	i = find_in_a(a, b->list->content);
+	rotate_list(&a->list, NULL, i, 1);
+	exec_push(ft_printf("pa\n"), b, a);
 	i = find_content(a, a->min);
 	rotate_list(&a->list, &b->list, i, 1);
 }
