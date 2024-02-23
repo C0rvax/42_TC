@@ -23,14 +23,14 @@ for i in "${ARG[@]}"; do # on parcours la liste d'argument ARG
 	if [ -s "$FICHERO" ]; then
 		while IFS= read -r line; do
 			if [[ $line == "Error" ]]; then
-				printf "${GREEN}$n.[OK] ${DEF_COLOR}"
+				printf "${vert}$n.[OK] ${DEF_COLOR}"
 			else
-				printf "${RED}$n.[KO] ${DEF_COLOR}"
+				printf "${rouge}$n.[KO] ${DEF_COLOR}"
 				break
 			fi
 		done <test_check.txt
 	else
-		printf "${RED}$n.[KO] ${DEF_COLOR}"
+		printf "${rouge}$n.[KO] ${DEF_COLOR}"
 	fi
 	((n = n + 1))
 	rm -rf test_check.txt
