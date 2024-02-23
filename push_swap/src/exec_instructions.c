@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:09:22 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/23 18:05:19 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:41:38 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,11 @@ void	exec_instructions(t_data *a, t_data *b)
 {
 	char	*line;
 
+	ft_printf("avant gnl\n");
 	line = get_next_line(1);
 	if (!line)
 		ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(line, 2);
 	while (line)
 	{
 		if (ft_strncmp(line, "ra", 3))
@@ -120,5 +122,6 @@ void	exec_instructions(t_data *a, t_data *b)
 		if (ft_strncmp(line, "sb", 3))
 			exec_swap(3, b);
 		line = get_next_line(1);
+		ft_printf("ici\n");
 	}
 }
