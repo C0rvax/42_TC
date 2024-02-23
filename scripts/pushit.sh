@@ -160,13 +160,14 @@ if [ $mode -eq 3 ] || [ $mode -eq 4 ]; then
 		"1 01"
 		"-000 -0000"
 		"-00042 -000042"
+		""
 	)
 	printf ${BLUE}"\n-------------------------------------------------------------\n"${DEF_COLOR}
 	printf ${BLUE}"\n\t\t\tCONTROL ERRORS\t\n"${DEF_COLOR}
 	printf ${BLUE}"\n-------------------------------------------------------------\n\n"${DEF_COLOR}
 	n=1
 	for i in "${ARG[@]}"; do # on parcours la liste d'argument ARG
-		./push_swap $i >/dev/null 2>test_check.txt
+		./push_swap "$i" >/dev/null 2>test_check.txt
 		if [ -s "$FICHERO" ]; then
 			while IFS= read -r line; do
 				if [[ $line == "Error" ]]; then
