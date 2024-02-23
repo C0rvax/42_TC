@@ -9,11 +9,14 @@ vpath %.c src/ gnl/
 SRC			= main.c check_list.c sort_list.c exec.c list.c utils.c			\
 			  find_index.c all_in.c rotate.c
 
-SRC_BONUS	= main_bonus.c check_list.c list.c rotate.c
+SRC_BONUS	= main_bonus.c check_list.c list.c rotate.c exec_instructions.c	\
+			  utils_bonus.c
 
 GNL_SRC		= get_next_line.c get_next_line_utils.c
 
 OBJ			:= $(SRC:%.c=%.o)
+
+GNL_OBJ		:= $(GNL_SRC:%.c=%.o)
 
 OBJ_BONUS	:= $(SRC_BONUS:%.c=%.o)
 
