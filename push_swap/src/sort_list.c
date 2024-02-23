@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:33:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/23 00:17:34 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:58:58 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	sort_500(t_data *a, t_data *b)
 	sort_3(a);
 	while (b->size > 1)
 	{
-		all_in_a(a, b);
+		all_in(a, b, 1);
 		exec_push(ft_printf("pa\n"), b, a);
 	}
 	i = find_in_a(a, b->list->content);
@@ -87,10 +87,10 @@ static void	sort_100(t_data *a, t_data *b)
 	exec_push(ft_printf("pb\n"), a, b);
 	while (a->size > 3)
 	{
-		all_in_b(a, b);
+		all_in(a, b, 2);
 		min = b->min;
 		exec_push(ft_printf("pb\n"), a, b);
-		if (b->min != min)
+		if (b->min != min && a->size > 4)
 			rotate_list(&b->list, &a->list, 1, 3);
 	}
 	sort_3(a);
@@ -116,7 +116,6 @@ void	sort_list(t_data *a, t_data *b)
 		sort_5(a, b);
 	else if (a->size <= 100)
 		sort_100(a, b);
-//		sort_500(a, b);
 	else
 		sort_500(a, b);
 }

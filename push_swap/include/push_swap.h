@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/23 00:03:34 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:00:59 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int		find_in_a(t_data *a, int bcontent);
 int		find_in_b(t_data *b, int acontent);
 int		find_content(t_data *data, int value);
 void	rotate_list(t_lst **first, t_lst **sec, int i, int mode);
-void	all_in_a(t_data *a, t_data *b);
-void	all_in_b(t_data *a, t_data *b);
+void	all_in(t_data *a, t_data *b, int mode);
 int		exec_swap(int print, t_data *data);
 int		exec_push(int print, t_data *in, t_data *out);
 void	push_in_b(t_data *a, t_data *b);
