@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:09:22 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/23 18:41:38 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/24 20:30:59 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,27 +88,32 @@ void	exec_instructions(t_data *a, t_data *b)
 {
 	char	*line;
 
-	ft_printf("avant gnl\n");
-	line = get_next_line(1);
+//	line = get_next_line(0);
+	line = "pb\n";
 	if (!line)
 		ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(line, 2);
+	ft_printf("line : %s\n", line);
+	ft_printf("line : %s\n", line);
 	while (line)
 	{
-		if (ft_strncmp(line, "ra", 3))
+		ft_printf("jusqu'ici tout va bien!\n");
+		if (ft_strncmp(line, "ra\n", 3))
 			exec_rotate(3, &a->list);
-		if (ft_strncmp(line, "rb", 3))
+		if (ft_strncmp(line, "rb\n", 3))
 			exec_rotate(3, &b->list);
-		if (ft_strncmp(line, "pa", 3))
-			exec_push(3, a, b);
-		if (ft_strncmp(line, "pb", 3))
+		if (ft_strncmp(line, "pa\n", 3))
 			exec_push(3, b, a);
-		if (ft_strncmp(line, "rr", 3))
+		if (ft_strncmp(line, "pb\n", 3))
+		{
+			printf("dans le comp\n");
+			exec_push(3, a, b);
+		}
+		if (ft_strncmp(line, "rr\n", 3))
 		{
 			exec_rotate(3, &b->list);
 			exec_rotate(3, &a->list);
 		}
-		if (ft_strncmp(line, "rrr", 4))
+		if (ft_strncmp(line, "rrr\n", 4))
 		{
 			exec_rotate(4, &b->list);
 			exec_rotate(4, &a->list);
@@ -121,7 +126,7 @@ void	exec_instructions(t_data *a, t_data *b)
 			exec_swap(3, a);
 		if (ft_strncmp(line, "sb", 3))
 			exec_swap(3, b);
-		line = get_next_line(1);
-		ft_printf("ici\n");
+		free(line);
+		line = get_next_line(0);
 	}
 }
