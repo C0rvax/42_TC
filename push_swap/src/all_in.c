@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:03:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/26 16:28:36 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:04:02 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,8 @@ static void	check_cost_b(t_data *a, t_data *b, int *cost)
 
 void	all_in(t_data *a, t_data *b, int mode)
 {
-	int	*cost;
+	int	cost[3];
 
-	cost = malloc(sizeof(int) * 3);
 	cost[0] = a->size + b->size ;
 	if (mode == 1)
 		check_cost_a(a, b, cost);
@@ -119,7 +118,6 @@ void	all_in(t_data *a, t_data *b, int mode)
 		else
 			rotate_list(&b->list, &b->list, cost[1] - cost[0], 3);
 	}
-	free (cost);
 }
 /*
 void	all_in_a(t_data *a, t_data *b)

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/21 11:13:50 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:56:02 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,26 @@ static void	loop_list(t_lst **a)
 	buf->next = *a;
 }
 
-static void	fill_list(t_data *a, int *buf)
+static int	fill_list(t_data *a, int *buf)
 {
 	int		i;
 	t_lst	*new;
 
 	i = a->size - 1;
 	a->list = ft_listnew(buf[i]);
+	if (!a->list)
+		return (1);
 	i--;
 	while (i >= 0)
 	{
 		new = ft_listnew(buf[i]);
+		if (!new)
+			return (ft_listclear(a), 1);
 		ft_listadd_front(a, new);
 		i--;
 	}
 	loop_list(&a->list);
+	return (0);
 }
 
 static int	init_list_a(t_data *a, int ac, char **av)
@@ -72,7 +77,8 @@ static int	init_list_a(t_data *a, int ac, char **av)
 		ft_freetab(charlist);
 	if (!buf)
 		return (0);
-	fill_list(a, buf);
+	if (fill_list(a, buf))
+		return (free(buf), ft_putstr_fd("Error\n", 2), 0);
 	free(buf);
 	set_list_max(a);
 	return (1);
