@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:16:26 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/26 13:41:42 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:28:42 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,30 +57,6 @@ int	u_never_know(t_data *a)
 		i++;
 	}
 	return (1);
-}
-
-char	*get_all_lines(int fd)
-{
-	char	*buf;
-	char	*line;
-	char	*copy;
-
-	line = ft_strdup("");
-	if (!line)
-		return (NULL);
-	while (1)
-	{
-		buf = get_next_line(fd);
-		if (!buf)
-			break ;
-		copy = line;
-		line = ft_strjoin(line, buf);
-		if (!line)
-			return (close(fd), free(buf), free(copy), NULL);
-		free(copy);
-		free(buf);
-	}
-	return (line);
 }
 /*
 void	print_list(t_data *data)

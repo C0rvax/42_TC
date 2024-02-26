@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 22:24:05 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/23 00:03:43 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/26 14:58:38 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,32 @@ int	exec_push(int p, t_data *in, t_data *out)
 
 void	push_in_b(t_data *a, t_data *b)
 {
+	int	q1;
+	int	q2;
+	int i;
 	int	med;
 	int	val;
+	int size;
 
 	med = get_med(a, a->min, a->max);
+	i = 0;
+	q1 = get_q1(a, a->min, med);
+	q2 = get_q2(a, med, a->max);
+	size = a->size;
+//	exit (1);
+	while (i < size)
+	{
+		val = a->list->content;
+		if (val <= q1 || val >= q2)
+			rotate_list(&a->list, &b->list, 1, 1);
+		else
+		{
+			exec_push(ft_printf("pb\n"), a, b);
+			if (val >= med && b->size > 1)
+				rotate_list(&b->list, &a->list, 1, 3);
+		}
+		i++;
+	}
 	while (a->size > 3)
 	{
 		val = a->list->content;

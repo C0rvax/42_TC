@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 14:53:41 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/21 12:34:03 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:06:05 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,51 @@ int	u_never_know(t_data *a)
 	return (1);
 }
 
+static int	is_med(t_data *data, int med)
+{
+	int		count;
+	int		i;
+	t_lst	*buf;
+
+	buf = data->list;
+	count = 0;
+	i = 0;
+	while (i < data->size)
+	{
+		if (buf->content < med)
+			count--;
+		if (buf->content >= med)
+			count++;
+		i++;
+		buf = buf->next;
+	}
+	if (data->size % 2 == 1)
+		count--;
+	return (count);
+}
+
+int	get_med(t_data *data, int min, int max)
+{
+	int	med;
+	int	i;
+
+	i = 0;
+	if (max >= 0 && min < 0)
+		med = (max + min) / 2;
+	else
+		med = max - ((max - min) / 2);
+	i = is_med(data, med);
+	while (i != 0)
+	{
+		if (i < 0)
+			med--;
+		else
+			med++;
+		i = is_med(data, med);
+	}
+	return (med);
+}
+/*
 void	print_list(t_data *data)
 {
 	int	i;
@@ -73,3 +118,4 @@ void	print_list(t_data *data)
 		i++;
 	}
 }
+*/

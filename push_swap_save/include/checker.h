@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/26 14:34:26 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:21:09 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef CHECKER_H
+# define CHECKER_H
 
 # include <unistd.h>
 # include <errno.h>
@@ -37,18 +37,10 @@ typedef struct data_s
 
 int		u_never_know(t_data *a);
 int		*check_list(char **av, int size);
-void	sort_list(t_data *a, t_data *b);
-int		find_in_a(t_data *a, int bcontent);
-int		find_in_b(t_data *b, int acontent);
-int		find_content(t_data *data, int value);
+void	exec_instructions(t_data *a, t_data *b);
 void	rotate_list(t_lst **first, t_lst **sec, int i, int mode);
-void	all_in(t_data *a, t_data *b, int mode);
 int		exec_swap(int print, t_data *data);
 int		exec_push(int print, t_data *in, t_data *out);
-int		get_q2(t_data *data, int med, int max);
-int		get_q1(t_data *data, int min, int med);
-void	push_in_b(t_data *a, t_data *b);
-int		get_med(t_data *data, int min, int max);
 t_lst	*ft_listnew(int content);
 void	ft_listclear(t_data *data);
 void	ft_listadd_front(t_data *data, t_lst *new);

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:09:22 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/26 13:41:39 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/24 20:30:59 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void	exec_instructions(t_data *a, t_data *b)
 {
 	char	*line;
 
-	line = get_all_lines(0);
 //	line = get_next_line(0);
+	line = "pb\n";
 	if (!line)
 		ft_putstr_fd("Error\n", 2);
-//	ft_printf("line : %s\n", line);
+	ft_printf("line : %s\n", line);
 	ft_printf("line : %s\n", line);
 	while (line)
 	{

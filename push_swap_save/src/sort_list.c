@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:33:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/21 12:34:10 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/24 20:31:01 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,7 @@ static void	sort_5(t_data *a, t_data *b)
 	rotate_list(&a->list, &b->list, i, 1);
 }
 
-static void	push_in_b(t_data *a, t_data *b)
-{
-	int	med;
-	int	val;
-
-	med = (a->max - a->min) / 2;
-	while (a->size > 3)
-	{
-		val = a->list->content;
-		exec_push(ft_printf("pb\n"), a, b);
-		if (val >= med && b->size > 1)
-			rotate_list(&b->list, &a->list, 1, 3);
-	}
-}
-
-static void	sort_big(t_data *a, t_data *b)
+static void	sort_500(t_data *a, t_data *b)
 {
 	int	i;
 
@@ -80,9 +65,39 @@ static void	sort_big(t_data *a, t_data *b)
 	set_list_max(a);
 	push_in_b(a, b);
 	sort_3(a);
+	while (b->size > 1)
+	{
+		all_in(a, b, 1);
+		exec_push(ft_printf("pa\n"), b, a);
+	}
+	i = find_in_a(a, b->list->content);
+	rotate_list(&a->list, NULL, i, 1);
+	exec_push(ft_printf("pa\n"), b, a);
+	i = find_content(a, a->min);
+	rotate_list(&a->list, &b->list, i, 1);
+}
+
+static void	sort_100(t_data *a, t_data *b)
+{
+	int	i;
+	int	min;
+
+	i = 0;
+	exec_push(ft_printf("pb\n"), a, b);
+	exec_push(ft_printf("pb\n"), a, b);
+	while (a->size > 3)
+	{
+		all_in(a, b, 2);
+		min = b->min;
+		exec_push(ft_printf("pb\n"), a, b);
+		if (b->min != min && a->size > 4)
+			rotate_list(&b->list, &a->list, 1, 3);
+	}
+	sort_3(a);
 	while (b->size)
 	{
-		all_in_a(a, b);
+		i = find_in_a(a, b->list->content);
+		rotate_list(&a->list, &b->list, i, 1);
 		exec_push(ft_printf("pa\n"), b, a);
 	}
 	i = find_content(a, a->min);
@@ -99,6 +114,8 @@ void	sort_list(t_data *a, t_data *b)
 		sort_3(a);
 	else if (a->size <= 5)
 		sort_5(a, b);
+	else if (a->size <= 100)
+		sort_100(a, b);
 	else
-		sort_big(a, b);
+		sort_500(a, b);
 }

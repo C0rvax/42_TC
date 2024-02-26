@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 22:24:05 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/21 12:42:40 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/23 00:03:43 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,48 +20,6 @@ int	exec_swap(int p, t_data *data)
 	data->list->content = data->list->next->content;
 	data->list->next->content = buf;
 	return (p);
-}
-
-static int	exec_rotate(int p, t_lst **list)
-{
-	if (p == 3)
-		*list = (*list)->next;
-	else
-		*list = (*list)->prev;
-	return (p);
-}
-
-void	rotate_list(t_lst **first, t_lst **sec, int i, int mode)
-{
-	if (i < 0)
-	{
-		i *= -1;
-		while (i > 0)
-		{
-			if (mode == 2)
-				exec_rotate(ft_printf("rrr\n"), sec);
-			else if (mode == 3)
-				ft_printf("rrb\n");
-			else
-				ft_printf("rra\n");
-			exec_rotate(4, first);
-			i--;
-		}
-	}
-	else
-	{
-		while (i > 0)
-		{
-			if (mode == 2)
-				exec_rotate(ft_printf("rr\n"), sec);
-			else if (mode == 3)
-				ft_printf("rb\n");
-			else
-				ft_printf("ra\n");
-			exec_rotate(3, first);
-			i--;
-		}
-	}
 }
 
 static t_lst	*extract_from_list(t_data *data)
@@ -115,6 +73,21 @@ int	exec_push(int p, t_data *in, t_data *out)
 	if (node->content > out->max || node->content < out->min)
 		set_list_max(out);
 	return (p);
+}
+
+void	push_in_b(t_data *a, t_data *b)
+{
+	int	med;
+	int	val;
+
+	med = get_med(a, a->min, a->max);
+	while (a->size > 3)
+	{
+		val = a->list->content;
+		exec_push(ft_printf("pb\n"), a, b);
+		if (val >= med && b->size > 1)
+			rotate_list(&b->list, &a->list, 1, 3);
+	}
 }
 /*
 void	rotate_list_mute(t_lst **first, t_lst **sec, int i, int mode)
