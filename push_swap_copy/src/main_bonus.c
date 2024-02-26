@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/21 11:13:50 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:35:13 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 static void	init_data(t_data *a, t_data *b)
 {
@@ -90,7 +90,12 @@ int	main(int ac, char **av)
 	init_data(&a, &b);
 	if (!init_list_a(&a, ac, av))
 		return (1);
-	sort_list(&a, &b);
+	ft_printf("avant instruc\n");
+	exec_instructions(&a, &b);
+	if (u_never_know(&a))
+		ft_printf("OK");
+	else
+		ft_printf("KO");
 	ft_listclear(&a);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:06:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/16 18:02:01 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:20:57 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_lst	*ft_listnew(int content)
 
 void	ft_listadd_front(t_data *data, t_lst *new)
 {
-
 	if (!new)
 		return ;
 	new->next = data->list;

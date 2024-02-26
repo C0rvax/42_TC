@@ -94,7 +94,16 @@ fi
 if [ $mode -eq 2 ] || [ $mode -eq 4 ]; then
 
 	make >/dev/null
-	cd push_swap_visualizer/build/
+	if [ ! -d "./push_swap_visualizer" ]; then
+		git clone https://github.com/o-reo/push_swap_visualizer.git
+		cd push_swap_visualizer
+		mkdir build
+		cd build
+		cmake ..
+		make
+	else
+		cd push_swap_visualizer/build/
+	fi
 	./bin/visualizer
 	cd ../..
 

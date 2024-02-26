@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 14:53:41 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/26 16:18:43 by aduvilla         ###   ########.fr       */
+/*   Created: 2024/02/23 18:16:26 by aduvilla          #+#    #+#             */
+/*   Updated: 2024/02/26 13:41:42 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
 void	set_list_max(t_data *data)
 {
@@ -59,49 +59,28 @@ int	u_never_know(t_data *a)
 	return (1);
 }
 
-static int	is_med(t_data *data, int med)
+char	*get_all_lines(int fd)
 {
-	int		count;
-	int		i;
-	t_lst	*buf;
+	char	*buf;
+	char	*line;
+	char	*copy;
 
-	buf = data->list;
-	count = 0;
-	i = 0;
-	while (i < data->size)
+	line = ft_strdup("");
+	if (!line)
+		return (NULL);
+	while (1)
 	{
-		if (buf->content < med)
-			count--;
-		if (buf->content >= med)
-			count++;
-		i++;
-		buf = buf->next;
+		buf = get_next_line(fd);
+		if (!buf)
+			break ;
+		copy = line;
+		line = ft_strjoin(line, buf);
+		if (!line)
+			return (close(fd), free(buf), free(copy), NULL);
+		free(copy);
+		free(buf);
 	}
-	if (data->size % 2 == 1)
-		count--;
-	return (count);
-}
-
-int	get_med(t_data *data, int min, int max)
-{
-	int	med;
-	int	i;
-
-	i = 0;
-	if (max >= 0 && min < 0)
-		med = (max + min) / 2;
-	else
-		med = max - ((max - min) / 2);
-	i = is_med(data, med);
-	while (i != 0)
-	{
-		if (i < 0)
-			med--;
-		else
-			med++;
-		i = is_med(data, med);
-	}
-	return (med);
+	return (line);
 }
 /*
 void	print_list(t_data *data)
