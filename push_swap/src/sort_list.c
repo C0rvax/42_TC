@@ -67,7 +67,7 @@ static void	sort_500(t_data *a, t_data *b)
 	sort_3(a);
 	while (b->size > 1)
 	{
-		all_in(a, b, 1);
+		all_in(a, b);
 		exec_push(ft_printf("pa\n"), b, a);
 	}
 	i = find_in_a(a, b->list->content);

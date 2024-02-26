@@ -42,7 +42,7 @@ int		find_in_a(t_data *a, int bcontent);
 int		find_in_b(t_data *b, int acontent);
 int		find_content(t_data *data, int value);
 void	rotate_list(t_lst **first, t_lst **sec, int i, int mode);
-void	all_in(t_data *a, t_data *b, int mode);
+void	all_in(t_data *a, t_data *b);
 int		exec_swap(int print, t_data *data);
 int		exec_push(int print, t_data *in, t_data *out);
 int		get_q2(t_data *data, int med, int max);

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 13:39:53 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/21 12:18:01 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:11:52 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	find_in_a(t_data *a, int bcontent)
 	i = 0;
 	buf = a->list;
 	if (bcontent < a->min || bcontent > a->max)
-	{
 		i = find_content(a, a->min);
-		return (i);
-	}
 	else
 	{
 		while (i < a->size)
@@ -38,7 +35,7 @@ int	find_in_a(t_data *a, int bcontent)
 			buf = buf->next;
 		}
 	}
-	return (ft_printf("Error\nPas trouvé dans a!"));
+	return (i);
 }
 
 int	find_in_b(t_data *b, int acontent)
@@ -87,5 +84,5 @@ int	find_content(t_data *data, int value)
 		i++;
 		lst = lst->next;
 	}
-	return (ft_printf("Error\nPas trouvé la value!"));
+	return (i);
 }

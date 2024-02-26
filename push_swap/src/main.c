@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/26 16:56:02 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:14:12 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	init_list_a(t_data *a, int ac, char **av)
 	{
 		charlist = ft_split(av[1], ' ');
 		if (!charlist)
-			return (ft_printf("Error\n"), 0);
+			return (ft_putstr_fd("Error\n", 2), 0);
 	}
 	else
 		charlist = av + 1;
