@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:03:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/23 11:58:14 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:28:36 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static int	get_max_min(int i, int j)
 {
-	if (i <= j)
+	if (i <= j && i >= 0)
+		return (i);
+	else if (i >= j && i < 0)
 		return (i);
 	else
 		return (j);

@@ -7,7 +7,7 @@ BONUS_NAME	= checker
 vpath %.c src/ gnl/
 
 SRC			= main.c check_list.c sort_list.c exec.c list.c utils.c			\
-			  find_index.c all_in.c rotate.c
+			  find_index.c all_in.c rotate.c get_q.c
 
 SRC_BONUS	= main_bonus.c check_list.c list.c rotate.c exec_instructions.c	\
 			  utils_bonus.c

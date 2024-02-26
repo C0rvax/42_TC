@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 17:33:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/26 14:34:29 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:31:48 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,22 @@ static void	sort_500(t_data *a, t_data *b)
 	rotate_list(&a->list, &b->list, i, 1);
 }
 
+void	sort_list(t_data *a, t_data *b)
+{
+	if (u_never_know(a))
+		return ;
+	else if (a->size == 2)
+		rotate_list(&a->list, &b->list, 1, 1);
+	else if (a->size == 3)
+		sort_3(a);
+	else if (a->size <= 5)
+		sort_5(a, b);
+	else if (a->size <= 100)
+		sort_500(a, b);
+	else
+		sort_500(a, b);
+}
+/*
 static void	sort_100(t_data *a, t_data *b)
 {
 	int	i;
@@ -103,19 +119,4 @@ static void	sort_100(t_data *a, t_data *b)
 	i = find_content(a, a->min);
 	rotate_list(&a->list, &b->list, i, 1);
 }
-
-void	sort_list(t_data *a, t_data *b)
-{
-	if (u_never_know(a))
-		return ;
-	else if (a->size == 2)
-		rotate_list(&a->list, &b->list, 1, 1);
-	else if (a->size == 3)
-		sort_3(a);
-	else if (a->size <= 5)
-		sort_5(a, b);
-	else if (a->size <= 100)
-		sort_100(a, b);
-	else
-		sort_500(a, b);
-}
+*/
