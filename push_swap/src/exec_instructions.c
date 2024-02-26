@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:09:22 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/26 13:41:39 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:50:56 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,46 +87,44 @@ static int	exec_rotate(int p, t_lst **list)
 void	exec_instructions(t_data *a, t_data *b)
 {
 	char	*line;
+	char	**array;
+	int		i;
 
 	line = get_all_lines(0);
 //	line = get_next_line(0);
 	if (!line)
 		ft_putstr_fd("Error\n", 2);
-//	ft_printf("line : %s\n", line);
-	ft_printf("line : %s\n", line);
-	while (line)
+	array = ft_split(line, '\n');
+	free(line);
+	i = 0;
+	while (array[i])
 	{
-		ft_printf("jusqu'ici tout va bien!\n");
-		if (ft_strncmp(line, "ra\n", 3))
+		if (!ft_strncmp(array[i], "ra", 2))
 			exec_rotate(3, &a->list);
-		if (ft_strncmp(line, "rb\n", 3))
+		if (!ft_strncmp(array[i], "rb", ft_strlen(array[i])))
 			exec_rotate(3, &b->list);
-		if (ft_strncmp(line, "pa\n", 3))
+		if (!ft_strncmp(array[i], "pa", 2))
 			exec_push(3, b, a);
-		if (ft_strncmp(line, "pb\n", 3))
-		{
-			printf("dans le comp\n");
+		if (!ft_strncmp(array[i], "pb", 2))
 			exec_push(3, a, b);
-		}
-		if (ft_strncmp(line, "rr\n", 3))
+		if (!ft_strncmp(array[i], "rr", 2))
 		{
 			exec_rotate(3, &b->list);
 			exec_rotate(3, &a->list);
 		}
-		if (ft_strncmp(line, "rrr\n", 4))
+		if (!ft_strncmp(array[i], "rrr", 3))
 		{
 			exec_rotate(4, &b->list);
 			exec_rotate(4, &a->list);
 		}
-		if (ft_strncmp(line, "rra", 4))
+		if (!ft_strncmp(array[i], "rra", 3))
 			exec_rotate(4, &a->list);
-		if (ft_strncmp(line, "rrb", 4))
+		if (!ft_strncmp(array[i], "rrb", 3))
 			exec_rotate(4, &b->list);
-		if (ft_strncmp(line, "sa", 3))
+		if (!ft_strncmp(array[i], "sa", 2))
 			exec_swap(3, a);
-		if (ft_strncmp(line, "sb", 3))
+		if (!ft_strncmp(array[i], "sb", 2))
 			exec_swap(3, b);
-		free(line);
-		line = get_next_line(0);
+		i++;
 	}
 }
