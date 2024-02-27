@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:58:24 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 16:42:21 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 17:29:22 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	check_instructions(char **cmd, char **instructions)
 	count = 0;
 	while (instructions[++i])
 	{
-		j = 0;
+		j = -1;
 		while (cmd[++j])
 		{
 			if (ft_strlen(instructions[i]) >= ft_strlen(cmd[j]))
