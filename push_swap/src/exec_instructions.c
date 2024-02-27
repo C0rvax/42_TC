@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:09:22 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 11:11:55 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:55:33 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	**ft_getcmd(void)
 	return (cmd);
 }
 
-int		check_instructions(char **cmd, char **instructions)
+int	check_instructions(char **cmd, char **instructions)
 {
 	int		i;
 	int		j;
@@ -123,7 +123,22 @@ int		check_instructions(char **cmd, char **instructions)
 		return (1);
 }
 
-int		instructions(t_data *a, t_data *b)
+static char	**ft_get_instruc(int fd)
+{
+	char	*line;
+	char	**instructions;
+
+	line = get_all_lines(fd);
+	if (!line)
+		return (ft_putstr_fd("Error\n", 2), NULL);
+	instructions = ft_split(line, '\n');
+	free(line);
+	if (!instructions)
+		return (ft_putstr_fd("Error\n", 2), NULL);
+	return (instructions);
+}
+
+int	instructions(t_data *a, t_data *b)
 {
 	int		i;
 	char	**cmd;
@@ -133,20 +148,13 @@ int		instructions(t_data *a, t_data *b)
 	if (!cmd)
 		return (0);
 	instructions = ft_get_instruc(0);
-}
-
-char	**ft_get_instruc(int fd)
-{
-	char	*line;
-	char	**instructions;
-
-	line = get_all_lines(fd);
-	if (!line)
-		return (ft_putstr_fd("Error\n", 2), NULL);
-	instructions = ft_split(line, '\n');
 	if (!instructions)
-		return (free(line), ft_putstr_fd("Error\n", 2), NULL);
+		return (ft_freetab(cmd), 0);
+	if (!check_instructions(cmd, instructions))
+		return (ft_freetab(cmd), ft_freetab(instructions), 0);
+	return (1);
 }
+
 void	exec_instructions(t_data *a, t_data *b)
 {
 	char	*line;
