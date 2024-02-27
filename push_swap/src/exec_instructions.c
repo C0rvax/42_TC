@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:09:22 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 11:55:33 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:30:06 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,92 +84,12 @@ static int	exec_rotate(int p, t_lst **list)
 	return (p);
 }
 
-char	**ft_getcmd(void)
-{
-	char	**cmd;
-	char	*line;
-
-	line = "sa;sb;ss;pa;pb;ra;rb;rr;rra;rrb;rrr";
-	cmd = ft_split(line, ';');
-	if (!cmd)
-		return (NULL);
-	return (cmd);
-}
-
-int	check_instructions(char **cmd, char **instructions)
+int	exec_instructions(t_data *a, t_data *b, char **cmd, char **instructions)
 {
 	int		i;
-	int		j;
-	int		count;
-	int		len;
 
 	i = 0;
-	count = 0;
 	while (instructions[i])
-	{
-		j = 0;
-		len = ft_strlen(instructions[i]);
-		while (cmd[j])
-		{
-			if (!ft_strncmp(instructions[i], cmd[j], len))
-				count++;
-			j++;
-		}
-		i++;
-	}
-	if (count != i)
-		return (0);
-	else
-		return (1);
-}
-
-static char	**ft_get_instruc(int fd)
-{
-	char	*line;
-	char	**instructions;
-
-	line = get_all_lines(fd);
-	if (!line)
-		return (ft_putstr_fd("Error\n", 2), NULL);
-	instructions = ft_split(line, '\n');
-	free(line);
-	if (!instructions)
-		return (ft_putstr_fd("Error\n", 2), NULL);
-	return (instructions);
-}
-
-int	instructions(t_data *a, t_data *b)
-{
-	int		i;
-	char	**cmd;
-	char	**instructions;
-
-	cmd = ft_getcmd();
-	if (!cmd)
-		return (0);
-	instructions = ft_get_instruc(0);
-	if (!instructions)
-		return (ft_freetab(cmd), 0);
-	if (!check_instructions(cmd, instructions))
-		return (ft_freetab(cmd), ft_freetab(instructions), 0);
-	return (1);
-}
-
-void	exec_instructions(t_data *a, t_data *b)
-{
-	char	*line;
-	char	**array;
-	int		i;
-
-	line = get_all_lines(0);
-	if (!line)
-		ft_putstr_fd("Error\n", 2);
-	array = ft_split(line, '\n');
-	if (!array)
-		ft_putstr_fd("Error\n", 2);
-	free(line);
-	i = 0;
-	while (array[i])
 	{
 		if (!ft_strncmp(array[i], "ra", ft_strlen(array[i])))
 			exec_rotate(3, &a->list);
