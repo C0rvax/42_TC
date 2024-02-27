@@ -6,20 +6,29 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:09:22 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 12:30:06 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:23:21 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-int	exec_swap(int p, t_data *data)
+int	exec_swap(t_data *a, t_data *b, int mode)
 {
 	int		buf;
 
-	buf = data->list->content;
-	data->list->content = data->list->next->content;
-	data->list->next->content = buf;
-	return (p);
+	if ((mode == 0 || mode == 2) && a->size >= 2)
+	{
+		buf = a->list->content;
+		a->list->content = a->list->next->content;
+		a->list->next->content = buf;
+	}
+	if ((mode == 1 || mode == 2) && b->size >= 2)
+	{
+		buf = b->list->content;
+		b->list->content = b->list->next->content;
+		b->list->next->content = buf;
+	}
+	return (1);
 }
 
 static t_lst	*extract_from_list(t_data *data)
@@ -54,6 +63,8 @@ int	exec_push(int p, t_data *in, t_data *out)
 	t_lst	*buf_p;
 	t_lst	*node;
 
+	if (in->size == 0)
+		return (p);
 	node = extract_from_list(in);
 	if ((node->content == in->max || node->content == in->min) && in->size > 0)
 		set_list_max(in);
@@ -84,39 +95,59 @@ static int	exec_rotate(int p, t_lst **list)
 	return (p);
 }
 
+int	indexe(t_data *a, t_data *b, char **cmd, char *instruction)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(instruction);
+	while (cmd[i])
+	{
+		if (!ft_strncmp(cmd[i], instruction, len))
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
+void	rotate_list(t_lst **a, t_lst **b, int index)
+{
+	if (index == 5 || index == 7)
+	{
+		if ((*a)->next)
+			*a = (*a)->next;
+	}
+	if (index == 6 || index == 7)
+	{
+		*b = (*b)->next;
+	}
+	if (index == 8 || index == 10)
+	{
+		*a = (*a)->prev;
+	}
+	if (index == 9 || index == 10)
+	{
+		*b = (*b)->prev;
+	}
+}
 int	exec_instructions(t_data *a, t_data *b, char **cmd, char **instructions)
 {
 	int		i;
+	int		index;
 
 	i = 0;
 	while (instructions[i])
 	{
-		if (!ft_strncmp(array[i], "ra", ft_strlen(array[i])))
-			exec_rotate(3, &a->list);
-		if (!ft_strncmp(array[i], "rb", ft_strlen(array[i])))
-			exec_rotate(3, &b->list);
-		if (!ft_strncmp(array[i], "pa", ft_strlen(array[i])))
-			exec_push(3, b, a);
-		if (!ft_strncmp(array[i], "pb", ft_strlen(array[i])))
+		index = indexe(a, b, cmd, instructions[i]);
+		if (index < 3)
+			exec_swap(a, b, index);
+		if (index == 3)
 			exec_push(3, a, b);
-		if (!ft_strncmp(array[i], "rr", ft_strlen(array[i])))
-		{
-			exec_rotate(3, &b->list);
-			exec_rotate(3, &a->list);
-		}
-		if (!ft_strncmp(array[i], "rrr", ft_strlen(array[i])))
-		{
-			exec_rotate(4, &b->list);
-			exec_rotate(4, &a->list);
-		}
-		if (!ft_strncmp(array[i], "rra", ft_strlen(array[i])))
-			exec_rotate(4, &a->list);
-		if (!ft_strncmp(array[i], "rrb", ft_strlen(array[i])))
-			exec_rotate(4, &b->list);
-		if (!ft_strncmp(array[i], "sa", ft_strlen(array[i])))
-			exec_swap(3, a);
-		if (!ft_strncmp(array[i], "sb", ft_strlen(array[i])))
-			exec_swap(3, b);
+		if (index == 4)
+			exec_push(3, b, a);
+		else
+			rotate_list(a, b, index);
 		i++;
 	}
 }

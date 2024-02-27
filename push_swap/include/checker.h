@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 12:26:00 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:12:25 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		u_never_know(t_data *a);
 int		*check_list(char **av, int size);
 int		exec_instructions(t_data *a, t_data *b, char **cmd, char **instruction);
 void	rotate_list(t_lst **first, t_lst **sec, int i, int mode);
-int		exec_swap(int print, t_data *data);
+int		exec_swap(t_data *a, t_data *b, int index);
 int		exec_push(int print, t_data *in, t_data *out);
 char	*get_all_lines(int fd);
 t_lst	*ft_listnew(int content);

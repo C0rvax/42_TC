@@ -4,21 +4,31 @@ NAME		= push_swap
 
 BONUS_NAME	= checker
 
-vpath %.c src/ gnl/
+DIR			= ./src/
 
-SRC			= main.c check_list.c sort_list.c exec.c list.c utils.c			\
+GNL_DIR		= ./gnl/
+
+BONUS_DIR	= ./bonus/
+
+FILE			= main.c check_list.c sort_list.c exec.c list.c utils.c		\
 			  find_index.c all_in.c rotate.c get_q.c
 
-SRC_BONUS	= main_bonus.c check_list.c list.c rotate.c exec_instructions.c	\
-			  utils_bonus.c
+FILE_BONUS	= main_bonus.c check_list.c list.c exec_instructions.c			\
+			  utils_bonus.c rotate_bonus.c instructions.c
 
-GNL_SRC		= get_next_line.c get_next_line_utils.c
+FILE_GNL	= get_next_line.c get_next_line_utils.c
 
-OBJ			:= $(SRC:%.c=%.o)
+SRC			= $(addprefix $(DIR), $(FILE))
 
-GNL_OBJ		:= $(GNL_SRC:%.c=%.o)
+SRC_BONUS	= $(addprefix $(BONUS_DIR), $(FILE_BONUS)) 
 
-OBJ_BONUS	:= $(SRC_BONUS:%.c=%.o)
+SRC_GNL		= $(addprefix $(GNL_DIR), $(FILE_GNL))
+
+OBJ			:= $(SRC:.c=.o)
+
+OBJ_GNL		:= $(SRC_GNL:.c=.o)
+
+OBJ_BONUS	:= $(SRC_BONUS:.c=.o)
 
 CFLAGS		= -Wextra -Wall -Werror
 
@@ -28,7 +38,7 @@ LIBRARIES	= -L./printf -lftprintf -L./libft -lft
 
 all			: $(NAME)
 
-$(NAME)		: $(OBJ) $(GNL_OBJ)
+$(NAME)		: $(OBJ) $(OBJ_GNL)
 		make -C printf
 		make -C libft
 		$(CC) $(CFLAGS) $^ $(LIBRARIES) -o $@
@@ -36,13 +46,13 @@ $(NAME)		: $(OBJ) $(GNL_OBJ)
 %.o			: %.c
 		$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
-bonus		: $(OBJ_BONUS) $(GNL_OBJ)
+bonus		: $(OBJ_BONUS) $(OBJ_GNL)
 		make -C printf
 		make -C libft
 		$(CC) $(CFLAGS) $^ $(LIBRARIES) -o $(BONUS_NAME)
 
 clean		:
-		rm -f $(OBJ) $(GNL_OBJ) $(OBJ_BONUS)
+		rm -f $(OBJ) $(OBJ_GNL) $(OBJ_BONUS)
 		make clean -C printf
 		make clean -C libft
 

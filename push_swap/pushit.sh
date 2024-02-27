@@ -84,8 +84,8 @@ if [ $mode -eq 1 ] || [ $mode -eq 4 ]; then
 
 	./complexity 3 500 $lim3 ../checker_linux
 	./complexity 5 500 $lim5 ../checker_linux
-	./complexity 100 500 $lim100 ../checker_linux
-	./complexity 500 100 $lim500 ../checker_linux
+	./complexity 100 10000 $lim100 ../checker_linux
+	./complexity 500 500 $lim500 ../checker_linux
 
 	make fclean >/dev/null
 	cd ..

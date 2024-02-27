@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 22:24:05 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/26 15:49:05 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:53:18 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	push_in_b(t_data *a, t_data *b)
 	while (size)
 	{
 		val = a->list->content;
-		if (val <= q1 || val >= q2)
+		if (val >= q1 && val <= q2)
 			rotate_list(&a->list, &b->list, 1, 1);
 		else
 			push_it(a, b, med);
