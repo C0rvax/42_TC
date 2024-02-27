@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:16:26 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/26 13:41:42 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 09:00:57 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*get_all_lines(int fd)
 	}
 	return (line);
 }
-/*
+
 void	print_list(t_data *data)
 {
 	int	i;
@@ -97,4 +97,3 @@ void	print_list(t_data *data)
 		i++;
 	}
 }
-*/

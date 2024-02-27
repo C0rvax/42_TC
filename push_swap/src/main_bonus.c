@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/26 17:36:36 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:12:01 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,26 @@ static void	loop_list(t_lst **a)
 	buf->next = *a;
 }
 
-static void	fill_list(t_data *a, int *buf)
+static int	fill_list(t_data *a, int *buf)
 {
 	int		i;
 	t_lst	*new;
 
 	i = a->size - 1;
 	a->list = ft_listnew(buf[i]);
+	if (!a->list)
+		return (0);
 	i--;
 	while (i >= 0)
 	{
 		new = ft_listnew(buf[i]);
+		if (!new)
+			return (ft_listclear(a), 0);
 		ft_listadd_front(a, new);
 		i--;
 	}
 	loop_list(&a->list);
+	return (1);
 }
 
 static int	init_list_a(t_data *a, int ac, char **av)
@@ -61,7 +66,7 @@ static int	init_list_a(t_data *a, int ac, char **av)
 	{
 		charlist = ft_split(av[1], ' ');
 		if (!charlist)
-			return (ft_printf("Error\n"), 0);
+			return (ft_putstr_fd("Error\n", 2), 0);
 	}
 	else
 		charlist = av + 1;
@@ -72,7 +77,8 @@ static int	init_list_a(t_data *a, int ac, char **av)
 		ft_freetab(charlist);
 	if (!buf)
 		return (0);
-	fill_list(a, buf);
+	if (fill_list(a, buf))
+		return (free(buf), 0);
 	free(buf);
 	set_list_max(a);
 	return (1);
@@ -82,6 +88,7 @@ int	main(int ac, char **av)
 {
 	t_data	a;
 	t_data	b;
+	char	**cmd;
 
 	if (ac < 2)
 		return (0);
@@ -90,11 +97,12 @@ int	main(int ac, char **av)
 	init_data(&a, &b);
 	if (!init_list_a(&a, ac, av))
 		return (1);
+	cmd = ft_getcmd();
 	exec_instructions(&a, &b);
 	if (u_never_know(&a))
-		ft_printf("OK");
+		ft_printf("OK\n");
 	else
-		ft_printf("KO");
+		ft_printf("KO\n");
 	ft_listclear(&a);
 	return (0);
 }

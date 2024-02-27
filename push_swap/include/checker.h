@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/26 13:37:48 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:11:59 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ void	ft_listclear(t_data *data);
 void	ft_listadd_front(t_data *data, t_lst *new);
 void	set_list_max(t_data *data);
 void	set_2p(t_lst **p1, t_lst *p2, t_lst **pt1, t_lst *pt2);
+char	**ft_getcmd(void);
 #endif

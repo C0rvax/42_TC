@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:09:22 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 00:34:53 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:11:55 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ static t_lst	*extract_from_list(t_data *data)
 	t_lst	*node;
 
 	node = data->list;
-	ft_printf("nod c : %d\n", node->content);
-	if (data->size > 1)
+	if (data->size == 1)
+		data->list = NULL;
+	else
 	{
 		buf_n = data->list->next;
 		buf_p = data->list->prev;
@@ -45,8 +46,6 @@ static t_lst	*extract_from_list(t_data *data)
 			set_2p(&buf_n->next, NULL, &buf_n->prev, NULL);
 	}
 	data->size--;
-	ft_printf("p node : %p\n", node);
-	ft_printf("nod c : %d\n", node->content);
 	return (node);
 }
 
@@ -55,17 +54,9 @@ int	exec_push(int p, t_data *in, t_data *out)
 	t_lst	*buf_p;
 	t_lst	*node;
 
-	ft_printf("in node : %d\n", in->list->content);
 	node = extract_from_list(in);
-	ft_printf("size : %d\n", in->size);
-	ft_printf("min : %d max %d\n", in->min, in->max);
-	ft_printf("node cont : %d\n", node->content);
 	if ((node->content == in->max || node->content == in->min) && in->size > 0)
-	{
-		ft_printf("apres test!\n");
 		set_list_max(in);
-	}
-	ft_printf("apres test!\n");
 	if (out->size == 1)
 	{
 		set_2p(&out->list->prev, node, &out->list->next, node);
@@ -93,6 +84,69 @@ static int	exec_rotate(int p, t_lst **list)
 	return (p);
 }
 
+char	**ft_getcmd(void)
+{
+	char	**cmd;
+	char	*line;
+
+	line = "sa;sb;ss;pa;pb;ra;rb;rr;rra;rrb;rrr";
+	cmd = ft_split(line, ';');
+	if (!cmd)
+		return (NULL);
+	return (cmd);
+}
+
+int		check_instructions(char **cmd, char **instructions)
+{
+	int		i;
+	int		j;
+	int		count;
+	int		len;
+
+	i = 0;
+	count = 0;
+	while (instructions[i])
+	{
+		j = 0;
+		len = ft_strlen(instructions[i]);
+		while (cmd[j])
+		{
+			if (!ft_strncmp(instructions[i], cmd[j], len))
+				count++;
+			j++;
+		}
+		i++;
+	}
+	if (count != i)
+		return (0);
+	else
+		return (1);
+}
+
+int		instructions(t_data *a, t_data *b)
+{
+	int		i;
+	char	**cmd;
+	char	**instructions;
+
+	cmd = ft_getcmd();
+	if (!cmd)
+		return (0);
+	instructions = ft_get_instruc(0);
+}
+
+char	**ft_get_instruc(int fd)
+{
+	char	*line;
+	char	**instructions;
+
+	line = get_all_lines(fd);
+	if (!line)
+		return (ft_putstr_fd("Error\n", 2), NULL);
+	instructions = ft_split(line, '\n');
+	if (!instructions)
+		return (free(line), ft_putstr_fd("Error\n", 2), NULL);
+}
 void	exec_instructions(t_data *a, t_data *b)
 {
 	char	*line;
@@ -100,48 +154,41 @@ void	exec_instructions(t_data *a, t_data *b)
 	int		i;
 
 	line = get_all_lines(0);
-//	line = get_next_line(0);
 	if (!line)
 		ft_putstr_fd("Error\n", 2);
 	array = ft_split(line, '\n');
+	if (!array)
+		ft_putstr_fd("Error\n", 2);
 	free(line);
 	i = 0;
 	while (array[i])
 	{
-		if (!ft_strncmp(array[i], "ra", 2))
+		if (!ft_strncmp(array[i], "ra", ft_strlen(array[i])))
 			exec_rotate(3, &a->list);
 		if (!ft_strncmp(array[i], "rb", ft_strlen(array[i])))
 			exec_rotate(3, &b->list);
-		ft_printf("avant pa\n");
-		if (!ft_strncmp(array[i], "pa", 2))
+		if (!ft_strncmp(array[i], "pa", ft_strlen(array[i])))
 			exec_push(3, b, a);
-		ft_printf("apres pa\n");
-		if (!ft_strncmp(array[i], "pb", 2))
+		if (!ft_strncmp(array[i], "pb", ft_strlen(array[i])))
 			exec_push(3, a, b);
-		if (!ft_strncmp(array[i], "rr", 2))
+		if (!ft_strncmp(array[i], "rr", ft_strlen(array[i])))
 		{
 			exec_rotate(3, &b->list);
 			exec_rotate(3, &a->list);
 		}
-		if (!ft_strncmp(array[i], "rrr", 3))
+		if (!ft_strncmp(array[i], "rrr", ft_strlen(array[i])))
 		{
 			exec_rotate(4, &b->list);
 			exec_rotate(4, &a->list);
 		}
-		ft_printf("ok\n");
-		if (!ft_strncmp(array[i], "rra", 3))
-		{
-			ft_printf("avant rra\n");
+		if (!ft_strncmp(array[i], "rra", ft_strlen(array[i])))
 			exec_rotate(4, &a->list);
-		}
-		ft_printf("apres rra\n");
-		if (!ft_strncmp(array[i], "rrb", 3))
+		if (!ft_strncmp(array[i], "rrb", ft_strlen(array[i])))
 			exec_rotate(4, &b->list);
-		if (!ft_strncmp(array[i], "sa", 2))
+		if (!ft_strncmp(array[i], "sa", ft_strlen(array[i])))
 			exec_swap(3, a);
-		if (!ft_strncmp(array[i], "sb", 2))
+		if (!ft_strncmp(array[i], "sb", ft_strlen(array[i])))
 			exec_swap(3, b);
 		i++;
 	}
-	ft_printf("ok\n");
 }
