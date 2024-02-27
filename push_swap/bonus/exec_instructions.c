@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:09:22 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 14:23:21 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:13:43 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,7 @@ int	exec_push(int p, t_data *in, t_data *out)
 	return (p);
 }
 
-static int	exec_rotate(int p, t_lst **list)
-{
-	if (p == 3)
-		*list = (*list)->next;
-	else
-		*list = (*list)->prev;
-	return (p);
-}
-
-int	indexe(t_data *a, t_data *b, char **cmd, char *instruction)
+int	indexe(char **cmd, char *instruction)
 {
 	int	i;
 	int	len;
@@ -113,41 +104,24 @@ int	indexe(t_data *a, t_data *b, char **cmd, char *instruction)
 
 void	rotate_list(t_lst **a, t_lst **b, int index)
 {
-	if (index == 5 || index == 7)
+	if ((index == 5 || index == 7) && *a != NULL)
 	{
 		if ((*a)->next)
 			*a = (*a)->next;
 	}
-	if (index == 6 || index == 7)
+	if ((index == 6 || index == 7) && *b != NULL)
 	{
+		if ((*b)->next)
 		*b = (*b)->next;
 	}
-	if (index == 8 || index == 10)
+	if ((index == 8 || index == 10) && *a != NULL)
 	{
+		if ((*a)->prev)
 		*a = (*a)->prev;
 	}
-	if (index == 9 || index == 10)
+	if ((index == 9 || index == 10) && *b != NULL)
 	{
+		if ((*b)->prev)
 		*b = (*b)->prev;
-	}
-}
-int	exec_instructions(t_data *a, t_data *b, char **cmd, char **instructions)
-{
-	int		i;
-	int		index;
-
-	i = 0;
-	while (instructions[i])
-	{
-		index = indexe(a, b, cmd, instructions[i]);
-		if (index < 3)
-			exec_swap(a, b, index);
-		if (index == 3)
-			exec_push(3, a, b);
-		if (index == 4)
-			exec_push(3, b, a);
-		else
-			rotate_list(a, b, index);
-		i++;
 	}
 }

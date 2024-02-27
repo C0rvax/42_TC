@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 14:12:25 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:26:32 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ typedef struct data_s
 
 int		u_never_know(t_data *a);
 int		*check_list(char **av, int size);
-int		exec_instructions(t_data *a, t_data *b, char **cmd, char **instruction);
-void	rotate_list(t_lst **first, t_lst **sec, int i, int mode);
+void	rotate_list(t_lst **a, t_lst **b, int index);
+int		indexe(char **cmd, char *instruction);
+int		instructions(t_data *a, t_data *b);
 int		exec_swap(t_data *a, t_data *b, int index);
 int		exec_push(int print, t_data *in, t_data *out);
 char	*get_all_lines(int fd);
@@ -48,4 +49,5 @@ void	ft_listadd_front(t_data *data, t_lst *new);
 void	set_list_max(t_data *data);
 void	set_2p(t_lst **p1, t_lst *p2, t_lst **pt1, t_lst *pt2);
 int		is_no_empty_line(char *line);
+void	print_list(t_data *data);
 #endif

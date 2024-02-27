@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 11:54:05 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:04:21 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	init_list_a(t_data *a, int ac, char **av)
 		ft_freetab(charlist);
 	if (!buf)
 		return (0);
-	if (fill_list(a, buf))
+	if (!fill_list(a, buf))
 		return (free(buf), 0);
 	free(buf);
 	set_list_max(a);
@@ -88,7 +88,6 @@ int	main(int ac, char **av)
 {
 	t_data	a;
 	t_data	b;
-	char	**cmd;
 
 	if (ac < 2)
 		return (0);
@@ -97,12 +96,14 @@ int	main(int ac, char **av)
 	init_data(&a, &b);
 	if (!init_list_a(&a, ac, av))
 		return (1);
-	cmd = ft_getcmd();
-	exec_instructions(&a, &b);
+	instructions(&a, &b);
 	if (u_never_know(&a))
 		ft_printf("OK\n");
 	else
 		ft_printf("KO\n");
-	ft_listclear(&a);
+	if (a.list)
+		ft_listclear(&a);
+	if (b.list)
+		ft_listclear(&b);
 	return (0);
 }

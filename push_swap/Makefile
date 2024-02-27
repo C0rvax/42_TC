@@ -14,7 +14,7 @@ FILE			= main.c check_list.c sort_list.c exec.c list.c utils.c		\
 			  find_index.c all_in.c rotate.c get_q.c
 
 FILE_BONUS	= main_bonus.c check_list.c list.c exec_instructions.c			\
-			  utils_bonus.c rotate_bonus.c instructions.c
+			  utils_bonus.c instructions.c
 
 FILE_GNL	= get_next_line.c get_next_line_utils.c
 

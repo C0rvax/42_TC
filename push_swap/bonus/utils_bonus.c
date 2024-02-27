@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:16:26 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 12:30:07 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:42:23 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,13 @@ int	is_no_empty_line(char *line)
 	int	i;
 
 	i = 0;
+	if (line && line[0] == '\0')
+		return (1);
 	if (line && line[0] == '\n')
+	{
+		ft_printf("ici\n");
 		return (0);
+	}
 	while (line[i + 1])
 	{
 		if (line[i] == '\n' && line[i + 1] == '\n')
@@ -98,7 +103,7 @@ int	is_no_empty_line(char *line)
 	}
 	return (1);
 }
-
+/*
 void	print_list(t_data *data)
 {
 	int	i;
@@ -113,3 +118,4 @@ void	print_list(t_data *data)
 		i++;
 	}
 }
+*/

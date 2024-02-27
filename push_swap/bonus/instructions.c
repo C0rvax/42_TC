@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:58:24 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 12:25:52 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:42:21 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,20 @@ static int	check_instructions(char **cmd, char **instructions)
 	int		count;
 	int		len;
 
-	i = 0;
+	i = -1;
 	count = 0;
-	while (instructions[i])
+	while (instructions[++i])
 	{
 		j = 0;
-		len = ft_strlen(instructions[i]);
-		while (cmd[j])
+		while (cmd[++j])
 		{
+			if (ft_strlen(instructions[i]) >= ft_strlen(cmd[j]))
+				len = ft_strlen(instructions[i]);
+			else
+				len = ft_strlen(cmd[j]);
 			if (!ft_strncmp(instructions[i], cmd[j], len))
 				count++;
-			j++;
 		}
-		i++;
 	}
 	if (count != i)
 		return (0);
@@ -68,9 +69,30 @@ static char	**ft_get_instruc(int fd)
 	return (instructions);
 }
 
-int	instructions(t_data *a, t_data *b)
+static int	exec_instructions(t_data *a, t_data *b, char **cmd, char **inst)
 {
 	int		i;
+	int		index;
+
+	i = 0;
+	while (inst[i])
+	{
+		index = indexe(cmd, inst[i]);
+		if (index < 3)
+			exec_swap(a, b, index);
+		if (index == 3)
+			exec_push(3, b, a);
+		if (index == 4)
+			exec_push(3, a, b);
+		else
+			rotate_list(&a->list, &b->list, index);
+		i++;
+	}
+	return (1);
+}
+
+int	instructions(t_data *a, t_data *b)
+{
 	char	**cmd;
 	char	**instructions;
 
