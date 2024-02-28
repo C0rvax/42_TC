@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 17:29:20 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:20:49 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,15 @@ int	main(int ac, char **av)
 	init_data(&a, &b);
 	if (!init_list_a(&a, ac, av))
 		return (1);
-	instructions(&a, &b);
-	if (u_never_know(&a))
-		ft_printf("OK\n");
+	if (instructions(&a, &b) < 0)
+		ft_putstr_fd("Error\n", 2);
 	else
-		ft_printf("KO\n");
+	{
+		if (u_never_know(&a))
+			ft_printf("OK\n");
+		else
+			ft_printf("KO\n");
+	}
 	if (a.list)
 		ft_listclear(&a);
 	if (b.list)

@@ -18,6 +18,7 @@ CYAN='\033[0;96m'
 GRAY='\033[0;90m'
 WHITE='\033[0;97m'
 
+clear
 echo -e "${bleu}"
 echo -e "██████╗ ██╗   ██╗███████╗██╗  ██╗    ██╗████████╗"
 echo -e "██╔══██╗██║   ██║██╔════╝██║  ██║    ██║╚══██╔══╝"
@@ -854,6 +855,27 @@ if [ $mode -eq 6 ] || [ $mode -eq 4 ]; then
 	printf ${MAGENTA}"\n-------------------------------------------------------------\n\n"${DEF_COLOR}
 
 	ARG="2 1 3"
+	ARG2=(
+		"ga"
+		"sa\nsa\nsa\nga"
+		"pa\nrru"
+		"pab"
+		"papb"
+	)
+	n=1
+	for i in "${ARG2[@]}"; do
+		echo -e "$ARG2" | ./checker $ARG >/dev/null 2>test_check.txt
+		echo -e "$ARG2" | ./checker_linux $ARG >/dev/null 2>test_check2.txt
+		testcheck=$(cmp test_check.txt test_check2.txt)
+		if [ -z "$testcheck" ]; then
+			printf "${GREEN}$n.[OK] ${DEF_COLOR}\n"
+		else
+			printf "${RED}$n.[KO]${DEF_COLOR}\n"
+		fi
+		((n = n + 1))
+		rm test_check.txt test_check2.txt
+	done
+
 	S=$(echo -e "sa" | ./checker_linux $ARG)
 	R=$(echo -e "sa" | ./checker $ARG)
 	if [ $S == $R ]; then
@@ -862,25 +884,6 @@ if [ $mode -eq 6 ] || [ $mode -eq 4 ]; then
 		printf "${RED}1.[KO]${DEF_COLOR}\n"
 	fi
 
-	ARG="2 1 3"
-	S=$(echo -e "ga" | ./checker_linux $ARG)
-	R=$(echo -e "ga" | ./checker $ARG)
-	if [ $S == $R ]; then
-		printf "${GREEN}SA 1.[OK] ${DEF_COLOR}\n"
-	else
-		printf "${RED}1.[KO]${DEF_COLOR}\n"
-	fi
-
-	ARG="1 2 3"
-	S=$(echo -e "ga" | ./checker_linux $ARG)
-	R=$(echo -e "ga" | ./checker $ARG)
-	if [ $S == $R ]; then
-		printf "${GREEN}SA 1.[OK] ${DEF_COLOR}\n"
-	else
-		printf "${RED}1.[KO]${DEF_COLOR}\n"
-	fi
-
-	ARG="2 1 3"
 	S=$(echo -e "sa\nsa\nsa" | ./checker_linux $ARG)
 	R=$(echo -e "sa\nsa\nsa" | ./checker $ARG)
 	if [ $S == $R ]; then
@@ -889,7 +892,6 @@ if [ $mode -eq 6 ] || [ $mode -eq 4 ]; then
 		printf "${RED}2.[KO]${DEF_COLOR}\n"
 	fi
 
-	ARG="2 1 3"
 	S=$(echo -e "sa\nsa" | ./checker_linux $ARG)
 	R=$(echo -e "sa\nsa" | ./checker $ARG)
 	if [ $S == $R ]; then

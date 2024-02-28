@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:58:24 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 17:29:22 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/28 14:16:38 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	instructions(t_data *a, t_data *b)
 	if (!instructions)
 		return (ft_freetab(cmd), 0);
 	if (!check_instructions(cmd, instructions))
-		return (ft_freetab(cmd), ft_freetab(instructions), 0);
+		return (ft_freetab(cmd), ft_freetab(instructions), -1);
 	if (!exec_instructions(a, b, cmd, instructions))
 		return (ft_freetab(cmd), ft_freetab(instructions), 0);
 	ft_freetab(cmd);

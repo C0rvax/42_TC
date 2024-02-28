@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:09:22 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 15:13:43 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:04:44 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,16 +112,16 @@ void	rotate_list(t_lst **a, t_lst **b, int index)
 	if ((index == 6 || index == 7) && *b != NULL)
 	{
 		if ((*b)->next)
-		*b = (*b)->next;
+			*b = (*b)->next;
 	}
 	if ((index == 8 || index == 10) && *a != NULL)
 	{
 		if ((*a)->prev)
-		*a = (*a)->prev;
+			*a = (*a)->prev;
 	}
 	if ((index == 9 || index == 10) && *b != NULL)
 	{
 		if ((*b)->prev)
-		*b = (*b)->prev;
+			*b = (*b)->prev;
 	}
 }
