@@ -37,8 +37,10 @@ echo -e "${bleu} ----------------- ${vert}Visualizer : Type V/v ${bleu}---------
 echo -e "${bleu}-----------------------------------------------------------${neutre}"
 echo -e "${bleu} -------------------- ${vert}All : Type A/a ${bleu}---------------------"
 echo -e "${bleu}-----------------------------------------------------------${neutre}"
+echo -e "${bleu} ------------------- ${vert}Bonus : Type B/b ${bleu}--------------------"
+echo -e "${bleu}-----------------------------------------------------------${neutre}"
 echo -e "${vert}"
-read -p "                [m/g/v/a]" rep
+read -p "                [M/g/V/b/A]" rep
 echo -e "${bleu}"
 case $rep in
 M)
@@ -84,14 +86,23 @@ if [ $mode -eq 1 ] || [ $mode -eq 4 ]; then
 	lim100=700
 	lim500=5500
 
+	# set nuber of tests
+	num3=500
+	num5=500
+	num100=10000
+	num500=500
+
 	make >/dev/null
+	if [ ! -d "./push_swap_tester" ]; then
+		git clone git@github.com:SimonCROS/push_swap_tester.git
+	fi
 	cd push_swap_tester
 	make >/dev/null
 
-	./complexity 3 500 $lim3 ../checker_linux
-	./complexity 5 500 $lim5 ../checker_linux
-	./complexity 100 500 $lim100 ../checker_linux
-	./complexity 500 100 $lim500 ../checker_linux
+	./complexity 3 $num3 $lim3 ../checker_linux
+	./complexity 5 $num5 $lim5 ../checker_linux
+	./complexity 100 $num100 $lim100 ../checker_linux
+	./complexity 500 $num500 $lim500 ../checker_linux
 
 	make fclean >/dev/null
 	cd ..
@@ -189,22 +200,9 @@ if [ $mode -eq 3 ] || [ $mode -eq 4 ]; then
 		((n = n + 1))
 		rm -rf test_check.txt
 	done
-	./push_swap "" >/dev/null 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}$n.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}$n.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}$n.[KO] ${DEF_COLOR}\n"
-	fi
-	((n = n + 1))
 	rm -rf test_check.txt
 	rm -rf 0
+
 	ARG2=(
 		"2 1"
 		"1 3 2"
@@ -792,537 +790,63 @@ if [ $mode -eq 6 ] || [ $mode -eq 4 ]; then
 	printf ${MAGENTA}"\n\t\t\tCONTROL ERRORS\t\n"${DEF_COLOR}
 	printf ${MAGENTA}"\n-------------------------------------------------------------\n\n"${DEF_COLOR}
 
-	./checker "a" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}1.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}1.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}1.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "111a11" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}2.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}2.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}2.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "hello world" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}3.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}3.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}3.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}4.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}4.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}4.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "0 0" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}5.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}5.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}5.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "111-1 2 -3" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}7.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}7.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}7.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "-3 -2 -2" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}8.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}8.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}8.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "\n" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}9.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}9.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}9.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "-2147483649" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}10.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}10.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}10.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "-2147483650" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}11.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}11.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}11.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "2147483648" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}12.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}12.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}12.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "8 "9 1" 12" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}13.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}13.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}13.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "10 -1 -2 -3 -4 -5 -6 90 99 10" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}14.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}14.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}14.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "1 +1 -1" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}15.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}15.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}15.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "3333-3333 1 4" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}16.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}16.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}16.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "111a111 -4 3" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}17.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}17.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}17.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "111111 "-4 3"" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}18.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}18.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}18.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "2147483649" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}19.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}19.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}19.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "2147483647+1" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}20.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}20.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}20.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "0 1 2 3 4 5 0" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}21.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}21.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}21.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "3 +3" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}22.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}22.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}22.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "3+3" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}23.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}23.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}23.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "42 42" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}24.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}24.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}24.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "42 " -42" " 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}25.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}25.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}25.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "4222-4222" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}26.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}26.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}26.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "99999999999999999999999999" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}27.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}27.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}27.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "-99999999999999999999999999" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}28.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}28.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}28.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "0 -0 1 -1" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}29.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}29.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}29.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "0 +0 1 -1" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}30.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}30.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}30.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./checker "111+111 -4 3" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}31.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}31.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}31.[KO] ${DEF_COLOR}\n"
-	fi
-
-	rm -rf test_check.txt
-
-	./checker "-" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}32.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}32.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}32.[KO] ${DEF_COLOR}\n"
-	fi
-
-	rm -rf test_check.txt
-
-	./checker "+" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}33.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}33.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}33.[KO] ${DEF_COLOR}\n"
-	fi
-
-	./push_swap "--123 1 321" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}34.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}34.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}34.[KO] ${DEF_COLOR}\n"
-	fi
-
-	rm -rf test_check.txt
-
-	./push_swap "++123 1 321" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}35.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}35.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}35.[KO] ${DEF_COLOR}\n"
-	fi
-
-	rm -rf test_check.txt
-
-	./push_swap "09 9 3 -1" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}36.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}36.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}36.[KO] ${DEF_COLOR}\n"
-	fi
-
-	rm -rf test_check.txt
-
-	./push_swap "00000001 1 9 3" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}37.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}37.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}37.[KO] ${DEF_COLOR}\n"
-	fi
-
-	rm -rf test_check.txt
-
-	./push_swap "-5 00000003 003 9 1" 2>test_check.txt
-	if [ -s "$FICHERO" ]; then
-		while IFS= read -r line; do
-			if [[ $line == "Error" ]]; then
-				printf "${GREEN}38.[OK] ${DEF_COLOR}\n"
-			else
-				printf "${RED}38.[KO] ${DEF_COLOR}\n"
-				break
-			fi
-		done <test_check.txt
-	else
-		printf "${RED}38.[KO] ${DEF_COLOR}\n"
-	fi
-
-	rm -rf test_check.txt
+	ARG=(
+		"a"
+		"111a11"
+		"hello world"
+		""
+		"0 0"
+		"111-1 2 -3"
+		"-3 -2 -2"
+		"\n"
+		"-2147483649"
+		"-2147483650"
+		"2147483648"
+		"8 \"9 1\" 12"
+		"10 -1 -2 -3 -4 -5 -6 90 99 10"
+		"1 +1 -1"
+		"3333-3333 1 4"
+		"111a111 -4 3"
+		"111111 \"-4 3\""
+		"2147483649"
+		"2147483647+1"
+		"0 1 2 3 4 5 0"
+		"3 +3"
+		"3+3"
+		"42 42"
+		"42 \" -42\" "
+		"4222-4222"
+		"99999999999999999999999999"
+		"-99999999999999999999999999"
+		"0 -0 1 -1"
+		"0 +0 1 -1"
+		"111+111 -4 3"
+		"-"
+		"+"
+		"--123 1 321"
+		"++123 1 321"
+		"09 9 3 -1"
+		"00000001 1 9 3"
+		"-5 00000003 003 9 1"
+	)
+	n=1
+	for i in "${ARG[@]}"; do # on parcours la liste d'argument ARG
+		./checker "$i" 2>test_check.txt
+		if [ -s "$FICHERO" ]; then
+			while IFS= read -r line; do
+				if [[ $line == "Error" ]]; then
+					printf "${GREEN}$n.[OK] ${DEF_COLOR}\n"
+				else
+					printf "${RED}$n.[KO] ${DEF_COLOR}\n"
+					break
+				fi
+			done <test_check.txt
+		else
+			printf "${RED}$n.[KO] ${DEF_COLOR}\n"
+		fi
+		((n = n + 1))
+		rm -rf test_check.txt
+	done
 
 	# Checkear nombres de funciones diferentes
 	printf ${MAGENTA}"\n-------------------------------------------------------------\n"${DEF_COLOR}
@@ -1332,6 +856,24 @@ if [ $mode -eq 6 ] || [ $mode -eq 4 ]; then
 	ARG="2 1 3"
 	S=$(echo -e "sa" | ./checker_linux $ARG)
 	R=$(echo -e "sa" | ./checker $ARG)
+	if [ $S == $R ]; then
+		printf "${GREEN}SA 1.[OK] ${DEF_COLOR}\n"
+	else
+		printf "${RED}1.[KO]${DEF_COLOR}\n"
+	fi
+
+	ARG="2 1 3"
+	S=$(echo -e "ga" | ./checker_linux $ARG)
+	R=$(echo -e "ga" | ./checker $ARG)
+	if [ $S == $R ]; then
+		printf "${GREEN}SA 1.[OK] ${DEF_COLOR}\n"
+	else
+		printf "${RED}1.[KO]${DEF_COLOR}\n"
+	fi
+
+	ARG="1 2 3"
+	S=$(echo -e "ga" | ./checker_linux $ARG)
+	R=$(echo -e "ga" | ./checker $ARG)
 	if [ $S == $R ]; then
 		printf "${GREEN}SA 1.[OK] ${DEF_COLOR}\n"
 	else
