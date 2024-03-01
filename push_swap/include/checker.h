@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/01 14:02:19 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:30:46 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define CHECKER_H
 
 # include <unistd.h>
-# include <errno.h>
-# include <stdio.h>
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"

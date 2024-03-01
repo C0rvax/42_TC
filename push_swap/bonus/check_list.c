@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 18:27:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/18 15:17:44 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:31:24 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int	*check_list(char **args, int size)
 		return (NULL);
 	a = malloc(sizeof(int) * size);
 	if (!a)
-		return (perror("Error\n"), NULL);
+		return (ft_putstr_fd("Error\n", 2), NULL);
 	i = 0;
 	while (i < size)
 	{
