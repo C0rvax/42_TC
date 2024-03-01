@@ -2,7 +2,7 @@ CC			= cc
 
 NAME		= push_swap
 
-BONUS_NAME	= checker
+BONUS	= checker
 
 DIR			= ./src/
 
@@ -46,10 +46,12 @@ $(NAME)		: $(OBJ) $(OBJ_GNL)
 %.o			: %.c
 		$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
-bonus		: $(OBJ_BONUS) $(OBJ_GNL)
+bonus		: $(BONUS)
+
+$(BONUS)	: $(OBJ_BONUS) $(OBJ_GNL)
 		make -C printf
 		make -C libft
-		$(CC) $(CFLAGS) $^ $(LIBRARIES) -o $(BONUS_NAME)
+		$(CC) $(CFLAGS) $^ $(LIBRARIES) -o $@
 
 clean		:
 		rm -f $(OBJ) $(OBJ_GNL) $(OBJ_BONUS)
@@ -57,7 +59,7 @@ clean		:
 		make clean -C libft
 
 fclean		: clean
-		rm -f $(NAME) $(BONUS_NAME)
+		rm -f $(NAME) $(BONUS)
 		make fclean -C printf
 		make fclean -C libft
 

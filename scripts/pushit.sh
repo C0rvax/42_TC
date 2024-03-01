@@ -900,6 +900,22 @@ if [ $mode -eq 6 ] || [ $mode -eq 4 ]; then
 		printf "${RED}2.[KO]${DEF_COLOR}\n"
 	fi
 
+	S=$(echo -e "pa\npa\npa\npa" | ./checker_linux $ARG)
+	R=$(echo -e "pa\npa\npa\npa" | ./checker $ARG)
+	if [ $S == $R ]; then
+		printf "${GREEN}3.[OK] ${DEF_COLOR}\n"
+	else
+		printf "${RED}3.[KO]${DEF_COLOR}\n"
+	fi
+
+	S=$(echo -e "pa\npa\npa\npa\nsa" | ./checker_linux $ARG)
+	R=$(echo -e "pa\npa\npa\npa\nsa" | ./checker $ARG)
+	if [ $S == $R ]; then
+		printf "${GREEN}4.[OK] ${DEF_COLOR}\n"
+	else
+		printf "${RED}4.[KO]${DEF_COLOR}\n"
+	fi
+
 	printf ${MAGENTA}"\n-------------------------------------------------------------\n"${DEF_COLOR}
 	printf ${MAGENTA}"\n\t\t\tBasic Input\t\t\n"${DEF_COLOR}
 	printf ${MAGENTA}"\n-------------------------------------------------------------\n\n"${DEF_COLOR}
