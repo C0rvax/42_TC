@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:37:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/28 15:18:47 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:02:19 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct data_s
 	int		min;
 }			t_data;
 
-int		u_never_know(t_data *a);
+int		u_never_know(t_data *a, t_data *b);
 int		*check_list(char **av, int size);
 void	rotate_list(t_lst **a, t_lst **b, int index);
 int		indexe(char **cmd, char *instruction);

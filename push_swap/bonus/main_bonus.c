@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 19:03:14 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/28 14:20:49 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:02:17 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	main(int ac, char **av)
 		ft_putstr_fd("Error\n", 2);
 	else
 	{
-		if (u_never_know(&a))
+		if (u_never_know(&a, &b))
 			ft_printf("OK\n");
 		else
 			ft_printf("KO\n");

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:16:26 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/02/27 17:30:39 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/01 14:02:24 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	set_2p(t_lst **p1, t_lst *p2, t_lst **pt1, t_lst *pt2)
 	*pt1 = pt2;
 }
 
-int	u_never_know(t_data *a)
+int	u_never_know(t_data *a, t_data *b)
 {
 	int		i;
 	t_lst	*list;
@@ -56,6 +56,8 @@ int	u_never_know(t_data *a)
 		list = list->next;
 		i++;
 	}
+	if (b->size > 0)
+		return (0);
 	return (1);
 }
 
