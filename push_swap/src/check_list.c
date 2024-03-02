@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 18:27:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/02 17:26:50 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/02 17:33:45 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,8 @@ static int	check_max(char **tab)
 				cpy++;
 			while (*cpy == '0')
 				cpy++;
-			if (ft_strlen(cpy) > 10)
-				return (ft_putstr_fd("Error\n", 2), 0);
-			else if (ft_strlen(cpy) == 10 && ft_strncmp(cpy, max, 10) > 0)
+			if (ft_strlen(cpy) > 10 || (ft_strlen(cpy) == 10
+					&& ft_strncmp(cpy, max, 10) > 0))
 				return (ft_putstr_fd("Error\n", 2), 0);
 		}
 		i++;
@@ -100,9 +99,8 @@ static int	check_min(char **tab)
 			cpy = tab[i] + 1;
 			while (*cpy == '0')
 				cpy++;
-			if (ft_strlen(cpy) > 10)
-				return (ft_putstr_fd("Error\n", 2), 0);
-			else if (ft_strlen(cpy) == 10 && ft_strncmp(cpy, min, 10) > 0)
+			if (ft_strlen(cpy) > 10 || (ft_strlen(cpy) == 10
+					&& ft_strncmp(cpy, min, 10) > 0))
 				return (ft_putstr_fd("Error\n", 2), 0);
 		}
 		i++;
