@@ -23,9 +23,9 @@ function check_outfile {
 make >/dev/null
 
 echo -e "${bleu} TEST : grep la | wc -w PIPEX"
-valgrind --leak-check=full --trace-children=yes ./pipex infile "grep la" "wc -w" outfile
+valgrind --leak-check=full --trace-children=yes --track-fds=yes ./pipex infile "grep la" "wc -w" outfile
 echo -e "${jaune} TEST : grep la | wc -w BASH"
-valgrind --leak-check=full --trace-children=yes grep 'la' <infile | wc -w >outfile2
+valgrind --leak-check=full --trace-children=yes --track-fds=yes grep 'la' <infile | wc -w >outfile2
 check_outfile
 echo -e "------------------------------------------------------------------------"
 
