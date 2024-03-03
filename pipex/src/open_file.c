@@ -6,11 +6,21 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 23:19:50 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 14:54:26 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/03 16:00:27 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+static void	print_hd(int cmd)
+{
+	while (cmd > 1)
+	{
+		ft_printf("pipe ");
+		cmd--;
+	}
+	ft_printf("heredoc> ");
+}
 
 static void	init_hd(t_data *data)
 {
@@ -18,6 +28,7 @@ static void	init_hd(t_data *data)
 	char	*line;
 
 	fd = open(".hd", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	print_hd(data->cmd_max);
 	line = get_next_line(0);
 	while (line)
 	{
@@ -30,6 +41,7 @@ static void	init_hd(t_data *data)
 		else
 			ft_putstr_fd(line, fd);
 		free(line);
+		print_hd(data->cmd_max);
 		line = get_next_line(0);
 	}
 	close(fd);
