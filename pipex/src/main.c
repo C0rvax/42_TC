@@ -6,13 +6,13 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/01/20 20:12:48 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/03 13:18:26 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	wait_and_clean(t_data *data)
+static int	wait_and_clean(t_data *data)
 {
 	int	status;
 	int	status_code;
@@ -26,10 +26,10 @@ static void	wait_and_clean(t_data *data)
 		waitpid(data->pid[i], &status, 0);
 		if (WIFEXITED(status))
 			status_code = WEXITSTATUS(status);
-		ft_printf("status : %d\n", status_code);
 		i++;
 	}
 	free_struct(data);
+	return (status_code);
 }
 
 int	main(int ac, char **av, char **env)
@@ -38,7 +38,7 @@ int	main(int ac, char **av, char **env)
 
 	if (ac < 5)
 		return (print_error("Invalid number of argument",
-				"./pipex infile cmd1 cmd2 outfile\n"), 1);
+				"./pipex infile cmd1 cmd2 outfile"), 1);
 	data = init_struct(ac, av, env);
 	data.cmd_n = 0;
 	while (data.cmd_n < data.cmd_max)
