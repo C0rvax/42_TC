@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 17:12:41 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/03 18:48:52 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	wait_and_clean(t_data *data)
 	while (i < data->cmd_max)
 	{
 		waitpid(data->pid[i], &status, 0);
-		if (WIFEXITED(status))
+		if (i == data->cmd_max - 1 && WIFEXITED(status))
 			status_code = WEXITSTATUS(status);
 		i++;
 	}
@@ -35,6 +35,7 @@ static int	wait_and_clean(t_data *data)
 int	main(int ac, char **av, char **env)
 {
 	t_data	data;
+	int		status_code;
 
 	if (ac < 5)
 		return (print_error("Invalid number of argument",
@@ -55,6 +56,6 @@ int	main(int ac, char **av, char **env)
 			exec_cmd(&data);
 		data.cmd_n++;
 	}
-	wait_and_clean(&data);
-	return (0);
+	status_code = wait_and_clean(&data);
+	return (status_code);
 }
