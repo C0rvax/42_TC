@@ -22,25 +22,33 @@ function check_outfile {
 
 make >/dev/null
 
-echo -e "${bleu} TEST : grep la | wc -w ${neutre}"
+echo -e "${bleu} TEST : grep la | wc -w PIPEX"
 valgrind --leak-check=full --trace-children=yes ./pipex infile "grep la" "wc -w" outfile
+echo -e "${jaune} TEST : grep la | wc -w BASH"
 valgrind --leak-check=full --trace-children=yes grep 'la' <infile | wc -w >outfile2
 check_outfile
+echo -e "------------------------------------------------------------------------"
 
-echo -e "${bleu} TEST : grep la | grep - ${neutre}"
+echo -e "${bleu} TEST : grep la | grep - PIPEX"
 valgrind --leak-check=full --trace-children=yes ./pipex infile "grep la" "grep -" outfile
+echo -e "${jaune} TEST : grep la | grep - BASH"
 valgrind --leak-check=full --trace-children=yes grep 'la' <infile | grep '-' >outfile2
 check_outfile
+echo -e "------------------------------------------------------------------------"
 
-echo -e "${bleu} TEST : grep la | wc -w | wc -w ${neutre}"
+echo -e "${bleu} TEST : grep la | wc -w | wc -w PIPEX"
 valgrind --leak-check=full --trace-children=yes ./pipex infile "grep la" "grep -" "wc -w" outfile
+echo -e "${jaune} TEST : grep la | wc -w | wc -w BASH"
 valgrind --leak-check=full --trace-children=yes grep 'la' <infile | grep '-' | wc -w >outfile2
 check_outfile
+echo -e "------------------------------------------------------------------------"
 
-echo -e "${bleu} TEST : grep la | cat | wc -w ${neutre}"
+echo -e "${bleu} TEST : grep la | cat | wc -w PIPEX"
 valgrind --leak-check=full --trace-children=yes ./pipex infile "grep la" "cat" "wc -w" outfile
+echo -e "${jaune} TEST : grep la | cat | wc -w BASH"
 valgrind --leak-check=full --trace-children=yes grep 'la' <infile | cat | wc -w >outfile2
 check_outfile
+echo -e "------------------------------------------------------------------------"
 
 echo -e "${bleu} TEST : grep la | cat | wc -w ${neutre}"
 ./pipex infile "grep la" "cat" "wc -w" outfile

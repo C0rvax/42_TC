@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 23:19:50 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 14:30:35 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/03 14:54:26 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ void	close_file(t_data *data)
 			close(data->pipefd[i][1]);
 		i++;
 	}
-	if (data->hd > 0)
+	if (data->hd)
 		unlink(".hd");
 }
