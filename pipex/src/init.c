@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 01:31:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 13:54:00 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/03 15:40:00 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,46 @@ static void	init_pipe(t_data *data)
 	}
 }
 
-void	init_argv(t_data *data)
+static char	**add_slash(char **path)
 {
-	data->argv = ft_split(data->av[data->cmd_n + 2 + data->hd], ' ');
-	if (!data->argv)
-		clean_exit(data, 'm');
-	data->cmd = get_cmd(data->argv[0], data);
-	if (!data->cmd)
+	int		i;
+	char	*copy;
+
+	i = 0;
+	while (path[i])
 	{
-		ft_freetab(data->argv);
-		clean_exit(data, 'c');
+		copy = path[i];
+		path[i] = ft_strjoin(path[i], "/");
+		free(copy);
+		if (!path[i])
+			return (ft_freetab(path), NULL);
+		i++;
+	}
+	return (path);
+}
+
+static void	get_paths(t_data *data)
+{
+	int		i;
+	char	*path;
+
+	i = 0;
+	path = NULL;
+	while (data->env[i])
+	{
+		if (ft_strnstr(data->env[i], "PATH=", 5))
+		{
+			path = ft_substr(data->env[i], 5, ft_strlen(data->env[i]));
+			if (!path)
+				return ;
+			data->paths = ft_split(path, ':');
+			free(path);
+			if (!data->paths)
+				return ;
+			data->paths = add_slash(data->paths);
+			return ;
+		}
+		i++;
 	}
 }
 
