@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:53:39 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 17:07:49 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/03 20:04:03 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,23 @@ void	print_error(char *s1, char *s2)
 	ft_putstr_fd("\n", 2);
 }
 
-void	clean_exit(t_data *data, t_err c)
+void	clean_exit(t_data *data, t_err error)
 {
-	if (c == MALLOC)
+	if (error == MALLOC)
 		print_error("pipex", strerror(errno));
-	if (c == PIPE)
+	if (error == PIPE)
 		print_error("pipe", "Failure");
-	if (c == CMD)
+	if (error == CMD)
 		print_error("command not found", data->av[data->cmd_n + 2 + data->hd]);
-	if (c == DUP)
+	if (error == DUP)
 		print_error("dup2", "Failure");
-	if (c == EXEC)
+	if (error == EXEC)
 		print_error(data->av[data->cmd_n + 2 + data->hd], strerror(errno));
-	if (c == FORK)
+	if (error == FORK)
 		print_error("fork", strerror(errno));
-	if (c == INFILE)
+	if (error == INFILE)
 		print_error(strerror(errno), data->av[1 + data->hd]);
-	if (c == OUTFILE)
+	if (error == OUTFILE)
 		print_error(strerror(errno), data->av[4 + data->hd]);
 	close_file(data);
 	free_struct(data);
