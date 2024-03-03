@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 18:27:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/02 17:33:45 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/03 01:11:26 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,31 @@ static int	check_min(char **tab)
 					&& ft_strncmp(cpy, min, 10) > 0))
 				return (ft_putstr_fd("Error\n", 2), 0);
 		}
+		i++;
+	}
+	return (1);
+}
+
+static int	check_min_max(char **tab)
+{
+	int		i;
+	char	*cpy;
+	int		diff;
+
+	i = 0;
+	while (tab[i])
+	{
+		cpy = tab[i];
+		if (*cpy == '-' || *cpy == '+')
+			cpy++;
+		while (*cpy == '0')
+			cpy++;
+		if (tab[i][0] == '-')
+			diff = ft_strncmp(cpy, "2147483648", 10);
+		else
+			diff = ft_strncmp(cpy, "2147483647", 10);
+		if (ft_strlen(cpy) > 10 || (ft_strlen(cpy) == 10 && diff > 0))
+			return (ft_putstr_fd("Error\n", 2), 0);
 		i++;
 	}
 	return (1);

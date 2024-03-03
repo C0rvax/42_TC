@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 18:27:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/01 14:31:24 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/03 01:11:24 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,104 @@ static int	check_max(char **tab)
 {
 	int		i;
 	char	*max;
+	char	*cpy;
+
+	i = 0;
+	max = "2147483647";
+	while (tab[i])
+	{
+		if (tab[i][0] != '-')
+		{
+			cpy = tab[i];
+			if (*cpy == '+')
+				cpy++;
+			while (*cpy == '0')
+				cpy++;
+			if (ft_strlen(cpy) > 10 || (ft_strlen(cpy) == 10
+					&& ft_strncmp(cpy, max, 10) > 0))
+				return (ft_putstr_fd("Error\n", 2), 0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+static int	check_min(char **tab)
+{
+	int		i;
+	char	*min;
+	char	*cpy;
+
+	i = 0;
+	min = "2147483648";
+	while (tab[i])
+	{
+		if (tab[i][0] == '-')
+		{
+			cpy = tab[i] + 1;
+			while (*cpy == '0')
+				cpy++;
+			if (ft_strlen(cpy) > 10 || (ft_strlen(cpy) == 10
+					&& ft_strncmp(cpy, min, 10) > 0))
+				return (ft_putstr_fd("Error\n", 2), 0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+static int	check_min_max(char **tab)
+{
+	int		i;
+	char	*cpy;
+	int		diff;
+
+	i = 0;
+	while (tab[i])
+	{
+		cpy = tab[i];
+		if (*cpy == '-' || *cpy == '+')
+			cpy++;
+		while (*cpy == '0')
+			cpy++;
+		if (tab[i][0] == '-')
+			diff = ft_strncmp(cpy, "2147483648", 10);
+		else
+			diff = ft_strncmp(cpy, "2147483647", 10);
+		if (ft_strlen(cpy) > 10 || (ft_strlen(cpy) == 10 && diff > 0))
+			return (ft_putstr_fd("Error\n", 2), 0);
+		i++;
+	}
+	return (1);
+}
+
+int	*check_list(char **args, int size)
+{
+	int		i;
+	int		*a;
+
+	if (!check_int(args, size))
+		return (ft_putstr_fd("Error\n", 2), NULL);
+	if (!check_min(args) || !check_max(args))
+		return (NULL);
+	a = malloc(sizeof(int) * size);
+	if (!a)
+		return (ft_putstr_fd("Error\n", 2), NULL);
+	i = 0;
+	while (i < size)
+	{
+		a[i] = ft_atoi(args[i]);
+		i++;
+	}
+	if (!check_dup(a, size))
+		return (ft_putstr_fd("Error\n", 2), free(a), NULL);
+	return (a);
+}
+/*
+static int	check_max(char **tab)
+{
+	int		i;
+	char	*max;
 	size_t	len;
 
 	i = 0;
@@ -110,26 +208,4 @@ static int	check_min(char **tab)
 	}
 	return (1);
 }
-
-int	*check_list(char **args, int size)
-{
-	int		i;
-	int		*a;
-
-	if (!check_int(args, size))
-		return (ft_putstr_fd("Error\n", 2), NULL);
-	if (!check_min(args) || !check_max(args))
-		return (NULL);
-	a = malloc(sizeof(int) * size);
-	if (!a)
-		return (ft_putstr_fd("Error\n", 2), NULL);
-	i = 0;
-	while (i < size)
-	{
-		a[i] = ft_atoi(args[i]);
-		i++;
-	}
-	if (!check_dup(a, size))
-		return (ft_putstr_fd("Error\n", 2), free(a), NULL);
-	return (a);
-}
+*/
