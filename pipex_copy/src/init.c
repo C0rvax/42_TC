@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 01:31:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 17:12:17 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/03 15:40:00 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,24 @@ static void	init_malloc(t_data *data)
 	i = 0;
 	data->fd = malloc(sizeof(int) * 2);
 	if (!data->fd)
-		clean_exit(data, MALLOC);
+		clean_exit(data, 'm');
 	data->fd[0] = -2;
 	data->fd[1] = -2;
 	data->pipefd = malloc(sizeof(int *) * (data->cmd_max - 1));
 	if (!data->pipefd)
-		clean_exit(data, MALLOC);
+		clean_exit(data, 'm');
 	while (i < data->cmd_max - 1)
 	{
 		data->pipefd[i] = malloc(sizeof(int) * 2);
 		if (!data->pipefd[i])
-			clean_exit(data, MALLOC);
+			clean_exit(data, 'm');
 		data->pipefd[i][0] = -2;
 		data->pipefd[i][1] = -2;
 		i++;
 	}
 	data->pid = malloc(sizeof(int) * data->cmd_max);
 	if (!data->pid)
-		clean_exit(data, MALLOC);
+		clean_exit(data, 'm');
 	data->pid[0] = -2;
 	data->pid[1] = -2;
 }
@@ -51,7 +51,7 @@ static void	init_pipe(t_data *data)
 	{
 		p = pipe(data->pipefd[i]);
 		if (p == -1)
-			clean_exit(data, PIPE);
+			clean_exit(data, 'p');
 		i++;
 	}
 }
@@ -111,7 +111,7 @@ t_data	init_struct(int ac, char **av, char **env)
 	data.cmd_max = ac - 3 - data.hd;
 	get_paths(&data);
 	if (!data.paths)
-		clean_exit(&data, MALLOC);
+		clean_exit(&data, 'm');
 	init_malloc(&data);
 	open_file(&data);
 	init_pipe(&data);

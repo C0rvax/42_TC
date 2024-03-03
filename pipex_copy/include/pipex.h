@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:03:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 17:07:51 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/03 15:37:26 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,13 @@ typedef struct data_s
 	int		*pid;
 }				t_data;
 
-typedef enum	error_e
-{
-	MALLOC,
-	PIPE,
-	CMD,
-	DUP,
-	EXEC,
-	FORK,
-	INFILE,
-	OUTFILE
-}			t_err;
-
 t_data	init_struct(int ac, char **av, char **env);
 void	free_struct(t_data *data);
 void	init_argv(t_data *data);
 void	exec_cmd(t_data *data);
 void	open_file(t_data *data);
 void	close_file(t_data *data);
-void	clean_exit(t_data *data, t_err c);
+void	clean_exit(t_data *data, char c);
 void	print_error(char *s1, char *s2);
 
 #endif

@@ -11,7 +11,7 @@ OBJ			:= $(SRC:.c=.o)
 
 GNL_OBJ		:= $(GNL_SRC:.c=.o)
 
-CFLAGS		= -Wextra -Wall -Werror -g
+CFLAGS		= -Wextra -Wall -Werror
 
 HEADERS		= -I./include
 

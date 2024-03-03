@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 23:19:50 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 17:13:47 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/03 16:00:27 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	open_file(t_data *data)
 	else
 		data->fd[0] = open(data->av[1], O_RDONLY);
 	if (data->fd[0] == -1)
-		clean_exit(data, INFILE);
+		clean_exit(data, 'i');
 	outfile = data->av[data->cmd_max + 2 + data->hd];
 	data->fd[1] = open(outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (data->fd[1] == -1)
-		clean_exit(data, OUTFILE);
+		clean_exit(data, 'o');
 }
 
 void	close_file(t_data *data)

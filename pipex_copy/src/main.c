@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 17:12:41 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/03 14:26:25 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int ac, char **av, char **env)
 	{
 		data.pid[data.cmd_n] = fork();
 		if (data.pid[data.cmd_n] == -1)
-			clean_exit(&data, FORK);
+			clean_exit(&data, 'f');
 		if (data.pid[data.cmd_n] == 0)
 			exec_cmd(&data);
 		data.cmd_n++;
