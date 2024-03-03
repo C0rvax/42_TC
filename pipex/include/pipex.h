@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:03:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 17:07:51 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/03 19:57:55 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct data_s
 	int		*pid;
 }				t_data;
 
-typedef enum	error_e
+typedef enum error_e
 {
 	MALLOC,
 	PIPE,
