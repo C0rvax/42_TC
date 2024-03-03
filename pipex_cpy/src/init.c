@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 01:31:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 13:54:00 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:12:24 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	init_pipe(t_data *data)
 
 void	init_argv(t_data *data)
 {
-	data->argv = ft_split(data->av[data->cmd_n + 2 + data->hd], ' ');
+	data->argv = ft_split(data->av[data->cmd_n + 2], ' ');
 	if (!data->argv)
 		clean_exit(data, 'm');
 	data->cmd = get_cmd(data->argv[0], data);
@@ -73,12 +73,15 @@ t_data	init_struct(int ac, char **av, char **env)
 {
 	t_data	data;
 
-	ft_bzero(&data, sizeof(t_data));
 	data.av = av;
 	data.env = env;
-	if (!ft_strncmp(av[1], "here_doc", ft_strlen(av[1])))
-		data.hd = 1;
-	data.cmd_max = ac - 3 - data.hd;
+	data.cmd_max = ac - 3;
+	data.paths = NULL;
+	data.argv = NULL;
+	data.cmd = NULL;
+	data.fd = NULL;
+	data.pipefd = NULL;
+	data.pid = NULL;
 	get_paths(&data);
 	if (!data.paths)
 		clean_exit(&data, 'm');

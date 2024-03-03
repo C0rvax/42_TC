@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:03:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 13:33:42 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/20 18:54:02 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct data_s
 	char	**paths;
 	char	**argv;
 	char	*cmd;
-	int		hd;
 	int		cmd_n;
 	int		cmd_max;
 	int		*fd;

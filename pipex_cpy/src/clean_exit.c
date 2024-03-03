@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:53:39 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 13:49:19 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/03 13:19:49 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ void	clean_exit(t_data *data, char c)
 	if (c == 'p')
 		print_error("pipe", "Failure");
 	if (c == 'c')
-		print_error("command not found", data->av[data->cmd_n + 2 + data->hd]);
+		print_error("command not found", data->av[data->cmd_n + 2]);
 	if (c == 'd')
 		print_error("dup2", "Failure");
 	if (c == 'e')
-		print_error(data->av[data->cmd_n + 2 + data->hd], strerror(errno));
+		print_error(data->av[data->cmd_n + 2], strerror(errno));
 	if (c == 'f')
 		print_error("fork", strerror(errno));
 	if (c == 'i')
-		print_error(strerror(errno), data->av[1 + data->hd]);
+		print_error(strerror(errno), data->av[1]);
 	if (c == 'o')
-		print_error(strerror(errno), data->av[4 + data->hd]);
+		print_error(strerror(errno), data->av[4]);
 	close_file(data);
 	free_struct(data);
 	exit(EXIT_FAILURE);

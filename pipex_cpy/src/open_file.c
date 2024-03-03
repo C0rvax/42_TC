@@ -6,49 +6,20 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 23:19:50 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 14:30:35 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:16:18 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	init_hd(t_data *data)
-{
-	int		fd;
-	char	*line;
-
-	fd = open(".hd", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	line = get_next_line(0);
-	while (line)
-	{
-		if (!ft_strncmp(line, data->av[2], ft_strlen(data->av[2])))
-		{
-			free(line);
-			close (fd);
-			return ;
-		}
-		else
-			ft_putstr_fd(line, fd);
-		free(line);
-		line = get_next_line(0);
-	}
-	close(fd);
-}
-
 void	open_file(t_data *data)
 {
 	char	*outfile;
 
-	if (data->hd)
-	{
-		init_hd(data);
-		data->fd[0] = open(".hd", O_RDONLY);
-	}
-	else
-		data->fd[0] = open(data->av[1], O_RDONLY);
+	outfile = data->av[data->cmd_max + 2];
+	data->fd[0] = open(data->av[1], O_RDONLY);
 	if (data->fd[0] == -1)
 		clean_exit(data, 'i');
-	outfile = data->av[data->cmd_max + 2 + data->hd];
 	data->fd[1] = open(outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (data->fd[1] == -1)
 		clean_exit(data, 'o');
@@ -74,6 +45,4 @@ void	close_file(t_data *data)
 			close(data->pipefd[i][1]);
 		i++;
 	}
-	if (data->hd > 0)
-		unlink(".hd");
 }
