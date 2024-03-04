@@ -10,36 +10,25 @@ neutre='\e[0;m'
 
 echo -e "${bleu} ---------------------- ${vert}SELECT TEST ${bleu}----------------------"
 echo -e "${bleu}-----------------------------------------------------------${neutre}"
-echo -e "${bleu} --------------- ${vert}Test Général : Type G/g ${bleu}-----------------"
+echo -e "${bleu} ----------------- ${vert}Test 1${bleu}-----------------"
 echo -e "${bleu}-----------------------------------------------------------${neutre}"
-echo -e "${bleu} ----------------- ${vert}Mass Tests : Type M/m ${bleu}-----------------"
+echo -e "${bleu} ----------------- ${vert}Test 2${bleu}-----------------"
 echo -e "${bleu}-----------------------------------------------------------${neutre}"
-echo -e "${bleu} ----------------- ${vert}Visualizer : Type V/v ${bleu}-----------------"
+echo -e "${bleu} ----------------- ${vert}Test 3${bleu}-----------------"
 echo -e "${bleu}-----------------------------------------------------------${neutre}"
-echo -e "${bleu} -------------------- ${vert}All : Type A/a ${bleu}---------------------"
-echo -e "${bleu}-----------------------------------------------------------${neutre}"
-echo -e "${bleu} ------------------- ${vert}Bonus : Type B/b ${bleu}--------------------"
+echo -e "${bleu} ----------------- ${vert}Test 4${bleu}-----------------"
 echo -e "${bleu}-----------------------------------------------------------${neutre}"
 echo -e "${vert}"
-read -p "                [M/g/V/b/A]" rep
+read -p "                [1/2/3/A]" rep
 echo -e "${bleu}"
 case $rep in
-M)
+1)
 	mode=1
 	;;
-m)
-	mode=1
-	;;
-V)
+2)
 	mode=2
 	;;
-v)
-	mode=2
-	;;
-G)
-	mode=3
-	;;
-g)
+3)
 	mode=3
 	;;
 A)
@@ -47,15 +36,6 @@ A)
 	;;
 a)
 	mode=4
-	;;
-B)
-	mode=6
-	;;
-b)
-	mode=6
-	;;
-*)
-	mode=5
 	;;
 esac
 
@@ -106,5 +86,28 @@ if [ $mode -eq 1 ] || [ $mode -eq 4 ]; then
 	./pipex infile "grep la" "cat" "wc -w" outfile
 	grep 'la' <infile | cat | wc -w >outfile2
 	check_outfile
+	make fclean >/dev/null
+fi
+if [ $mode -eq 2 ] || [ $mode -eq 4 ]; then
+	make >/dev/null
+	if [ ! -d "./pipex-tester" ]; then
+		git clone https://github.com/vfurmane/pipex-tester
+	fi
+	chmod 777 ./pipex-tester/run.sh
+	./pipex-tester/run.sh
+	rm -rf ./pipex-tester
+	make fclean >/dev/null
+fi
+if [ $mode -eq 3 ] || [ $mode -eq 4 ]; then
+	make >/dev/null
+	if [ ! -d "./42_pipex_tester" ]; then
+		git clone git@github.com:michmos/42_pipex_tester.git
+	fi
+	cd 42_pipex_tester
+	chmod 777 run.sh
+	./run.sh
+	chmod 777 infiles/infile_without_permissions
+	cd ..
+	rm -rf 42_pipex_tester last_err_log.txt outfiles
 	make fclean >/dev/null
 fi
