@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 23:19:50 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/04 13:38:05 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/04 14:48:06 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static void	init_hd(t_data *data)
 	line = get_next_line(0);
 	while (line)
 	{
-		if (!ft_strncmp(line, data->av[2], ft_strlen(data->av[2])))
+		if (!ft_strncmp(line, data->av[2], ft_strlen(line) - 1)
+				&& ft_strlen(data->av[2]) == ft_strlen(line) - 1)
 		{
 			free(line);
 			close (fd);
