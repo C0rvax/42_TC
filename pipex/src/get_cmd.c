@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 14:59:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 17:10:01 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:00:52 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,20 @@ static char	*get_cmd(char *cmd, t_data *data)
 	char	*path;
 
 	i = 0;
-	while (data->paths[i])
+	if (data->paths)
 	{
-		path = ft_strjoin(data->paths[i], cmd);
-		if (!path)
-			return (NULL);
-		a = access(path, F_OK | X_OK);
-		if (a == 0)
-			return (path);
-		free(path);
-		path = NULL;
-		i++;
+		while (data->paths[i])
+		{
+			path = ft_strjoin(data->paths[i], cmd);
+			if (!path)
+				return (NULL);
+			a = access(path, F_OK | X_OK);
+			if (a == 0)
+				return (path);
+			free(path);
+			path = NULL;
+			i++;
+		}
 	}
 	a = access(cmd, F_OK | X_OK);
 	if (a == 0)
