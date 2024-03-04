@@ -1,0 +1,76 @@
+make: Entering directory '/home/c0rvax/Code/TC/pipex'
+cc -Wextra -Wall -Werror -g -I./include -c src/main.c -o src/main.o
+cc -Wextra -Wall -Werror -g -I./include -c src/init.c -o src/init.o
+cc -Wextra -Wall -Werror -g -I./include -c src/get_cmd.c -o src/get_cmd.o
+cc -Wextra -Wall -Werror -g -I./include -c src/open_file.c -o src/open_file.o
+cc -Wextra -Wall -Werror -g -I./include -c src/clean_exit.c -o src/clean_exit.o
+cc -Wextra -Wall -Werror -g -I./include -c src/exec_cmd.c -o src/exec_cmd.o
+cc -Wextra -Wall -Werror -g -I./include -c gnl/get_next_line.c -o gnl/get_next_line.o
+cc -Wextra -Wall -Werror -g -I./include -c gnl/get_next_line_utils.c -o gnl/get_next_line_utils.o
+make -C printf
+make[1]: Entering directory '/home/c0rvax/Code/TC/pipex/printf'
+cc -I. -c ft_printf.c -o ft_printf.o -Wall -Wextra -Werror
+cc -I. -c ifforest.c -o ifforest.o -Wall -Wextra -Werror
+cc -I. -c print_hex.c -o print_hex.o -Wall -Wextra -Werror
+cc -I. -c print_number.c -o print_number.o -Wall -Wextra -Werror
+cc -I. -c print_putchar.c -o print_putchar.o -Wall -Wextra -Werror
+cc -I. -c print_putstr.c -o print_putstr.o -Wall -Wextra -Werror
+cc -I. -c print_unsigned.c -o print_unsigned.o -Wall -Wextra -Werror
+cc -I. -c print_pointer.c -o print_pointer.o -Wall -Wextra -Werror
+ar rc libftprintf.a ft_printf.o ifforest.o print_hex.o print_number.o print_putchar.o print_putstr.o print_unsigned.o print_pointer.o
+make[1]: Leaving directory '/home/c0rvax/Code/TC/pipex/printf'
+make -C libft
+make[1]: Entering directory '/home/c0rvax/Code/TC/pipex/libft'
+cc -I. -c ft_memset.c -o ft_memset.o -Wall -Wextra -Werror
+cc -I. -c ft_bzero.c -o ft_bzero.o -Wall -Wextra -Werror
+cc -I. -c ft_isalpha.c -o ft_isalpha.o -Wall -Wextra -Werror
+cc -I. -c ft_isdigit.c -o ft_isdigit.o -Wall -Wextra -Werror
+cc -I. -c ft_isalnum.c -o ft_isalnum.o -Wall -Wextra -Werror
+cc -I. -c ft_isascii.c -o ft_isascii.o -Wall -Wextra -Werror
+cc -I. -c ft_isprint.c -o ft_isprint.o -Wall -Wextra -Werror
+cc -I. -c ft_putchar_fd.c -o ft_putchar_fd.o -Wall -Wextra -Werror
+cc -I. -c ft_putstr_fd.c -o ft_putstr_fd.o -Wall -Wextra -Werror
+cc -I. -c ft_putendl_fd.c -o ft_putendl_fd.o -Wall -Wextra -Werror
+cc -I. -c ft_putnbr_fd.c -o ft_putnbr_fd.o -Wall -Wextra -Werror
+cc -I. -c ft_toupper.c -o ft_toupper.o -Wall -Wextra -Werror
+cc -I. -c ft_tolower.c -o ft_tolower.o -Wall -Wextra -Werror
+cc -I. -c ft_atoi.c -o ft_atoi.o -Wall -Wextra -Werror
+cc -I. -c ft_memcpy.c -o ft_memcpy.o -Wall -Wextra -Werror
+cc -I. -c ft_memmove.c -o ft_memmove.o -Wall -Wextra -Werror
+cc -I. -c ft_memchr.c -o ft_memchr.o -Wall -Wextra -Werror
+cc -I. -c ft_memcmp.c -o ft_memcmp.o -Wall -Wextra -Werror
+cc -I. -c ft_strlen.c -o ft_strlen.o -Wall -Wextra -Werror
+cc -I. -c ft_strchr.c -o ft_strchr.o -Wall -Wextra -Werror
+cc -I. -c ft_strrchr.c -o ft_strrchr.o -Wall -Wextra -Werror
+cc -I. -c ft_strncmp.c -o ft_strncmp.o -Wall -Wextra -Werror
+cc -I. -c ft_strlcpy.c -o ft_strlcpy.o -Wall -Wextra -Werror
+cc -I. -c ft_strlcat.c -o ft_strlcat.o -Wall -Wextra -Werror
+cc -I. -c ft_strnstr.c -o ft_strnstr.o -Wall -Wextra -Werror
+cc -I. -c ft_itoa.c -o ft_itoa.o -Wall -Wextra -Werror
+cc -I. -c ft_calloc.c -o ft_calloc.o -Wall -Wextra -Werror
+cc -I. -c ft_strdup.c -o ft_strdup.o -Wall -Wextra -Werror
+cc -I. -c ft_strtrim.c -o ft_strtrim.o -Wall -Wextra -Werror
+cc -I. -c ft_strmapi.c -o ft_strmapi.o -Wall -Wextra -Werror
+cc -I. -c ft_strjoin.c -o ft_strjoin.o -Wall -Wextra -Werror
+cc -I. -c ft_striteri.c -o ft_striteri.o -Wall -Wextra -Werror
+cc -I. -c ft_substr.c -o ft_substr.o -Wall -Wextra -Werror
+cc -I. -c ft_split.c -o ft_split.o -Wall -Wextra -Werror
+cc -I. -c ft_putchar.c -o ft_putchar.o -Wall -Wextra -Werror
+cc -I. -c ft_putendl.c -o ft_putendl.o -Wall -Wextra -Werror
+cc -I. -c ft_putnbr.c -o ft_putnbr.o -Wall -Wextra -Werror
+cc -I. -c ft_putstr.c -o ft_putstr.o -Wall -Wextra -Werror
+cc -I. -c ft_isblank.c -o ft_isblank.o -Wall -Wextra -Werror
+cc -I. -c ft_iscntrl.c -o ft_iscntrl.o -Wall -Wextra -Werror
+cc -I. -c ft_isgraph.c -o ft_isgraph.o -Wall -Wextra -Werror
+cc -I. -c ft_islower.c -o ft_islower.o -Wall -Wextra -Werror
+cc -I. -c ft_isspace.c -o ft_isspace.o -Wall -Wextra -Werror
+cc -I. -c ft_isupper.c -o ft_isupper.o -Wall -Wextra -Werror
+cc -I. -c ft_isxdigit.c -o ft_isxdigit.o -Wall -Wextra -Werror
+cc -I. -c ft_strstr.c -o ft_strstr.o -Wall -Wextra -Werror
+cc -I. -c ft_freetab.c -o ft_freetab.o -Wall -Wextra -Werror
+cc -I. -c ft_putars.c -o ft_putars.o -Wall -Wextra -Werror
+cc -I. -c ft_putar.c -o ft_putar.o -Wall -Wextra -Werror
+ar rc libft.a ft_memset.o ft_bzero.o ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_isascii.o ft_isprint.o ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o ft_putnbr_fd.o ft_toupper.o ft_tolower.o ft_atoi.o ft_memcpy.o ft_memmove.o ft_memchr.o ft_memcmp.o ft_strlen.o ft_strchr.o ft_strrchr.o ft_strncmp.o ft_strlcpy.o ft_strlcat.o ft_strnstr.o ft_itoa.o ft_calloc.o ft_strdup.o ft_strtrim.o ft_strmapi.o ft_strjoin.o ft_striteri.o ft_substr.o ft_split.o ft_putchar.o ft_putendl.o ft_putnbr.o ft_putstr.o ft_isblank.o ft_iscntrl.o ft_isgraph.o ft_islower.o ft_isspace.o ft_isupper.o ft_isxdigit.o ft_strstr.o ft_freetab.o ft_putars.o ft_putar.o
+make[1]: Leaving directory '/home/c0rvax/Code/TC/pipex/libft'
+cc -Wextra -Wall -Werror -g src/main.o src/init.o src/get_cmd.o src/open_file.o src/clean_exit.o src/exec_cmd.o gnl/get_next_line.o gnl/get_next_line_utils.o -L./printf -lftprintf -L./libft -lft -o pipex
+make: Leaving directory '/home/c0rvax/Code/TC/pipex'

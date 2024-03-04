@@ -1,0 +1,50 @@
+[31;1m------------------------------------------------------------------------------------------------------------------------
+test 11:
+[0m[1m./pipex "nonexistingfile" "cat -e" "cat -e" "outfiles/outfile" 
+< nonexistingfile cat -e | cat -e > outfiles/outfile_tester
+
+[0m[31;1moutfiles/outfile:                                               [32;1moutfiles/outfile_tester:[0m
+This is random text echoed into existing outfiles before      <
+applying pipex. This allows to verify whether your program    <
+ and the original successfully replace existing text	      <
+
+Your exit status: 1
+Orig exit status: 0
+
+[31;1m------------------------------------------------------------------------------------------------------------------------
+test 12:
+[0m[1m./pipex "infiles/infile_without_permissions" "cat -e" "cat -e" "outfiles/outfile" 
+< infiles/infile_without_permissions cat -e | cat -e > outfiles/outfile_tester
+
+[0m[31;1moutfiles/outfile:                                               [32;1moutfiles/outfile_tester:[0m
+This is random text echoed into existing outfiles before      <
+applying pipex. This allows to verify whether your program    <
+ and the original successfully replace existing text	      <
+
+Your exit status: 1
+Orig exit status: 0
+
+[31;1m------------------------------------------------------------------------------------------------------------------------
+test 24:
+[0m[1m./pipex "here_doc" "EOF" "cat -e" "cat -e" "outfiles/outfile" 
+cat -e << EOF | cat -e >> outfiles/outfile_tester
+
+[0m[31;1moutfiles/outfile:                                               [32;1moutfiles/outfile_tester:[0m
+							      >	This is random text echoed into existing outfiles before 
+							      >	applying pipex. This allows to verify whether your program
+							      >	 and the original successfully replace existing text
+Hello$$								Hello$$
+Hello$$								Hello$$
+Hello$$								Hello$$
+
+==9751== HEAP SUMMARY:
+==9751==     in use at exit: 4 bytes in 1 blocks
+==9751==   total heap usage: 33 allocs, 32 frees, 615 bytes allocated
+==9751== 
+==9751== LEAK SUMMARY:
+==9751==    definitely lost: 0 bytes in 0 blocks
+==9751==    indirectly lost: 0 bytes in 0 blocks
+==9751==      possibly lost: 0 bytes in 0 blocks
+==9751==    still reachable: 4 bytes in 1 blocks
+==9751==         suppressed: 0 bytes in 0 blocks
+
