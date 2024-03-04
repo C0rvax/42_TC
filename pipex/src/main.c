@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 18:48:52 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:53:09 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int ac, char **av, char **env)
 	if (ac < 6 && !ft_strncmp(av[1], "here_doc", ft_strlen(av[1])))
 		return (print_error("Invalid number of argument",
 				"./pipex here_doc LIMITER cmd1 cmd2 outfile"), 1);
-	if (!env)
+	if (!env || env[0] == NULL)
 		return (ft_putstr_fd("Environment: no variable set!\n", 2), 1);
 	data = init_struct(ac, av, env);
 	data.cmd_n = 0;
