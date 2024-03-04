@@ -82,6 +82,41 @@ if [ $mode -eq 1 ] || [ $mode -eq 4 ]; then
 	check_outfile
 	echo -e "------------------------------------------------------------------------"
 
+	echo -e "${bleu} TEST : nofile cat | tee PIPEX"
+	valgrind --leak-check=full --trace-children=yes ./pipex nofile "cat" "tee" outfile
+	echo -e "${jaune} TEST : nofile cat | tee BASH"
+	valgrind --leak-check=full --trace-children=yes cat <nofile | tee >outfile2
+	check_outfile
+	echo -e "------------------------------------------------------------------------"
+
+	echo -e "${bleu} TEST : cannotread cat | tee PIPEX"
+	valgrind --leak-check=full --trace-children=yes ./pipex cannotread cat tee outfile
+	echo -e "${jaune} TEST : cannotread cat | tee BASH"
+	valgrind --leak-check=full --trace-children=yes cat <cannotread | tee >outfile2
+	check_outfile
+	echo -e "------------------------------------------------------------------------"
+
+	echo -e "${bleu} TEST : loremipsum tail -n 16 | grep -e '^Ut .*\.$' PIPEX"
+	valgrind --leak-check=full --trace-children=yes ./pipex loremipsum "tail -n 16" "grep -e '^Ut .*\.$'" outfile
+	echo -e "${jaune} TEST : loremipsum tail -n 16 | grep -e '^Ut .*\.$' BASH"
+	valgrind --leak-check=full --trace-children=yes tail -n 16 <loremipsum | grep -e '^Ut .*\.$' >outfile2
+	check_outfile
+	echo -e "------------------------------------------------------------------------"
+
+	echo -e "${bleu} TEST : loremipsum grep '.\+up.\+' | sed \"s/\(up\)/what's '\1' \?/g\" PIPEX"
+	valgrind --leak-check=full --trace-children=yes ./pipex loremipsum grep '.\+up.\+' sed "s/\(up\)/what's '\1' \?/g" outfile
+	echo -e "${jaune} TEST : loremipsum grep '.\+up.\+' | sed \"s/\(up\)/what's '\1' \?/g\" BASH"
+	valgrind --leak-check=full --trace-children=yes grep '.\+up.\+' <loremipsum | sed "s/\(up\)/what's '\1' \?/g" >outfile2
+	check_outfile
+	echo -e "------------------------------------------------------------------------"
+
+	echo -e "${bleu} TEST : loremipsum head -n 16 | sed -e \"s/dolor/it's painful/g\" PIPEX"
+	valgrind --leak-check=full --trace-children=yes ./pipex loremipsum head -n 16 | sed -e "s/dolor/it's painful/g" outfile
+	echo -e "${jaune} TEST : loremipsum head -n 16 | sed -e \"s/dolor/it's painful/g\" BASH"
+	valgrind --leak-check=full --trace-children=yes head -n 16 <loremipsum | sed -e "s/dolor/it's painful/g" >outfile2
+	check_outfile
+	echo -e "------------------------------------------------------------------------"
+
 	echo -e "${bleu} TEST : grep la | cat | wc -w ${neutre}"
 	./pipex infile "grep la" "cat" "wc -w" outfile
 	grep 'la' <infile | cat | wc -w >outfile2
