@@ -20,7 +20,7 @@ int	main()
 	char	*copy;
 
 	fd = open("./bible.txt", O_RDONLY);
-	while (copy)
+	while (1)
 	{
 		copy = get_next_line(fd);
 		if (!copy)
