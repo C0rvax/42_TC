@@ -37,9 +37,21 @@ A)
 a)
 	mode=4
 	;;
+4)
+	mode=5
+	;;
 esac
 
 if [ $mode -eq 1 ] || [ $mode -eq 4 ]; then
+	make >/dev/null
+	./pipex infile cat nonexist outfile
+	echo $?
+	cat <infile | nonexist >outfile
+	echo $?
+	make fclean >/dev/null
+fi
+
+if [ $mode -eq 5 ] || [ $mode -eq 4 ]; then
 	function check_outfile {
 		diff --brief outfile outfile2 >/dev/null
 		comp_value=$?
@@ -97,23 +109,24 @@ if [ $mode -eq 1 ] || [ $mode -eq 4 ]; then
 	echo -e "------------------------------------------------------------------------"
 
 	echo -e "${bleu} TEST : loremipsum tail -n 16 | grep -e '^Ut .*\.$' PIPEX"
-	valgrind --leak-check=full --trace-children=yes ./pipex loremipsum "tail -n 16" "grep -e '^Ut .*\.$'" outfile
+	#	./pipex loremipsum "tail -n 16" "grep -e '^Ut .*\.$'" outfile
+	./pipex loremipsum "tail -n 16" "grep -e ^Ut .*\.$" outfile
 	echo -e "${jaune} TEST : loremipsum tail -n 16 | grep -e '^Ut .*\.$' BASH"
-	valgrind --leak-check=full --trace-children=yes tail -n 16 <loremipsum | grep -e '^Ut .*\.$' >outfile2
+	tail <loremipsum -n 16 | grep -e '^Ut .*\.$' >outfile2
 	check_outfile
 	echo -e "------------------------------------------------------------------------"
 
 	echo -e "${bleu} TEST : loremipsum grep '.\+up.\+' | sed \"s/\(up\)/what's '\1' \?/g\" PIPEX"
-	valgrind --leak-check=full --trace-children=yes ./pipex loremipsum grep '.\+up.\+' sed "s/\(up\)/what's '\1' \?/g" outfile
+	./pipex loremipsum "grep '.\+up.\+'" "sed s/\(up\)/what's '\1' \?/g" outfile
 	echo -e "${jaune} TEST : loremipsum grep '.\+up.\+' | sed \"s/\(up\)/what's '\1' \?/g\" BASH"
-	valgrind --leak-check=full --trace-children=yes grep '.\+up.\+' <loremipsum | sed "s/\(up\)/what's '\1' \?/g" >outfile2
+	grep <loremipsum '.\+up.\+' | sed "s/\(up\)/what's '\1' \?/g" >outfile2
 	check_outfile
 	echo -e "------------------------------------------------------------------------"
 
 	echo -e "${bleu} TEST : loremipsum head -n 16 | sed -e \"s/dolor/it's painful/g\" PIPEX"
-	valgrind --leak-check=full --trace-children=yes ./pipex loremipsum head -n 16 | sed -e "s/dolor/it's painful/g" outfile
+	./pipex loremipsum "head -n 16" "sed -e s/dolor/it's painful/g" outfile
 	echo -e "${jaune} TEST : loremipsum head -n 16 | sed -e \"s/dolor/it's painful/g\" BASH"
-	valgrind --leak-check=full --trace-children=yes head -n 16 <loremipsum | sed -e "s/dolor/it's painful/g" >outfile2
+	valgrind --leak-check=full --trace-children=yes 'head -n 16' <loremipsum | sed -e "s/dolor/it's painful/g" >outfile2
 	check_outfile
 	echo -e "------------------------------------------------------------------------"
 

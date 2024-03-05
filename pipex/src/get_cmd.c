@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 14:59:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/04 16:00:52 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:01:42 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,8 @@ void	init_argv(t_data *data)
 {
 	data->argv = ft_split(data->av[data->cmd_n + 2 + data->hd], ' ');
 	if (!data->argv)
-		clean_exit(data, MALLOC);
+		clean_exit(data, MALLOC, 1);
 	data->cmd = get_cmd(data->argv[0], data);
 	if (!data->cmd)
-	{
-		ft_freetab(data->argv);
-		clean_exit(data, CMD);
-	}
+		clean_exit(data, CMD, 127);
 }

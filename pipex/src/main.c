@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 16:42:31 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/04 14:44:49 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:51:38 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ static int	wait_and_clean(t_data *data)
 	{
 		waitpid(data->pid[i], &status, 0);
 		if (i == data->cmd_max - 1 && WIFEXITED(status))
+		{
 			status_code = WEXITSTATUS(status);
+		}
 		i++;
 	}
 	free_struct(data);
@@ -51,7 +53,7 @@ int	main(int ac, char **av, char **env)
 	{
 		data.pid[data.cmd_n] = fork();
 		if (data.pid[data.cmd_n] == -1)
-			clean_exit(&data, FORK);
+			clean_exit(&data, FORK, 1);
 		if (data.pid[data.cmd_n] == 0)
 			exec_cmd(&data);
 		data.cmd_n++;

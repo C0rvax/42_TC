@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 17:03:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 20:04:00 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:28:49 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	init_argv(t_data *data);
 void	exec_cmd(t_data *data);
 void	open_file(t_data *data);
 void	close_file(t_data *data);
-void	clean_exit(t_data *data, t_err error);
+void	clean_exit(t_data *data, t_err error, int status_code);
 void	print_error(char *s1, char *s2);
 
 #endif
