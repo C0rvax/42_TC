@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 23:19:50 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/05 14:57:50 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:06:42 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	init_hd(t_data *data)
 
 	fd = open(".hd", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	print_hd(data->cmd_max);
-	line = get_next_line(0, data->av[2]);
+	line = get_next_line(0);
 	while (line)
 	{
 		if (!ft_strncmp(line, data->av[2], ft_strlen(line) - 1)
@@ -43,7 +43,7 @@ static void	init_hd(t_data *data)
 			ft_putstr_fd(line, fd);
 		free(line);
 		print_hd(data->cmd_max);
-		line = get_next_line(0, data->av[2]);
+		line = get_next_line(0);
 	}
 	close(fd);
 }
@@ -57,17 +57,21 @@ void	open_file(t_data *data)
 	{
 		init_hd(data);
 		data->fd[0] = open(".hd", O_RDONLY);
+		if (data->fd[0] == -1)
+			print_error(strerror(errno), data->av[1 + data->hd]);
 		data->fd[1] = open(outfile, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	}
 	else
 	{
 		data->fd[0] = open(data->av[1], O_RDONLY);
+		if (data->fd[0] == -1)
+			print_error(strerror(errno), data->av[1 + data->hd]);
 		data->fd[1] = open(outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	}
-	if (data->fd[0] == -1)
-		clean_exit(data, INFILE);
 	if (data->fd[1] == -1)
 		clean_exit(data, OUTFILE);
+	if (data->fd[0] == -1)
+		clean_exit(data, INFILE);
 }
 
 void	close_file(t_data *data)

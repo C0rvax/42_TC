@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:29:08 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/05 14:57:34 by aduvilla         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:13:53 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1
 # endif
 
 # include <unistd.h>
@@ -23,7 +23,7 @@
 int		isend(char *s);
 char	*read_to_result(char *result, const int fd);
 char	*stash_memory(char *result);
-char	*get_next_line(const int fd, char *eof);
+char	*get_next_line(const int fd);
 size_t	gnl_strlen(const char *s);
 char	*gnl_substr(char *s, unsigned int start, size_t len);
 char	*gnl_strjoin(char *s1, char *s2);

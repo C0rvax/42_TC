@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 22:53:39 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/03 20:04:03 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:04:19 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ void	clean_exit(t_data *data, t_err error)
 		print_error(data->av[data->cmd_n + 2 + data->hd], strerror(errno));
 	if (error == FORK)
 		print_error("fork", strerror(errno));
-	if (error == INFILE)
-		print_error(strerror(errno), data->av[1 + data->hd]);
 	if (error == OUTFILE)
 		print_error(strerror(errno), data->av[4 + data->hd]);
 	close_file(data);
