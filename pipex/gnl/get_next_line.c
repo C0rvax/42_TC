@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 10:15:13 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/22 11:27:44 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:02:10 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*stash_memory(char *result)
 	return (memory);
 }
 
-char	*get_next_line(const int fd)
+char	*get_next_line(const int fd, char *eof)
 {
 	static char	*memory;
 	char		*result;
@@ -92,5 +92,11 @@ char	*get_next_line(const int fd)
 	if (!result)
 		return (NULL);
 	memory = stash_memory(result);
+	if (!ft_strncmp(eof, result, gnl_strlen(result) - 1)
+		&& gnl_strlen(eof) == gnl_strlen(result) - 1)
+	{
+		free(memory);
+		memory = NULL;
+	}
 	return (result);
 }
