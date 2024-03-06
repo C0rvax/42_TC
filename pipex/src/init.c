@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 01:31:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/05 16:31:47 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/03/06 14:36:23 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,11 @@ static void	get_paths(t_data *data)
 		{
 			path = ft_substr(data->env[i], 5, ft_strlen(data->env[i]));
 			if (!path)
-				return ;
+				clean_exit(data, MALLOC, 1);
 			data->paths = ft_split(path, ':');
 			free(path);
 			if (!data->paths)
-				return ;
+				clean_exit(data, MALLOC, 1);
 			data->paths = add_slash(data->paths);
 			return ;
 		}
@@ -110,8 +110,6 @@ t_data	init_struct(int ac, char **av, char **env)
 		data.hd = 1;
 	data.cmd_max = ac - 3 - data.hd;
 	get_paths(&data);
-	if (!data.paths)
-		clean_exit(&data, MALLOC, 1);
 	init_malloc(&data);
 	open_file(&data);
 	init_pipe(&data);
