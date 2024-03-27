@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aduvilla <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 16:25:44 by aduvilla          #+#    #+#             */
-/*   Updated: 2023/11/07 16:28:24 by aduvilla         ###   ########.fr       */
+/*   Created: 2024/03/27 11:35:54 by aduvilla          #+#    #+#             */
+/*   Updated: 2024/03/27 11:45:38 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef PHILO_H
+# define PHILO_H
 
-char	*ft_strdup(const char *s)
-{
-	int		i;
-	char	*res;
+# include <stdio.h>
+# include <unistd.h>
+# include <pthread.h>
+# include <sys/time.h>
 
-	res = malloc(sizeof(char) * ft_strlen(s) + 1);
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		res[i] = s[i];
-		i++;
-	}
-	res[i] = '\0';
-	return (res);
-}
+#endif
