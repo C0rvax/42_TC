@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:35:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/03/27 14:21:16 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/13 10:05:56 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@
 
 typedef struct	s_academia
 {
-	pthread_t		*ending;
-	time_t			t_to_die;
-	time_t			t_to_eat;
-	time_t			t_to_sleep;
+	int				nb_philos;
 	int				n_meals;
+	time_t			die_time;
+	time_t			eat_time;
+	time_t			sleep_time;
+	pthread_t		thanatos;
 	pthread_mutex_t	l_starve;
+	pthread_mutex_t	print;
 	struct s_philo	**philo;
 }		t_academia;
 
