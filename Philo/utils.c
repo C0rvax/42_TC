@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:57:48 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/05/14 10:29:16 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:47:32 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,33 @@ int	phi_atoi(char *arg)
 		return (print_error(arg, ":", "is not a valid number", -1));
 	while (arg[i])
 	{
-		res = res * 10 + arg[i] + '0';
+		res = res * 10 + arg[i] - '0';
 		i++;
 	}
 	if (res > 2147483647)
 		return (print_error(arg, ":", "is higher than INT_MAX", -1));
-	return (res);
+	return ((int)res);
 }
 
 time_t	get_ts(void)
 {
 	struct timeval	time;
-	
+
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+int	philos_alive(t_academia *academia)
+{
+
+	pthread_mutex_lock(&academia->end_mutex);
+	if (academia->stop)
+	{
+		pthread_mutex_unlock(&academia->end_mutex);
+		return (0);
+	}
+	pthread_mutex_unlock(&academia->end_mutex);
+	return (1);
 }
 
 void	print_status(t_philo *philo, char *s)
@@ -60,12 +73,14 @@ void	print_status(t_philo *philo, char *s)
 	time_t	time;
 
 	time = get_ts() - philo->academia->start_time;
-	pthread_mutex_lock(&philo->academia->stop_lock);
+	pthread_mutex_lock(&philo->academia->end_mutex);
 	if (!philo->academia->stop)
 	{
-		pthread_mutex_lock(&philo->academia->print);
-		printf("%ld %d %s", time, philo->id, s);
-		pthread_mutex_unlock(&philo->academia->print);
+		pthread_mutex_unlock(&philo->academia->end_mutex);
+		pthread_mutex_lock(&philo->academia->print_mutex);
+		printf("%ld %d %s\n", time, philo->id, s);
+		pthread_mutex_unlock(&philo->academia->print_mutex);
 	}
-	pthread_mutex_unlock(&philo->academia->stop_lock);
+	else
+		pthread_mutex_unlock(&philo->academia->end_mutex);
 }

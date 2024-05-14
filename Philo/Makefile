@@ -2,13 +2,13 @@ CC			= cc
 
 NAME		= philo
 
-SRC			= $(addprefix ./philo/, main.c init.c exit_error.c utils.c		\
+SRC			= main.c init.c exit_error.c utils.c thanatos.c philo.c
 
 OBJ			:= $(SRC:.c=.o)
 
 CFLAGS		= -Wextra -Wall -Werror -g
 
-HEADERS		= -I./include
+HEADERS		= -I.
 
 all			: $(NAME)
 
