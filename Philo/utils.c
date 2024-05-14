@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:57:48 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/05/14 15:47:32 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/14 15:59:24 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ time_t	get_ts(void)
 
 int	philos_alive(t_academia *academia)
 {
-
 	pthread_mutex_lock(&academia->end_mutex);
 	if (academia->stop)
 	{

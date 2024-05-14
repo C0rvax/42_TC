@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:43:57 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/05/14 15:40:09 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:07:55 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,23 @@ static int	is_dead(t_philo *philo)
 static int	is_over(t_academia *academia)
 {
 	int	i;
-	int	finish;
+	int	full;
 
 	i = 0;
-	finish = 1;
+	full = 1;
 	while (i < academia->nb_philos)
 	{
 		pthread_mutex_lock(&academia->philo[i]->starve_mutex);
 		if (academia->meals_max != -2)
 			if (academia->philo[i]->n_meals < academia->meals_max)
-				finish = 0;
+				full = 0;
 		if (is_dead(academia->philo[i]))
 		{
-			printf("dead\n");
 			pthread_mutex_unlock(&academia->philo[i]->starve_mutex);
 			return (1);
 		}
 		pthread_mutex_unlock(&academia->philo[i]->starve_mutex);
-		if (!finish)
+		if (full)
 		{
 			stop_philo(academia);
 			return (1);
@@ -71,10 +70,7 @@ void	*thanatos(void *academia)
 	while (1)
 	{
 		if (is_over(adm))
-		{
-			printf("time : %ld over\n", get_ts() - adm->start_time);
 			return (NULL);
-		}
 		usleep(900);
 	}
 	return (NULL);
