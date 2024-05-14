@@ -59,7 +59,7 @@ int		clean_exit(t_academia *academia);
 
 /***********************	UTILS	****************************************/
 
-time_t	get_ts(void);
+time_t	get_time(void);
 int		phi_atoi(char *arg);
 void	print_status(t_philo *philo, char *s);
 int		philos_alive(t_academia *academia);

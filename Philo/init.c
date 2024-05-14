@@ -36,7 +36,7 @@ int	init_academia(t_academia *academia, int ac, char **av)
 	if (ac > 5)
 		academia->meals_max = phi_atoi(av[5]);
 	academia->stop = 0;
-	academia->start_time = get_ts();
+	academia->start_time = get_time();
 	if (check_academia(academia))
 		return (1);
 	if (pthread_mutex_init(&academia->print_mutex, NULL))

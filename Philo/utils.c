@@ -47,7 +47,7 @@ int	phi_atoi(char *arg)
 	return ((int)res);
 }
 
-time_t	get_ts(void)
+time_t	get_time(void)
 {
 	struct timeval	time;
 
@@ -71,7 +71,7 @@ void	print_status(t_philo *philo, char *s)
 {
 	time_t	time;
 
-	time = get_ts() - philo->academia->start_time;
+	time = get_time() - philo->academia->start_time;
 	pthread_mutex_lock(&philo->academia->end_mutex);
 	if (!philo->academia->stop)
 	{

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:53:37 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/05/14 15:53:52 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:49:49 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,34 @@ static void	philo_solo(t_philo *philo)
 	pthread_mutex_unlock(&philo->selfork_mutex);
 }
 
+static void	waiting(t_philo *philo, int mode)
+{
+	time_t	eat;
+	time_t	sleep;
+
+	eat = philo->academia->eat_time * 1000;
+	sleep = philo->academia->sleep_time * 1000;
+	if (mode == 1)
+	{
+		if (philo->id == philo->academia->nb_philos
+				&& philo->academia->nb_philos % 2)
+			usleep(eat * 2 - 900);
+		else
+			usleep(eat - 900);
+	}
+	if (mode == 2)
+	{
+		if (philo->academia->nb_philos % 2)
+		{
+			if (eat * 2 - 900 > sleep)
+				usleep(eat * 2 - sleep - 900);
+		}
+		else
+			if (eat - 900 > sleep)
+				usleep(eat - sleep - 900);
+	}
+}
+
 static void	philo_eat_sleep_think(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->selfork_mutex);
@@ -29,7 +57,7 @@ static void	philo_eat_sleep_think(t_philo *philo)
 	print_status(philo, "has taken a fork");
 	print_status(philo, "is eating");
 	pthread_mutex_lock(&philo->starve_mutex);
-	philo->starve_time = get_ts() + philo->academia->die_time;
+	philo->starve_time = get_time() + philo->academia->die_time;
 	philo->n_meals++;
 	pthread_mutex_unlock(&philo->starve_mutex);
 	usleep(philo->academia->eat_time * 1000);
@@ -38,6 +66,7 @@ static void	philo_eat_sleep_think(t_philo *philo)
 	print_status(philo, "is sleeping");
 	usleep(philo->academia->sleep_time * 1000);
 	print_status(philo, "is thinking");
+	waiting(philo, 2);
 }
 
 void	*philo(void *phi)
@@ -50,10 +79,10 @@ void	*philo(void *phi)
 	else
 	{
 		pthread_mutex_lock(&philo->starve_mutex);
-		philo->starve_time = get_ts() + philo->academia->die_time;
+		philo->starve_time = get_time() + philo->academia->die_time;
 		pthread_mutex_unlock(&philo->starve_mutex);
-		if (philo->id % 2 == 0)
-			usleep(philo->academia->eat_time * 100);
+		if (philo->id % 2)
+			waiting(philo, 1);
 		while (philos_alive(philo->academia))
 			philo_eat_sleep_think(philo);
 	}

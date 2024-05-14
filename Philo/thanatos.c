@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:43:57 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/05/14 16:07:55 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/14 17:14:59 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ static void	stop_philo(t_academia *academia)
 
 static int	is_dead(t_philo *philo)
 {
-	if (get_ts() - philo->academia->start_time >= philo->starve_time)
+	if (get_time() >= philo->starve_time)
 	{
+		pthread_mutex_unlock(&philo->starve_mutex);
 		print_status(philo, "died");
 		stop_philo(philo->academia);
 		return (1);
 	}
+	pthread_mutex_unlock(&philo->starve_mutex);
 	return (0);
 }
 
@@ -40,22 +42,19 @@ static int	is_over(t_academia *academia)
 	while (i < academia->nb_philos)
 	{
 		pthread_mutex_lock(&academia->philo[i]->starve_mutex);
-		if (academia->meals_max != -2)
+		if (academia->meals_max > 0)
+		{
 			if (academia->philo[i]->n_meals < academia->meals_max)
 				full = 0;
+		}
+		else
+			full = 0;
 		if (is_dead(academia->philo[i]))
-		{
-			pthread_mutex_unlock(&academia->philo[i]->starve_mutex);
-			return (1);
-		}
-		pthread_mutex_unlock(&academia->philo[i]->starve_mutex);
-		if (full)
-		{
-			stop_philo(academia);
-			return (1);
-		}
+			return (stop_philo(academia), 1);
 		i++;
 	}
+	if (full)
+		return (stop_philo(academia), 1);
 	return (0);
 }
 
