@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:57:48 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/05/13 17:36:49 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/14 10:29:16 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	phi_atoi(char *arg)
 	res = 0;
 	i = 0;
 	if (!is_valid(arg))
-		return (print_error(arg, ":", "is not a number", -1));
+		return (print_error(arg, ":", "is not a valid number", -1));
 	while (arg[i])
 	{
 		res = res * 10 + arg[i] + '0';

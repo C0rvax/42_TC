@@ -1,13 +1,12 @@
 CC			= cc
 
-NAME		= pipex
+NAME		= philo
 
-SRC			= $(addprefix ./philo/, main.c init.c get_cmd.c open_file.c		\
-			  clean_exit.c exec_cmd.c)
+SRC			= $(addprefix ./philo/, main.c init.c exit_error.c utils.c		\
 
 OBJ			:= $(SRC:.c=.o)
 
-CFLAGS		= -Wextra -Wall -Werror -g -pthread
+CFLAGS		= -Wextra -Wall -Werror -g
 
 HEADERS		= -I./include
 
