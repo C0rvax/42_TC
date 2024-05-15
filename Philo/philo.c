@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:53:37 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/05/14 19:49:49 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:51:53 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,24 @@ static void	waiting(t_philo *philo, int mode)
 {
 	time_t	eat;
 	time_t	sleep;
+	int		odd;
 
+	odd = philo->academia->nb_philos % 2;
 	eat = philo->academia->eat_time * 1000;
 	sleep = philo->academia->sleep_time * 1000;
 	if (mode == 1)
 	{
-		if (philo->id == philo->academia->nb_philos
-				&& philo->academia->nb_philos % 2)
+		if (philo->id == philo->academia->nb_philos && odd)
 			usleep(eat * 2 - 900);
 		else
 			usleep(eat - 900);
 	}
-	if (mode == 2)
+	else if (mode == 2)
 	{
-		if (philo->academia->nb_philos % 2)
-		{
-			if (eat * 2 - 900 > sleep)
-				usleep(eat * 2 - sleep - 900);
-		}
-		else
-			if (eat - 900 > sleep)
-				usleep(eat - sleep - 900);
+		if (odd && eat * 2 - 900 > sleep)
+			usleep(eat * 2 - sleep - 900);
+		else if (eat - 900 > sleep)
+			usleep(eat - sleep - 900);
 	}
 }
 
@@ -83,7 +80,7 @@ void	*philo(void *phi)
 		pthread_mutex_unlock(&philo->starve_mutex);
 		if (philo->id % 2)
 			waiting(philo, 1);
-		while (philos_alive(philo->academia))
+		while (!stop_dinner(philo->academia))
 			philo_eat_sleep_think(philo);
 	}
 	return (NULL);

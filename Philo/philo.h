@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:35:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/05/14 15:48:23 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/15 09:00:39 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		clean_exit(t_academia *academia);
 time_t	get_time(void);
 int		phi_atoi(char *arg);
 void	print_status(t_philo *philo, char *s);
-int		philos_alive(t_academia *academia);
+int		stop_dinner(t_academia *academia);
 
 /***********************	INIT	****************************************/
 
@@ -73,6 +73,7 @@ int		init_philo(t_academia *adm);
 /***********************	ROUTINE	****************************************/
 
 void	*thanatos(void *academia);
+void	stop_academia(t_academia *academia);
 void	*philo(void *phi);
 
 #endif

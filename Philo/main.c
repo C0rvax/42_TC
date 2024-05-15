@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 13:53:08 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/05/14 15:46:16 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:01:55 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ static int	a_table(t_academia *academia)
 
 	if (academia->nb_philos > 1)
 		if (pthread_create(&academia->thanatos, NULL, &thanatos, academia))
-			return (print_error("pthread", ":", "cannot create a thread", 1));
+			return (print_error("pthread:", " ", "cannot create a thread", 1));
 	i = 0;
 	while (i < academia->nb_philos)
 	{
 		if (pthread_create(&academia->philo[i]->thread, NULL, &philo,
 				academia->philo[i]))
-			return (print_error("pthread", ":", "cannot create a thread", 1));
+			return (print_error("pthread:", " ", "cannot create a thread", 1));
 		i++;
 	}
 	return (0);
 }
 
-static int	clear_table(t_academia *academia)
+static void	clear_table(t_academia *academia)
 {
 	int	i;
 
@@ -43,7 +43,6 @@ static int	clear_table(t_academia *academia)
 	if (academia->nb_philos > 1)
 		pthread_join(academia->thanatos, NULL);
 	clean_exit(academia);
-	return (0);
 }
 
 int	main(int ac, char **av)
@@ -52,10 +51,10 @@ int	main(int ac, char **av)
 	char		*use;
 	char		*use2;
 
-	use = "./philo [nb of philosophers] [time to die] [time to eat]";
-	use2 = "[time to sleep] [number of meals]";
+	use = " ./philo [nb of philosophers] [time to die] [time to eat]";
+	use2 = " [time to sleep] {number of meals}";
 	if (ac != 5 && ac != 6)
-		return (print_error("usage :", use, use2, 1));
+		return (print_error("usage:", use, use2, 1));
 	if (init_academia(&academia, ac, av))
 		return (clear_academia(&academia));
 	if (init_philo(&academia))
