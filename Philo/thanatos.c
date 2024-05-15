@@ -6,13 +6,13 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:43:57 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/05/15 09:55:50 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:29:16 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	stop_academia(t_academia *academia)
+static void	stop_academia(t_academia *academia)
 {
 	pthread_mutex_lock(&academia->end_mutex);
 	academia->stop = 1;

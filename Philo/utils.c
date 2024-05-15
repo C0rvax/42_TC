@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 11:57:48 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/05/15 10:59:18 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:25:40 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,14 @@ void	print_status(t_philo *philo, char *s)
 	time_t	time;
 
 	time = get_time() - philo->academia->start_time;
-	if (!stop_dinner(philo->academia))
+	pthread_mutex_lock(&philo->academia->end_mutex);
+	if (!philo->academia->stop)
 	{
 		pthread_mutex_lock(&philo->academia->print_mutex);
 		printf("%ld %d %s\n", time, philo->id, s);
 		if (s && s[0] == 'd')
-			stop_academia(philo->academia);
+			philo->academia->stop = 1;
 		pthread_mutex_unlock(&philo->academia->print_mutex);
 	}
+	pthread_mutex_unlock(&philo->academia->end_mutex);
 }

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 11:35:54 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/05/15 09:00:39 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:26:55 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int		init_philo(t_academia *adm);
 /***********************	ROUTINE	****************************************/
 
 void	*thanatos(void *academia);
-void	stop_academia(t_academia *academia);
 void	*philo(void *phi);
 
 #endif
