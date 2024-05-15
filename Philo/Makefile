@@ -6,14 +6,14 @@ SRC			= main.c init.c exit_error.c utils.c thanatos.c philo.c
 
 OBJ			:= $(SRC:.c=.o)
 
-CFLAGS		= -Wextra -Wall -Werror -g
+CFLAGS		= -Wextra -Wall -Werror
 
 HEADERS		= -I.
 
 all			: $(NAME)
 
 $(NAME)		: $(OBJ)
-		$(CC) $(CFLAGS) $^ $(LIBRARIES) -o $@
+		$(CC) $(CFLAGS) $^ -o $@
 
 %.o			: %.c
 		$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
