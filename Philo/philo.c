@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:53:37 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/05/15 10:51:53 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:41:32 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,18 @@ static void	waiting(t_philo *philo, int mode)
 
 static void	philo_eat_sleep_think(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->selfork_mutex);
-	print_status(philo, "has taken a fork");
-	pthread_mutex_lock(philo->taxfork_mutex);
+	if (philo->id % 2)
+	{
+		pthread_mutex_lock(&philo->selfork_mutex);
+		print_status(philo, "has taken a fork");
+		pthread_mutex_lock(philo->taxfork_mutex);
+	}
+	else
+	{
+		pthread_mutex_lock(philo->taxfork_mutex);
+		print_status(philo, "has taken a fork");
+		pthread_mutex_lock(&philo->selfork_mutex);
+	}
 	print_status(philo, "has taken a fork");
 	print_status(philo, "is eating");
 	pthread_mutex_lock(&philo->starve_mutex);
