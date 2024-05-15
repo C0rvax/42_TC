@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 13:53:37 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/05/15 13:41:32 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/05/15 21:27:57 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	*philo(void *phi)
 	t_philo	*philo;
 
 	philo = (t_philo *)phi;
+	if (philo->academia->meals_max == 0)
+		return (NULL);
 	if (philo->academia->nb_philos == 1)
 		philo_solo(philo);
 	else
