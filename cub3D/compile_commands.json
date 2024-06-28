@@ -1,0 +1,758 @@
+[
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "gnl/get_next_line.c",
+   "-o",
+   "gnl/get_next_line.o"
+  ],
+  "file": "gnl/get_next_line.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "gnl/get_next_line_utils.c",
+   "-o",
+   "gnl/get_next_line_utils.o"
+  ],
+  "file": "gnl/get_next_line_utils.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/main.c",
+   "-o",
+   "src/main.o"
+  ],
+  "file": "src/main.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/moving.c",
+   "-o",
+   "src/moving.o"
+  ],
+  "file": "src/moving.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/fps.c",
+   "-o",
+   "src/fps.o"
+  ],
+  "file": "src/fps.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/ending.c",
+   "-o",
+   "src/ending.o"
+  ],
+  "file": "src/ending.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/changing_direction.c",
+   "-o",
+   "src/changing_direction.o"
+  ],
+  "file": "src/changing_direction.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/init_cub.c",
+   "-o",
+   "src/init/init_cub.o"
+  ],
+  "file": "src/init/init_cub.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/exit.c",
+   "-o",
+   "src/init/exit.o"
+  ],
+  "file": "src/init/exit.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/utils.c",
+   "-o",
+   "src/init/utils.o"
+  ],
+  "file": "src/init/utils.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/init_scene.c",
+   "-o",
+   "src/init/init_scene.o"
+  ],
+  "file": "src/init/init_scene.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/edit_scene.c",
+   "-o",
+   "src/init/edit_scene.o"
+  ],
+  "file": "src/init/edit_scene.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/char_condition.c",
+   "-o",
+   "src/init/char_condition.o"
+  ],
+  "file": "src/init/char_condition.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/check_map.c",
+   "-o",
+   "src/init/check_map.o"
+  ],
+  "file": "src/init/check_map.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/init_map.c",
+   "-o",
+   "src/init/init_map.o"
+  ],
+  "file": "src/init/init_map.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/raycasting/rays.c",
+   "-o",
+   "src/raycasting/rays.o"
+  ],
+  "file": "src/raycasting/rays.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/raycasting/rays2.c",
+   "-o",
+   "src/raycasting/rays2.o"
+  ],
+  "file": "src/raycasting/rays2.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/FPS_view/draw_lines.c",
+   "-o",
+   "src/FPS_view/draw_lines.o"
+  ],
+  "file": "src/FPS_view/draw_lines.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/FPS_view/draw_walls.c",
+   "-o",
+   "src/FPS_view/draw_walls.o"
+  ],
+  "file": "src/FPS_view/draw_walls.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/FPS_view/draw_view.c",
+   "-o",
+   "src/FPS_view/draw_view.o"
+  ],
+  "file": "src/FPS_view/draw_view.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/FPS_view/utils.c",
+   "-o",
+   "src/FPS_view/utils.o"
+  ],
+  "file": "src/FPS_view/utils.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/Cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/FPS_view/draw_textures.c",
+   "-o",
+   "src/FPS_view/draw_textures.o"
+  ],
+  "file": "src/FPS_view/draw_textures.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/main.c",
+   "-o",
+   "src/main.o"
+  ],
+  "file": "src/main.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/moving.c",
+   "-o",
+   "src/moving.o"
+  ],
+  "file": "src/moving.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/fps.c",
+   "-o",
+   "src/fps.o"
+  ],
+  "file": "src/fps.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/ending.c",
+   "-o",
+   "src/ending.o"
+  ],
+  "file": "src/ending.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/changing_direction.c",
+   "-o",
+   "src/changing_direction.o"
+  ],
+  "file": "src/changing_direction.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "gnl/get_next_line.c",
+   "-o",
+   "gnl/get_next_line.o"
+  ],
+  "file": "gnl/get_next_line.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "gnl/get_next_line_utils.c",
+   "-o",
+   "gnl/get_next_line_utils.o"
+  ],
+  "file": "gnl/get_next_line_utils.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/init_cub.c",
+   "-o",
+   "src/init/init_cub.o"
+  ],
+  "file": "src/init/init_cub.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/exit.c",
+   "-o",
+   "src/init/exit.o"
+  ],
+  "file": "src/init/exit.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/utils.c",
+   "-o",
+   "src/init/utils.o"
+  ],
+  "file": "src/init/utils.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/init_scene.c",
+   "-o",
+   "src/init/init_scene.o"
+  ],
+  "file": "src/init/init_scene.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/edit_scene.c",
+   "-o",
+   "src/init/edit_scene.o"
+  ],
+  "file": "src/init/edit_scene.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/char_condition.c",
+   "-o",
+   "src/init/char_condition.o"
+  ],
+  "file": "src/init/char_condition.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/check_map.c",
+   "-o",
+   "src/init/check_map.o"
+  ],
+  "file": "src/init/check_map.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/init/init_map.c",
+   "-o",
+   "src/init/init_map.o"
+  ],
+  "file": "src/init/init_map.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/raycasting/rays.c",
+   "-o",
+   "src/raycasting/rays.o"
+  ],
+  "file": "src/raycasting/rays.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/raycasting/rays2.c",
+   "-o",
+   "src/raycasting/rays2.o"
+  ],
+  "file": "src/raycasting/rays2.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/FPS_view/draw_walls.c",
+   "-o",
+   "src/FPS_view/draw_walls.o"
+  ],
+  "file": "src/FPS_view/draw_walls.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/FPS_view/draw_view.c",
+   "-o",
+   "src/FPS_view/draw_view.o"
+  ],
+  "file": "src/FPS_view/draw_view.c"
+ },
+ {
+  "directory": "/home/aduvilla/Code/TC/cub3D",
+  "arguments": [
+   "cc",
+   "-Wextra",
+   "-Wall",
+   "-Werror",
+   "-g",
+   "-Imlx",
+   "-I./include",
+   "-O3",
+   "-c",
+   "src/FPS_view/utils.c",
+   "-o",
+   "src/FPS_view/utils.o"
+  ],
+  "file": "src/FPS_view/utils.c"
+ }
+]
