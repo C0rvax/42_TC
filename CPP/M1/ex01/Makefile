@@ -6,11 +6,11 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/09/30 14:09:36 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/09/30 22:21:25 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC				= phonebook.cpp
+SRC				= main.cpp PhoneBook.cpp Contact.cpp
 
 OBJ				= $(SRC:.cpp=.o)
 
@@ -18,7 +18,7 @@ CC				= c++
 
 FLAGS			= -Wall -Wextra -Werror -std=c++98
 
-NAME			= megaphone
+NAME			= PhoneBook
 
 all				: $(NAME)
 
