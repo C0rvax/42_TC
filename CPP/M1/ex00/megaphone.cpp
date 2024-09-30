@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 23:15:43 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/09/24 10:38:54 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:31:59 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ int	main(int ac, char **av)
 		{
 			for (j = 0; av[i][j]; j++)
 				std::cout << (char) std::toupper(av[i][j]);
-			std::cout << std::endl;
+			std::cout << ' ';
 		}
+		std::cout << std::endl;
 	}
 	return (0);
-
-
 }
