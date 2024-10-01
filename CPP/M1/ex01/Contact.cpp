@@ -6,13 +6,25 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 19:40:57 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/09/30 19:53:41 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:50:32 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 
 Contact::Contact()
+{
+	this->m_firstName = "";
+	this->m_lastName = "";
+	this->m_nickName = "";
+	this->m_phoneNumber = "";
+	this->m_darkestSecret = "";
+}
+
+Contact::Contact(std::string firstName, std::string lastName, std::string
+		nickName, std::string phoneNumber, std::string darkestSecret) :
+		m_firstName(firstName), m_lastName(lastName), m_nickName(nickName),
+		m_phoneNumber(phoneNumber), m_darkestSecret(darkestSecret)
 {
 }
 

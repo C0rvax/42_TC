@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 18:40:24 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/01 00:35:09 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/01 10:01:40 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "PhoneBook.hpp"
@@ -27,13 +27,15 @@ void	PhoneBook::add()
 
 	index = m_contactCount % 8;
 	std::cout << std::endl;
+	std::cout << "|-------------------------------------------|" << std::endl;
 	std::cout << "|           Adding new contact              |" << std::endl;
-	this->m_list[index].setFirstName(m_addInput("| First name: "));
-	this->m_list[index].setLastName(m_addInput("| Last name: "));
-	this->m_list[index].setNickName(m_addInput("| Nick name: "));
-	this->m_list[index].setPhoneNumber(m_addInput("| Phone number: "));
-	this->m_list[index].setDarkestSecret(m_addInput("| Darkest secret: "));
+	this->m_list[index].setFirstName(m_addInput("- First name: "));
+	this->m_list[index].setLastName(m_addInput("- Last name: "));
+	this->m_list[index].setNickName(m_addInput("- Nick name: "));
+	this->m_list[index].setPhoneNumber(m_addInput("- Phone number: "));
+	this->m_list[index].setDarkestSecret(m_addInput("- Darkest secret: "));
 	std::cout << "|             Contact added                 |" << std::endl;
+	std::cout << "|-------------------------------------------|" << std::endl;
 	std::cout << std::endl;
 	std::cout << std::endl;
 	m_contactCount++;
@@ -52,14 +54,19 @@ void	PhoneBook::search()
 	{
 		m_printIndex();
 		std::cout << "| Type Index number to see more informations|" << std::endl;
+		std::cout << "|-------------------------------------------|" << std::endl;
 		std::cout << std::endl;
-		getline(std::cin, input);
+		std:getline(std::cin, input);
 		index = m_getIndex(input);
 		while(index > std::min(8, m_contactCount) || index <= 0)
 		{
+			std::cout << std::endl;
+			std::cout << "|-------------------------------------------|" << std::endl;
 			std::cout << "|Wrong input: chose a number between 1 and ";
-			std::cout << std::min(8, m_contactCount) << " |" << std::endl;
-			getline(std::cin, input);
+			std::cout << std::min(8, m_contactCount) << "|" << std::endl;
+			std::cout << "|-------------------------------------------|" << std::endl;
+			std::cout << std::endl;
+			std::getline(std::cin, input);
 			index = m_getIndex(input);
 		}
 		m_printContact(index);
@@ -68,7 +75,7 @@ void	PhoneBook::search()
 	{
 		std::cout << "| Nothing to display: the PhoneBook is empty|" << std::endl;
 		std::cout << "|            Back to Main Menu              |" << std::endl;
-		std::cout << std::endl;
+		std::cout << "|-------------------------------------------|" << std::endl;
 		std::cout << std::endl;
 	}
 }
@@ -89,7 +96,7 @@ void	PhoneBook::m_printIndex() const
 		m_printTen(m_list[i].getNickName());
 		std::cout << "|" << std::endl;
 	}
-	std::cout << std::endl;
+	std::cout << "|-------------------------------------------|" << std::endl;
 }
 
 int	PhoneBook::m_getIndex(std::string input) const
@@ -104,17 +111,21 @@ int	PhoneBook::m_getIndex(std::string input) const
 
 void	PhoneBook::m_printContact(int index) const
 {
-	std::cout << "| Index: " << index << std::endl;
-	std::cout << "| First name: ";
+	std::cout << std::endl;
+	std::cout << "|-------------------------------------------|" << std::endl;
+	std::cout << "|                 Contact                   |" << std::endl;
+	std::cout << "- Index: " << index << std::endl;
+	std::cout << "- First name: ";
 	std::cout << m_list[index - 1].getFirstName() << std::endl;
-	std::cout << "| Last name: ";
+	std::cout << "- Last name: ";
 	std::cout << m_list[index - 1].getLastName() << std::endl;
-	std::cout << "| Nick name: ";
+	std::cout << "- Nick name: ";
 	std::cout << m_list[index - 1].getNickName() << std::endl;
-	std::cout << "| Phone number: ";
+	std::cout << "- Phone number: ";
 	std::cout << m_list[index - 1].getPhoneNumber() << std::endl;
-	std::cout << "| Darkest secret: ";
+	std::cout << "- Darkest secret: ";
 	std::cout << m_list[index - 1].getDarkestSecret() << std::endl;
+	std::cout << "|-------------------------------------------|" << std::endl;
 	std::cout << std::endl;
 }
 
@@ -139,12 +150,12 @@ std::string	PhoneBook::m_addInput(std::string attribute) const
 	std::string input;
 
 	std::cout << attribute;
-	getline(std::cin, input);
+	std:getline(std::cin, input);
 	while (input.empty())
 	{
 		std::cout << "Invalid Input: No empty string" << std::endl;
 		std::cout << attribute;
-		getline(std::cin, input);
+		std::getline(std::cin, input);
 	}
 	return (input);
 }

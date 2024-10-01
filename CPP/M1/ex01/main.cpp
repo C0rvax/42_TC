@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 17:42:51 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/01 00:35:16 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/01 09:50:35 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	main()
 	PhoneBook	myAwesomePhoneBook;
 	std::string	input;
 
-	mainMenu();
 	while(1)
 	{
-		getline(std::cin, input);
+		mainMenu();
+		std::getline(std::cin, input);
 		if (input.compare("ADD") == 0)
 			myAwesomePhoneBook.add();
 		else if (input.compare("SEARCH") == 0)
@@ -43,9 +43,10 @@ int	main()
 		else
 		{
 			std::cout << std::endl;
+			std::cout << "|-------------------------------------------|" << std::endl;
 			std::cout << "|              Command not found            |" << std::endl;
 			std::cout << "|       Type 'ADD', 'SEARCH' or 'EXIT'      |" << std::endl;
-			std::cout << std::endl;
+			std::cout << "|-------------------------------------------|" << std::endl;
 			std::cout << std::endl;
 		}
 	}
