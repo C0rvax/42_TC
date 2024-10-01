@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/10/01 13:06:39 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/10/01 17:13:40 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,7 @@ OBJ				= $(SRC:.cpp=.o)
 
 CC				= c++
 
-FLAGS			= -Wall -Wextra -std=c++98
-#FLAGS			= -Wall -Wextra -Werror -std=c++98
+FLAGS			= -Wall -Wextra -Werror -std=c++98
 
 NAME			= Account
 
