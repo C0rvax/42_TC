@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 10:31:06 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/01 13:17:11 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/01 16:02:47 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ int	Account::getNbWithdrawals( void )
 void	Account::displayAccountsInfos( void )
 {
 	_displayTimestamp();
-	std::cout << "accounts:" << Account::getNbAccounts() << ';';
-	std::cout << "total:" << Account::getTotalAmount() << ';';
-	std::cout << "deposits:" << Account::getNbDeposits() << ';';
-	std::cout << "withdrawals:" << Account::getNbWithdrawals() << std::endl;
+	std::cout << "accounts:" << getNbAccounts() << ';';
+	std::cout << "total:" << getTotalAmount() << ';';
+	std::cout << "deposits:" << getNbDeposits() << ';';
+	std::cout << "withdrawals:" << getNbWithdrawals() << std::endl;
 }
 
 void	Account::makeDeposit( int deposit )
@@ -84,7 +84,7 @@ void	Account::makeDeposit( int deposit )
 	Account::_totalAmount += deposit;
 	Account::_totalNbDeposits++;
 	std::cout << "amount:" << this->_amount << ';';
-	std::cout << "nb_deposits:" << this->_nbDeposits << ';';
+	std::cout << "nb_deposits:" << this->_nbDeposits << std::endl;
 }
 
 bool	Account::makeWithdrawal( int withdrawal )
