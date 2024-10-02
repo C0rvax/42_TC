@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:15:23 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/01 18:21:39 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:52:37 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,7 @@ Zombie*	newZombie(std::string name)
 
 	newZ = new Zombie(name);
 	return (newZ);
+	//newZ = new(std::nothrow) Zombie(name);
+	//if (!newZ)
+	//	return (NULL);
 }

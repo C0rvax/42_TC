@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:24:11 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/01 18:36:41 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/02 13:05:02 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ Zombie	*newZombie(std::string name);
 
 int	main()
 {
+	Zombie	instance0("DiDiEr");
 	Zombie	*instance1 = newZombie("pedro");
 	Zombie	*instance2 = newZombie("Serge");
 	
+	instance0.announce();
 	instance1->announce();
 	instance2->announce();
 	randomChump("claude");
