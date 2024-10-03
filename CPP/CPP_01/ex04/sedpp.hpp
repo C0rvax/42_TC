@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.hpp                                         :+:      :+:    :+:   */
+/*   sedpp.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 14:20:47 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/03 14:20:03 by aduvilla         ###   ########.fr       */
+/*   Created: 2024/10/03 16:33:13 by aduvilla          #+#    #+#             */
+/*   Updated: 2024/10/03 18:50:49 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WEAPON_HPP
-# define WEAPON_HPP
+#ifndef SEDPP_HPP
+# define SEDPP_HPP
 
 # include <string>
 
-class	Weapon
+# define FORM " try ./Sedpp [filename] [s1] [s2]"
+# define ERR_FILE ": cannot open file"
+
+class	Sedpp
 {
 	public:
-		Weapon(std::string t_type);
-		~Weapon();
-		std::string const& getType() const;
-		void setType(std::string t_type);
+		Sedpp(std::string filename, std::string s1, std::string s2);
+		~Sedpp();
+		int	sedReplace();
 	private:
-		std::string	type;
+		std::string	m_replace(std::string buff);
+		std::string m_filename;
+		std::string	m_s1;
+		std::string	m_s2;
 };
-
 #endif

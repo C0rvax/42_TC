@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:31:57 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/03 13:39:38 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:20:48 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Weapon::Weapon(std::string t_type) : type(t_type)
 Weapon::~Weapon()
 {}
 
-const std::string& Weapon::getType()
+std::string const& Weapon::getType() const
 {
 	return (this->type);
 }
