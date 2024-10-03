@@ -6,12 +6,12 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/10/03 18:16:08 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/10/03 18:52:33 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC				= main.cpp 								\
-				  sedpp.cpp
+				  Sedpp.cpp
 
 OBJ				= $(SRC:.cpp=.o)
 

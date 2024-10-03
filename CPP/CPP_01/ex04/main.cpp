@@ -6,13 +6,12 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:15:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/03 18:50:47 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/03 18:53:19 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
 #include <iostream>
-#include "sedpp.hpp"
+#include "Sedpp.hpp"
 
 int	main(int ac, char **av)
 {
