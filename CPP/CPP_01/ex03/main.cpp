@@ -6,27 +6,30 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 13:47:56 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/02 14:14:56 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/03 13:46:26 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string>
-#include <iostream>
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 
 int	main()
 {
-	std::string 	hello = "HI THIS IS BRAIN";
-	std::string*	stringPTR = &hello;
-	std::string&	stringREF = hello;
-
-	std::cout << "Adress of:" << std::endl;
-	std::cout << "-string: " << &hello << std::endl;
-	std::cout << "-stringPTR: " << stringPTR << std::endl;
-	std::cout << "-stringREF: " << &stringREF << std::endl;
-	std::cout << std::endl;
-	std::cout << "Value of:" << std::endl;
-	std::cout << "-string: " << hello << std::endl;
-	std::cout << "-stringPTR: " << *stringPTR << std::endl;
-	std::cout << "-stringREF: " << stringREF << std::endl;
+	{
+		Weapon	club = Weapon("crude spiked club");
+		HumanA	bob("bob", club);
+		bob.attack();
+		club.setType("some other type of club");
+		bob.attack();
+	}
+	{
+		Weapon	club = Weapon("crude spiked club");
+		HumanB	jim("jim");
+		jim.setWeapon(club);
+		jim.attack();
+		club.setType("some other type of club");
+		jim.attack();
+	}
 	return (0);
 }

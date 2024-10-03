@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.hpp                                         :+:      :+:    :+:   */
+/*   HumanB.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 14:20:47 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/03 13:39:12 by aduvilla         ###   ########.fr       */
+/*   Created: 2024/10/03 11:31:12 by aduvilla          #+#    #+#             */
+/*   Updated: 2024/10/03 13:30:40 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WEAPON_HPP
-# define WEAPON_HPP
+#ifndef HUMANB_HPP
+# define HUMANB_HPP
 
 # include <string>
+# include "Weapon.hpp"
 
-class	Weapon
+class	HumanB
 {
 	public:
-		Weapon(std::string t_type);
-		~Weapon();
-		const std::string& getType();
-		void setType(std::string t_type);
+		HumanB(std::string t_name);
+		~HumanB();
+		void	attack();
+		void	setWeapon(Weapon& t_weapon);
 	private:
-		std::string	type;
+		std::string name;
+		Weapon*	weapon;
 };
 
 #endif
