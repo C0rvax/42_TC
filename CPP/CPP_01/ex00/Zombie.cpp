@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:10:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/02 12:36:47 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/04 10:05:57 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ Zombie::Zombie(std::string name) : name(name)
 
 Zombie::~Zombie()
 {
+	std::cout << "[Debug] : " << name << "'s destructor called" << std::endl;
 }
 
 void	Zombie::announce(void)
