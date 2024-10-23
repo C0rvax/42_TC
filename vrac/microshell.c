@@ -25,7 +25,7 @@ int	exec_cd(char **av, int i)
 {
 	if (i != 2)
 		return (print_error("error: cd: bad arguments", NULL, 1));
-	if (chdir(av[1]) == 0)
+	if (chdir(av[1]) != 0)
 		return (print_error("error: cd: cannot change directory to ", av[1], 1));
 	return (0);
 }
@@ -38,22 +38,23 @@ int	ft_exec(char **av, int i, char **env)
 
 	if (!strcmp(av[0], "cd"))
 		return (exec_cd(av, i));
-	if (av[i] && !strcmp(av[i], ";"))
+	if (!av[i] || !strcmp(av[i], ";"))
 	{
-		av[i] = NULL;
 		pid = fork();
 		if (pid == -1)
 			exit(print_error("error: fatal", NULL, 1));
 		if (pid == 0)
 		{
+			av[i] = NULL;
 			execve(av[0], av, env);
 			exit(print_error("error: cannot execute ", av[0], 1));
 		}
-		waitpid(pid, &status, 1);
+		while (waitpid(-1, &status, 0))
+			;
+//		waitpid(pid, &status, 0);
 	}
-	if (av[i] && !strcmp(av[i], "|"))
+	else if (!strcmp(av[i], "|"))
 	{
-		av[i] = NULL;
 		if (pipe(fd) == -1)
 			exit(print_error("error: fatal", NULL, 1));
 		pid = fork();
@@ -61,12 +62,15 @@ int	ft_exec(char **av, int i, char **env)
 			exit(print_error("error: fatal", NULL, 1));
 		if (pid == 0)
 		{
+			av[i] = NULL;
 			set_pipe(fd, 1);
 			execve(av[0], av, env);
 			exit(print_error("error: cannot execute ", av[0], 1));
 		}
 		set_pipe(fd, 0);
-		waitpid(pid, &status, 1);
+		while (waitpid(-1, &status, 0))
+			;
+//		waitpid(pid, &status, 0);
 	}
 	return (WIFEXITED(status) && WEXITSTATUS(status));
 }
