@@ -49,7 +49,7 @@ int	ft_exec(char **av, int i, char **env)
 			execve(av[0], av, env);
 			exit(print_error("error: cannot execute ", av[0], 1));
 		}
-		while (waitpid(-1, &status, 0))
+		while (waitpid(-1, &status, 0) != -1)
 			;
 //		waitpid(pid, &status, 0);
 	}
@@ -68,7 +68,7 @@ int	ft_exec(char **av, int i, char **env)
 			exit(print_error("error: cannot execute ", av[0], 1));
 		}
 		set_pipe(fd, 0);
-		while (waitpid(-1, &status, 0))
+		while (waitpid(-1, &status, 0) != -1)
 			;
 //		waitpid(pid, &status, 0);
 	}
