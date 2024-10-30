@@ -6,16 +6,17 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:47:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/30 22:09:51 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/30 23:24:53 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main (void)
 {
-	ClapTrap	a;
-	ClapTrap	b("jon");
+	ScavTrap	a("Serge");
+	ScavTrap	b("jon");
+	ScavTrap	c( a );
 	
 	a.attack("georges");
 	a.takeDamage(5);
@@ -27,6 +28,13 @@ int main (void)
 	{
 		b.attack("Yvan");
 	}
+	b.takeDamage(5);
+	b.beRepaired(10);
+	c.takeDamage(10);
+	c.takeDamage(80);
+	c = b;
+	c.takeDamage(80);
+	c.takeDamage(80);
 
 	return 0;
 }

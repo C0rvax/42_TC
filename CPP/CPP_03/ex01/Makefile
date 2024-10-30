@@ -6,12 +6,13 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/10/30 21:50:22 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/10/30 23:15:56 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC				= main.cpp 								\
-				  ClapTrap.cpp
+				  ClapTrap.cpp							\
+				  ScavTrap.cpp
 
 OBJ				= $(SRC:.cpp=.o)
 
