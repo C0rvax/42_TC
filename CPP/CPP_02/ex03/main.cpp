@@ -6,49 +6,26 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:02:21 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/30 17:45:15 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/30 20:20:07 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "Fixed.hpp"
+#include "Point.hpp"
 
 int main (void)
 {
-	Fixed	a;
-	Fixed const	b( Fixed( 5.05f ) * Fixed( 2 ));
-	Fixed	c;
+	Point	a;
+	Point	b(5, 18.5f);
+	Point	c(-2.4f, 18.5f);
+	Point	in(4, 15.2f);
+	Point	out(-0.1f, 115.3f);
+	Point	justOut(4.9, 18.1f);
+	Point	above(0, 18.51f);
 
-	std::cout << a << std::endl;
-	std::cout << ++a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
-
-	std::cout << b << std::endl;
-
-	std::cout << Fixed::max(a, b) << std::endl;
-
-	std::cout << "a vaut " << a << " et b vaut " << b << std::endl;
-	if (a <= b)
-		std::cout << "a est inferieur ou égal à b" << std::endl;
-	if (c == 0)
-	{
-		std::cout << "c vaut 0" << std::endl;
-		std::cout << c << std::endl;
-		std::cout << ++c << std::endl;
-		std::cout << c << std::endl;
-		std::cout << c++ << std::endl;
-		std::cout << c << std::endl;
-		std::cout << "a vaut " << a << " et c vaut " << c << std::endl;
-		if (c <= a)
-		{
-			std::cout << "c est inferieur ou égal à a" << std::endl;
-			if (c < a)
-				std::cout << "error" << std::endl;
-			else
-				std::cout << "c n'est pas strictement inferieur à a" << std::endl;
-		}
-	}
+	std::cout << "in is inside abc: " << (bsp(a, b, c, in) ? "true" : "false") << std::endl;
+	std::cout << "out is inside abc: " << (bsp(a, b, c, out) ? "true" : "false") << std::endl;
+	std::cout << "justOut is inside abc: " << (bsp(a, b, c, justOut) ? "true" : "false") << std::endl;
+	std::cout << "above is inside abc: " << (bsp(a, b, c, above) ? "true" : "false") << std::endl;
 	return 0;
 }

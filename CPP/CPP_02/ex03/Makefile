@@ -6,12 +6,13 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/10/30 13:02:27 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/10/30 19:36:43 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC				= main.cpp 								\
-				  Fixed.cpp
+				  Fixed.cpp								\
+				  Point.cpp
 
 OBJ				= $(SRC:.cpp=.o)
 
