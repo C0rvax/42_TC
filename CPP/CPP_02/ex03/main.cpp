@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:02:21 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/30 18:10:24 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:45:15 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int main (void)
 
 	std::cout << Fixed::max(a, b) << std::endl;
 
-	std::cout << std::endl;
 	std::cout << "a vaut " << a << " et b vaut " << b << std::endl;
 	if (a <= b)
 		std::cout << "a est inferieur ou égal à b" << std::endl;
@@ -50,11 +49,6 @@ int main (void)
 			else
 				std::cout << "c n'est pas strictement inferieur à a" << std::endl;
 		}
-		if (c != a)
-			std::cout << "error" << std::endl;
-		else
-			std::cout << "a + c = " << a + c << std::endl;
-		std::cout << "a + c - b = " << a + c - b << std::endl;
 	}
 	return 0;
 }
