@@ -6,39 +6,35 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:47:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 00:02:34 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/30 23:55:49 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
 int main (void)
 {
-	ScavTrap	a("Serge");
+	FragTrap	a("Serge");
 	ScavTrap	b("jon");
-	ScavTrap	c( a );
-	ClapTrap	d("clap");
 	
 	a.attack("georges");
-	d.attack("Yvan");
 	a.takeDamage(5);
 	a.beRepaired(5);
 	a.takeDamage(5);
 	a.takeDamage(5);
 	a.beRepaired(5);
+	a.attack("robert");
 	for (int i = 0; i < 11; i++)
 	{
 		b.attack("Yvan");
 	}
 	b.takeDamage(5);
 	b.beRepaired(10);
-	c.takeDamage(10);
-	c.takeDamage(80);
-	c = b;
-	c.guardGate();
-	c.takeDamage(1000);
-	c.guardGate();
+	a.highFivesGuys();
+	a.takeDamage(1000);
+	a.highFivesGuys();
+	a.attack("nobody");
 
 	return 0;
 }

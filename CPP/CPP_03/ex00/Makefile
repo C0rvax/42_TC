@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/10/30 21:50:22 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/10/31 00:00:21 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CC				= c++
 
 FLAGS			= -Wall -Wextra -Werror -std=c++98
 
-NAME			= a.out
+NAME			= clap
 
 all				: $(NAME)
 

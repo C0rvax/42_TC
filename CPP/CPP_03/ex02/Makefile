@@ -6,13 +6,14 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/10/31 00:00:02 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/10/30 23:29:10 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC				= main.cpp 								\
 				  ClapTrap.cpp							\
-				  ScavTrap.cpp
+				  ScavTrap.cpp							\
+				  FragTrap.cpp
 
 OBJ				= $(SRC:.cpp=.o)
 
@@ -20,7 +21,7 @@ CC				= c++
 
 FLAGS			= -Wall -Wextra -Werror -std=c++98
 
-NAME			= scav
+NAME			= frag
 
 all				: $(NAME)
 
