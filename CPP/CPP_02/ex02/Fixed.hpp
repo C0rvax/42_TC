@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:02:16 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/30 16:05:25 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:47:28 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ class	Fixed
 		Fixed	&operator--(void);
 		Fixed	operator--(int n);
 		
-		static Fixed	&min(Fixed & a, Fixed & b);
-		static Fixed	&max(Fixed & a, Fixed & b);
+		static Fixed		&min(Fixed & a, Fixed & b);
+		static Fixed		&max(Fixed & a, Fixed & b);
 		static Fixed const	&min(Fixed const & a, Fixed const & b);
 		static Fixed const	&max(Fixed const & a, Fixed const & b);
 		
