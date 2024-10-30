@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 00:12:18 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 00:14:53 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/31 00:47:05 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ class	DiamondTrap : public FragTrap, public ScavTrap
 		DiamondTrap &operator=(DiamondTrap const & rhs);
 		~DiamondTrap(void);
 		
+		void	whoAmI(void);
 	private:
 		std::string	m_name;
 };

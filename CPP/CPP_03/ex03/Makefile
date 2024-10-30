@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/10/31 00:05:03 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/10/31 00:51:17 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRC				= main.cpp 								\
 				  ClapTrap.cpp							\
 				  ScavTrap.cpp							\
 				  FragTrap.cpp							\
-				  Diamond.cpp
+				  DiamondTrap.cpp
 
 OBJ				= $(SRC:.cpp=.o)
 
