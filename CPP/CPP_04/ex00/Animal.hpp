@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:02:05 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 15:13:17 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:20:23 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class	Animal
 		Animal(std::string const & type);
 		Animal(Animal const & src);
 		Animal &operator=(Animal const & rhs);
-		~Animal(void);
+		virtual ~Animal(void);
 
 		virtual void	makeSound(void) const;
 		std::string		getType(void) const;
