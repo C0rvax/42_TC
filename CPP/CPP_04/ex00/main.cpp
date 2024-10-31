@@ -35,7 +35,7 @@ int	main()
 	const WrongAnimal*	beta = new WrongAnimal();
 	const WrongAnimal*	k = new WrongCat();
 
-	std::cout << k->getType() << " " << std::endl;
+	std::cout << k->getType() << " is a wrong cat" << std::endl;
 	k->makeSound();
 	beta->makeSound();
 
