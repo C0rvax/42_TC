@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:05:52 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 16:23:56 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:27:02 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	main()
 	j->makeSound();
 	meta->makeSound();
 
-	delete meta;
 	delete j;
 	delete i;
+	delete meta;
 	
 	const WrongAnimal*	beta = new WrongAnimal();
 	const WrongAnimal*	k = new WrongCat();
@@ -39,6 +39,6 @@ int	main()
 	k->makeSound();
 	beta->makeSound();
 
-	delete beta;
 	delete k;
+	delete beta;
 }

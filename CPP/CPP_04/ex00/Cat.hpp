@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:12:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 14:43:57 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:11:04 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class	Cat : public Animal
 		Cat(void);
 		Cat(Cat const & src);
 		Cat &operator=(Cat const & rhs);
-		~Cat();
+		~Cat(void);
 
 		void	makeSound(void) const;
 };
