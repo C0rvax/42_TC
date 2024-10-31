@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 23:31:36 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 00:11:27 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:04:00 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ class	FragTrap : virtual public ClapTrap
 		~FragTrap(void);
 		
 		void	highFivesGuys(void);
-
-	protected:
-		unsigned int	m_attackDamage;
 };
 
 #endif  /* __FRAGTRAP_HPP__ */

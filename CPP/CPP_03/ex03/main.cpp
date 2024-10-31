@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:47:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 11:35:55 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/31 12:23:19 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 int main (void)
 {
 	DiamondTrap a("Yves");
+	std::cout << std::endl;
+	a.printTrap();
 	std::cout << std::endl;
 	DiamondTrap	b( a );
 

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 00:12:18 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 11:12:18 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:02:39 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
-class	DiamondTrap : public FragTrap, public ScavTrap
-//class	DiamondTrap : public ScavTrap, public FragTrap
+//class	DiamondTrap : public FragTrap, public ScavTrap
+class	DiamondTrap : public ScavTrap, public FragTrap
 {
 	public:
 		DiamondTrap(void);

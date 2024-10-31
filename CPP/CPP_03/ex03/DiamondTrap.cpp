@@ -6,13 +6,14 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 00:29:32 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 11:10:17 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:01:02 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 #include "ClapTrap.hpp"
 #include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 #include <iostream>
 #include <string>
 
@@ -42,7 +43,7 @@ DiamondTrap	&DiamondTrap::operator=(DiamondTrap const & value)
 {
 	if (this != &value)
 		ClapTrap::operator=(value);
-	std::cout << "DiamondTrap " << this->m_name << ": Copy constructor called" << std::endl;
+	std::cout << "DiamondTrap " << this->m_name << ": Copy assignment constructor called" << std::endl;
 	return *this;
 }
 
