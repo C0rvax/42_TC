@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:17:17 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/30 23:18:08 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:07:37 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ ClapTrap::ClapTrap(ClapTrap const & src)
 {
 	std::cout << "ClapTrap Copy constructor called" << std::endl;
 	*this = src;
-	return;
 }
 
 ClapTrap	&ClapTrap::operator=(ClapTrap const & rhs)
@@ -111,4 +110,12 @@ void	ClapTrap::beRepaired(unsigned int amount)
 		else
 			std::cout << "has no energy points!" << std::endl;
 	}
+}
+
+void	ClapTrap::printTrap(void)
+{
+	std::cout << "Name: " << this->m_name << std::endl;
+	std::cout << "Hit points: " << this->m_hitPoint << std::endl;
+	std::cout << "Energy points: " << this->m_energyPoint << std::endl;
+	std::cout << "Attack damages: " << this->m_attackDamage << std::endl;
 }

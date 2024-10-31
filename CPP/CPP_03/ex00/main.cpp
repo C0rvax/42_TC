@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:47:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/30 22:09:51 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/31 10:23:00 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int main (void)
 {
 	ClapTrap	a;
 	ClapTrap	b("jon");
+	ClapTrap	c = b;
 	
 	a.attack("georges");
 	a.takeDamage(5);
@@ -27,6 +28,9 @@ int main (void)
 	{
 		b.attack("Yvan");
 	}
+	c.attack("bob");
+	c.takeDamage(10);
+	c.beRepaired(5);
 
 	return 0;
 }

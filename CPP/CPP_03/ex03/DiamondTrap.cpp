@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 00:29:32 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 00:47:11 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/10/31 11:10:17 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ DiamondTrap::~DiamondTrap(void)
 
 void	DiamondTrap::whoAmI(void)
 {
-	std::cout << "DiamondTrap name: " << this->m_name << "ClapTrap name: " << ClapTrap::m_name << std::endl;
+	std::cout << "DiamondTrap name: " << this->m_name << "\nClapTrap name: " << ClapTrap::m_name << std::endl;
 }
