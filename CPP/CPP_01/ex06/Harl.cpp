@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:05:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/03 20:18:57 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/04 16:45:53 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ void Harl::complain(std::string level)
 	}
 	switch (caseLevel)
 	{
+		default:
+			{
+				std::cout << "I didn’t receive any notification about my order status. It would be helpful to get updates!" << std::endl;
+				break;
+			}
 		case 0:
 			debug();
 		case 1:
@@ -62,9 +67,5 @@ void Harl::complain(std::string level)
 			warning();
 		case 3:
 			error();
-			break;
-		default:
-			std::cout << "[?!?!?!]" << std::endl;
-			std::cout << "I didn’t receive any notification about my order status. It would be helpful to get updates!" << std::endl;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:10:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/02 13:35:33 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/04 15:20:12 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ void	Zombie::announce(void)
 
 void	Zombie::setName(std::string t_name)
 {
-	name = t_name;
+	this->name = t_name;
 }

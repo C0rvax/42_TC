@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:39:38 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/03 20:21:18 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/04 16:40:44 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int main()
     harl.complain("WARNING");
 	std::cout << std::endl;
     harl.complain("ERROR");
-	std::cout << std::endl;
-    harl.complain("NOSE");
 	std::cout << std::endl;
     harl.complain("DEBUGI");
 	std::cout << std::endl;

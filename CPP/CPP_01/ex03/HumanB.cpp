@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:22:55 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/03 13:46:55 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/04 15:39:04 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ HumanB::~HumanB()
 
 void	HumanB::attack()
 {
-	std::cout << name << " attacks with their " << weapon->getType() << std::endl;
+	if (weapon)
+		std::cout << name << " attacks with their " << weapon->getType() << std::endl;
+	else
+		std::cout << name << " attacks with their bare fists" << std::endl;
 }
 
 void	HumanB::setWeapon(Weapon& t_weapon)
