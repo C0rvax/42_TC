@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:58:28 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 15:05:32 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:26:46 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ Dog::Dog(Dog const & src) : Animal("Dog")
 
 Dog	&Dog::operator=(Dog const & rhs)
 {
+	std::cout << "Dog copy assignment called" << std::endl;
 	if (this != & rhs)
 	{
 		this->m_type = rhs.m_type;
-		if (this->m_brain != NULL)
+		if (this->m_brain)
 			delete this->m_brain;
 		this->m_brain = new Brain(*rhs.getBrain());
 	}

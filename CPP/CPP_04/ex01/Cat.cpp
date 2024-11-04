@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:35:15 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 14:56:02 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:26:57 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ Cat::Cat(Cat const & src) : Animal("Cat")
 
 Cat	&Cat::operator=(Cat const & rhs)
 {
+	std::cout << "Cat copy assignment constructor called" << std::endl;
 	if (this != & rhs)
 	{
 		this->m_type = rhs.m_type;
-		if (this->m_brain != NULL)
+		if (this->m_brain)
 			delete this->m_brain;
 		this->m_brain = new Brain(*rhs.getBrain());
 	}
