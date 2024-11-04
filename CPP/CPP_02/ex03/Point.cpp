@@ -21,8 +21,9 @@ Point::Point(const float n_x, const float n_y) : m_x(n_x), m_y(n_y)
 {
 }
 
-Point::Point(Point const & src) : m_x(src.m_x), m_y(src.m_y)
+Point::Point(Point const & src)
 {
+	*this = src;
 }
 
 Point	&Point::operator=(Point const & rhs)

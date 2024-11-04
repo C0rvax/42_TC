@@ -19,8 +19,7 @@ Cat::Cat(void) : Animal("Cat")
 
 Cat::Cat(Cat const & src) : Animal("Cat")
 {
-	if (this != &src)
-		*this = src;
+	*this = src;
 	std::cout << "Cat copy constructor called" << std::endl;
 }
 

@@ -24,8 +24,7 @@ WrongAnimal::WrongAnimal(std::string const & type) : m_type(type)
 
 WrongAnimal::WrongAnimal(WrongAnimal const & src)
 {
-	if (this != &src)
-		*this = src;
+	*this = src;
 	std::cout << "WrongAnimal copy constructor called" << std::endl;
 }
 

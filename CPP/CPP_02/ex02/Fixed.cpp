@@ -31,8 +31,6 @@ Fixed::Fixed(const float f) : m_fixPointValue(roundf(f * (1 << m_fractBits)))
 Fixed::Fixed(Fixed const & src)
 {
 	*this = src;
-
-	return;
 }
 
 Fixed &	Fixed::operator=(Fixed const & rhs)

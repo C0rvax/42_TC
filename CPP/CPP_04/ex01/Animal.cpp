@@ -24,8 +24,7 @@ Animal::Animal(std::string const & type) : m_type(type)
 
 Animal::Animal(Animal const & src)
 {
-	if (this != &src)
-		*this = src;
+	*this = src;
 	std::cout << "Animal copy constructor called" << std::endl;
 }
 

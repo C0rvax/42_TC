@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:05:52 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 17:27:02 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/04 12:18:49 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,36 @@
 
 int	main()
 {
-	const Animal*	meta = new Animal();
-	const Animal*	j = new Dog();
-	const Animal*	i = new Cat();
+	Animal*	ark[10];
 
-	std::cout << j->getType() << " is a dog" << std::endl;
-	std::cout << i->getType() << " is a cat" << std::endl;
-	i->makeSound();
-	j->makeSound();
-	meta->makeSound();
+	for (int i = 0; i < 5; i++)
+		ark[i] = new Cat();
+	for (int i = 5; i < 10; i++)
+		ark[i] = new Dog();
+	for (int i = 0; i < 10; i++)
+		ark[i]->makeSound();
+	for (int i = 0; i < 10; i++)
+		delete ark[i];
 
-	delete j;
-	delete i;
-	delete meta;
-	
-	const WrongAnimal*	beta = new WrongAnimal();
-	const WrongAnimal*	k = new WrongCat();
+	Cat	a;
+	Cat	b;
 
-	std::cout << k->getType() << " is a wrong cat" << std::endl;
-	k->makeSound();
-	beta->makeSound();
+	a.getBrain()->setIdea("Eat", 0);
+	a.getBrain()->setIdea("Sleep", 1);
+	std::cout << a.getBrain()->getIdea(0) << std::endl;
+	std::cout << a.getBrain()->getIdea(1) << std::endl;
+	std::cout << std::endl;
+	std::cout << b.getBrain()->getIdea(0) << std::endl;
+	std::cout << b.getBrain()->getIdea(1) << std::endl;
 
-	delete k;
-	delete beta;
+	b = a;
+	std::cout << std::endl;
+	std::cout << b.getBrain()->getIdea(0) << std::endl;
+	std::cout << b.getBrain()->getIdea(1) << std::endl;
+
+	a.getBrain()->setIdea("Eat", 1);
+	a.getBrain()->setIdea("Sleep", 0);
+	std::cout << std::endl;
+	std::cout << b.getBrain()->getIdea(0) << std::endl;
+	std::cout << b.getBrain()->getIdea(1) << std::endl;
 }

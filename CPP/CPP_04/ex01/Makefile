@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/10/31 15:25:02 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/11/04 11:39:39 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ SRC				= main.cpp 								\
 				  Animal.cpp							\
 				  Cat.cpp								\
 				  WrongAnimal.cpp						\
-				  WrongCat.cpp
+				  WrongCat.cpp							\
+				  Brain.cpp
 
 OBJ				= $(SRC:.cpp=.o)
 

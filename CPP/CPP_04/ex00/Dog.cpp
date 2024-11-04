@@ -20,8 +20,7 @@ Dog::Dog(void) : Animal("Dog")
 
 Dog::Dog(Dog const & src) : Animal("Dog")
 {
-	if (this != &src)
-		*this = src;
+	*this = src;
 	std::cout << "Dog copy constructor called" << std::endl;
 }
 
