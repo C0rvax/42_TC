@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:02:11 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/04 17:11:51 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/04 22:26:36 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ Fixed::Fixed(void) : m_fixPointValue(0)
 	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const int n) : m_fixPointValue(n << m_fractBits)
+Fixed::Fixed(const int n)
 {
+	this->m_fixPointValue = n << m_fractBits;
 	std::cout << "Int constructor called" << std::endl;
 }
 
