@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 18:27:34 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/30 19:50:20 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:48:24 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ Point::Point(Point const & src)
 
 Point	&Point::operator=(Point const & rhs)
 {
-	if (this != &rhs)
-	{
-		const_cast<Fixed &>(m_x) = rhs.m_x;
-		const_cast<Fixed &>(m_y) = rhs.m_y;
-	}
 	return *this;
 }
 

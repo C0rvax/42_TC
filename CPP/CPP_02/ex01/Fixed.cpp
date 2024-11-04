@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:02:11 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/30 15:35:29 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/04 17:11:51 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ Fixed::Fixed(const int n) : m_fixPointValue(n << m_fractBits)
 	std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed(const float f) : m_fixPointValue(roundf(f * (1 << m_fractBits)))
+Fixed::Fixed(const float f)
 {
+	this->m_fixPointValue = roundf(f  * (1 << m_fractBits));
 	std::cout << "Float constructor called" << std::endl;
 }
 
@@ -42,8 +43,7 @@ Fixed &	Fixed::operator=(Fixed const & rhs)
 	std::cout << "Copy assignment operator called" << std::endl;
 	
 	if (this != &rhs)
-		this->m_fixPointValue = rhs.getRawBits();
-
+		this->setRawBits(rhs.getRawBits());
 	return *this;
 }
 
@@ -64,12 +64,12 @@ void	Fixed::setRawBits(int const n)
 
 float	Fixed::toFloat(void) const
 {
-	return ((float)m_fixPointValue / (1 << m_fractBits));
+	return ((float)this->getRawBits() / (1 << m_fractBits));
 }
 
 int		Fixed::toInt(void) const
 {
-	return (m_fixPointValue >> m_fractBits);
+	return (this->getRawBits() >> m_fractBits);
 }
 
 std::ostream&	operator<<(std::ostream & o, Fixed const & rhs)

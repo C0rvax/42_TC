@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:02:11 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/30 18:06:05 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:41:17 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,39 +76,40 @@ std::ostream&	operator<<(std::ostream & o, Fixed const & rhs)
 
 bool	Fixed::operator>(const Fixed & rhs) const
 {
-	return (this->m_fixPointValue > rhs.getRawBits());
+	
+	return this->getRawBits() > rhs.getRawBits();
 }
 
 bool	Fixed::operator<(const Fixed & rhs) const
 {
-	return (this->m_fixPointValue < rhs.getRawBits());
+	return this->getRawBits() < rhs.getRawBits();
 }
 
 bool	Fixed::operator>=(const Fixed & rhs) const
 {
-	return (this->m_fixPointValue >= rhs.getRawBits());
+	return (this->getRawBits() >= rhs.getRawBits());
 }
 
 bool	Fixed::operator<=(const Fixed & rhs) const
 {
-	return (this->m_fixPointValue <= rhs.getRawBits());
+	return (this->getRawBits() <= rhs.getRawBits());
 }
 
 bool	Fixed::operator==(const Fixed & rhs) const
 {
-	return (this->m_fixPointValue == rhs.getRawBits());
+	return (this->getRawBits() == rhs.getRawBits());
 }
 
 bool	Fixed::operator!=(const Fixed & rhs) const
 {
-	return (this->m_fixPointValue != rhs.getRawBits());
+	return (this->getRawBits() != rhs.getRawBits());
 }
 
 // ARITHMETIC OPERATOR //
 
 Fixed	Fixed::operator+(const Fixed & rhs) const
 {
-	return (this->toFloat() + rhs.toFloat());
+	return Fixed(this->toFloat() + rhs.toFloat());
 }
 
 Fixed	Fixed::operator-(const Fixed & rhs) const
@@ -131,19 +132,21 @@ Fixed	Fixed::operator/(const Fixed & rhs) const
 Fixed	&Fixed::operator++(void)
 {
 	++this->m_fixPointValue;
+	this->setRawBits(this->getRawBits() + 1);
 	return *this;
 }
 
 Fixed	Fixed::operator++(int)
 {
 	Fixed tmp(*this);
+	++this->m_fixPointValue;
 	this->m_fixPointValue++;
 	return tmp;
 }
 
 Fixed	&Fixed::operator--(void)
 {
-	--this->m_fixPointValue;
+	this->setRawBits(this->getRawBits() - 1);
 	return *this;
 }
 

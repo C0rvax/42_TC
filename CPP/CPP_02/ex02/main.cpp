@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:02:21 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/30 18:10:24 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:17:54 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int main (void)
 
 	std::cout << b << std::endl;
 
+	std::cout << "max entre a et b: ";
 	std::cout << Fixed::max(a, b) << std::endl;
+	std::cout << "min entre a et b: ";
+	std::cout << Fixed::min(a, b) << std::endl;
 
 	std::cout << std::endl;
 	std::cout << "a vaut " << a << " et b vaut " << b << std::endl;
