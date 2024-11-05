@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:31:12 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/03 13:30:40 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/05 10:20:14 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@
 class	HumanB
 {
 	public:
-		HumanB(std::string t_name);
-		~HumanB();
-		void	attack();
+		HumanB	(std::string t_name);
+		~HumanB	(void);
+		void	attack(void);
 		void	setWeapon(Weapon& t_weapon);
 	private:
 		std::string name;
-		Weapon*	weapon;
+		Weapon*		m_weapon;
 };
-
 #endif

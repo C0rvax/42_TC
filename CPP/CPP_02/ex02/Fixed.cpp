@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:02:11 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/04 23:34:35 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/05 09:53:46 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ bool	Fixed::operator>(const Fixed & rhs) const
 {
 	return this->getRawBits() > rhs.getRawBits();
 }
+
 */
 bool	Fixed::operator<(const Fixed & rhs) const
 {
@@ -140,6 +141,14 @@ Fixed	Fixed::operator/(const Fixed & rhs) const
 {
 	return Fixed(this->toFloat() / rhs.toFloat());
 }
+
+/*
+Fixed	Fixed::operator/(const Fixed & rhs) const
+{
+	return (this->toFloat() / rhs.toFloat());
+}
+*/
+// if returning a float like this the float constructor will be called implicitly
 
 // INCREMENT DECREMENT OPERATOR //
 

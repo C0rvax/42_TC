@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 12:22:55 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/04 15:39:04 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/05 10:42:36 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 #include "HumanB.hpp"
 #include <iostream>
 
-HumanB::HumanB(std::string t_name) : name(t_name), weapon(NULL)
+HumanB::HumanB(std::string t_name) : name(t_name), m_weapon(NULL)
 {}
 
-HumanB::~HumanB()
+HumanB::~HumanB(void)
 {}
 
-void	HumanB::attack()
+void	HumanB::attack(void)
 {
-	if (weapon)
-		std::cout << name << " attacks with their " << weapon->getType() << std::endl;
-	else
+	if (!m_weapon)
 		std::cout << name << " attacks with their bare fists" << std::endl;
+	else
+		std::cout << name << " attacks with their " << m_weapon->getType() << std::endl;
 }
 
 void	HumanB::setWeapon(Weapon& t_weapon)
 {
-	weapon = &t_weapon;
+	m_weapon = &t_weapon;
 }
