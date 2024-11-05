@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 18:20:15 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/30 19:34:25 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:54:29 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 class	Point
 {
 	public:
-		Point(void);
-		Point(const float n_x, const float n_y);
-		Point(Point const & src);
-		Point &operator=(Point const & rhs);
-		~Point();
+		Point	(void);
+		Point	(const float n_x, const float n_y);
+		Point	(Point const & src);
+		Point	&operator=(Point const & rhs);
+		~Point	();
 
-		Fixed	getX(void) const;
-		Fixed	getY(void) const;
+		Fixed const &	getX(void) const;
+		Fixed const &	getY(void) const;
 
 	private:
 		Fixed const	m_x;

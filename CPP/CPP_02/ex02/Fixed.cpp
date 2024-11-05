@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:02:11 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/05 09:53:46 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/05 17:59:48 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,34 +97,34 @@ bool	Fixed::operator>(const Fixed & rhs) const
 */
 bool	Fixed::operator<(const Fixed & rhs) const
 {
-	return this->getRawBits() < rhs.getRawBits();
+	return (this->getRawBits() < rhs.getRawBits());
 }
 
 bool	Fixed::operator>=(const Fixed & rhs) const
 {
-	return this->getRawBits() >= rhs.getRawBits();
+	return (this->getRawBits() >= rhs.getRawBits());
 }
 
 bool	Fixed::operator<=(const Fixed & rhs) const
 {
-	return this->getRawBits() <= rhs.getRawBits();
+	return (this->getRawBits() <= rhs.getRawBits());
 }
 
 bool	Fixed::operator==(const Fixed & rhs) const
 {
-	return this->getRawBits() == rhs.getRawBits();
+	return (this->getRawBits() == rhs.getRawBits());
 }
 
 bool	Fixed::operator!=(const Fixed & rhs) const
 {
-	return this->getRawBits() != rhs.getRawBits();
+	return (this->getRawBits() != rhs.getRawBits());
 }
 
 // ARITHMETIC OPERATOR //
 
 Fixed	Fixed::operator+(const Fixed & rhs) const
 {
-	return Fixed(this->toFloat() + rhs.toFloat());
+	return this->toFloat() + rhs.toFloat();
 }
 
 Fixed	Fixed::operator-(const Fixed & rhs) const
@@ -141,7 +141,6 @@ Fixed	Fixed::operator/(const Fixed & rhs) const
 {
 	return Fixed(this->toFloat() / rhs.toFloat());
 }
-
 /*
 Fixed	Fixed::operator/(const Fixed & rhs) const
 {
@@ -184,6 +183,7 @@ Fixed	Fixed::operator--(int)
 
 Fixed	&Fixed::min(Fixed & a, Fixed & b)
 {
+	// return (a.getRawBits() < b.getRawBits() ? a : b);
 	if (a.getRawBits() < b.getRawBits())
 		return a;
 	return b;

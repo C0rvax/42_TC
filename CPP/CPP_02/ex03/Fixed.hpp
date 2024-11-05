@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:02:16 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/30 17:47:28 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:51:21 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 class	Fixed
 {
 	public:
-		Fixed(void);
-		Fixed(Fixed const & src);
-		Fixed(const int n);
-		Fixed(const float f);
-		Fixed &operator=(Fixed const & rhs);
-		~Fixed();
+		Fixed	(void);
+		Fixed	(Fixed const & src);
+		Fixed	(const int n);
+		Fixed	(const float f);
+		Fixed&	operator=(Fixed const & rhs);
+		~Fixed	();
 
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);

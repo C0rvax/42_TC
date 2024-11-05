@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:02:11 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/30 19:38:35 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/05 17:34:18 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ Fixed &	Fixed::operator=(Fixed const & rhs)
 {
 	if (this != &rhs)
 		this->m_fixPointValue = rhs.getRawBits();
-
 	return *this;
 }
 
@@ -62,7 +61,8 @@ float	Fixed::toFloat(void) const
 
 int		Fixed::toInt(void) const
 {
-	return (this->m_fixPointValue >> m_fractBits);
+	int	i = this->m_fixPointValue >> m_fractBits;
+	return i;
 }
 
 std::ostream&	operator<<(std::ostream & o, Fixed const & rhs)
