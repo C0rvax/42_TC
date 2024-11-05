@@ -6,9 +6,17 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/10/31 15:25:02 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/11/05 14:11:51 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+CC				= c++
+
+FLAGS			= -Wall -Wextra -Werror -std=c++98
+
+OBJ				= $(SRC:.cpp=.o)
+
+HEADERS			= -I./include
 
 SRC				= main.cpp 								\
 				  Dog.cpp								\
@@ -17,18 +25,15 @@ SRC				= main.cpp 								\
 				  WrongAnimal.cpp						\
 				  WrongCat.cpp
 
-OBJ				= $(SRC:.cpp=.o)
-
-CC				= c++
-
-FLAGS			= -Wall -Wextra -Werror -std=c++98
-
 NAME			= Animal
 
 all				: $(NAME)
 
 $(NAME)			: $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(FLAGS) $^ -o $@
+
+%.o				: %.cpp
+	$(CC) $(FLAGS) $(HEADERS) -c $< -o $@
 
 clean			:
 	rm -rf $(OBJ)
