@@ -6,14 +6,11 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:24:11 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/02 13:05:02 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/05 18:13:32 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
-
-void	randomChump(std::string name);
-Zombie	*newZombie(std::string name);
 
 int	main()
 {

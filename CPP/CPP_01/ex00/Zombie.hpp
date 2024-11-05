@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 18:01:06 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/01 18:14:57 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/05 18:13:28 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,8 @@ class	Zombie
 	private:
 		std::string	name;
 };
+
+void	randomChump(std::string name);
+Zombie	*newZombie(std::string name);
+
 #endif

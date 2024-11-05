@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 14:15:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/03 18:53:19 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/05 18:27:42 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 	if (ac < 4)
 	{
 		std::cout << "Sedpp: Too few arguments:" << FORM << std::endl;
-		return (1);
+		return 1;
 	}
 	if (ac > 4)
 	{

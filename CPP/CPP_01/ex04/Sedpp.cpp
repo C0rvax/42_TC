@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 16:40:16 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/03 18:53:35 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/05 18:37:11 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,30 @@ std::string	Sedpp::m_replace(std::string buff)
 int	Sedpp::sedReplace()
 {
 	std::string		buff;
-	std::ifstream	inputStream;
-	std::ofstream	outputStream;
+	std::ifstream	input;
+	std::ofstream	Output;
 
-	inputStream.open(m_filename, std::ifstream::in);
-	if (!inputStream.good())
+	input.open(m_filename, std::ifstream::in);
+	if (!input.good())
 	{
 		std::cout << "Sedpp: " << m_filename << ERR_FILE << std::endl;
 		return (1);
 	}
-	outputStream.open(m_filename + ".replace", std::ifstream::out);
-	if (!outputStream.good())
+	Output.open(m_filename + ".replace", std::ifstream::out);
+	if (!Output.good())
 	{
 		std::cout << "Sedpp: " << m_filename + ".replace";
 		std::cout << ERR_FILE << std::endl;
-		inputStream.close();
+		input.close();
 		return (1);
 	}
-	while (std::getline(inputStream, buff).good())
+	while (std::getline(input, buff).good())
 	{
-		outputStream << m_replace(buff);
-		if (!inputStream.eof())
-			outputStream << std::endl;
+		Output << m_replace(buff);
+		if (!input.eof())
+			Output << std::endl;
 	}
-	inputStream.close();
-	outputStream.close();
+	input.close();
+	Output.close();
 	return (0);
 }
