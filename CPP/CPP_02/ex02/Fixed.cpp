@@ -63,7 +63,7 @@ float	Fixed::toFloat(void) const
 
 int		Fixed::toInt(void) const
 {
-	return (this->m_fixPointValue >> m_fractBits);
+	return this->m_fixPointValue >> m_fractBits;
 }
 
 std::ostream&	operator<<(std::ostream & o, Fixed const & rhs)
