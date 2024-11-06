@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:39:38 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/04 16:33:08 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/06 10:51:50 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int main()
     harl.complain("INFO");
     harl.complain("WARNING");
     harl.complain("ERROR");
+    harl.complain("ERRO");
     harl.complain("DEBUGI");
     harl.complain("INFOA");
     harl.complain("WARNINGU");

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:02:11 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/05 17:59:48 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:06:38 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ Fixed::Fixed(Fixed const & src)
 
 Fixed &	Fixed::operator=(Fixed const & rhs)
 {
-	
 	if (this != &rhs)
 		this->m_fixPointValue = rhs.getRawBits();
-
 	return *this;
 }
 
@@ -81,43 +79,37 @@ bool	Fixed::operator>(const Fixed & rhs) const
 		return true;
 	return false;
 }
-
 /*
 bool	Fixed::operator>(const Fixed & rhs) const
 {
 	bool	res = this->getRawBits() > rhs.getRawBits();
 	return res;
 }
-
-bool	Fixed::operator>(const Fixed & rhs) const
-{
-	return this->getRawBits() > rhs.getRawBits();
-}
-
 */
+
 bool	Fixed::operator<(const Fixed & rhs) const
 {
-	return (this->getRawBits() < rhs.getRawBits());
+	return this->getRawBits() < rhs.getRawBits();
 }
 
 bool	Fixed::operator>=(const Fixed & rhs) const
 {
-	return (this->getRawBits() >= rhs.getRawBits());
+	return this->getRawBits() >= rhs.getRawBits();
 }
 
 bool	Fixed::operator<=(const Fixed & rhs) const
 {
-	return (this->getRawBits() <= rhs.getRawBits());
+	return this->getRawBits() <= rhs.getRawBits();
 }
 
 bool	Fixed::operator==(const Fixed & rhs) const
 {
-	return (this->getRawBits() == rhs.getRawBits());
+	return this->getRawBits() == rhs.getRawBits();
 }
 
 bool	Fixed::operator!=(const Fixed & rhs) const
 {
-	return (this->getRawBits() != rhs.getRawBits());
+	return this->getRawBits() != rhs.getRawBits();
 }
 
 // ARITHMETIC OPERATOR //
@@ -183,29 +175,20 @@ Fixed	Fixed::operator--(int)
 
 Fixed	&Fixed::min(Fixed & a, Fixed & b)
 {
-	// return (a.getRawBits() < b.getRawBits() ? a : b);
-	if (a.getRawBits() < b.getRawBits())
-		return a;
-	return b;
+	return a.getRawBits() < b.getRawBits() ? a : b;
 }
 
 const Fixed	&Fixed::min(const Fixed & a, const Fixed & b)
 {
-	if (a.getRawBits() < b.getRawBits())
-		return a;
-	return b;
+	return a.getRawBits() < b.getRawBits() ? a : b;
 }
 
 Fixed	&Fixed::max(Fixed & a, Fixed & b)
 {
-	if (a.getRawBits() > b.getRawBits())
-		return a;
-	return b;
+	return a.getRawBits() > b.getRawBits() ? a : b;
 }
 
 const Fixed	&Fixed::max(const Fixed & a, const Fixed & b)
 {
-	if (a.getRawBits() > b.getRawBits())
-		return a;
-	return b;
+	return a.getRawBits() > b.getRawBits() ? a : b;
 }

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:05:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/04 16:45:53 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/06 11:40:21 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,31 @@ void Harl::complain(std::string level)
 	std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	for (int i = 0; i < 4; i++)
 	{
-		if (level == levels[i])
+		if (!level.compare(levels[i]))
+		{
 			caseLevel = i;
+			break;
+		}
 	}
 	switch (caseLevel)
 	{
 		default:
 			{
+				std::cout << "[?!?!?!]" << std::endl;
 				std::cout << "I didn’t receive any notification about my order status. It would be helpful to get updates!" << std::endl;
 				break;
 			}
 		case 0:
 			debug();
+		// fallthrough
 		case 1:
 			info();
+		// fallthrough
 		case 2:
 			warning();
+		// fallthrough
 		case 3:
 			error();
 	}
 }
+// the comment "fallthrough" in a switch result in ignoring warnings at compilation

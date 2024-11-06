@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:02:21 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/05 18:02:08 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:26:41 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int main (void)
 		std::cout << "a + c - b = " << a + c - b << std::endl;
 		std::cout << "a vaut " << a << " et b vaut " << b << " et c vaut " << c << std::endl;
 		std::cout << "a * 4 + b = " << a * 4 + b << std::endl;
-		std::cout << "a * 4 = " << a * 4 << std::endl;
+		std::cout << "a * 4 = " << a * 4 << " et b vaut " << b << std::endl;
 	}
 	return 0;
 }

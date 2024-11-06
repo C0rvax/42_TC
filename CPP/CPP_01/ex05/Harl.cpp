@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:05:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/03 19:51:52 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/06 10:52:26 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void Harl::complain(std::string level)
 	std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	for (int i = 0; i < 4; i++)
 	{
-		if (level == levels[i])
+		if (!level.compare(levels[i]))
 		{
 			(this->*functions[i])();
 			return ;
