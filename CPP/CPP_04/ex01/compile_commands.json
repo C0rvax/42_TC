@@ -1,0 +1,114 @@
+[
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "main.cpp",
+   "-o",
+   "main.o"
+  ],
+  "file": "main.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "Dog.cpp",
+   "-o",
+   "Dog.o"
+  ],
+  "file": "Dog.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "Animal.cpp",
+   "-o",
+   "Animal.o"
+  ],
+  "file": "Animal.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "Cat.cpp",
+   "-o",
+   "Cat.o"
+  ],
+  "file": "Cat.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "WrongAnimal.cpp",
+   "-o",
+   "WrongAnimal.o"
+  ],
+  "file": "WrongAnimal.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "WrongCat.cpp",
+   "-o",
+   "WrongCat.o"
+  ],
+  "file": "WrongCat.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "Brain.cpp",
+   "-o",
+   "Brain.o"
+  ],
+  "file": "Brain.cpp"
+ }
+]
