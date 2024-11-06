@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 22:38:12 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 11:32:30 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:32:12 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,21 @@ ScavTrap::ScavTrap(std::string const & name) : ClapTrap(name)
 	this->m_attackDamage = 20;
 }
 
-ScavTrap::ScavTrap(ScavTrap const & src) : ClapTrap(src)
+ScavTrap::ScavTrap(ScavTrap const & src) : ClapTrap()
 {
 	*this = src;
 	std::cout << "ScavTrap " << this->m_name << ": Copy constructor called" << std::endl;
 }
 
-ScavTrap	&ScavTrap::operator=(ScavTrap const & value)
+ScavTrap	&ScavTrap::operator=(ScavTrap const & rhs)
 {
-	if (this != &value)
-		ClapTrap::operator=(value);
+	if (this != &rhs)
+	{
+		this->m_name = rhs.m_name;
+		this->m_hitPoint = rhs.m_hitPoint;
+		this->m_energyPoint = rhs.m_energyPoint;
+		this->m_attackDamage = rhs.m_attackDamage;
+	}
 	std::cout << "ScavTrap " << this->m_name << ": Copy assignment constructor called" << std::endl;
 	return *this;
 }

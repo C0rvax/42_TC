@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:17:17 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 11:07:37 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:35:06 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ ClapTrap::ClapTrap(ClapTrap const & src)
 	*this = src;
 }
 
-ClapTrap	&ClapTrap::operator=(ClapTrap const & rhs)
+ClapTrap&	ClapTrap::operator=(ClapTrap const & rhs)
 {
 	std::cout << "ClapTrap Copy assignment constructor called" << std::endl;
 	if (this != &rhs)

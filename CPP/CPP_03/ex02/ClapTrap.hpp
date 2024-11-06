@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:08:05 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 11:05:44 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:17:09 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ class	ClapTrap
 
 		void	printTrap(void);
 	protected:
-		std::string	m_name;
-		int			m_hitPoint;
-		int			m_energyPoint;
-		int			m_attackDamage;
+		std::string		m_name;
+		unsigned int	m_hitPoint;
+		unsigned int	m_energyPoint;
+		unsigned int	m_attackDamage;
 };
 
 #endif  /* __CLAPTRAP_HPP__ */
