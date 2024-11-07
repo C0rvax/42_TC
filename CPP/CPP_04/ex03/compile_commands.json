@@ -25,6 +25,22 @@
    "-std=c++98",
    "-I./include",
    "-c",
+   "AMateria.cpp",
+   "-o",
+   "AMateria.o"
+  ],
+  "file": "AMateria.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex03",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
    "Cure.cpp",
    "-o",
    "Cure.o"
@@ -46,5 +62,21 @@
    "Character.o"
   ],
   "file": "Character.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex03",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "Ice.cpp",
+   "-o",
+   "Ice.o"
+  ],
+  "file": "Ice.cpp"
  }
 ]
