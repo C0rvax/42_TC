@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:02:16 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/07 15:53:41 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:50:47 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ class	Character : public ICharacter
 		std::string			m_name;
 		static const int	m_inventoryMax = 4;	
 		AMateria*			m_inventory[m_inventoryMax];
+		static AMateria*	m_floor[100];
+		static int			m_floorIdx;
 		
 };
 

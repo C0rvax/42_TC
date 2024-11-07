@@ -6,13 +6,15 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:17:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/07 15:57:53 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/07 17:01:28 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 
-//static const int	m_inventoryMax = 4;
+//const int	Character::m_inventoryMax = 4;
+AMateria*	Character::m_floor[100] = {NULL};
+int	Character::m_floorIdx = 0;
 
 Character::Character	(void)
 {
@@ -84,7 +86,8 @@ void	Character::unequip(int idx)
 {
 	if (idx > 0 && idx <= this->m_inventoryMax && this->m_inventory[idx] != NULL)
 	{
-		//stash this->m_inventory[idx];
+		this->m_floor[m_floorIdx] = this->m_inventory[idx];
+		this->m_floorIdx++;
 		this->m_inventory[idx] = NULL;
 	}
 }
