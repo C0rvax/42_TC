@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   AAnimal.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 14:02:05 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 16:20:23 by aduvilla         ###   ########.fr       */
+/*   Created: 2024/11/07 10:34:15 by aduvilla          #+#    #+#             */
+/*   Updated: 2024/11/07 10:34:54 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __ANIMAL_HPP__
-#define __ANIMAL_HPP__
+#ifndef __AANIMAL_HPP__
+#define __AANIMAL_HPP__
 
 #include <iostream>
 
-class	Animal
+class	AAnimal
 {
 	public:
-		Animal(void);
-		Animal(std::string const & type);
-		Animal(Animal const & src);
-		Animal &operator=(Animal const & rhs);
-		virtual ~Animal(void);
+		AAnimal(void);
+		AAnimal(std::string const & type);
+		AAnimal(AAnimal const & src);
+		AAnimal &operator=(AAnimal const & rhs);
+		virtual ~AAnimal(void);
 
-		virtual void	makeSound(void) const;
+		virtual void	makeSound(void) const = 0;
 		std::string		getType(void) const;
 	protected:
 		std::string	m_type;
 };
 
-#endif  /* __ANIMAL_HPP__ */
+#endif  /* __AANIMAL_HPP__ */

@@ -20,7 +20,7 @@ HEADERS			= -I./include
 
 SRC				= main.cpp 								\
 				  Dog.cpp								\
-				  Animal.cpp							\
+				  AAnimal.cpp							\
 				  Cat.cpp								\
 				  WrongAnimal.cpp						\
 				  WrongCat.cpp							\

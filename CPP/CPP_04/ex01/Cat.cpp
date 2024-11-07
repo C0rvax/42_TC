@@ -15,7 +15,7 @@
 Cat::Cat(void) : Animal("Cat")
 {
 	std::cout << "Cat default constructor called" << std::endl;
-	m_brain = new Brain;
+	this->m_brain = new Brain();
 }
 
 Cat::Cat(Cat const & src) : Animal("Cat")
@@ -41,7 +41,7 @@ Cat	&Cat::operator=(Cat const & rhs)
 Cat::~Cat(void)
 {
 	std::cout << "Cat destructor called" << std::endl;
-	delete m_brain;
+	delete this->m_brain;
 }
 
 void	Cat::makeSound(void) const

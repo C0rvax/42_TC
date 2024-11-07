@@ -12,13 +12,13 @@
 
 #include "Cat.hpp"
 
-Cat::Cat(void) : Animal("Cat")
+Cat::Cat(void) : AAnimal("Cat")
 {
 	std::cout << "Cat default constructor called" << std::endl;
 	m_brain = new Brain;
 }
 
-Cat::Cat(Cat const & src) : Animal("Cat")
+Cat::Cat(Cat const & src) : AAnimal("Cat")
 {
 //	this->m_brain = NULL;
 	*this = src;

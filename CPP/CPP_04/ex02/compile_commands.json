@@ -41,11 +41,11 @@
    "-std=c++98",
    "-I./include",
    "-c",
-   "Animal.cpp",
+   "AAnimal.cpp",
    "-o",
-   "Animal.o"
+   "AAnimal.o"
   ],
-  "file": "Animal.cpp"
+  "file": "AAnimal.cpp"
  },
  {
   "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex02",
