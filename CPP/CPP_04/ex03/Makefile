@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/11/07 14:41:51 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/11/07 15:54:31 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,10 @@ OBJ				= $(SRC:.cpp=.o)
 HEADERS			= -I./include
 
 SRC				= main.cpp 								\
+				  AMateria.cpp							\
 				  Cure.cpp								\
 				  Character.cpp							\
+				  Ice.cpp
 
 NAME			= ff8
 

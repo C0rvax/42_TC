@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:02:16 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/07 14:47:23 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:53:41 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define __CHARACTER_HPP__
 
 #include "ICharacter.hpp"
+#include "AMateria.hpp"
 
 class	Character : public ICharacter
 {
