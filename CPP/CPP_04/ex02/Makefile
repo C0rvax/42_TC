@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/11/05 15:42:23 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/11/07 11:39:01 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC				= main.cpp 								\
 				  WrongCat.cpp							\
 				  Brain.cpp
 
-NAME			= AnimalBrain
+NAME			= Abstract
 
 all				: $(NAME)
 
