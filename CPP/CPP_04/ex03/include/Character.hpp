@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:02:16 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/07 16:50:47 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/12 14:18:15 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class	Character : public ICharacter
 		void				equip(AMateria * m);
 		void				unequip(int idx);
 		void				use(int idx, ICharacter & target);
+		static void			deleteFloor(void);
 
 	private:
 		std::string			m_name;

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:17:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/07 17:01:28 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/12 14:48:17 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ Character::Character	(std::string const & name)
 
 Character::Character	(Character const & src)
 {
+	for (size_t i = 0; i < this->m_inventoryMax; i++)
+		this->m_inventory[i] = NULL;
 	*this = src;
 }
 
@@ -42,13 +44,13 @@ Character&	Character::operator=(Character const & rhs)
 	this->m_name = rhs.getName();
 	for (int i = 0; i < this->m_inventoryMax; i++)
 	{
-		if (this->m_inventory[i] == NULL)
-			this->m_inventory[i] = rhs.m_inventory[i]->clone();
-		else
+		if (this->m_inventory[i] != NULL)
 		{
 			delete this->m_inventory[i];
 			this->m_inventory[i] = NULL;
 		}
+		if (rhs.m_inventory[i] != NULL)
+			this->m_inventory[i] = rhs.m_inventory[i]->clone();
 	}
 	return *this;
 }
@@ -80,11 +82,12 @@ void	Character::equip(AMateria * m)
 			return;
 		}
 	}
+	delete m;
 }
 
 void	Character::unequip(int idx)
 {
-	if (idx > 0 && idx <= this->m_inventoryMax && this->m_inventory[idx] != NULL)
+	if (idx >= 0 && idx < this->m_inventoryMax && this->m_inventory[idx] != NULL)
 	{
 		this->m_floor[m_floorIdx] = this->m_inventory[idx];
 		this->m_floorIdx++;
@@ -94,6 +97,20 @@ void	Character::unequip(int idx)
 
 void	Character::use(int idx, ICharacter & target)
 {
-	if (idx > 0 && idx <= this->m_inventoryMax && this->m_inventory[idx] != NULL)
+	if (idx >= 0 && idx < this->m_inventoryMax && this->m_inventory[idx] != NULL)
 		this->m_inventory[idx]->use(target);
+}
+
+void	Character::deleteFloor(void)
+{
+	for (int i = 0; i < m_floorIdx; i++)
+	{
+		if (m_floor[i] != NULL)
+		{
+			std::cout << "deleting materia in floor index " << i << std::endl;
+			delete m_floor[i];
+			m_floor[i] = NULL;
+		}
+	}
+	m_floorIdx = 0;
 }

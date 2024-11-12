@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:37:42 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/07 16:49:18 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/12 14:48:10 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ MateriaSource&	MateriaSource::operator=(MateriaSource const & rhs)
 		return *this;
 	for (int i = 0; i < this->m_recipesMax; i++)
 	{
-		if (this->m_recipes[i] == NULL)
-			this->m_recipes[i] = rhs.m_recipes[i]->clone();
-		else
+		if (this->m_recipes[i] != NULL)
 		{
 			delete this->m_recipes[i];
 			this->m_recipes[i] = NULL;
 		}
+		if (rhs.m_recipes[i] != NULL)
+			this->m_recipes[i] = rhs.m_recipes[i]->clone();
 	}
 	return *this;
 }
@@ -64,6 +64,7 @@ void	MateriaSource::learnMateria(AMateria * m)
 			return;
 		}
 	}
+	delete m;
 }
 
 AMateria*	MateriaSource::createMateria(std::string const & type)

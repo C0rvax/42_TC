@@ -6,39 +6,39 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:34:02 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/07 15:06:51 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:01:18 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cure.hpp"
 
-cure::cure	(void) : AMateria("cure")
+Cure::Cure	(void) : AMateria("cure")
 {
 }
 
-cure::cure	(cure const & src) : AMateria("cure")
+Cure::Cure	(Cure const & src) : AMateria("cure")
 {
 	*this = src;
 }
 
-cure&	cure::operator=(cure const & rhs)
+Cure&	Cure::operator=(Cure const & rhs)
 {
 	if (this != &rhs)
 		this->m_type = rhs.getType();
 	return *this;
 }
 
-cure::~cure	(void)
+Cure::~Cure	(void)
 {
 }
 
-AMateria*	cure::clone(void) const
+AMateria*	Cure::clone(void) const
 {
-	AMateria*	clone = new(std::nothrow) cure();
+	AMateria*	clone = new(std::nothrow) Cure();
 	return clone;
 }
 
-void	cure::use(ICharacter & target)
+void	Cure::use(ICharacter & target)
 {
 	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }

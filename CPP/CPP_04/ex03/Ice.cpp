@@ -6,39 +6,39 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 15:01:09 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/07 15:05:24 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/12 14:56:40 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ice.hpp"
 
-ice::ice	(void) : AMateria("ice")
+Ice::Ice	(void) : AMateria("ice")
 {
 }
 
-ice::ice	(ice const & src) : AMateria("ice")
+Ice::Ice	(Ice const & src) : AMateria("ice")
 {
 	*this = src;
 }
 
-ice&	ice::operator=(ice const & rhs)
+Ice&	Ice::operator=(Ice const & rhs)
 {
 	if (this != &rhs)
 		this->m_type = rhs.getType();
 	return *this;
 }
 
-ice::~ice	(void)
+Ice::~Ice	(void)
 {
 }
 
-AMateria*	ice::clone(void) const
+AMateria*	Ice::clone(void) const
 {
-	AMateria*	clone = new(std::nothrow) ice();
+	AMateria*	clone = new(std::nothrow) Ice();
 	return clone;
 }
 
-void	ice::use(ICharacter & target)
+void	Ice::use(ICharacter & target)
 {
-	std::cout << "* shoots an ice bot at " << target.getName() << std::endl;
+	std::cout << "* shoots an Ice bolt at " << target.getName() << " *" << std::endl;
 }

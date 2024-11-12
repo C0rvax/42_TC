@@ -15,13 +15,13 @@
 
 #include "AMateria.hpp"
 
-class	ice : public AMateria
+class	Ice : public AMateria
 {
 	public:
-		ice(void);
-		ice(ice const & src);
-		ice &operator=(ice const & rhs);
-		~ice(void);
+		Ice(void);
+		Ice(Ice const & src);
+		Ice &operator=(Ice const & rhs);
+		~Ice(void);
 
 		AMateria*	clone() const;
 		void		use(ICharacter & target);

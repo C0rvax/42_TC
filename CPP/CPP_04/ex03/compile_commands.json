@@ -78,5 +78,21 @@
    "Ice.o"
   ],
   "file": "Ice.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex03",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "MateriaSource.cpp",
+   "-o",
+   "MateriaSource.o"
+  ],
+  "file": "MateriaSource.cpp"
  }
 ]

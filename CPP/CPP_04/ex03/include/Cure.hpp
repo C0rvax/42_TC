@@ -15,13 +15,13 @@
 
 #include "AMateria.hpp"
 
-class	cure : public AMateria
+class	Cure : public AMateria
 {
 	public:
-		cure(void);
-		cure(cure const & src);
-		cure &operator=(cure const & rhs);
-		~cure(void);
+		Cure(void);
+		Cure(Cure const & src);
+		Cure &operator=(Cure const & rhs);
+		~Cure(void);
 
 		AMateria*	clone(void) const;
 		void		use(ICharacter & target);
