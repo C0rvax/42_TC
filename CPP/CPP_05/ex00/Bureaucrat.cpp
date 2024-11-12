@@ -6,11 +6,12 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:02:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/12 16:56:58 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/12 17:34:32 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include <ostream>
 
 Bureaucrat::Bureaucrat	(void) : m_name("")
 {
@@ -19,6 +20,7 @@ Bureaucrat::Bureaucrat	(void) : m_name("")
 
 Bureaucrat::Bureaucrat	(std::string name, int grade) : m_name(name)
 {
+	this->m_grade = 150;
 	if (grade < m_maxGrade)
 		throw Bureaucrat::GradeTooHighException();
 	else if (grade > m_minGrade)
@@ -43,7 +45,7 @@ Bureaucrat::~Bureaucrat	(void)
 {
 }
 
-std::string	Bureaucrat::getName(void) const
+std::string	const	Bureaucrat::getName(void) const
 {
 	return (this->m_name);
 }
@@ -99,4 +101,10 @@ const char*	Bureaucrat::GradeTooHighException::what(void) const throw()
 const char*	Bureaucrat::GradeTooLowException::what(void) const throw()
 {
 	return ("Cannot decrement: Bureaucrat have already the lowest grade");
+}
+
+std::ostream&	operator<<(std::ostream & o, Bureaucrat const & rhs)
+{
+	o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << ".";
+	return o;
 }
