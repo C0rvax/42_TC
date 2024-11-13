@@ -1,0 +1,50 @@
+[
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_05/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "main.cpp",
+   "-o",
+   "main.o"
+  ],
+  "file": "main.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_05/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "Bureaucrat.cpp",
+   "-o",
+   "Bureaucrat.o"
+  ],
+  "file": "Bureaucrat.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_05/ex01",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "Form.cpp",
+   "-o",
+   "Form.o"
+  ],
+  "file": "Form.cpp"
+ }
+]
