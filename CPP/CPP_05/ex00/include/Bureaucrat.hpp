@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:52:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/12 17:32:51 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:50:52 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,32 @@ class	Bureaucrat
 		Bureaucrat&	operator=(Bureaucrat const & rhs);
 		~Bureaucrat	(void);
 
-	std::string const	getName(void) const;
-	int					getGrade(void) const;
-	Bureaucrat&			operator++(void);
-	Bureaucrat			operator++(int);
-	Bureaucrat&			operator--(void);
-	Bureaucrat			operator--(int);
+		std::string const	getName(void) const;
+		int					getGrade(void) const;
+		Bureaucrat&			operator++(void);
+		Bureaucrat			operator++(int);
+		Bureaucrat&			operator--(void);
+		Bureaucrat			operator--(int);
 
-	class	GradeTooHighException : public std::exception
-	{
-		public:
-			virtual const char *	what(void) const throw();
-	};
+		class	GradeTooHighException : public std::exception
+		{
+			public:
+				virtual const char *	what(void) const throw();
+		};
 
-	class	GradeTooLowException : public std::exception
-	{
-		public:
-			virtual const char *	what(void) const throw();
-	};
+		class	GradeTooLowException : public std::exception
+		{
+			public:
+				virtual const char *	what(void) const throw();
+		};
 
 	private:
-	std::string const	m_name;
-	int					m_grade;
-	static const int	m_maxGrade = 1;
-	static const int	m_minGrade = 150;
+		std::string const	m_name;
+		int					m_grade;
+		static const int	m_maxGrade = 1;
+		static const int	m_minGrade = 150;
 };
 
 std::ostream&	operator<<(std::ostream & o, Bureaucrat const & rhs);
+
 #endif  /* __BUREAUCRAT_HPP__ */
