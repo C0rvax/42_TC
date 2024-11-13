@@ -6,12 +6,12 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:02:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/12 17:34:32 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:36:46 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include <ostream>
+#include <iostream>
 
 Bureaucrat::Bureaucrat	(void) : m_name("")
 {
@@ -107,4 +107,18 @@ std::ostream&	operator<<(std::ostream & o, Bureaucrat const & rhs)
 {
 	o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << ".";
 	return o;
+}
+
+void	Bureaucrat::signForm(Form & f)
+{
+	try
+	{
+		f.beSigned(*this);
+		std::cout << this->getName() << " signed " << f.getName() << std::endl;
+	}
+	catch (Form::GradeTooLowException & e)
+	{
+		std::cout << this->m_name << " couldn't sign " << f.getName();
+		std::cout << " because " << e.what() << std::endl;
+	}
 }

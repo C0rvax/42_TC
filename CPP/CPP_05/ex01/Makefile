@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/11/12 17:50:53 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/11/13 14:58:20 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ OBJ				= $(SRC:.cpp=.o)
 HEADERS			= -I./include
 
 SRC				= main.cpp 								\
-				  Bureaucrat.cpp
+				  Bureaucrat.cpp						\
+				  Form.cpp
 
 NAME			= Form
 
