@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:53:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 12:47:24 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/14 13:35:48 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ class	AForm
 		};
 
 		class	GradeTooLowException : public std::exception
+		{
+			public:
+				virtual const char *	what(void) const throw();
+		};
+
+		class	UnsignedException : public std::exception
 		{
 			public:
 				virtual const char *	what(void) const throw();

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:23:42 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 01:20:38 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/14 13:36:03 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ const char*	AForm::GradeTooHighException::what(void) const throw()
 const char*	AForm::GradeTooLowException::what(void) const throw()
 {
 	return ("Form's grade too low.");
+}
+
+const char*	AForm::UnsignedException::what(void) const throw()
+{
+	return ("Unsigned Form.");
 }
 
 std::ostream&	operator<<(std::ostream & o, AForm const & rhs)

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:52:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 12:54:49 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/14 13:58:45 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ class	Bureaucrat
 				virtual const char *	what(void) const throw();
 		};
 
-		void	signAForm(AForm & f);
+		void	signForm(AForm & f);
 		void	executeForm(AForm const & form);
 
 		static const int	maxGrade = 1;

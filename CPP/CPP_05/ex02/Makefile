@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/11/13 14:58:20 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/11/14 14:17:30 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,12 @@ HEADERS			= -I./include
 
 SRC				= main.cpp 								\
 				  Bureaucrat.cpp						\
-				  AForm.cpp
+				  AForm.cpp								\
+				  PresidentialPardonForm.cpp			\
+				  ShrubberyCreationForm.cpp				\
+				  RobotomyRequestForm.cpp
 
-NAME			= AForm
+NAME			= Robo
 
 all				: $(NAME)
 

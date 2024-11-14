@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 12:47:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 13:34:56 by aduvilla         ###   ########.fr       */
+/*   Created: 2024/11/14 13:02:44 by aduvilla          #+#    #+#             */
+/*   Updated: 2024/11/14 13:10:29 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __PRESIDENTIALPARDONFORM_HPP__
-#define __PRESIDENTIALPARDONFORM_HPP__
+#ifndef __SHRUBBERYCREATIONFORM_HPP__
+#define __SHRUBBERYCREATIONFORM_HPP__
 
 #include "AForm.hpp"
 
-class	PresidentialPardonForm : public AForm
+class	ShrubberyCreationForm : public AForm
 {
 	public:
-		PresidentialPardonForm(void);
-		PresidentialPardonForm(std::string const & target);
-		PresidentialPardonForm(PresidentialPardonForm const & src);
-		PresidentialPardonForm &operator=(PresidentialPardonForm const & rhs);
-		~PresidentialPardonForm(void);
+		ShrubberyCreationForm(void);
+		ShrubberyCreationForm(std::string const & target);
+		ShrubberyCreationForm(ShrubberyCreationForm const & src);
+		ShrubberyCreationForm &operator=(ShrubberyCreationForm const & rhs);
+		~ShrubberyCreationForm(void);
 
 		void	execute(Bureaucrat const & executor) const;
 
-		static int const	signGrade = 25;
-		static int const	executeGrade = 5;
+		static int const	signGrade = 145;
+		static int const	executeGrade = 137;
 
 	private:
 		std::string	m_target;
 };
-#endif  /* __PRESIDENTIALPARDONFORM_HPP__ */
+#endif  /* __SHRUBBERYCREATIONFORM_HPP__ */
