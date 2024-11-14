@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AForm.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:53:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/13 14:33:51 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/14 01:21:48 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef __FORM_HPP__
-#define __FORM_HPP__
+#ifndef __AFORM_HPP__
+#define __AFORM_HPP__
 
 #include "Bureaucrat.hpp"
 
@@ -54,4 +54,4 @@ class	AForm
 
 std::ostream&	operator<<(std::ostream & o, AForm const & rhs);
 
-#endif  /* __FORM_HPP__ */
+#endif  /* __AFORM_HPP__ */

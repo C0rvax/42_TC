@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AForm.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:23:42 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/13 15:45:29 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/14 01:20:38 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ void	AForm::beSigned(Bureaucrat & b)
 
 const char*	AForm::GradeTooHighException::what(void) const throw()
 {
-	return ("AForm's grade too high.");
+	return ("Form's grade too high.");
 }
 
 const char*	AForm::GradeTooLowException::what(void) const throw()
 {
-	return ("AForm's grade too low.");
+	return ("Form's grade too low.");
 }
 
 std::ostream&	operator<<(std::ostream & o, AForm const & rhs)
