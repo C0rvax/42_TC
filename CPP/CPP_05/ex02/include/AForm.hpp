@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -17,14 +17,14 @@
 
 class	Bureaucrat;
 
-class	Form
+class	AForm
 {
 	public:
-		Form	(void);
-		Form	(std::string const name, int signGrade, int executeGrade);
-		Form	(Form const & src);
-		Form&	operator=(Form const & rhs);
-		~Form	(void);
+		AForm	(void);
+		AForm	(std::string const name, int signGrade, int executeGrade);
+		AForm	(AForm const & src);
+		AForm&	operator=(AForm const & rhs);
+		~AForm	(void);
 
 		std::string const	getName(void) const;
 		bool				getSigned(void) const;
@@ -52,6 +52,6 @@ class	Form
 		
 };
 
-std::ostream&	operator<<(std::ostream & o, Form const & rhs);
+std::ostream&	operator<<(std::ostream & o, AForm const & rhs);
 
 #endif  /* __FORM_HPP__ */

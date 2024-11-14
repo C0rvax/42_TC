@@ -11,60 +11,60 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include <iostream>
 
 int	main()
 {
 	try
 	{
-		Form	cerfa0("cerfa0", 0, 1);
+		AForm	cerfa0("cerfa0", 0, 1);
 	}
-	catch (Form::GradeTooHighException &e)
+	catch (AForm::GradeTooHighException &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
 	try
 	{
-		Form	cerfa0("cerfa0", 1, 0);
+		AForm	cerfa0("cerfa0", 1, 0);
 	}
-	catch (Form::GradeTooHighException &e)
+	catch (AForm::GradeTooHighException &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
 	try
 	{
-		Form	japd("japd", 151, 140);
+		AForm	japd("japd", 151, 140);
 	}
-	catch (Form::GradeTooLowException &e)
+	catch (AForm::GradeTooLowException &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
 	try
 	{
-		Form	japd("japd", 140, 151);
+		AForm	japd("japd", 140, 151);
 	}
-	catch (Form::GradeTooLowException &e)
+	catch (AForm::GradeTooLowException &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
 
 	Bureaucrat	boss("xavier", 1);
 	Bureaucrat	slave("bob", 150);
-	Form		cerfa80("cerfa80", 80, 80);
-	Form		cerfa1("cerfa1", 1, 1);
-	Form		cerfa150("cerfa150", 150, 150);
+	AForm		cerfa80("cerfa80", 80, 80);
+	AForm		cerfa1("cerfa1", 1, 1);
+	AForm		cerfa150("cerfa150", 150, 150);
 
 	std::cout << cerfa80 << std::endl;
-	slave.signForm(cerfa80);
+	slave.signAForm(cerfa80);
 	std::cout << cerfa80 << std::endl;
-	slave.signForm(cerfa1);
+	slave.signAForm(cerfa1);
 	std::cout << cerfa1 << std::endl;
-	slave.signForm(cerfa150);
+	slave.signAForm(cerfa150);
 	std::cout << cerfa150 << std::endl;
-	boss.signForm(cerfa80);
+	boss.signAForm(cerfa80);
 	std::cout << cerfa80 << std::endl;
-	boss.signForm(cerfa1);
+	boss.signAForm(cerfa1);
 	std::cout << cerfa1 << std::endl;
 	
 	return 0;

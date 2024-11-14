@@ -14,9 +14,9 @@
 #define __BUREAUCRAT_HPP__
 
 #include <string>
-#include "Form.hpp"
+#include "AForm.hpp"
 
-class	Form;
+class	AForm;
 
 class	Bureaucrat
 {
@@ -46,7 +46,7 @@ class	Bureaucrat
 				virtual const char *	what(void) const throw();
 		};
 
-		void	signForm(Form & f);
+		void	signAForm(AForm & f);
 
 		static const int	m_maxGrade = 1;
 		static const int	m_minGrade = 150;

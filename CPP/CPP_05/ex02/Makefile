@@ -20,9 +20,9 @@ HEADERS			= -I./include
 
 SRC				= main.cpp 								\
 				  Bureaucrat.cpp						\
-				  Form.cpp
+				  AForm.cpp
 
-NAME			= Form
+NAME			= AForm
 
 all				: $(NAME)
 
