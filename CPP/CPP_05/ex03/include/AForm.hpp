@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:53:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 13:35:48 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/14 19:21:35 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class	AForm
 		AForm	(std::string const name, int signGrade, int executeGrade);
 		AForm	(AForm const & src);
 		AForm&	operator=(AForm const & rhs);
-		~AForm	(void);
+		virtual ~AForm	(void);
 
 		std::string const	getName(void) const;
 		bool				getSigned(void) const;

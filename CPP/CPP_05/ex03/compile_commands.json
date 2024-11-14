@@ -1,6 +1,6 @@
 [
  {
-  "directory": "/home/c0rvax/Code/TC/CPP/CPP_05/ex02",
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_05/ex03",
   "arguments": [
    "c++",
    "-Wall",
@@ -16,7 +16,7 @@
   "file": "main.cpp"
  },
  {
-  "directory": "/home/c0rvax/Code/TC/CPP/CPP_05/ex02",
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_05/ex03",
   "arguments": [
    "c++",
    "-Wall",
@@ -32,7 +32,7 @@
   "file": "Bureaucrat.cpp"
  },
  {
-  "directory": "/home/c0rvax/Code/TC/CPP/CPP_05/ex02",
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_05/ex03",
   "arguments": [
    "c++",
    "-Wall",
@@ -46,5 +46,69 @@
    "AForm.o"
   ],
   "file": "AForm.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_05/ex03",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "PresidentialPardonForm.cpp",
+   "-o",
+   "PresidentialPardonForm.o"
+  ],
+  "file": "PresidentialPardonForm.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_05/ex03",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "ShrubberyCreationForm.cpp",
+   "-o",
+   "ShrubberyCreationForm.o"
+  ],
+  "file": "ShrubberyCreationForm.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_05/ex03",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "RobotomyRequestForm.cpp",
+   "-o",
+   "RobotomyRequestForm.o"
+  ],
+  "file": "RobotomyRequestForm.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_05/ex03",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
+   "Intern.cpp",
+   "-o",
+   "Intern.o"
+  ],
+  "file": "Intern.cpp"
  }
 ]
