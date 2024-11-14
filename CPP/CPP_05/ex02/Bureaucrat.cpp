@@ -15,15 +15,15 @@
 
 Bureaucrat::Bureaucrat	(void) : m_name("")
 {
-	this->m_grade = m_minGrade;
+	this->m_grade = minGrade;
 }
 
 Bureaucrat::Bureaucrat	(std::string name, int grade) : m_name(name)
 {
 	this->m_grade = 150;
-	if (grade < m_maxGrade)
+	if (grade < maxGrade)
 		throw Bureaucrat::GradeTooHighException();
-	else if (grade > m_minGrade)
+	else if (grade > minGrade)
 		throw Bureaucrat::GradeTooLowException();
 	else
 		this->m_grade = grade;
@@ -57,7 +57,7 @@ int	Bureaucrat::getGrade(void) const
 
 Bureaucrat& Bureaucrat::operator++(void)
 {
-	if (this->getGrade() - 1 < m_maxGrade)
+	if (this->getGrade() - 1 < maxGrade)
 		throw Bureaucrat::GradeTooHighException();
 	else
 		this->m_grade -= 1;
@@ -67,7 +67,7 @@ Bureaucrat& Bureaucrat::operator++(void)
 Bureaucrat Bureaucrat::operator++(int)
 {
 	Bureaucrat tmp(*this);
-	if (this->getGrade() - 1 < m_maxGrade)
+	if (this->getGrade() - 1 < maxGrade)
 		throw Bureaucrat::GradeTooHighException();
 	else
 		this->m_grade -= 1;
@@ -76,7 +76,7 @@ Bureaucrat Bureaucrat::operator++(int)
 
 Bureaucrat& Bureaucrat::operator--(void)
 {
-	if (this->getGrade() + 1 > m_minGrade)
+	if (this->getGrade() + 1 > minGrade)
 		throw Bureaucrat::GradeTooLowException();
 	else
 		this->m_grade += 1;
@@ -86,7 +86,7 @@ Bureaucrat& Bureaucrat::operator--(void)
 Bureaucrat Bureaucrat::operator--(int)
 {
 	Bureaucrat tmp(*this);
-	if (this->getGrade() + 1 > m_minGrade)
+	if (this->getGrade() + 1 > minGrade)
 		throw Bureaucrat::GradeTooLowException();
 	else
 		this->m_grade += 1;

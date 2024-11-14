@@ -13,7 +13,7 @@
 #include "AForm.hpp"
 #include <ostream>
 
-AForm::AForm	(void) : m_name(""), m_signGrade(Bureaucrat::m_minGrade), m_executeGrade(Bureaucrat::m_minGrade)
+AForm::AForm	(void) : m_name(""), m_signGrade(Bureaucrat::minGrade), m_executeGrade(Bureaucrat::minGrade)
 {
 	this->m_signed = false;
 }
@@ -21,9 +21,9 @@ AForm::AForm	(void) : m_name(""), m_signGrade(Bureaucrat::m_minGrade), m_execute
 AForm::AForm	(std::string const name, int const signGrade, int const executeGrade) : m_name(name), m_signGrade(signGrade), m_executeGrade(executeGrade)
 {
 	this->m_signed = false;
-	if (signGrade < Bureaucrat::m_maxGrade || executeGrade < Bureaucrat::m_maxGrade)
+	if (signGrade < Bureaucrat::maxGrade || executeGrade < Bureaucrat::maxGrade)
 		throw AForm::GradeTooHighException();
-	if (signGrade > Bureaucrat::m_minGrade || executeGrade > Bureaucrat::m_minGrade)
+	if (signGrade > Bureaucrat::minGrade || executeGrade > Bureaucrat::minGrade)
 		throw AForm::GradeTooLowException();
 }
 

@@ -48,8 +48,8 @@ class	Bureaucrat
 
 		void	signForm(Form & f);
 
-		static const int	m_maxGrade = 1;
-		static const int	m_minGrade = 150;
+		static const int	maxGrade = 1;
+		static const int	minGrade = 150;
 	private:
 		std::string const	m_name;
 		int					m_grade;

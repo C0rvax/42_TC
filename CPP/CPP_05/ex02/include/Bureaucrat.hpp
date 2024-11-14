@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:52:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/13 14:55:52 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:54:49 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,11 @@ class	Bureaucrat
 		};
 
 		void	signAForm(AForm & f);
+		void	executeForm(AForm const & form);
 
-		static const int	m_maxGrade = 1;
-		static const int	m_minGrade = 150;
+		static const int	maxGrade = 1;
+		static const int	minGrade = 150;
+
 	private:
 		std::string const	m_name;
 		int					m_grade;

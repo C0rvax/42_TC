@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:53:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 01:21:48 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/14 12:47:24 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class	AForm
 		int 				getSignGrade(void) const;
 		int					getExecuteGrade(void) const;
 		void				beSigned(Bureaucrat & b);
+		virtual void		execute(Bureaucrat const & executor) const = 0;
 		
 		class	GradeTooHighException : public std::exception
 		{
