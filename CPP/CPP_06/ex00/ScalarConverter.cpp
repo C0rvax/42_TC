@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:50:37 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/15 19:07:23 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 19:16:24 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ ScalarConverter::~ScalarConverter	(void)
 
 static e_type	getType(std::string const & str)
 {
-	int	coma = 0;
 	if (str.length() == 1 && std::isalpha(str[0]) && std::isprint(str[0]))
 		return CHAR;
-	if (*str == '-' || *str == "+")
-		str++;
-	for (size_t i = 0; i < str.length() - 1; i++)
+	int	coma = 0;
+	size_t start = (str[0] == '-' || str[0] == '+') ? 1 : 0;
+	for (size_t i = start; i < str.length() - 1; i++)
 	{
 		if (str[i] == '.')	
 			coma++;
@@ -56,8 +55,7 @@ static e_type	getType(std::string const & str)
 			return INT;
 		return DOUBLE;
 	}
-
-
+	return NONE;
 }
 
 static void	printChar(std::string const & str)
