@@ -6,11 +6,12 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:23:42 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 13:36:03 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:31:49 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
+#include "Bureaucrat.hpp"
 #include <ostream>
 
 AForm::AForm	(void) : m_name(""), m_signGrade(Bureaucrat::minGrade), m_executeGrade(Bureaucrat::minGrade)

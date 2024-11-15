@@ -6,11 +6,12 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:17:33 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/12 14:48:17 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:24:35 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
+#include "AMateria.hpp"
 
 //const int	Character::m_inventoryMax = 4;
 AMateria*	Character::m_floor[100] = {NULL};

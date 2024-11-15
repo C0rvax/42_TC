@@ -6,11 +6,12 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:13:22 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 13:44:10 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:33:54 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
+#include "Bureaucrat.hpp"
 #include <iostream>
 
 PresidentialPardonForm::PresidentialPardonForm(void) :

@@ -6,11 +6,12 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:02:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/13 15:36:46 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:30:11 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 
 Bureaucrat::Bureaucrat	(void) : m_name("")

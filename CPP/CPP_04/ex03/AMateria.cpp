@@ -6,11 +6,12 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:37:06 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/07 13:15:41 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:24:54 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
 
 AMateria::AMateria	(void)
 {

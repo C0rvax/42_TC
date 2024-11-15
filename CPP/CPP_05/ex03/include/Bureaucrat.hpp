@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:52:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 13:58:45 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 13:53:27 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define __BUREAUCRAT_HPP__
 
 #include <string>
-#include "AForm.hpp"
+//#include "AForm.hpp"
 
 class	AForm;
 

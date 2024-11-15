@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:35:15 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/04 12:26:57 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:12:29 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Cat::Cat(void) : AAnimal("Cat")
 
 Cat::Cat(Cat const & src) : AAnimal("Cat")
 {
-//	this->m_brain = NULL;
+	this->m_brain = NULL;
 	*this = src;
 	std::cout << "Cat copy constructor called" << std::endl;
 }

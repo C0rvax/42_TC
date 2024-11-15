@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 14:58:28 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/04 12:26:46 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 13:05:40 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Dog::Dog(void) : Animal("Dog")
 
 Dog::Dog(Dog const & src) : Animal("Dog")
 {
-//	this->m_brain = NULL;
+	this->m_brain = NULL;
 	*this = src;
 	std::cout << "Dog copy constructor called" << std::endl;
 }

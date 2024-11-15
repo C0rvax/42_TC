@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:05:52 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/10/31 17:27:02 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:07:43 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,27 @@
 
 int	main()
 {
-	const Animal*	meta = new Animal();
-	const Animal*	j = new Dog();
-	const Animal*	i = new Cat();
+	const Animal*	animal = new Animal();
+	const Animal*	dog = new Dog();
+	const Animal*	cat = new Cat();
 
-	std::cout << j->getType() << " is a dog" << std::endl;
-	std::cout << i->getType() << " is a cat" << std::endl;
-	i->makeSound();
-	j->makeSound();
-	meta->makeSound();
+	std::cout << dog->getType() << " is a dog" << std::endl;
+	std::cout << cat->getType() << " is a cat" << std::endl;
+	dog->makeSound();
+	cat->makeSound();
+	animal->makeSound();
 
-	delete j;
-	delete i;
-	delete meta;
+	delete dog;
+	delete cat;
+	delete animal;
 	
-	const WrongAnimal*	beta = new WrongAnimal();
-	const WrongAnimal*	k = new WrongCat();
+	const WrongAnimal*	wrongAnimal = new WrongAnimal();
+	const WrongAnimal*	wrong = new WrongCat();
 
-	std::cout << k->getType() << " is a wrong cat" << std::endl;
-	k->makeSound();
-	beta->makeSound();
+	std::cout << wrong->getType() << " is a wrong cat" << std::endl;
+	wrong->makeSound();
+	wrongAnimal->makeSound();
 
-	delete k;
-	delete beta;
+	delete wrong;
+	delete wrongAnimal;
 }

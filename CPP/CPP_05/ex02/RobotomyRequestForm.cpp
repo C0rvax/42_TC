@@ -6,11 +6,12 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:18:18 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 17:27:35 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:33:47 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
+#include "Bureaucrat.hpp"
 #include <iostream>
 #include <cstdlib>
 

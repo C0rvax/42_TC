@@ -6,11 +6,13 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:34:02 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/12 15:01:18 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:25:44 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cure.hpp"
+#include <iostream>
+#include "ICharacter.hpp"
 
 Cure::Cure	(void) : AMateria("cure")
 {

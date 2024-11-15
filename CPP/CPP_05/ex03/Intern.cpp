@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:27:16 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 20:23:56 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 13:50:34 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,17 @@ Intern&	Intern::operator=(Intern const & rhs)
 Intern::~Intern	(void)
 {
 }
-
-AForm*	createShrubbery(std::string & target)
+static AForm*	createShrubbery(std::string & target)
 {
 	return new ShrubberyCreationForm(target);
 }
 
-AForm*	createRobotomy(std::string & target)
+static AForm*	createRobotomy(std::string & target)
 {
 	return new RobotomyRequestForm(target);
 }
 
-AForm*	createPresidential(std::string & target)
+static AForm*	createPresidential(std::string & target)
 {
 	return new PresidentialPardonForm(target);
 }

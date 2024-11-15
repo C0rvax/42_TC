@@ -6,11 +6,13 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 15:01:09 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/12 14:56:40 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:26:11 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ice.hpp"
+#include <iostream>
+#include "ICharacter.hpp"
 
 Ice::Ice	(void) : AMateria("ice")
 {

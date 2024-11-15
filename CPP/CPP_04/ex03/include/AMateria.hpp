@@ -6,14 +6,17 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 11:47:23 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/07 15:00:21 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:23:25 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __AMATERIA_HPP__
 #define __AMATERIA_HPP__
 
-#include "ICharacter.hpp"
+#include <string>
+//#include "ICharacter.hpp"
+
+class	ICharacter;
 
 class	AMateria
 {

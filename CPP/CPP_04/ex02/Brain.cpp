@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 10:06:39 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/04 10:59:43 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:14:42 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 Brain::Brain(void)
 {
+	for (int i = 0; i < 100; i++)
+		this->ideas[i] = "";
 	std::cout << "Brain default constructor called" << std::endl;
 }
 

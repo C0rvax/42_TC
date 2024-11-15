@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:52:15 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 20:08:41 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 13:39:31 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ int	main()
 	promoted.executeForm(*robo);
 	promoted.executeForm(*pres);
 	std::cout << "promotion of " << promoted++ <<std::endl;
+	promoted.executeForm(*robo);
 	std::cout << std::endl;
 	std::cout << *shrub << std::endl;
 	std::cout << *robo << std::endl;
 	std::cout << *pres << std::endl;
-	promoted.executeForm(*robo);
 	boss.executeForm(*pres);
 	boss.signForm(*pres);
 	boss.executeForm(*pres);

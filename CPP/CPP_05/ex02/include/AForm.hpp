@@ -6,14 +6,14 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:53:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 13:35:48 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:32:21 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __AFORM_HPP__
 #define __AFORM_HPP__
 
-#include "Bureaucrat.hpp"
+#include <string>
 
 class	Bureaucrat;
 
