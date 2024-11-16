@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:50:37 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/16 16:44:01 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:39:59 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,10 @@ static e_type	getType(std::string const & str)
 		if ((!std::isdigit(str[i]) && str[i] != '.') || coma == 2)
 			return NONE;
 	}
-	if (str[len - 1] == 'f' && coma == 1 && str[len - 2] != '.')
-		return FLOAT;
-	if (std::isdigit(str[len - 1]))
-	{
-		if (coma == 0)
+	if ((str[len - 1] == 'f' && coma == 1 && str[len - 2] != '.') || (std::isdigit(str[len - 1]) && coma == 1))
+		return FLOATING_POINT;
+	if (std::isdigit(str[len - 1]) && coma == 0)
 			return INT;
-		return DOUBLE;
-	}
 	return NONE;
 }
 
@@ -84,32 +80,13 @@ static void	printInt(std::string const & str)
 	std::cout << "double: " << value << ".0" << std::endl;
 }
 
-static void	printFloat(std::string const & str)
-{
-	float	value = std::atof(str.c_str());
-//	bool	outLimit = value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min();
-	std::cout << "char: " << ((value >= 32 && value <= 126) ? "'" + std::string(1, static_cast<char>(value)) + "'" : "Non displayable") << std::endl;
-	if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
-		std::cout << "int: impossible" << std::endl;
-	else
-		std::cout << "int: " << static_cast<int>(value) << std::endl;
-	if (std::floor(value) == value)
-	{
-		std::cout << "float: " << std::fixed << std::setprecision(1) << value << "f" << std::endl;
-		std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(value) << std::endl;
-	}
-	else
-	{
-		std::cout << "float: " << value << "f" << std::endl;
-		std::cout << "double: " << static_cast<double>(value) << std::endl;
-	}
-//	std::cout << "int: " << (outLimit ? "impossible" : std::to_string(static_cast<int>(value))) << std::endl;
-}
-
-static void	printDouble(std::string const & str)
+static void	printFloatingPoint(std::string const & str)
 {
 	double	value = std::atof(str.c_str());
-	std::cout << "char: " << ((value >= 32 && value <= 126) ? "'" + std::string(1, static_cast<char>(value)) + "'" : "Non displayable") << std::endl;
+	if (value >= 0 && value <= 255) // oui ou non ??????????????????????
+		std::cout << "char: " << ((value >= 32 && value <= 126) ? "'" + std::string(1, static_cast<char>(value)) + "'" : "Non displayable") << std::endl;
+	else
+		std::cout << "char: impossible" << std::endl;
 	if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
 		std::cout << "int: impossible" << std::endl;
 	else
@@ -160,7 +137,7 @@ static void	printNone(std::string const & str)
 void	ScalarConverter::convert(std::string const & str)
 {
 	e_type	type = getType(str);
-	void	(*funcions[])(std::string const &) = {&printChar, &printInt, &printFloat, &printDouble, &printPseudoLiteral, &printNone};
+	void	(*funcions[])(std::string const &) = {&printChar, &printInt, &printFloatingPoint, &printPseudoLiteral, &printNone};
 
 	funcions[type](str);
 }

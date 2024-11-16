@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:47:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/16 16:15:57 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:35:24 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ enum e_type
 {
 	CHAR,
 	INT,
-	FLOAT,
-	DOUBLE,
+	FLOATING_POINT,
 	LITERAL,
 	NONE
 };
