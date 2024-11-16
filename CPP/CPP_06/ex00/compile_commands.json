@@ -9,6 +9,22 @@
    "-std=c++98",
    "-I./include",
    "-c",
+   "main.cpp",
+   "-o",
+   "main.o"
+  ],
+  "file": "main.cpp"
+ },
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_06/ex00",
+  "arguments": [
+   "c++",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-I./include",
+   "-c",
    "ScalarConverter.cpp",
    "-o",
    "ScalarConverter.o"

@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/11/15 15:52:58 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/11/16 15:40:47 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ HEADERS			= -I./include
 SRC				= main.cpp 								\
 				  ScalarConverter.cpp
 
-NAME			= Robo
+NAME			= convert
 
 all				: $(NAME)
 

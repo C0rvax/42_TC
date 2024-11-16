@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:47:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/15 17:27:24 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:15:57 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ enum e_type
 	INT,
 	FLOAT,
 	DOUBLE,
+	LITERAL,
 	NONE
 };
 
@@ -30,7 +31,7 @@ class	ScalarConverter
 		ScalarConverter(void);
 		ScalarConverter(ScalarConverter const & src);
 		ScalarConverter &operator=(ScalarConverter const & rhs);
-		~ScalarConverter(void);
+		virtual ~ScalarConverter(void) = 0;
 
 		static void	convert(std::string const & str);
 
