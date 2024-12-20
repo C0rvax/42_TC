@@ -18,26 +18,28 @@ SRC				= main.cpp 								\
 
 OBJ				= $(SRC:.cpp=.o)
 
-CC				= c++
+CXX				= c++
 
-FLAGS			= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS			= -Wall -Wextra -Werror -std=c++98
 
 NAME			= diamond
 
 all				: $(NAME)
 
 $(NAME)			: $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $@ -I.
 
 %.o				: %.cpp
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CXX) -MMD $(CXXFLAGS) -c $< -o $@ -I.
 
 clean			:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ) $(OBJ:.o=.d)
 
 fclean			: clean
 	rm -rf $(NAME)
 
 re				: fclean all
+
+-include $(OBJ:.o=.d)
 
 .PHONY			: all clean fclean re

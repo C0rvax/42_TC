@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/10/30 13:01:53 by aduvilla         ###   ########.fr        #
+#    Updated: 2024/12/20 12:04:20 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,26 +15,28 @@ SRC				= main.cpp 								\
 
 OBJ				= $(SRC:.cpp=.o)
 
-CC				= c++
+CXX				= c++
 
-FLAGS			= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS			= -Wall -Wextra -Werror -std=c++98
 
 NAME			= a.out
 
 all				: $(NAME)
 
 $(NAME)			: $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $@ -I.
 
 %.o				: %.cpp
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CXX) -MMD $(CXXFLAGS) -c $< -o $@ -I.
 
 clean			:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ) $(OBJ:.o=.d)
 
 fclean			: clean
 	rm -rf $(NAME)
 
 re				: fclean all
+
+-include $(OBJ:.o=.d)
 
 .PHONY			: all clean fclean re

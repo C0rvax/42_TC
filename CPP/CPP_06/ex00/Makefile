@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC				= c++
+CXX				= c++
 
-FLAGS			= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS			= -Wall -Wextra -Werror -std=c++98
 
 OBJ				= $(SRC:.cpp=.o)
 
@@ -26,18 +26,19 @@ NAME			= convert
 all				: $(NAME)
 
 $(NAME)			: $(OBJ)
-	$(CC) $(FLAGS) $^ -o $@
+	$(CXX) $(CXXLAGS) $^ -o $@
 
 %.o				: %.cpp
-	$(CC) $(FLAGS) $(HEADERS) -c $< -o $@
+	$(CXX) -MMD $(CXXFLAGS) $(HEADERS) -c $< -o $@
 
 clean			:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ) $(OBJ:.o=.d)
 
 fclean			: clean
 	rm -rf $(NAME)
 
 re				: fclean all
 
-.PHONY			: all clean fclean re
+-include $(OBJ:.o=.d)
 
+.PHONY			: all clean fclean re
