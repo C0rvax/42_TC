@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 18:27:34 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/05 17:21:44 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/12/23 11:37:23 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ Point::Point	(const float n_x, const float n_y) : m_x(Fixed(n_x)), m_y(Fixed(n_y
 }
 
 Point::Point	(Point const & src) : m_x(src.getX()), m_y(src.getY())
-//Point::Point	(Point const & src)
 {
-//	this->m_x = src.getX();
-//	this->m_y = src.getY();
 }
 
 Point	&Point::operator=(Point const & rhs)
