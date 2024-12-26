@@ -58,12 +58,12 @@ FragTrap::~FragTrap(void)
 void	FragTrap::highFivesGuys(void)
 {
 	if (this->m_hitPoint == 0)
-		std::cout << "FragTrap " << this->m_name << ": cannot highfive because he's dead ☠️" << std::endl;
+		std::cout << YELLOW << "FragTrap " << this->m_name << ": cannot highfive because he's dead ☠️" << RESET << std::endl;
 	else if (this->m_energyPoint == 0)
-		std::cout << "FragTrap " << this->m_name << ": cannot highfive because he's tired 😴" << std::endl;
+		std::cout << YELLOW << "FragTrap " << this->m_name << ": cannot highfive because he's tired 😴" << RESET << std::endl;
 	else
 	{
-		std::cout << "FragTrap " << this->m_name << ": ✋" << std::endl;
+		std::cout << BLUE << "FragTrap " << this->m_name << ": ✋" << RESET << std::endl;
 		this->m_energyPoint--;
 	}
 }

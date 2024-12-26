@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 23:35:10 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/06 13:35:33 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/12/26 12:11:30 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ FragTrap::~FragTrap(void)
 void	FragTrap::highFivesGuys(void)
 {
 	if (this->m_hitPoint == 0)
-		std::cout << "FragTrap " << this->m_name << ": cannot highfive because he's dead ☠️" << std::endl;
+		std::cout << YELLOW << "FragTrap " << this->m_name << ": cannot highfive because he's dead ☠️" << RESET << std::endl;
 	else if (this->m_energyPoint == 0)
-		std::cout << "FragTrap " << this->m_name << ": cannot highfive because he's tired 😴" << std::endl;
+		std::cout << YELLOW << "FragTrap " << this->m_name << ": cannot highfive because he's tired 😴" << RESET << std::endl;
 	else
 	{
-		std::cout << "FragTrap " << this->m_name << ": ✋" << std::endl;
+		std::cout << BLUE << "FragTrap " << this->m_name << ": ✋" << RESET << std::endl;
 		this->m_energyPoint--;
 	}
 }

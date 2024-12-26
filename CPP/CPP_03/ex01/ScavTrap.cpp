@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 22:38:12 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/06 13:32:12 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/12/26 12:08:58 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ ScavTrap::~ScavTrap(void)
 void	ScavTrap::attack(std::string const & target)
 {
 	if (this->m_hitPoint == 0)
-		std::cout << "ScavTrap " << this->m_name << ": cannot attack because he's dead" << std::endl;
+		std::cout << YELLOW << "ScavTrap " << this->m_name << ": cannot attack because he's dead" << RESET << std::endl;
 	else if (this->m_energyPoint == 0)
-		std::cout << "ScavTrap " << this->m_name << ": cannot attack because he's tired" << std::endl;
+		std::cout << YELLOW << "ScavTrap " << this->m_name << ": cannot attack because he's tired" << RESET << std::endl;
 	else
 	{
-		std::cout << "ScavTrap " << this->m_name << " attacks " << target;
+		std::cout << RED << "ScavTrap " << this->m_name << " attacks " << target;
 		std::cout << ", causing " << this->m_attackDamage;
-		std::cout << " points of damage!" << std::endl;
+		std::cout << " points of damage!" << RESET << std::endl;
 		this->m_energyPoint--;
 	}
 }
@@ -73,9 +73,9 @@ void	ScavTrap::attack(std::string const & target)
 void	ScavTrap::guardGate(void) const
 {
 	if (this->m_hitPoint == 0)
-		std::cout << "ScavTrap " << this->m_name << ": cannot keep gate because he's dead" << std::endl;
+		std::cout << YELLOW << "ScavTrap " << this->m_name << ": cannot keep gate because he's dead" << RESET << std::endl;
 	else if (this->m_energyPoint == 0)
-		std::cout << "ScavTrap " << this->m_name << ": cannot keep gate because he's tired" << std::endl;
+		std::cout << YELLOW << "ScavTrap " << this->m_name << ": cannot keep gate because he's tired" << RESET << std::endl;
 	else
-		std::cout << "ScavTrap " << this->m_name << ": Is now in Gate keeper mode!" << std::endl;
+		std::cout << BLUE << "ScavTrap " << this->m_name << ": Is now in Gate keeper mode!" << RESET << std::endl;
 }

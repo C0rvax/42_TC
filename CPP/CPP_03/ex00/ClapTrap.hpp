@@ -6,13 +6,19 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 21:08:05 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/06 12:53:22 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/12/26 12:03:28 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __CLAPTRAP_HPP__
 #define __CLAPTRAP_HPP__
 #include <string>
+
+# define RESET "\033[0m"
+# define RED "\033[31m"
+# define GREEN "\033[32m"
+# define YELLOW "\033[33m"
+# define BLUE "\033[34m"
 
 class	ClapTrap
 {
