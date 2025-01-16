@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/11/07 11:39:01 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/01/16 11:43:25 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ all				: $(NAME)
 $(NAME)			: $(OBJ)
 	$(CXX) $(CXXLAGS) $^ -o $@
 
-%.o				: %.cpp
+%.o				: src/%.cpp
 	$(CXX) -MMD $(CXXFLAGS) $(HEADERS) -c $< -o $@
 
 clean			:

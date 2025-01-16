@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:05:52 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/15 14:17:13 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:44:29 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main()
 	std::cout << std::endl;
 	b->makeSound();
 	a->makeSound();
+	std::cout << std::endl;
 	delete a;
 	delete b;
 }

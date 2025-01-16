@@ -1,98 +1,104 @@
 [
  {
-  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex03",
+  "directory": "/home/aduvilla/Code/TC/CPP/CPP_04/ex03",
   "arguments": [
    "c++",
+   "-MMD",
    "-Wall",
    "-Wextra",
    "-Werror",
    "-std=c++98",
    "-I./include",
    "-c",
-   "main.cpp",
+   "src/main.cpp",
    "-o",
    "main.o"
   ],
-  "file": "main.cpp"
+  "file": "src/main.cpp"
  },
  {
-  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex03",
+  "directory": "/home/aduvilla/Code/TC/CPP/CPP_04/ex03",
   "arguments": [
    "c++",
+   "-MMD",
    "-Wall",
    "-Wextra",
    "-Werror",
    "-std=c++98",
    "-I./include",
    "-c",
-   "AMateria.cpp",
+   "src/AMateria.cpp",
    "-o",
    "AMateria.o"
   ],
-  "file": "AMateria.cpp"
+  "file": "src/AMateria.cpp"
  },
  {
-  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex03",
+  "directory": "/home/aduvilla/Code/TC/CPP/CPP_04/ex03",
   "arguments": [
    "c++",
+   "-MMD",
    "-Wall",
    "-Wextra",
    "-Werror",
    "-std=c++98",
    "-I./include",
    "-c",
-   "Cure.cpp",
+   "src/Cure.cpp",
    "-o",
    "Cure.o"
   ],
-  "file": "Cure.cpp"
+  "file": "src/Cure.cpp"
  },
  {
-  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex03",
+  "directory": "/home/aduvilla/Code/TC/CPP/CPP_04/ex03",
   "arguments": [
    "c++",
+   "-MMD",
    "-Wall",
    "-Wextra",
    "-Werror",
    "-std=c++98",
    "-I./include",
    "-c",
-   "Character.cpp",
+   "src/Character.cpp",
    "-o",
    "Character.o"
   ],
-  "file": "Character.cpp"
+  "file": "src/Character.cpp"
  },
  {
-  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex03",
+  "directory": "/home/aduvilla/Code/TC/CPP/CPP_04/ex03",
   "arguments": [
    "c++",
+   "-MMD",
    "-Wall",
    "-Wextra",
    "-Werror",
    "-std=c++98",
    "-I./include",
    "-c",
-   "Ice.cpp",
+   "src/Ice.cpp",
    "-o",
    "Ice.o"
   ],
-  "file": "Ice.cpp"
+  "file": "src/Ice.cpp"
  },
  {
-  "directory": "/home/c0rvax/Code/TC/CPP/CPP_04/ex03",
+  "directory": "/home/aduvilla/Code/TC/CPP/CPP_04/ex03",
   "arguments": [
    "c++",
+   "-MMD",
    "-Wall",
    "-Wextra",
    "-Werror",
    "-std=c++98",
    "-I./include",
    "-c",
-   "MateriaSource.cpp",
+   "src/MateriaSource.cpp",
    "-o",
    "MateriaSource.o"
   ],
-  "file": "MateriaSource.cpp"
+  "file": "src/MateriaSource.cpp"
  }
 ]

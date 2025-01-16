@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 12:00:48 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/12 14:58:07 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/16 11:59:50 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(void)
 	std::cout << "t2 use materia in slot 0: ";
 	t2->use(0, *bob); // should display nothing
 	std::cout << std::endl;
+	std::cout << std::endl;
 
 	Character*	t3 = new Character(*t1);
 
@@ -64,9 +65,6 @@ int	main(void)
 	t3->use(0, *bob); // should display the same materia in t1 slot 0
 	std::cout << "t3 use materia in slot 1: ";
 	t3->use(1, *bob); // should display the same materia in t1 slot 1
-
-	std::cout << std::endl;
-
 	t3->unequip(0);
 	std::cout << "t3 use materia in slot 0: ";
 	t3->use(0, *bob); // should display nothing (slot 0 unequiped)
