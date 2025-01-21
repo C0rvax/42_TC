@@ -1,0 +1,614 @@
+[
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/main.cpp",
+   "-o",
+   ".obj/main.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/main.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Client.cpp",
+   "-o",
+   ".obj/Client.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Client.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Channel.cpp",
+   "-o",
+   ".obj/Channel.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Channel.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/utils.cpp",
+   "-o",
+   ".obj/utils.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/utils.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Parsing.cpp",
+   "-o",
+   ".obj/Parsing.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Parsing.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/serverExceptions.cpp",
+   "-o",
+   ".obj/serverExceptions.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/serverExceptions.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/ChanMode.cpp",
+   "-o",
+   ".obj/ChanMode.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/ChanMode.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Server/Server.cpp",
+   "-o",
+   ".obj/Server/Server.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Server/Server.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Server/initServer.cpp",
+   "-o",
+   ".obj/Server/initServer.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Server/initServer.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Server/getServer.cpp",
+   "-o",
+   ".obj/Server/getServer.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Server/getServer.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Server/signalServer.cpp",
+   "-o",
+   ".obj/Server/signalServer.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Server/signalServer.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Server/authentificationServer.cpp",
+   "-o",
+   ".obj/Server/authentificationServer.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Server/authentificationServer.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Server/runServer.cpp",
+   "-o",
+   ".obj/Server/runServer.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Server/runServer.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Server/utilServer.cpp",
+   "-o",
+   ".obj/Server/utilServer.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Server/utilServer.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Server/exitServer.cpp",
+   "-o",
+   ".obj/Server/exitServer.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Server/exitServer.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Commands/Nick.cpp",
+   "-o",
+   ".obj/Commands/Nick.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Commands/Nick.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Commands/Kick.cpp",
+   "-o",
+   ".obj/Commands/Kick.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Commands/Kick.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Commands/Join.cpp",
+   "-o",
+   ".obj/Commands/Join.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Commands/Join.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Commands/Ping.cpp",
+   "-o",
+   ".obj/Commands/Ping.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Commands/Ping.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Commands/PrivMsg.cpp",
+   "-o",
+   ".obj/Commands/PrivMsg.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Commands/PrivMsg.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Commands/Notice.cpp",
+   "-o",
+   ".obj/Commands/Notice.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Commands/Notice.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Commands/Part.cpp",
+   "-o",
+   ".obj/Commands/Part.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Commands/Part.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Commands/Topic.cpp",
+   "-o",
+   ".obj/Commands/Topic.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Commands/Topic.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Commands/Mode.cpp",
+   "-o",
+   ".obj/Commands/Mode.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Commands/Mode.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Commands/Quit.cpp",
+   "-o",
+   ".obj/Commands/Quit.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Commands/Quit.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Commands/Invite.cpp",
+   "-o",
+   ".obj/Commands/Invite.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Commands/Invite.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "src/Commands/Who.cpp",
+   "-o",
+   ".obj/Commands/Who.o",
+   "-Iinc",
+   "-I",
+   "inc/Commands/"
+  ],
+  "file": "src/Commands/Who.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "bot/Bot.cpp",
+   "-o",
+   ".botObj/bot/Bot.o",
+   "-Ibot/inc"
+  ],
+  "file": "bot/Bot.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "bot/fileTransferBot.cpp",
+   "-o",
+   ".botObj/bot/fileTransferBot.o",
+   "-Ibot/inc"
+  ],
+  "file": "bot/fileTransferBot.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "bot/main.cpp",
+   "-o",
+   ".botObj/bot/main.o",
+   "-Ibot/inc"
+  ],
+  "file": "bot/main.cpp"
+ },
+ {
+  "directory": "/home/aduvilla/Code/ft_irc",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-std=c++98",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g3",
+   "-c",
+   "bot/utils.cpp",
+   "-o",
+   ".botObj/bot/utils.o",
+   "-Ibot/inc"
+  ],
+  "file": "bot/utils.cpp"
+ }
+]

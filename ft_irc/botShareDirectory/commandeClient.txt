@@ -1,0 +1,20 @@
+# CONNECT
+irssi -c [adresseip] -p [port] -w [password] -n [nick]
+
+nc -N [host] [port]
+PASS [password]
+NICK [nick]
+USER [user] 0 * :[realName]
+
+# DCC IRSSI SEND FILE
+/dcc send [user] [complete/path/file]
+
+# DCC IRSSI GET FILE
+/dcc get [user] [file]
+/dcc get -n [newFileName] -d [path/to/paste/dir] [user] [file]
+
+# NETCAT SEND FILE
+nc [Ipaddress] [port] < [complete/path/file]
+
+# NETCAT GET FILE
+nc -l [port] > [new/path/and/filename]
