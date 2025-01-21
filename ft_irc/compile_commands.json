@@ -1,6 +1,6 @@
 [
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -20,7 +20,7 @@
   "file": "src/main.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -40,7 +40,7 @@
   "file": "src/Client.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -60,7 +60,7 @@
   "file": "src/Channel.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -80,7 +80,7 @@
   "file": "src/utils.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -100,7 +100,7 @@
   "file": "src/Parsing.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -120,7 +120,7 @@
   "file": "src/serverExceptions.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -140,7 +140,7 @@
   "file": "src/ChanMode.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -160,7 +160,7 @@
   "file": "src/Server/Server.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -180,7 +180,7 @@
   "file": "src/Server/initServer.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -200,7 +200,7 @@
   "file": "src/Server/getServer.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -220,7 +220,7 @@
   "file": "src/Server/signalServer.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -240,7 +240,7 @@
   "file": "src/Server/authentificationServer.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -260,7 +260,7 @@
   "file": "src/Server/runServer.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -280,7 +280,7 @@
   "file": "src/Server/utilServer.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -300,7 +300,7 @@
   "file": "src/Server/exitServer.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -320,7 +320,7 @@
   "file": "src/Commands/Nick.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -340,7 +340,7 @@
   "file": "src/Commands/Kick.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -360,7 +360,7 @@
   "file": "src/Commands/Join.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -380,7 +380,7 @@
   "file": "src/Commands/Ping.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -400,7 +400,7 @@
   "file": "src/Commands/PrivMsg.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -420,7 +420,7 @@
   "file": "src/Commands/Notice.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -440,7 +440,7 @@
   "file": "src/Commands/Part.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -460,7 +460,7 @@
   "file": "src/Commands/Topic.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -480,7 +480,7 @@
   "file": "src/Commands/Mode.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -500,7 +500,7 @@
   "file": "src/Commands/Quit.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -520,7 +520,7 @@
   "file": "src/Commands/Invite.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -540,7 +540,7 @@
   "file": "src/Commands/Who.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -558,7 +558,7 @@
   "file": "bot/Bot.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -576,7 +576,7 @@
   "file": "bot/fileTransferBot.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
@@ -594,7 +594,7 @@
   "file": "bot/main.cpp"
  },
  {
-  "directory": "/home/aduvilla/Code/ft_irc",
+  "directory": "/home/aduvilla/Code/TC/ft_irc",
   "arguments": [
    "c++",
    "-MMD",
