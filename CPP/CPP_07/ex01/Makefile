@@ -6,11 +6,11 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/01/22 17:04:36 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/01/22 17:56:59 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= Whatever
+NAME			= Iter
 
 CXX				= c++
 
