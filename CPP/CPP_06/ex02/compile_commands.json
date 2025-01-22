@@ -1,0 +1,19 @@
+[
+ {
+  "directory": "/home/c0rvax/Code/TC/CPP/CPP_06/ex02",
+  "arguments": [
+   "c++",
+   "-MMD",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++98",
+   "-Iinclude",
+   "-c",
+   "src/main.cpp",
+   "-o",
+   ".obj/src/main.o"
+  ],
+  "file": "src/main.cpp"
+ }
+]

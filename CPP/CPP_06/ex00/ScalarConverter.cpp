@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:50:37 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/16 17:39:59 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:24:54 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@
 #include <limits>
 #include <iostream>
 
-ScalarConverter::ScalarConverter	(void)
-{
-}
+ScalarConverter::ScalarConverter	(void) {}
 
 ScalarConverter::ScalarConverter	(ScalarConverter const & src)
 {
@@ -33,9 +31,7 @@ ScalarConverter&	ScalarConverter::operator=(ScalarConverter const & rhs)
 	return *this;
 }
 
-ScalarConverter::~ScalarConverter	(void)
-{
-}
+ScalarConverter::~ScalarConverter	(void) {}
 
 static e_type	getType(std::string const & str)
 {
@@ -83,7 +79,7 @@ static void	printInt(std::string const & str)
 static void	printFloatingPoint(std::string const & str)
 {
 	double	value = std::atof(str.c_str());
-	if (value >= 0 && value <= 255) // oui ou non ??????????????????????
+	if (value >= 0 && value <= 255)
 		std::cout << "char: " << ((value >= 32 && value <= 126) ? "'" + std::string(1, static_cast<char>(value)) + "'" : "Non displayable") << std::endl;
 	else
 		std::cout << "char: impossible" << std::endl;
@@ -91,7 +87,7 @@ static void	printFloatingPoint(std::string const & str)
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(value) << std::endl;
-	if (value > std::numeric_limits<float>::max() || value < std::numeric_limits<float>::min())
+	if (value > std::numeric_limits<float>::max() || value < -std::numeric_limits<float>::max()) // changed line
 	{
 		std::cout << "float: impossible" << std::endl;
 		std::cout << "double: " << value << std::endl;

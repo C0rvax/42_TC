@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 15:11:53 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/22 14:28:48 by aduvilla         ###   ########.fr       */
+/*   Created: 2025/01/22 15:53:56 by aduvilla          #+#    #+#             */
+/*   Updated: 2025/01/22 16:29:35 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "ScalarConverter.hpp"
+#ifndef BASE_HPP
+# define BASE_HPP
 
-int	main(int ac, char **av)
+class	Base
 {
-	if (ac != 2)
-	{
-		std::cout << "Converter: usage: ./convert [value]" << std::endl;
-		return 1;
-	}
-	ScalarConverter::convert(std::string(av[1]));
-	return 0;
-}
+	public:
+	virtual	~Base();
+};
+
+Base*	generte();
+void	identify(Base * p);
+void	identify(Base & p);
+
+#endif

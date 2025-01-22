@@ -5,21 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 15:11:53 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/22 14:28:48 by aduvilla         ###   ########.fr       */
+/*   Created: 2025/01/22 15:14:34 by aduvilla          #+#    #+#             */
+/*   Updated: 2025/01/22 16:01:38 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Serializer.hpp"
 #include <iostream>
-#include "ScalarConverter.hpp"
 
-int	main(int ac, char **av)
+int	main()
 {
-	if (ac != 2)
-	{
-		std::cout << "Converter: usage: ./convert [value]" << std::endl;
-		return 1;
-	}
-	ScalarConverter::convert(std::string(av[1]));
+	Data	robert = {.level = 9, .name = "robert"};
+	Data*		deserializedRobert = Serializer::deserialize(Serializer::serialize(&robert));
+
+	std::cout << (deserializedRobert == &robert ? "struct are the same" : "struct are differents") << std::endl;
+	std::cout << "OG name: " << robert.name << " / level: " << robert.level << std::endl;
+	std::cout << "New name: " << deserializedRobert->name << " / level: " << deserializedRobert->level << std::endl;
 	return 0;
 }

@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   C.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 15:11:53 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/22 14:28:48 by aduvilla         ###   ########.fr       */
+/*   Created: 2025/01/22 15:57:53 by aduvilla          #+#    #+#             */
+/*   Updated: 2025/01/22 15:58:10 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include "ScalarConverter.hpp"
+#ifndef C_HPP
+# define C_HPP
 
-int	main(int ac, char **av)
-{
-	if (ac != 2)
-	{
-		std::cout << "Converter: usage: ./convert [value]" << std::endl;
-		return 1;
-	}
-	ScalarConverter::convert(std::string(av[1]));
-	return 0;
-}
+# include "Base.hpp"
+
+class	C : public Base {};
+
+#endif

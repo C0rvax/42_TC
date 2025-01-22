@@ -5,21 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 15:11:53 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/22 14:28:48 by aduvilla         ###   ########.fr       */
+/*   Created: 2025/01/22 16:04:09 by aduvilla          #+#    #+#             */
+/*   Updated: 2025/01/22 16:32:35 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Base.hpp"
 #include <iostream>
-#include "ScalarConverter.hpp"
 
-int	main(int ac, char **av)
+int	main()
 {
-	if (ac != 2)
+	Base*	b[10];
+	for (size_t i = 0; i < 10; i++)
 	{
-		std::cout << "Converter: usage: ./convert [value]" << std::endl;
-		return 1;
+		b[i] = generte();
+		std::cout << "no: " << i << " is type: ";
+		if (i % 2 == 0)
+			identify(b[i]);
+		else
+			identify(*b[i]);
 	}
-	ScalarConverter::convert(std::string(av[1]));
 	return 0;
 }

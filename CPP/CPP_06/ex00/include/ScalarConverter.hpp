@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:47:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/17 17:38:21 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:28:14 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,13 @@ enum e_type
 class	ScalarConverter
 {
 	public:
-		ScalarConverter(ScalarConverter const & src);
-		ScalarConverter &operator=(ScalarConverter const & rhs);
-		~ScalarConverter(void);
-
 		static void	convert(std::string const & str);
 
 	private:	
 		ScalarConverter(void);
+		ScalarConverter(ScalarConverter const & src);
+		ScalarConverter &operator=(ScalarConverter const & rhs);
+		~ScalarConverter(void);
 };
 
 #endif  /* __SCALARCONVERTER_HPP__ */
