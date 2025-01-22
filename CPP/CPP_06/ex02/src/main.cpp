@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:04:09 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/22 16:32:35 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:36:34 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ int	main()
 			identify(b[i]);
 		else
 			identify(*b[i]);
+	}
+	for (size_t i = 0; i < 10; i++)
+	{
+		delete b[i];
 	}
 	return 0;
 }
