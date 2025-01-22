@@ -1,6 +1,6 @@
 [
  {
-  "directory": "/home/aduvilla/Code/TC/Philo",
+  "directory": "/home/c0rvax/Code/TC/Philo",
   "arguments": [
    "cc",
    "-Wextra",
@@ -15,7 +15,7 @@
   "file": "main.c"
  },
  {
-  "directory": "/home/aduvilla/Code/TC/Philo",
+  "directory": "/home/c0rvax/Code/TC/Philo",
   "arguments": [
    "cc",
    "-Wextra",
@@ -30,7 +30,7 @@
   "file": "init.c"
  },
  {
-  "directory": "/home/aduvilla/Code/TC/Philo",
+  "directory": "/home/c0rvax/Code/TC/Philo",
   "arguments": [
    "cc",
    "-Wextra",
@@ -45,7 +45,7 @@
   "file": "exit_error.c"
  },
  {
-  "directory": "/home/aduvilla/Code/TC/Philo",
+  "directory": "/home/c0rvax/Code/TC/Philo",
   "arguments": [
    "cc",
    "-Wextra",
@@ -60,7 +60,7 @@
   "file": "utils.c"
  },
  {
-  "directory": "/home/aduvilla/Code/TC/Philo",
+  "directory": "/home/c0rvax/Code/TC/Philo",
   "arguments": [
    "cc",
    "-Wextra",
@@ -75,7 +75,7 @@
   "file": "thanatos.c"
  },
  {
-  "directory": "/home/aduvilla/Code/TC/Philo",
+  "directory": "/home/c0rvax/Code/TC/Philo",
   "arguments": [
    "cc",
    "-Wextra",
