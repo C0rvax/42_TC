@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 18:28:58 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/22 18:52:42 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:35:56 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 #include <cstddef>
 #include <stdexcept>
+
 template <typename T>
 class	Array
 {
 	private:
-	T*				m_array;
+	T*		m_array;
 	size_t	m_size;
 
 	public:
@@ -49,6 +50,7 @@ class	Array
 			for (size_t i = 0; i < m_size; i++)
 				m_array[i] = rhs.m_array[i];
 		}
+		return this;
 	}
 
 	T&	operator[](size_t index)

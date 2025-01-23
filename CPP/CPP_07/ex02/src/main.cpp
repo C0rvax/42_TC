@@ -3,10 +3,18 @@
 #include <Array.hpp>
 
 #define MAX_VAL 5
-int main(int, char**)
+int main()
 {
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
+	std::cout << "all good go !" << std::endl;
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+		// valgrind error: unitialized value
+		std::cout << "et avant ?" << std::endl;
+		std::cout << "number [" << i << "] = " << numbers[i] << std::endl;
+		std::cout << "mirror [" << i << "] = " << mirror[i] << std::endl;
+	}
     srand(time(NULL));
     for (int i = 0; i < MAX_VAL; i++)
     {
@@ -22,11 +30,12 @@ int main(int, char**)
 	{
 		for (size_t i = 0; i < MAX_VAL; i++)
 		{
-			std::cout << test[i] << std::endl;
-			std::cout << numbers[i] << std::endl;
+			std::cout << "test [" << i << "] = " << test[i] << std::endl;
+			std::cout << "number [" << i << "] = " << numbers[i] << std::endl;
 			test[i] *= 100;
-			std::cout << test[i] << std::endl;
-			std::cout << numbers[i] << std::endl;
+			std::cout << "After multiplication:" << std::endl;
+			std::cout << "test [" << i << "] = " << test[i] << std::endl;
+			std::cout << "number [" << i << "] = " << numbers[i] << std::endl;
 			std::cout << std::endl;
 		}
 	}
@@ -61,10 +70,18 @@ int main(int, char**)
         std::cerr << e.what() << '\n';
     }
 
+    Array<std::string> strings(MAX_VAL);
+	std::string* mirrorS = new std::string[MAX_VAL];
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+		std::cout << "strings [" << i << "] = " << strings[i] << std::endl;
+		std::cout << "mirror [" << i << "] = " << mirrorS[i] << std::endl;
+	}
     for (int i = 0; i < MAX_VAL; i++)
     {
         numbers[i] = rand();
     }
     delete [] mirror;//
+    delete [] mirrorS;//
     return 0;
 }
