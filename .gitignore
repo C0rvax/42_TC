@@ -1,6 +1,6 @@
-.cache/
-.cache
-.vscode
-.obj
-compile_flags.txt
-compile_commands.json
+*.cache/
+*.cache
+*.vscode
+*.obj
+*compile_flags.txt
+*compile_commands.json
