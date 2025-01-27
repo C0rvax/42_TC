@@ -6,7 +6,7 @@
 /*   By: noda <noda@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:15:16 by noda              #+#    #+#             */
-/*   Updated: 2025/01/19 17:29:25 by noda             ###   ########.fr       */
+/*   Updated: 2025/01/27 11:53:16 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,10 @@ void	Mode::modeO(Server &server, Channel & channel, Client &source, bool status,
 			if (client && status)
 			{
 				if (!channel.getMode()->isOP(client))
+				{
 					channel.getMode()->addOP(client);
+					client->addOP(channel);
+				}
 				channel.sendAllMsg(&server, &source, "+o " + modeArg, eMode);
 			}
 			if (client && !status && channel.getMode()->isOP(client))

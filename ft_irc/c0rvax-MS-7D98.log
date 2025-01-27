@@ -1,0 +1,917 @@
+Mon Jan 27 2025 at 09:55:09 GMT :Server listening on port 6667
+Mon Jan 27 2025 at 09:55:09 GMT :Server <4> Connected
+Mon Jan 27 2025 at 09:55:09 GMT :Waiting for a connection...
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** No Identd
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** Looking up your hostname
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** Found your hostname
+Mon Jan 27 2025 at 09:55:13 GMT :Client <5> Connected
+Mon Jan 27 2025 at 09:55:13 GMT :5 >> CAP LS 302
+Mon Jan 27 2025 at 09:55:13 GMT :5 >> JOIN :
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 451 JOIN :You have not registered
+Mon Jan 27 2025 at 09:55:13 GMT :5 >> PASS port
+Mon Jan 27 2025 at 09:55:13 GMT :5 >> NICK rich
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :!@localhost NICK :rich
+Mon Jan 27 2025 at 09:55:13 GMT :5 >> USER c0rvax c0rvax localhost :c0rvax
+Mon Jan 27 2025 at 09:55:13 GMT :Client <5> is now authentified
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 001 rich :Welcome to the ft_IRC NETWORK rich!c0rvax@localhost
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 002 rich :Your host is c0rvax-MS-7D98, running version 1.2.3
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 003 rich :This server was created -
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 004 rich :c0rvax-MS-7D98 1.2.3 itkol
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 005 rich :CHANMODES=i, t, k, o, l : are supported by this server
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 251 rich :There are 1 users on 1 server
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 252 rich :Operators are disabled on this server
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 254 rich :0 :channels formed
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 375 rich :- c0rvax-MS-7D98 Message of the Day -
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-        Welcome to,
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-                   c0rvax-MS-7D98
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-        * Host.....: c0rvax-MS-7D98
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-        * Port.....: 6667
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-    Welcome to our 42 IRC project
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-           243   38     446297    
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-         53 34908087  313590      
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-      753 735808     33 738     39
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-      88 32565       2 198732 9246
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-    38979055085      9984504135980          :::::::::: :::::::::::           ::::::::::: :::::::::   :::::::: 
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-  057 88495985313   0116007259358          :+:            :+:                   :+:     :+:    :+: :+:    :+:
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-   899987   88952257895565940885          +:+            +:+                   +:+     +:+    +:+ +:+
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-    5840     588070339903                :#::+::#       +#+                   +#+     +#++:++#:  +#+
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-               10136900                 +#+            +#+                   +#+     +#+    +#+ +#+
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-             701369805578              #+#            #+#                   #+#     #+#    #+# #+#    #+#
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-          71811936088655376           ###            ###    ########## ########### ###    ###  ########
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-         10136260   308943335     
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-       36335490       048652233   
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-     708356907          998945557 
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-    39  6490              08994669                      by eschussl and aduvilla
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-    050390                 5899959
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :-  
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 372 rich :
+Mon Jan 27 2025 at 09:55:13 GMT :5 << :c0rvax-MS-7D98 376 rich :End of /MOTD command.
+Mon Jan 27 2025 at 09:55:16 GMT :5 >> QUIT :leaving
+Mon Jan 27 2025 at 09:55:16 GMT :Client <5> Disconnected
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** No Identd
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** Looking up your hostname
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** Found your hostname
+Mon Jan 27 2025 at 10:13:00 GMT :Client <5> Connected
+Mon Jan 27 2025 at 10:13:00 GMT :5 >> CAP LS 302
+Mon Jan 27 2025 at 10:13:00 GMT :5 >> JOIN :
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 451 JOIN :You have not registered
+Mon Jan 27 2025 at 10:13:00 GMT :5 >> PASS port
+Mon Jan 27 2025 at 10:13:00 GMT :5 >> NICK rich
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :!@localhost NICK :rich
+Mon Jan 27 2025 at 10:13:00 GMT :5 >> USER c0rvax c0rvax localhost :c0rvax
+Mon Jan 27 2025 at 10:13:00 GMT :Client <5> is now authentified
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 001 rich :Welcome to the ft_IRC NETWORK rich!c0rvax@localhost
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 002 rich :Your host is c0rvax-MS-7D98, running version 1.2.3
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 003 rich :This server was created -
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 004 rich :c0rvax-MS-7D98 1.2.3 itkol
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 005 rich :CHANMODES=i, t, k, o, l : are supported by this server
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 251 rich :There are 1 users on 1 server
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 252 rich :Operators are disabled on this server
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 254 rich :0 :channels formed
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 375 rich :- c0rvax-MS-7D98 Message of the Day -
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-        Welcome to,
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-                   c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-        * Host.....: c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-        * Port.....: 6667
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-    Welcome to our 42 IRC project
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-           243   38     446297    
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-         53 34908087  313590      
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-      753 735808     33 738     39
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-      88 32565       2 198732 9246
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-    38979055085      9984504135980          :::::::::: :::::::::::           ::::::::::: :::::::::   :::::::: 
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-  057 88495985313   0116007259358          :+:            :+:                   :+:     :+:    :+: :+:    :+:
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-   899987   88952257895565940885          +:+            +:+                   +:+     +:+    +:+ +:+
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-    5840     588070339903                :#::+::#       +#+                   +#+     +#++:++#:  +#+
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-               10136900                 +#+            +#+                   +#+     +#+    +#+ +#+
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-             701369805578              #+#            #+#                   #+#     #+#    #+# #+#    #+#
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-          71811936088655376           ###            ###    ########## ########### ###    ###  ########
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-         10136260   308943335     
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-       36335490       048652233   
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-     708356907          998945557 
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-    39  6490              08994669                      by eschussl and aduvilla
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-    050390                 5899959
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :-  
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 372 rich :
+Mon Jan 27 2025 at 10:13:00 GMT :5 << :c0rvax-MS-7D98 376 rich :End of /MOTD command.
+Mon Jan 27 2025 at 10:13:03 GMT :5 >> MODE rich +i
+Mon Jan 27 2025 at 10:13:05 GMT :5 >> JOIN #ici
+Mon Jan 27 2025 at 10:13:05 GMT :5 << :rich!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:13:05 GMT :5 << :c0rvax-MS-7D98 353 rich = #ici :@rich 
+Mon Jan 27 2025 at 10:13:05 GMT :5 << :c0rvax-MS-7D98 366 rich #ici :End of /NAMES list.
+Mon Jan 27 2025 at 10:13:08 GMT :5 >> MODE #ici
+Mon Jan 27 2025 at 10:13:08 GMT :5 << :c0rvax-MS-7D98 324 rich #ici +
+Mon Jan 27 2025 at 10:13:10 GMT :5 >> WHO #ici
+Mon Jan 27 2025 at 10:13:10 GMT :5 << :c0rvax-MS-7D98 352 rich #ici c0rvax localhost c0rvax-MS-7D98 rich H@ :0 c0rvax
+Mon Jan 27 2025 at 10:13:10 GMT :5 << :c0rvax-MS-7D98 315 rich #ici :End of WHO list
+Mon Jan 27 2025 at 10:13:13 GMT :5 >> MODE #ici b
+Mon Jan 27 2025 at 10:13:13 GMT :5 << :c0rvax-MS-7D98 368 rich #ici :End of channel ban list
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** No Identd
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** Looking up your hostname
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** Found your hostname
+Mon Jan 27 2025 at 10:13:15 GMT :Client <6> Connected
+Mon Jan 27 2025 at 10:13:15 GMT :6 >> CAP LS 302
+Mon Jan 27 2025 at 10:13:15 GMT :6 >> JOIN :
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 451 JOIN :You have not registered
+Mon Jan 27 2025 at 10:13:15 GMT :6 >> PASS port
+Mon Jan 27 2025 at 10:13:15 GMT :6 >> NICK jean
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :!@localhost NICK :jean
+Mon Jan 27 2025 at 10:13:15 GMT :6 >> USER c0rvax c0rvax localhost :c0rvax
+Mon Jan 27 2025 at 10:13:15 GMT :Client <6> is now authentified
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 001 jean :Welcome to the ft_IRC NETWORK jean!c0rvax@localhost
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 002 jean :Your host is c0rvax-MS-7D98, running version 1.2.3
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 003 jean :This server was created -
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 004 jean :c0rvax-MS-7D98 1.2.3 itkol
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 005 jean :CHANMODES=i, t, k, o, l : are supported by this server
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 251 jean :There are 2 users on 1 server
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 252 jean :Operators are disabled on this server
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 254 jean :1 :channels formed
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 375 jean :- c0rvax-MS-7D98 Message of the Day -
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-        Welcome to,
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-                   c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-        * Host.....: c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-        * Port.....: 6667
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-    Welcome to our 42 IRC project
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-           243   38     446297    
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-         53 34908087  313590      
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-      753 735808     33 738     39
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-      88 32565       2 198732 9246
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-    38979055085      9984504135980          :::::::::: :::::::::::           ::::::::::: :::::::::   :::::::: 
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-  057 88495985313   0116007259358          :+:            :+:                   :+:     :+:    :+: :+:    :+:
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-   899987   88952257895565940885          +:+            +:+                   +:+     +:+    +:+ +:+
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-    5840     588070339903                :#::+::#       +#+                   +#+     +#++:++#:  +#+
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-               10136900                 +#+            +#+                   +#+     +#+    +#+ +#+
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-             701369805578              #+#            #+#                   #+#     #+#    #+# #+#    #+#
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-          71811936088655376           ###            ###    ########## ########### ###    ###  ########
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-         10136260   308943335     
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-       36335490       048652233   
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-     708356907          998945557 
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-    39  6490              08994669                      by eschussl and aduvilla
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-    050390                 5899959
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :-  
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 372 jean :
+Mon Jan 27 2025 at 10:13:15 GMT :6 << :c0rvax-MS-7D98 376 jean :End of /MOTD command.
+Mon Jan 27 2025 at 10:13:17 GMT :6 >> MODE jean +i
+Mon Jan 27 2025 at 10:13:18 GMT :5 >> PING c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:13:18 GMT :5 << :c0rvax-MS-7D98 PONG c0rvax-MS-7D98 :rich
+Mon Jan 27 2025 at 10:13:20 GMT :6 >> JOIN #ici
+Mon Jan 27 2025 at 10:13:20 GMT :5 << :jean!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:13:20 GMT :6 << :jean!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:13:20 GMT :6 << :c0rvax-MS-7D98 353 jean = #ici :@rich jean 
+Mon Jan 27 2025 at 10:13:20 GMT :6 << :c0rvax-MS-7D98 366 jean #ici :End of /NAMES list.
+Mon Jan 27 2025 at 10:13:22 GMT :6 >> MODE #ici
+Mon Jan 27 2025 at 10:13:22 GMT :6 << :c0rvax-MS-7D98 324 jean #ici +
+Mon Jan 27 2025 at 10:13:25 GMT :6 >> WHO #ici
+Mon Jan 27 2025 at 10:13:25 GMT :6 << :c0rvax-MS-7D98 352 jean #ici c0rvax localhost c0rvax-MS-7D98 rich H@ :0 c0rvax
+Mon Jan 27 2025 at 10:13:25 GMT :6 << :c0rvax-MS-7D98 352 jean #ici c0rvax localhost c0rvax-MS-7D98 jean H :0 c0rvax
+Mon Jan 27 2025 at 10:13:25 GMT :6 << :c0rvax-MS-7D98 315 jean #ici :End of WHO list
+Mon Jan 27 2025 at 10:13:26 GMT :5 >> MODE #ici +o jean
+Mon Jan 27 2025 at 10:13:26 GMT :5 << :rich!c0rvax@localhost MODE #ici +o jean
+Mon Jan 27 2025 at 10:13:26 GMT :6 << :rich!c0rvax@localhost MODE #ici +o jean
+Mon Jan 27 2025 at 10:13:27 GMT :6 >> MODE #ici b
+Mon Jan 27 2025 at 10:13:27 GMT :6 << :c0rvax-MS-7D98 368 jean #ici :End of channel ban list
+Mon Jan 27 2025 at 10:13:33 GMT :6 >> PING c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:13:33 GMT :6 << :c0rvax-MS-7D98 PONG c0rvax-MS-7D98 :jean
+Mon Jan 27 2025 at 10:13:35 GMT :6 >> QUIT :leaving
+Mon Jan 27 2025 at 10:13:35 GMT :Client <6> Disconnected
+Mon Jan 27 2025 at 10:13:35 GMT :5 << :jean!c0rvax@localhost QUIT :Quit: leaving
+Mon Jan 27 2025 at 10:13:46 GMT :5 >> QUIT :leaving
+Mon Jan 27 2025 at 10:13:46 GMT :Client <5> Disconnected
+Mon Jan 27 2025 at 10:15:45 GMT :Server <4> Disconnected
+Mon Jan 27 2025 at 10:15:45 GMT :closing
+Mon Jan 27 2025 at 10:15:45 GMT :
+============================================
+
+Mon Jan 27 2025 at 10:15:56 GMT :Server listening on port 6667
+Mon Jan 27 2025 at 10:15:56 GMT :Server <4> Connected
+Mon Jan 27 2025 at 10:15:56 GMT :Waiting for a connection...
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** No Identd
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** Looking up your hostname
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** Found your hostname
+Mon Jan 27 2025 at 10:15:58 GMT :Client <5> Connected
+Mon Jan 27 2025 at 10:15:58 GMT :5 >> CAP LS 302
+Mon Jan 27 2025 at 10:15:58 GMT :5 >> JOIN :
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 451 JOIN :You have not registered
+Mon Jan 27 2025 at 10:15:58 GMT :5 >> PASS port
+Mon Jan 27 2025 at 10:15:58 GMT :5 >> NICK jean
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :!@localhost NICK :jean
+Mon Jan 27 2025 at 10:15:58 GMT :5 >> USER c0rvax c0rvax localhost :c0rvax
+Mon Jan 27 2025 at 10:15:58 GMT :Client <5> is now authentified
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 001 jean :Welcome to the ft_IRC NETWORK jean!c0rvax@localhost
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 002 jean :Your host is c0rvax-MS-7D98, running version 1.2.3
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 003 jean :This server was created -
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 004 jean :c0rvax-MS-7D98 1.2.3 itkol
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 005 jean :CHANMODES=i, t, k, o, l : are supported by this server
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 251 jean :There are 1 users on 1 server
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 252 jean :Operators are disabled on this server
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 254 jean :0 :channels formed
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 375 jean :- c0rvax-MS-7D98 Message of the Day -
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-        Welcome to,
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-                   c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-        * Host.....: c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-        * Port.....: 6667
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-    Welcome to our 42 IRC project
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-           243   38     446297    
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-         53 34908087  313590      
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-      753 735808     33 738     39
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-      88 32565       2 198732 9246
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-    38979055085      9984504135980          :::::::::: :::::::::::           ::::::::::: :::::::::   :::::::: 
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-  057 88495985313   0116007259358          :+:            :+:                   :+:     :+:    :+: :+:    :+:
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-   899987   88952257895565940885          +:+            +:+                   +:+     +:+    +:+ +:+
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-    5840     588070339903                :#::+::#       +#+                   +#+     +#++:++#:  +#+
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-               10136900                 +#+            +#+                   +#+     +#+    +#+ +#+
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-             701369805578              #+#            #+#                   #+#     #+#    #+# #+#    #+#
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-          71811936088655376           ###            ###    ########## ########### ###    ###  ########
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-         10136260   308943335     
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-       36335490       048652233   
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-     708356907          998945557 
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-    39  6490              08994669                      by eschussl and aduvilla
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-    050390                 5899959
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :-  
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 372 jean :
+Mon Jan 27 2025 at 10:15:58 GMT :5 << :c0rvax-MS-7D98 376 jean :End of /MOTD command.
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** No Identd
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** Looking up your hostname
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** Found your hostname
+Mon Jan 27 2025 at 10:16:01 GMT :Client <6> Connected
+Mon Jan 27 2025 at 10:16:01 GMT :6 >> CAP LS 302
+Mon Jan 27 2025 at 10:16:01 GMT :6 >> JOIN :
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 451 JOIN :You have not registered
+Mon Jan 27 2025 at 10:16:01 GMT :6 >> PASS port
+Mon Jan 27 2025 at 10:16:01 GMT :6 >> NICK rich
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :!@localhost NICK :rich
+Mon Jan 27 2025 at 10:16:01 GMT :6 >> USER c0rvax c0rvax localhost :c0rvax
+Mon Jan 27 2025 at 10:16:01 GMT :Client <6> is now authentified
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 001 rich :Welcome to the ft_IRC NETWORK rich!c0rvax@localhost
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 002 rich :Your host is c0rvax-MS-7D98, running version 1.2.3
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 003 rich :This server was created -
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 004 rich :c0rvax-MS-7D98 1.2.3 itkol
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 005 rich :CHANMODES=i, t, k, o, l : are supported by this server
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 251 rich :There are 2 users on 1 server
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 252 rich :Operators are disabled on this server
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 254 rich :0 :channels formed
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 375 rich :- c0rvax-MS-7D98 Message of the Day -
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-        Welcome to,
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-                   c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-        * Host.....: c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-        * Port.....: 6667
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-    Welcome to our 42 IRC project
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-           243   38     446297    
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-         53 34908087  313590      
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-      753 735808     33 738     39
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-      88 32565       2 198732 9246
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-    38979055085      9984504135980          :::::::::: :::::::::::           ::::::::::: :::::::::   :::::::: 
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-  057 88495985313   0116007259358          :+:            :+:                   :+:     :+:    :+: :+:    :+:
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-   899987   88952257895565940885          +:+            +:+                   +:+     +:+    +:+ +:+
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-    5840     588070339903                :#::+::#       +#+                   +#+     +#++:++#:  +#+
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-               10136900                 +#+            +#+                   +#+     +#+    +#+ +#+
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-             701369805578              #+#            #+#                   #+#     #+#    #+# #+#    #+#
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-          71811936088655376           ###            ###    ########## ########### ###    ###  ########
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-         10136260   308943335     
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-       36335490       048652233   
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-     708356907          998945557 
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-    39  6490              08994669                      by eschussl and aduvilla
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-    050390                 5899959
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :-  
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 372 rich :
+Mon Jan 27 2025 at 10:16:01 GMT :6 << :c0rvax-MS-7D98 376 rich :End of /MOTD command.
+Mon Jan 27 2025 at 10:16:01 GMT :5 >> MODE jean +i
+Mon Jan 27 2025 at 10:16:03 GMT :6 >> MODE rich +i
+Mon Jan 27 2025 at 10:16:06 GMT :6 >> JOIN #ici
+Mon Jan 27 2025 at 10:16:06 GMT :6 << :rich!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:16:06 GMT :6 << :c0rvax-MS-7D98 353 rich = #ici :@rich 
+Mon Jan 27 2025 at 10:16:06 GMT :6 << :c0rvax-MS-7D98 366 rich #ici :End of /NAMES list.
+Mon Jan 27 2025 at 10:16:06 GMT :5 >> PING c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:16:06 GMT :5 << :c0rvax-MS-7D98 PONG c0rvax-MS-7D98 :jean
+Mon Jan 27 2025 at 10:16:08 GMT :6 >> MODE #ici
+Mon Jan 27 2025 at 10:16:08 GMT :6 << :c0rvax-MS-7D98 324 rich #ici +
+Mon Jan 27 2025 at 10:16:09 GMT :5 >> JOIN #ici
+Mon Jan 27 2025 at 10:16:09 GMT :6 << :jean!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:16:09 GMT :5 << :jean!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:16:09 GMT :5 << :c0rvax-MS-7D98 353 jean = #ici :@rich jean 
+Mon Jan 27 2025 at 10:16:09 GMT :5 << :c0rvax-MS-7D98 366 jean #ici :End of /NAMES list.
+Mon Jan 27 2025 at 10:16:11 GMT :6 >> WHO #ici
+Mon Jan 27 2025 at 10:16:11 GMT :6 << :c0rvax-MS-7D98 352 rich #ici c0rvax localhost c0rvax-MS-7D98 rich H@ :0 c0rvax
+Mon Jan 27 2025 at 10:16:11 GMT :6 << :c0rvax-MS-7D98 352 rich #ici c0rvax localhost c0rvax-MS-7D98 jean H :0 c0rvax
+Mon Jan 27 2025 at 10:16:11 GMT :6 << :c0rvax-MS-7D98 315 rich #ici :End of WHO list
+Mon Jan 27 2025 at 10:16:11 GMT :5 >> MODE #ici
+Mon Jan 27 2025 at 10:16:11 GMT :5 << :c0rvax-MS-7D98 324 jean #ici +
+Mon Jan 27 2025 at 10:16:13 GMT :6 >> MODE #ici b
+Mon Jan 27 2025 at 10:16:13 GMT :6 << :c0rvax-MS-7D98 368 rich #ici :End of channel ban list
+Mon Jan 27 2025 at 10:16:14 GMT :5 >> WHO #ici
+Mon Jan 27 2025 at 10:16:14 GMT :5 << :c0rvax-MS-7D98 352 jean #ici c0rvax localhost c0rvax-MS-7D98 rich H@ :0 c0rvax
+Mon Jan 27 2025 at 10:16:14 GMT :5 << :c0rvax-MS-7D98 352 jean #ici c0rvax localhost c0rvax-MS-7D98 jean H :0 c0rvax
+Mon Jan 27 2025 at 10:16:14 GMT :5 << :c0rvax-MS-7D98 315 jean #ici :End of WHO list
+Mon Jan 27 2025 at 10:16:16 GMT :5 >> MODE #ici b
+Mon Jan 27 2025 at 10:16:16 GMT :5 << :c0rvax-MS-7D98 368 jean #ici :End of channel ban list
+Mon Jan 27 2025 at 10:16:18 GMT :6 >> MODE #ici +o jean
+Mon Jan 27 2025 at 10:16:18 GMT :6 << :rich!c0rvax@localhost MODE #ici +o jean
+Mon Jan 27 2025 at 10:16:18 GMT :5 << :rich!c0rvax@localhost MODE #ici +o jean
+Mon Jan 27 2025 at 10:16:21 GMT :6 >> PING c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:16:21 GMT :6 << :c0rvax-MS-7D98 PONG c0rvax-MS-7D98 :rich
+Mon Jan 27 2025 at 10:16:21 GMT :5 >> QUIT :leaving
+Mon Jan 27 2025 at 10:16:21 GMT :Client <5> Disconnected
+Mon Jan 27 2025 at 10:16:21 GMT :6 << :jean!c0rvax@localhost QUIT :Quit: leaving
+Mon Jan 27 2025 at 10:16:23 GMT :6 >> QUIT :leaving
+Mon Jan 27 2025 at 10:16:23 GMT :Client <6> Disconnected
+Mon Jan 27 2025 at 10:18:50 GMT :Server <4> Disconnected
+Mon Jan 27 2025 at 10:18:50 GMT :closing
+Mon Jan 27 2025 at 10:18:50 GMT :
+============================================
+
+Mon Jan 27 2025 at 10:19:01 GMT :Server listening on port 6667
+Mon Jan 27 2025 at 10:19:01 GMT :Server <4> Connected
+Mon Jan 27 2025 at 10:19:01 GMT :Waiting for a connection...
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** No Identd
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** Looking up your hostname
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** Found your hostname
+Mon Jan 27 2025 at 10:19:03 GMT :Client <5> Connected
+Mon Jan 27 2025 at 10:19:03 GMT :5 >> CAP LS 302
+Mon Jan 27 2025 at 10:19:03 GMT :5 >> JOIN :
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 451 JOIN :You have not registered
+Mon Jan 27 2025 at 10:19:03 GMT :5 >> PASS port
+Mon Jan 27 2025 at 10:19:03 GMT :5 >> NICK jean
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :!@localhost NICK :jean
+Mon Jan 27 2025 at 10:19:03 GMT :5 >> USER c0rvax c0rvax localhost :c0rvax
+Mon Jan 27 2025 at 10:19:03 GMT :Client <5> is now authentified
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 001 jean :Welcome to the ft_IRC NETWORK jean!c0rvax@localhost
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 002 jean :Your host is c0rvax-MS-7D98, running version 1.2.3
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 003 jean :This server was created -
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 004 jean :c0rvax-MS-7D98 1.2.3 itkol
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 005 jean :CHANMODES=i, t, k, o, l : are supported by this server
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 251 jean :There are 1 users on 1 server
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 252 jean :Operators are disabled on this server
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 254 jean :0 :channels formed
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 375 jean :- c0rvax-MS-7D98 Message of the Day -
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-        Welcome to,
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-                   c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-        * Host.....: c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-        * Port.....: 6667
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-    Welcome to our 42 IRC project
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-           243   38     446297    
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-         53 34908087  313590      
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-      753 735808     33 738     39
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-      88 32565       2 198732 9246
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-    38979055085      9984504135980          :::::::::: :::::::::::           ::::::::::: :::::::::   :::::::: 
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-  057 88495985313   0116007259358          :+:            :+:                   :+:     :+:    :+: :+:    :+:
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-   899987   88952257895565940885          +:+            +:+                   +:+     +:+    +:+ +:+
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-    5840     588070339903                :#::+::#       +#+                   +#+     +#++:++#:  +#+
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-               10136900                 +#+            +#+                   +#+     +#+    +#+ +#+
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-             701369805578              #+#            #+#                   #+#     #+#    #+# #+#    #+#
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-          71811936088655376           ###            ###    ########## ########### ###    ###  ########
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-         10136260   308943335     
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-       36335490       048652233   
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-     708356907          998945557 
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-    39  6490              08994669                      by eschussl and aduvilla
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-    050390                 5899959
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :-  
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 372 jean :
+Mon Jan 27 2025 at 10:19:03 GMT :5 << :c0rvax-MS-7D98 376 jean :End of /MOTD command.
+Mon Jan 27 2025 at 10:19:05 GMT :5 >> MODE jean +i
+Mon Jan 27 2025 at 10:19:08 GMT :5 >> JOIN #ici
+Mon Jan 27 2025 at 10:19:08 GMT :5 << :jean!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:19:08 GMT :5 << :c0rvax-MS-7D98 353 jean = #ici :@jean 
+Mon Jan 27 2025 at 10:19:08 GMT :5 << :c0rvax-MS-7D98 366 jean #ici :End of /NAMES list.
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** No Identd
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** Looking up your hostname
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** Found your hostname
+Mon Jan 27 2025 at 10:19:08 GMT :Client <6> Connected
+Mon Jan 27 2025 at 10:19:08 GMT :6 >> CAP LS 302
+Mon Jan 27 2025 at 10:19:08 GMT :6 >> JOIN :
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 451 JOIN :You have not registered
+Mon Jan 27 2025 at 10:19:08 GMT :6 >> PASS port
+Mon Jan 27 2025 at 10:19:08 GMT :6 >> NICK rich
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :!@localhost NICK :rich
+Mon Jan 27 2025 at 10:19:08 GMT :6 >> USER c0rvax c0rvax localhost :c0rvax
+Mon Jan 27 2025 at 10:19:08 GMT :Client <6> is now authentified
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 001 rich :Welcome to the ft_IRC NETWORK rich!c0rvax@localhost
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 002 rich :Your host is c0rvax-MS-7D98, running version 1.2.3
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 003 rich :This server was created -
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 004 rich :c0rvax-MS-7D98 1.2.3 itkol
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 005 rich :CHANMODES=i, t, k, o, l : are supported by this server
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 251 rich :There are 2 users on 1 server
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 252 rich :Operators are disabled on this server
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 254 rich :1 :channels formed
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 375 rich :- c0rvax-MS-7D98 Message of the Day -
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-        Welcome to,
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-                   c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-        * Host.....: c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-        * Port.....: 6667
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-    Welcome to our 42 IRC project
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-           243   38     446297    
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-         53 34908087  313590      
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-      753 735808     33 738     39
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-      88 32565       2 198732 9246
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-    38979055085      9984504135980          :::::::::: :::::::::::           ::::::::::: :::::::::   :::::::: 
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-  057 88495985313   0116007259358          :+:            :+:                   :+:     :+:    :+: :+:    :+:
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-   899987   88952257895565940885          +:+            +:+                   +:+     +:+    +:+ +:+
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-    5840     588070339903                :#::+::#       +#+                   +#+     +#++:++#:  +#+
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-               10136900                 +#+            +#+                   +#+     +#+    +#+ +#+
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-             701369805578              #+#            #+#                   #+#     #+#    #+# #+#    #+#
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-          71811936088655376           ###            ###    ########## ########### ###    ###  ########
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-         10136260   308943335     
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-       36335490       048652233   
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-     708356907          998945557 
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-    39  6490              08994669                      by eschussl and aduvilla
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-    050390                 5899959
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :-  
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 372 rich :
+Mon Jan 27 2025 at 10:19:08 GMT :6 << :c0rvax-MS-7D98 376 rich :End of /MOTD command.
+Mon Jan 27 2025 at 10:19:10 GMT :5 >> MODE #ici
+Mon Jan 27 2025 at 10:19:10 GMT :5 << :c0rvax-MS-7D98 324 jean #ici +
+Mon Jan 27 2025 at 10:19:11 GMT :6 >> MODE rich +i
+Mon Jan 27 2025 at 10:19:13 GMT :5 >> WHO #ici
+Mon Jan 27 2025 at 10:19:13 GMT :5 << :c0rvax-MS-7D98 352 jean #ici c0rvax localhost c0rvax-MS-7D98 jean H@ :0 c0rvax
+Mon Jan 27 2025 at 10:19:13 GMT :5 << :c0rvax-MS-7D98 315 jean #ici :End of WHO list
+Mon Jan 27 2025 at 10:19:13 GMT :6 >> JOIN #ici
+Mon Jan 27 2025 at 10:19:13 GMT :5 << :rich!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:19:13 GMT :6 << :rich!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:19:13 GMT :6 << :c0rvax-MS-7D98 353 rich = #ici :@jean rich 
+Mon Jan 27 2025 at 10:19:13 GMT :6 << :c0rvax-MS-7D98 366 rich #ici :End of /NAMES list.
+Mon Jan 27 2025 at 10:19:15 GMT :5 >> MODE #ici b
+Mon Jan 27 2025 at 10:19:15 GMT :5 << :c0rvax-MS-7D98 368 jean #ici :End of channel ban list
+Mon Jan 27 2025 at 10:19:16 GMT :6 >> MODE #ici
+Mon Jan 27 2025 at 10:19:16 GMT :6 << :c0rvax-MS-7D98 324 rich #ici +
+Mon Jan 27 2025 at 10:19:18 GMT :6 >> WHO #ici
+Mon Jan 27 2025 at 10:19:18 GMT :6 << :c0rvax-MS-7D98 352 rich #ici c0rvax localhost c0rvax-MS-7D98 jean H@ :0 c0rvax
+Mon Jan 27 2025 at 10:19:18 GMT :6 << :c0rvax-MS-7D98 352 rich #ici c0rvax localhost c0rvax-MS-7D98 rich H :0 c0rvax
+Mon Jan 27 2025 at 10:19:18 GMT :6 << :c0rvax-MS-7D98 315 rich #ici :End of WHO list
+Mon Jan 27 2025 at 10:19:19 GMT :5 >> MODE #ici +o rich
+Mon Jan 27 2025 at 10:19:19 GMT :5 << :jean!c0rvax@localhost MODE #ici +o rich
+Mon Jan 27 2025 at 10:19:19 GMT :6 << :jean!c0rvax@localhost MODE #ici +o rich
+Mon Jan 27 2025 at 10:19:21 GMT :6 >> MODE #ici b
+Mon Jan 27 2025 at 10:19:21 GMT :6 << :c0rvax-MS-7D98 368 rich #ici :End of channel ban list
+Mon Jan 27 2025 at 10:19:23 GMT :5 >> PING c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:19:23 GMT :5 << :c0rvax-MS-7D98 PONG c0rvax-MS-7D98 :jean
+Mon Jan 27 2025 at 10:19:24 GMT :6 >> QUIT :leaving
+Mon Jan 27 2025 at 10:19:24 GMT :Client <6> Disconnected
+Mon Jan 27 2025 at 10:19:24 GMT :5 << :rich!c0rvax@localhost QUIT :Quit: leaving
+Mon Jan 27 2025 at 10:19:37 GMT :5 >> QUIT :leaving
+Mon Jan 27 2025 at 10:19:37 GMT :Client <5> Disconnected
+Mon Jan 27 2025 at 10:42:51 GMT :Server <4> Disconnected
+Mon Jan 27 2025 at 10:42:51 GMT :closing
+Mon Jan 27 2025 at 10:42:51 GMT :
+============================================
+
+Mon Jan 27 2025 at 10:42:59 GMT :Server listening on port 6667
+Mon Jan 27 2025 at 10:42:59 GMT :Server <4> Connected
+Mon Jan 27 2025 at 10:42:59 GMT :Waiting for a connection...
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** No Identd
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** Looking up your hostname
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** Found your hostname
+Mon Jan 27 2025 at 10:43:01 GMT :Client <5> Connected
+Mon Jan 27 2025 at 10:43:01 GMT :5 >> CAP LS 302
+Mon Jan 27 2025 at 10:43:01 GMT :5 >> JOIN :
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 451 JOIN :You have not registered
+Mon Jan 27 2025 at 10:43:01 GMT :5 >> PASS port
+Mon Jan 27 2025 at 10:43:01 GMT :5 >> NICK rich
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :!@localhost NICK :rich
+Mon Jan 27 2025 at 10:43:01 GMT :5 >> USER c0rvax c0rvax localhost :c0rvax
+Mon Jan 27 2025 at 10:43:01 GMT :Client <5> is now authentified
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 001 rich :Welcome to the ft_IRC NETWORK rich!c0rvax@localhost
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 002 rich :Your host is c0rvax-MS-7D98, running version 1.2.3
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 003 rich :This server was created -
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 004 rich :c0rvax-MS-7D98 1.2.3 itkol
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 005 rich :CHANMODES=i, t, k, o, l : are supported by this server
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 251 rich :There are 1 users on 1 server
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 252 rich :Operators are disabled on this server
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 254 rich :0 :channels formed
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 375 rich :- c0rvax-MS-7D98 Message of the Day -
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-        Welcome to,
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-                   c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-        * Host.....: c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-        * Port.....: 6667
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-    Welcome to our 42 IRC project
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-           243   38     446297    
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-         53 34908087  313590      
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-      753 735808     33 738     39
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-      88 32565       2 198732 9246
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-    38979055085      9984504135980          :::::::::: :::::::::::           ::::::::::: :::::::::   :::::::: 
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-  057 88495985313   0116007259358          :+:            :+:                   :+:     :+:    :+: :+:    :+:
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-   899987   88952257895565940885          +:+            +:+                   +:+     +:+    +:+ +:+
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-    5840     588070339903                :#::+::#       +#+                   +#+     +#++:++#:  +#+
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-               10136900                 +#+            +#+                   +#+     +#+    +#+ +#+
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-             701369805578              #+#            #+#                   #+#     #+#    #+# #+#    #+#
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-          71811936088655376           ###            ###    ########## ########### ###    ###  ########
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-         10136260   308943335     
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-       36335490       048652233   
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-     708356907          998945557 
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-    39  6490              08994669                      by eschussl and aduvilla
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-    050390                 5899959
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :-  
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 372 rich :
+Mon Jan 27 2025 at 10:43:01 GMT :5 << :c0rvax-MS-7D98 376 rich :End of /MOTD command.
+Mon Jan 27 2025 at 10:43:03 GMT :5 >> MODE rich +i
+Mon Jan 27 2025 at 10:43:06 GMT :5 >> JOIN #ici
+Mon Jan 27 2025 at 10:43:06 GMT :5 << :rich!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:43:06 GMT :5 << :c0rvax-MS-7D98 353 rich = #ici :@rich 
+Mon Jan 27 2025 at 10:43:06 GMT :5 << :c0rvax-MS-7D98 366 rich #ici :End of /NAMES list.
+Mon Jan 27 2025 at 10:43:08 GMT :5 >> MODE #ici
+Mon Jan 27 2025 at 10:43:08 GMT :5 << :c0rvax-MS-7D98 324 rich #ici +
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** No Identd
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** Looking up your hostname
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** Found your hostname
+Mon Jan 27 2025 at 10:43:10 GMT :Client <6> Connected
+Mon Jan 27 2025 at 10:43:10 GMT :6 >> CAP LS 302
+Mon Jan 27 2025 at 10:43:10 GMT :6 >> JOIN :
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 451 JOIN :You have not registered
+Mon Jan 27 2025 at 10:43:10 GMT :6 >> PASS port
+Mon Jan 27 2025 at 10:43:10 GMT :6 >> NICK jean
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :!@localhost NICK :jean
+Mon Jan 27 2025 at 10:43:10 GMT :6 >> USER c0rvax c0rvax localhost :c0rvax
+Mon Jan 27 2025 at 10:43:10 GMT :Client <6> is now authentified
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 001 jean :Welcome to the ft_IRC NETWORK jean!c0rvax@localhost
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 002 jean :Your host is c0rvax-MS-7D98, running version 1.2.3
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 003 jean :This server was created -
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 004 jean :c0rvax-MS-7D98 1.2.3 itkol
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 005 jean :CHANMODES=i, t, k, o, l : are supported by this server
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 251 jean :There are 2 users on 1 server
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 252 jean :Operators are disabled on this server
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 254 jean :1 :channels formed
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 375 jean :- c0rvax-MS-7D98 Message of the Day -
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-        Welcome to,
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-                   c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-        * Host.....: c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-        * Port.....: 6667
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-    Welcome to our 42 IRC project
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-           243   38     446297    
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-         53 34908087  313590      
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-      753 735808     33 738     39
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-      88 32565       2 198732 9246
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-    38979055085      9984504135980          :::::::::: :::::::::::           ::::::::::: :::::::::   :::::::: 
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-  057 88495985313   0116007259358          :+:            :+:                   :+:     :+:    :+: :+:    :+:
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-   899987   88952257895565940885          +:+            +:+                   +:+     +:+    +:+ +:+
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-    5840     588070339903                :#::+::#       +#+                   +#+     +#++:++#:  +#+
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-               10136900                 +#+            +#+                   +#+     +#+    +#+ +#+
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-             701369805578              #+#            #+#                   #+#     #+#    #+# #+#    #+#
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-          71811936088655376           ###            ###    ########## ########### ###    ###  ########
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-         10136260   308943335     
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-       36335490       048652233   
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-     708356907          998945557 
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-    39  6490              08994669                      by eschussl and aduvilla
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-    050390                 5899959
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :-  
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 372 jean :
+Mon Jan 27 2025 at 10:43:10 GMT :6 << :c0rvax-MS-7D98 376 jean :End of /MOTD command.
+Mon Jan 27 2025 at 10:43:11 GMT :5 >> WHO #ici
+Mon Jan 27 2025 at 10:43:11 GMT :5 << :c0rvax-MS-7D98 352 rich #ici c0rvax localhost c0rvax-MS-7D98 rich H@ :0 c0rvax
+Mon Jan 27 2025 at 10:43:11 GMT :5 << :c0rvax-MS-7D98 315 rich #ici :End of WHO list
+Mon Jan 27 2025 at 10:43:12 GMT :6 >> MODE jean +i
+Mon Jan 27 2025 at 10:43:13 GMT :5 >> MODE #ici b
+Mon Jan 27 2025 at 10:43:13 GMT :5 << :c0rvax-MS-7D98 368 rich #ici :End of channel ban list
+Mon Jan 27 2025 at 10:43:15 GMT :6 >> JOIN #ici
+Mon Jan 27 2025 at 10:43:15 GMT :5 << :jean!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:43:15 GMT :6 << :jean!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:43:15 GMT :6 << :c0rvax-MS-7D98 353 jean = #ici :@rich jean 
+Mon Jan 27 2025 at 10:43:15 GMT :6 << :c0rvax-MS-7D98 366 jean #ici :End of /NAMES list.
+Mon Jan 27 2025 at 10:43:17 GMT :6 >> MODE #ici
+Mon Jan 27 2025 at 10:43:17 GMT :6 << :c0rvax-MS-7D98 324 jean #ici +
+Mon Jan 27 2025 at 10:43:19 GMT :5 >> PING c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:43:19 GMT :5 << :c0rvax-MS-7D98 PONG c0rvax-MS-7D98 :rich
+Mon Jan 27 2025 at 10:43:19 GMT :5 >> MODE #ici +o jean
+Mon Jan 27 2025 at 10:43:19 GMT :5 << :rich!c0rvax@localhost MODE #ici +o jean
+Mon Jan 27 2025 at 10:43:19 GMT :6 << :rich!c0rvax@localhost MODE #ici +o jean
+Mon Jan 27 2025 at 10:43:20 GMT :6 >> WHO #ici
+Mon Jan 27 2025 at 10:43:20 GMT :6 << :c0rvax-MS-7D98 352 jean #ici c0rvax localhost c0rvax-MS-7D98 rich H@ :0 c0rvax
+Mon Jan 27 2025 at 10:43:20 GMT :6 << :c0rvax-MS-7D98 352 jean #ici c0rvax localhost c0rvax-MS-7D98 jean H@ :0 c0rvax
+Mon Jan 27 2025 at 10:43:20 GMT :6 << :c0rvax-MS-7D98 315 jean #ici :End of WHO list
+Mon Jan 27 2025 at 10:43:22 GMT :6 >> MODE #ici b
+Mon Jan 27 2025 at 10:43:22 GMT :6 << :c0rvax-MS-7D98 368 jean #ici :End of channel ban list
+Mon Jan 27 2025 at 10:43:24 GMT :6 >> QUIT :leaving
+Mon Jan 27 2025 at 10:43:24 GMT :Client <6> Disconnected
+Mon Jan 27 2025 at 10:43:24 GMT :5 << :jean!c0rvax@localhost QUIT :Quit: leaving
+Mon Jan 27 2025 at 10:43:39 GMT :5 >> QUIT :leaving
+Mon Jan 27 2025 at 10:43:39 GMT :Client <5> Disconnected
+Mon Jan 27 2025 at 10:48:23 GMT :Server <4> Disconnected
+Mon Jan 27 2025 at 10:48:23 GMT :closing
+Mon Jan 27 2025 at 10:48:23 GMT :
+============================================
+
+Mon Jan 27 2025 at 10:48:37 GMT :Server listening on port 6667
+Mon Jan 27 2025 at 10:48:37 GMT :Server <4> Connected
+Mon Jan 27 2025 at 10:48:37 GMT :Waiting for a connection...
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** No Identd
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** Looking up your hostname
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** Found your hostname
+Mon Jan 27 2025 at 10:48:43 GMT :Client <5> Connected
+Mon Jan 27 2025 at 10:48:43 GMT :5 >> CAP LS 302
+Mon Jan 27 2025 at 10:48:43 GMT :5 >> JOIN :
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 451 JOIN :You have not registered
+Mon Jan 27 2025 at 10:48:43 GMT :5 >> PASS port
+Mon Jan 27 2025 at 10:48:43 GMT :5 >> NICK jean
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :!@localhost NICK :jean
+Mon Jan 27 2025 at 10:48:43 GMT :5 >> USER c0rvax c0rvax localhost :c0rvax
+Mon Jan 27 2025 at 10:48:43 GMT :Client <5> is now authentified
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 001 jean :Welcome to the ft_IRC NETWORK jean!c0rvax@localhost
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 002 jean :Your host is c0rvax-MS-7D98, running version 1.2.3
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 003 jean :This server was created -
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 004 jean :c0rvax-MS-7D98 1.2.3 itkol
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 005 jean :CHANMODES=i, t, k, o, l : are supported by this server
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 251 jean :There are 1 users on 1 server
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 252 jean :Operators are disabled on this server
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 254 jean :0 :channels formed
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 375 jean :- c0rvax-MS-7D98 Message of the Day -
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-        Welcome to,
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-                   c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-        * Host.....: c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-        * Port.....: 6667
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-    Welcome to our 42 IRC project
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-           243   38     446297    
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-         53 34908087  313590      
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-      753 735808     33 738     39
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-      88 32565       2 198732 9246
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-    38979055085      9984504135980          :::::::::: :::::::::::           ::::::::::: :::::::::   :::::::: 
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-  057 88495985313   0116007259358          :+:            :+:                   :+:     :+:    :+: :+:    :+:
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-   899987   88952257895565940885          +:+            +:+                   +:+     +:+    +:+ +:+
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-    5840     588070339903                :#::+::#       +#+                   +#+     +#++:++#:  +#+
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-               10136900                 +#+            +#+                   +#+     +#+    +#+ +#+
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-             701369805578              #+#            #+#                   #+#     #+#    #+# #+#    #+#
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-          71811936088655376           ###            ###    ########## ########### ###    ###  ########
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-         10136260   308943335     
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-       36335490       048652233   
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-     708356907          998945557 
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-    39  6490              08994669                      by eschussl and aduvilla
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-    050390                 5899959
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :-  
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 372 jean :
+Mon Jan 27 2025 at 10:48:43 GMT :5 << :c0rvax-MS-7D98 376 jean :End of /MOTD command.
+Mon Jan 27 2025 at 10:48:45 GMT :5 >> MODE jean +i
+Mon Jan 27 2025 at 10:48:48 GMT :5 >> JOIN #ici
+Mon Jan 27 2025 at 10:48:48 GMT :5 << :jean!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:48:48 GMT :5 << :c0rvax-MS-7D98 353 jean = #ici :@jean 
+Mon Jan 27 2025 at 10:48:48 GMT :5 << :c0rvax-MS-7D98 366 jean #ici :End of /NAMES list.
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** No Identd
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** Looking up your hostname
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** Found your hostname
+Mon Jan 27 2025 at 10:48:48 GMT :Client <6> Connected
+Mon Jan 27 2025 at 10:48:48 GMT :6 >> CAP LS 302
+Mon Jan 27 2025 at 10:48:48 GMT :6 >> JOIN :
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 451 JOIN :You have not registered
+Mon Jan 27 2025 at 10:48:48 GMT :6 >> PASS port
+Mon Jan 27 2025 at 10:48:48 GMT :6 >> NICK rich
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :!@localhost NICK :rich
+Mon Jan 27 2025 at 10:48:48 GMT :6 >> USER c0rvax c0rvax localhost :c0rvax
+Mon Jan 27 2025 at 10:48:48 GMT :Client <6> is now authentified
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 001 rich :Welcome to the ft_IRC NETWORK rich!c0rvax@localhost
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 002 rich :Your host is c0rvax-MS-7D98, running version 1.2.3
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 003 rich :This server was created -
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 004 rich :c0rvax-MS-7D98 1.2.3 itkol
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 005 rich :CHANMODES=i, t, k, o, l : are supported by this server
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 251 rich :There are 2 users on 1 server
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 252 rich :Operators are disabled on this server
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 254 rich :1 :channels formed
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 375 rich :- c0rvax-MS-7D98 Message of the Day -
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-        Welcome to,
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-                   c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-        * Host.....: c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-        * Port.....: 6667
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-    Welcome to our 42 IRC project
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-           243   38     446297    
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-         53 34908087  313590      
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-      753 735808     33 738     39
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-      88 32565       2 198732 9246
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-    38979055085      9984504135980          :::::::::: :::::::::::           ::::::::::: :::::::::   :::::::: 
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-  057 88495985313   0116007259358          :+:            :+:                   :+:     :+:    :+: :+:    :+:
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-   899987   88952257895565940885          +:+            +:+                   +:+     +:+    +:+ +:+
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-    5840     588070339903                :#::+::#       +#+                   +#+     +#++:++#:  +#+
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-               10136900                 +#+            +#+                   +#+     +#+    +#+ +#+
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-             701369805578              #+#            #+#                   #+#     #+#    #+# #+#    #+#
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-          71811936088655376           ###            ###    ########## ########### ###    ###  ########
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-         10136260   308943335     
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-       36335490       048652233   
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-     708356907          998945557 
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-    39  6490              08994669                      by eschussl and aduvilla
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-    050390                 5899959
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :-  
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 372 rich :
+Mon Jan 27 2025 at 10:48:48 GMT :6 << :c0rvax-MS-7D98 376 rich :End of /MOTD command.
+Mon Jan 27 2025 at 10:48:50 GMT :5 >> MODE #ici
+Mon Jan 27 2025 at 10:48:50 GMT :5 << :c0rvax-MS-7D98 324 jean #ici +
+Mon Jan 27 2025 at 10:48:50 GMT :6 >> MODE rich +i
+Mon Jan 27 2025 at 10:48:53 GMT :5 >> WHO #ici
+Mon Jan 27 2025 at 10:48:53 GMT :5 << :c0rvax-MS-7D98 352 jean #ici c0rvax localhost c0rvax-MS-7D98 jean H@ :0 c0rvax
+Mon Jan 27 2025 at 10:48:53 GMT :5 << :c0rvax-MS-7D98 315 jean #ici :End of WHO list
+Mon Jan 27 2025 at 10:48:53 GMT :6 >> JOIN #ici
+Mon Jan 27 2025 at 10:48:53 GMT :5 << :rich!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:48:53 GMT :6 << :rich!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:48:53 GMT :6 << :c0rvax-MS-7D98 353 rich = #ici :@jean rich 
+Mon Jan 27 2025 at 10:48:53 GMT :6 << :c0rvax-MS-7D98 366 rich #ici :End of /NAMES list.
+Mon Jan 27 2025 at 10:48:55 GMT :5 >> MODE #ici b
+Mon Jan 27 2025 at 10:48:55 GMT :5 << :c0rvax-MS-7D98 368 jean #ici :End of channel ban list
+Mon Jan 27 2025 at 10:48:56 GMT :6 >> MODE #ici
+Mon Jan 27 2025 at 10:48:56 GMT :6 << :c0rvax-MS-7D98 324 rich #ici +
+Mon Jan 27 2025 at 10:48:58 GMT :6 >> WHO #ici
+Mon Jan 27 2025 at 10:48:58 GMT :6 << :c0rvax-MS-7D98 352 rich #ici c0rvax localhost c0rvax-MS-7D98 jean H@ :0 c0rvax
+Mon Jan 27 2025 at 10:48:58 GMT :6 << :c0rvax-MS-7D98 352 rich #ici c0rvax localhost c0rvax-MS-7D98 rich H :0 c0rvax
+Mon Jan 27 2025 at 10:48:58 GMT :6 << :c0rvax-MS-7D98 315 rich #ici :End of WHO list
+Mon Jan 27 2025 at 10:49:01 GMT :6 >> MODE #ici b
+Mon Jan 27 2025 at 10:49:01 GMT :6 << :c0rvax-MS-7D98 368 rich #ici :End of channel ban list
+Mon Jan 27 2025 at 10:49:01 GMT :5 >> PING c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:49:01 GMT :5 << :c0rvax-MS-7D98 PONG c0rvax-MS-7D98 :jean
+Mon Jan 27 2025 at 10:49:02 GMT :5 >> MODE #ici +o rich
+Mon Jan 27 2025 at 10:49:02 GMT :5 << :jean!c0rvax@localhost MODE #ici +o rich
+Mon Jan 27 2025 at 10:49:02 GMT :6 << :jean!c0rvax@localhost MODE #ici +o rich
+Mon Jan 27 2025 at 10:49:06 GMT :6 >> PING c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:49:06 GMT :6 << :c0rvax-MS-7D98 PONG c0rvax-MS-7D98 :rich
+Mon Jan 27 2025 at 10:49:07 GMT :6 >> QUIT :leaving
+Mon Jan 27 2025 at 10:49:07 GMT :Client <6> Disconnected
+Mon Jan 27 2025 at 10:49:07 GMT :5 << :rich!c0rvax@localhost QUIT :Quit: leaving
+Mon Jan 27 2025 at 10:50:02 GMT :5 >> PING c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:50:02 GMT :5 << :c0rvax-MS-7D98 PONG c0rvax-MS-7D98 :jean
+Mon Jan 27 2025 at 10:51:03 GMT :5 >> PING c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:51:03 GMT :5 << :c0rvax-MS-7D98 PONG c0rvax-MS-7D98 :jean
+Mon Jan 27 2025 at 10:52:04 GMT :5 >> PING c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:52:04 GMT :5 << :c0rvax-MS-7D98 PONG c0rvax-MS-7D98 :jean
+Mon Jan 27 2025 at 10:53:05 GMT :5 >> PING c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:53:05 GMT :5 << :c0rvax-MS-7D98 PONG c0rvax-MS-7D98 :jean
+Mon Jan 27 2025 at 10:53:23 GMT :Client <5> Disconnected
+Mon Jan 27 2025 at 10:53:23 GMT :Server <4> Disconnected
+Mon Jan 27 2025 at 10:53:23 GMT :closing
+Mon Jan 27 2025 at 10:53:23 GMT :
+============================================
+
+Mon Jan 27 2025 at 10:53:31 GMT :Server listening on port 6667
+Mon Jan 27 2025 at 10:53:31 GMT :Server <4> Connected
+Mon Jan 27 2025 at 10:53:31 GMT :Waiting for a connection...
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** No Identd
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** Looking up your hostname
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 NOTICE AUTH :*** Found your hostname
+Mon Jan 27 2025 at 10:53:37 GMT :Client <5> Connected
+Mon Jan 27 2025 at 10:53:37 GMT :5 >> CAP LS 302
+Mon Jan 27 2025 at 10:53:37 GMT :5 >> JOIN :
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 451 JOIN :You have not registered
+Mon Jan 27 2025 at 10:53:37 GMT :5 >> PASS port
+Mon Jan 27 2025 at 10:53:37 GMT :5 >> NICK jean
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :!@localhost NICK :jean
+Mon Jan 27 2025 at 10:53:37 GMT :5 >> USER c0rvax c0rvax localhost :c0rvax
+Mon Jan 27 2025 at 10:53:37 GMT :Client <5> is now authentified
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 001 jean :Welcome to the ft_IRC NETWORK jean!c0rvax@localhost
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 002 jean :Your host is c0rvax-MS-7D98, running version 1.2.3
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 003 jean :This server was created -
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 004 jean :c0rvax-MS-7D98 1.2.3 itkol
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 005 jean :CHANMODES=i, t, k, o, l : are supported by this server
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 251 jean :There are 1 users on 1 server
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 252 jean :Operators are disabled on this server
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 254 jean :0 :channels formed
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 375 jean :- c0rvax-MS-7D98 Message of the Day -
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-        Welcome to,
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-                   c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-        * Host.....: c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-        * Port.....: 6667
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-    Welcome to our 42 IRC project
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-           243   38     446297    
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-         53 34908087  313590      
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-      753 735808     33 738     39
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-      88 32565       2 198732 9246
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-    38979055085      9984504135980          :::::::::: :::::::::::           ::::::::::: :::::::::   :::::::: 
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-  057 88495985313   0116007259358          :+:            :+:                   :+:     :+:    :+: :+:    :+:
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-   899987   88952257895565940885          +:+            +:+                   +:+     +:+    +:+ +:+
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-    5840     588070339903                :#::+::#       +#+                   +#+     +#++:++#:  +#+
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-               10136900                 +#+            +#+                   +#+     +#+    +#+ +#+
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-             701369805578              #+#            #+#                   #+#     #+#    #+# #+#    #+#
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-          71811936088655376           ###            ###    ########## ########### ###    ###  ########
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-         10136260   308943335     
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-       36335490       048652233   
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-     708356907          998945557 
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-    39  6490              08994669                      by eschussl and aduvilla
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-    050390                 5899959
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :-  
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 372 jean :
+Mon Jan 27 2025 at 10:53:37 GMT :5 << :c0rvax-MS-7D98 376 jean :End of /MOTD command.
+Mon Jan 27 2025 at 10:53:39 GMT :5 >> MODE jean +i
+Mon Jan 27 2025 at 10:53:42 GMT :5 >> JOIN #ici
+Mon Jan 27 2025 at 10:53:42 GMT :5 << :jean!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:53:42 GMT :5 << :c0rvax-MS-7D98 353 jean = #ici :@jean 
+Mon Jan 27 2025 at 10:53:42 GMT :5 << :c0rvax-MS-7D98 366 jean #ici :End of /NAMES list.
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** No Identd
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** Looking up your hostname
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 NOTICE AUTH :*** Found your hostname
+Mon Jan 27 2025 at 10:53:42 GMT :Client <6> Connected
+Mon Jan 27 2025 at 10:53:42 GMT :6 >> CAP LS 302
+Mon Jan 27 2025 at 10:53:42 GMT :6 >> JOIN :
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 451 JOIN :You have not registered
+Mon Jan 27 2025 at 10:53:42 GMT :6 >> PASS port
+Mon Jan 27 2025 at 10:53:42 GMT :6 >> NICK rich
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :!@localhost NICK :rich
+Mon Jan 27 2025 at 10:53:42 GMT :6 >> USER c0rvax c0rvax localhost :c0rvax
+Mon Jan 27 2025 at 10:53:42 GMT :Client <6> is now authentified
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 001 rich :Welcome to the ft_IRC NETWORK rich!c0rvax@localhost
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 002 rich :Your host is c0rvax-MS-7D98, running version 1.2.3
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 003 rich :This server was created -
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 004 rich :c0rvax-MS-7D98 1.2.3 itkol
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 005 rich :CHANMODES=i, t, k, o, l : are supported by this server
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 251 rich :There are 2 users on 1 server
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 252 rich :Operators are disabled on this server
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 254 rich :1 :channels formed
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 375 rich :- c0rvax-MS-7D98 Message of the Day -
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-        Welcome to,
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-                   c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-        * Host.....: c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-        * Port.....: 6667
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-    Welcome to our 42 IRC project
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-           243   38     446297    
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-         53 34908087  313590      
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-      753 735808     33 738     39
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-      88 32565       2 198732 9246
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-    38979055085      9984504135980          :::::::::: :::::::::::           ::::::::::: :::::::::   :::::::: 
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-  057 88495985313   0116007259358          :+:            :+:                   :+:     :+:    :+: :+:    :+:
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-   899987   88952257895565940885          +:+            +:+                   +:+     +:+    +:+ +:+
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-    5840     588070339903                :#::+::#       +#+                   +#+     +#++:++#:  +#+
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-               10136900                 +#+            +#+                   +#+     +#+    +#+ +#+
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-             701369805578              #+#            #+#                   #+#     #+#    #+# #+#    #+#
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-          71811936088655376           ###            ###    ########## ########### ###    ###  ########
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-         10136260   308943335     
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-       36335490       048652233   
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-     708356907          998945557 
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-    39  6490              08994669                      by eschussl and aduvilla
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-    050390                 5899959
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :-  
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 372 rich :
+Mon Jan 27 2025 at 10:53:42 GMT :6 << :c0rvax-MS-7D98 376 rich :End of /MOTD command.
+Mon Jan 27 2025 at 10:53:44 GMT :5 >> MODE #ici
+Mon Jan 27 2025 at 10:53:44 GMT :5 << :c0rvax-MS-7D98 324 jean #ici +
+Mon Jan 27 2025 at 10:53:45 GMT :6 >> MODE rich +i
+Mon Jan 27 2025 at 10:53:47 GMT :5 >> WHO #ici
+Mon Jan 27 2025 at 10:53:47 GMT :5 << :c0rvax-MS-7D98 352 jean #ici c0rvax localhost c0rvax-MS-7D98 jean H@ :0 c0rvax
+Mon Jan 27 2025 at 10:53:47 GMT :5 << :c0rvax-MS-7D98 315 jean #ici :End of WHO list
+Mon Jan 27 2025 at 10:53:47 GMT :6 >> JOIN #ici
+Mon Jan 27 2025 at 10:53:47 GMT :5 << :rich!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:53:47 GMT :6 << :rich!c0rvax@localhost JOIN :#ici
+Mon Jan 27 2025 at 10:53:47 GMT :6 << :c0rvax-MS-7D98 353 rich = #ici :@jean rich 
+Mon Jan 27 2025 at 10:53:47 GMT :6 << :c0rvax-MS-7D98 366 rich #ici :End of /NAMES list.
+Mon Jan 27 2025 at 10:53:49 GMT :5 >> MODE #ici b
+Mon Jan 27 2025 at 10:53:49 GMT :5 << :c0rvax-MS-7D98 368 jean #ici :End of channel ban list
+Mon Jan 27 2025 at 10:53:50 GMT :6 >> MODE #ici
+Mon Jan 27 2025 at 10:53:50 GMT :6 << :c0rvax-MS-7D98 324 rich #ici +
+Mon Jan 27 2025 at 10:53:52 GMT :6 >> WHO #ici
+Mon Jan 27 2025 at 10:53:52 GMT :6 << :c0rvax-MS-7D98 352 rich #ici c0rvax localhost c0rvax-MS-7D98 jean H@ :0 c0rvax
+Mon Jan 27 2025 at 10:53:52 GMT :6 << :c0rvax-MS-7D98 352 rich #ici c0rvax localhost c0rvax-MS-7D98 rich H :0 c0rvax
+Mon Jan 27 2025 at 10:53:52 GMT :6 << :c0rvax-MS-7D98 315 rich #ici :End of WHO list
+Mon Jan 27 2025 at 10:53:53 GMT :5 >> MODE #ici +o rich
+Mon Jan 27 2025 at 10:53:53 GMT :5 << :jean!c0rvax@localhost MODE #ici +o rich
+Mon Jan 27 2025 at 10:53:53 GMT :6 << :jean!c0rvax@localhost MODE #ici +o rich
+Mon Jan 27 2025 at 10:53:55 GMT :6 >> MODE #ici b
+Mon Jan 27 2025 at 10:53:55 GMT :6 << :c0rvax-MS-7D98 368 rich #ici :End of channel ban list
+Mon Jan 27 2025 at 10:53:57 GMT :5 >> PING c0rvax-MS-7D98
+Mon Jan 27 2025 at 10:53:57 GMT :5 << :c0rvax-MS-7D98 PONG c0rvax-MS-7D98 :jean
+Mon Jan 27 2025 at 10:53:57 GMT :6 >> QUIT :leaving
+Mon Jan 27 2025 at 10:53:57 GMT :Client <6> Disconnected
+Mon Jan 27 2025 at 10:53:57 GMT :5 << :rich!c0rvax@localhost QUIT :Quit: leaving
+Mon Jan 27 2025 at 10:54:04 GMT :5 >> QUIT :leaving
+Mon Jan 27 2025 at 10:54:04 GMT :Client <5> Disconnected
+Mon Jan 27 2025 at 10:54:13 GMT :Server <4> Disconnected
+Mon Jan 27 2025 at 10:54:13 GMT :closing
+Mon Jan 27 2025 at 10:54:13 GMT :
+============================================
+

@@ -6,7 +6,7 @@
 /*   By: noda <noda@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 16:55:26 by eschussl          #+#    #+#             */
-/*   Updated: 2025/01/19 17:43:55 by noda             ###   ########.fr       */
+/*   Updated: 2025/01/27 11:58:19 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,10 @@ Client&	Client::operator=(const Client & rhs)
 void	Client::cleanChannels()
 {
 	for (size_t i = 0; i < m_vOpChannels.size(); i++)
+	{
 		m_vOpChannels[i]->getMode()->removeOP(this);
+		this->leaveOP(*m_vOpChannels[i]);
+	}
 	for (size_t i = 0; i < m_vChannels.size(); i++)
 		m_vChannels[i]->removeClient(*this);
 }
@@ -355,8 +358,6 @@ void	Client::sendQuitMsg(const std::string & message)
 	for (size_t i = 0; i < this->m_vChannels.size(); i++)
 		this->m_vChannels[i]->sendAllMsg(this->m_vChannels[i]->getServ(), this, message, eQuit);
 }
-
-#include <iostream>
 
 /**
  * @brief Removes the client from a channel.

@@ -6,7 +6,7 @@
 /*   By: noda <noda@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 14:19:25 by noda              #+#    #+#             */
-/*   Updated: 2025/01/15 16:12:02 by noda             ###   ########.fr       */
+/*   Updated: 2025/01/27 11:45:54 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ void Part::execute(Server &server, const Parsing &parse, Client &client)
                     e.sendError(server, &client, chan);
                     break;
             }
-			
         }
-        
     }
 }
