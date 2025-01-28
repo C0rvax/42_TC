@@ -6,11 +6,11 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/01/28 23:26:47 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/01/29 00:14:50 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= btc
+NAME			= RPN
 
 CXX				= c++
 
