@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:24:00 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/28 22:27:39 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/28 22:45:19 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ BitcoinExchange::BitcoinExchange	(void)
 	mapDataCsv();
 }
 
-BitcoinExchange::BitcoinExchange	(BitcoinExchange const & src)
-{
-	*this = src;
-}
+BitcoinExchange::BitcoinExchange	(BitcoinExchange const & src) {	*this = src; }
 
 BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const & rhs)
 {
@@ -38,9 +35,7 @@ BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const & rhs)
 	return *this;
 }
 
-BitcoinExchange::~BitcoinExchange	(void)
-{
-}
+BitcoinExchange::~BitcoinExchange	(void) {}
 
 void	BitcoinExchange::setMap(std::string& date, std::string& value)
 {

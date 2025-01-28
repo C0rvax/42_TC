@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:47:07 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/28 21:58:23 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/28 22:44:20 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ class	BitcoinExchange
 	BitcoinExchange &operator=(BitcoinExchange const & rhs);
 	~BitcoinExchange(void);
 	void	HowRichIAm(char* input);
-	void	printMap();
 
 	private:
 	std::map<int, double>		m_map;
