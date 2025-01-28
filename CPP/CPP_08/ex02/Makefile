@@ -6,11 +6,11 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/01/28 15:54:27 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/01/28 15:55:49 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= Span
+NAME			= abomination
 
 CXX				= c++
 
@@ -18,8 +18,7 @@ CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
 HEADERS			= -Iinclude
 
-SRCS			= $(addprefix src/, main.cpp\
-				  Span.cpp)
+SRCS			= $(addprefix src/, main.cpp)
 
 OBJS			= $(addprefix .obj/, $(SRCS:.cpp=.o))
 
