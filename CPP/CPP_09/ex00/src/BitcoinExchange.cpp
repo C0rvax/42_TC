@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 18:24:00 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/28 22:45:19 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/28 23:25:50 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ BitcoinExchange::BitcoinExchange	(BitcoinExchange const & src) {	*this = src; }
 BitcoinExchange&	BitcoinExchange::operator=(BitcoinExchange const & rhs)
 {
 	if (this != &rhs)
+	{
 		m_map = rhs.m_map;
+		m_dateMax = rhs.m_dateMax;
+		m_dateMin = rhs.m_dateMin;
+	}
 	return *this;
 }
 

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:47:07 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/28 22:44:20 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/28 23:25:33 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ class	BitcoinExchange
 	std::map<int, double>		m_map;
 	int							m_dateMin;
 	int							m_dateMax;
-	char*						m_input;
 
 	void	mapDataCsv();
 	void	setMap(std::string& date, std::string& value);
