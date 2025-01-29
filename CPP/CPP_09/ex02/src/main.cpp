@@ -6,14 +6,26 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:40:57 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/29 10:57:06 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:27:23 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ctime>
-#include <vector>
+#include <iostream>
 #include "PmergeMe.hpp"
 
-void	displaySequence(const std::vector<int>& sequence)
+
+int	main(int ac, char** av)
 {
+	try
+	{
+		PmergeMe	sorter;
+		sorter.initParam(ac, av);
+		sorter.sort();
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+		return 1;
+	}
+	return 0;
 }
