@@ -6,12 +6,13 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:47:12 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/30 12:04:35 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:32:33 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 #include <algorithm>
+#include <cmath>
 #include <cstddef>
 #include <cstdlib>
 #include <iostream>
@@ -100,12 +101,18 @@ void	PmergeMe::swapVec(size_t& pairSize)
 
 size_t	getJacob(int n)
 {
+	return round((pow(2, n + 1) + pow(-1, n)) / 3);
+}
+/*
+size_t	getJacob(int n)
+{
 	if (n == 0)
 		return 0;
 	if (n == 1)
 		return 1;
 	return getJacob(n - 1) + 2 * getJacob(n - 2);
 }
+*/
 
 void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend)
 {
