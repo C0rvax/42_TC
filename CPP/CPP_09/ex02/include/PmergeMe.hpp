@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:43:13 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/30 11:05:19 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:23:37 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ class	PmergeMe
 	void	mergePendVec(std::vector<int>& main, std::vector<int>& pend);
 	void	sortVec();
 	void	swapList(size_t& pairSize);
-	void	mergeList();
+	void	mergeList(size_t& pairSize);
+	void	mergePendList(std::list<int>& main, std::list<int>& pend);
 	void	sortList();
 	void	displayVec() const;
 	void	displayList() const;
