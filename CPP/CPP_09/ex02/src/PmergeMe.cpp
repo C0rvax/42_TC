@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:47:12 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/29 18:27:14 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:08:15 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@
 
 PmergeMe::PmergeMe(void) {}
 
-PmergeMe::PmergeMe(PmergeMe const & src)
-{
-	*this = src;
-}
+PmergeMe::PmergeMe(PmergeMe const & src) { *this = src; }
 
 PmergeMe&	PmergeMe::operator=(PmergeMe const & rhs)
 {
@@ -100,21 +97,43 @@ void	PmergeMe::swapVec(size_t& pairSize)
 	swapVec(pairSize);
 }
 
-void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend, size_t& pairSize)
+size_t	getJacob(int n)
 {
-	if (pend.size() < 20000)
+	if (n == 0)
+		return 0;
+	if (n == 1)
+		return 1;
+	return getJacob(n - 1) + 2 * getJacob(n - 2);
+}
+
+void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend)
+{
+	if (pend.size() < 2)
 		main.insert(std::upper_bound(main.begin(), main.end(), *pend.begin()), pend.begin(), pend.end());
 	else
 	{
-		(void)pairSize;
+		int	jacob = 3;
+		int	level = 0;
+		while (!pend.empty())
+		{
+			size_t nbElement = getJacob(jacob) - getJacob(jacob - 1);
+			nbElement = std::min(nbElement, pend.size());
+			for (size_t i = 0; i < nbElement; ++i)
+			{
+				size_t	limit = getJacob(jacob + level) - i;
+				std::vector<int>::iterator	stop = limit <= main.size() ? main.begin() + limit : main.end();
+				stop = std::upper_bound(main.begin(), stop, *(pend.begin() + nbElement - i - 1));
+				main.insert(stop, *(pend.begin() + nbElement - i - 1));
+				pend.erase(pend.begin() + nbElement - i - 1);
+				level++;
+			}
+			jacob++;
+		}
 	}
 }
 
 void	PmergeMe::mergeVec(size_t& pairSize)
 {
-	std::cout << "pairSize = " << pairSize << std::endl;
-	std::cout << "debut merge: vec = ";
-	displayVec();
 	if (pairSize == 0)
 		return;
 	std::vector<int>	main, pend, odd, ignored;
@@ -137,18 +156,12 @@ void	PmergeMe::mergeVec(size_t& pairSize)
 	for (; ignorit < m_vector.end(); ignorit++)
 		ignored.push_back(*ignorit);
 	if (!pend.empty())
-		mergePendVec(main, pend, pairSize);
+		mergePendVec(main, pend);
 	if (!odd.empty())
 		main.insert(std::upper_bound(main.begin(), main.end(), *odd.begin()), odd.begin(), odd.end());
 	if (!ignored.empty())
 		main.insert(main.end(), ignored.begin(), ignored.end());
 	m_vector = main;
-	std::cout << "pend : ";
-	printVec(pend);
-	std::cout << "ignored : ";
-	printVec(ignored);
-	std::cout << "fin merge: vec = ";
-	displayVec();
 	pairSize /= 2;
 	mergeVec(pairSize);
 }
@@ -158,13 +171,12 @@ void	PmergeMe::sortVec()
 	size_t	pairSize = 1;
 	swapVec(pairSize);
 	pairSize /= 2;
-	displayVec();
 	mergeVec(pairSize);
 }
 
 void	PmergeMe::sort()
 {
-	std::cout << "Before: ";
+	std::cout << "Before:  ";
 	displayList();
 	std::clock_t	startVec = std::clock();
 	sortVec();
@@ -172,9 +184,8 @@ void	PmergeMe::sort()
 //	std::clock_t	startList = std::clock();
 //	sortList();
 //	std::clock_t	endList = std::clock();
-	std::cout << "After: ";
+	std::cout << "After:   ";
 	displayVec();
-	std::cout << std::endl;
 	std::cout << "Time to process a range of " << m_vector.size() << " elements with std::vector: ";
 	std::cout << 1000000.0 * (endVec - startVec) / CLOCKS_PER_SEC << " µs" << std::endl;
 //	std::cout << "Time to process a range of " << m_list.size() << " elements with std::list: ";
