@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:47:12 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/30 15:32:33 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:37:58 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,38 @@ void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend)
 		main.insert(std::upper_bound(main.begin(), main.end(), *pend.begin()), pend.begin(), pend.end());
 	else
 	{
+		 size_t jc = 3; // Start with the 3rd Jacobsthal number
+        size_t count = 0;
+        size_t idx;
+        size_t decrease;
+
+        // Sort 'pend' into 'main' using binary search 'upper_bound' with Jacobsthal as optimization.
+        while (!pend.empty()) {
+            idx = getJacob(jc) - getJacob(jc - 1);
+            if (idx > pend.size())
+                idx = pend.size();
+
+            decrease = 0;
+            while (idx) {
+                // Determine the insertion point based on the Jacobsthal index and insert the element.
+                std::vector<int>::iterator end = main.begin();
+                if (getJacob(jc + count) - decrease <= main.size())
+                    end = main.begin() + getJacob(jc + count) - decrease;
+                else
+                    end = main.end();
+                // Binary sort
+                end = std::upper_bound(main.begin(), end, *(pend.begin() + idx - 1));
+                main.insert(end, *(pend.begin() + idx - 1));
+                pend.erase(pend.begin() + idx - 1);
+
+                idx--;
+                decrease++;
+                count++;
+            }
+            jc++;
+        }
+	}
+	/*
 		int	jacob = 3;
 		int	level = 0;
 		while (!pend.empty())
@@ -138,11 +170,13 @@ void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend)
 			jacob++;
 		}
 	}
+	*/
 }
 
 void	PmergeMe::mergeVec(size_t& pairSize)
 {
-	if (pairSize == 0)
+	std::cout << "pair s = " << pairSize << std::endl;
+	if (pairSize < 1)
 		return;
 	std::vector<int>	main, pend, odd, ignored;
 	std::vector<int>::iterator	oddit = m_vector.end() - (m_vector.size() % (pairSize * 2));
@@ -163,21 +197,33 @@ void	PmergeMe::mergeVec(size_t& pairSize)
 		odd.push_back(*oddit);
 	for (; ignorit < m_vector.end(); ignorit++)
 		ignored.push_back(*ignorit);
+	std::cout << "----------------------------" << std::endl;
+	std::cout << "pend ";
+	printVec(pend);
 	if (!pend.empty())
 		mergePendVec(main, pend);
 	if (!odd.empty())
 		main.insert(std::upper_bound(main.begin(), main.end(), *odd.begin()), odd.begin(), odd.end());
 	if (!ignored.empty())
 		main.insert(main.end(), ignored.begin(), ignored.end());
+	std::cout << "ignor ";
+	printVec(ignored);
+	std::cout << "odd ";
+	printVec(odd);
+	std::cout << "size = " << pairSize << " vec: ";
+	printVec(main);
 	m_vector = main;
 	pairSize /= 2;
-	mergeVec(pairSize);
+	std::cout << "pair s = " << pairSize << std::endl;
+	if (pairSize > 0)
+		mergeVec(pairSize);
 }
 
 void	PmergeMe::sortVec()
 {
 	size_t	pairSize = 1;
 	swapVec(pairSize);
+	displayVec();
 	pairSize /= 2;
 	mergeVec(pairSize);
 }
@@ -263,7 +309,7 @@ void	PmergeMe::mergeList(size_t& pairSize)
 //		std::advance(it, pairSize);
 		for (size_t i = 0; i < pairSize; ++i)
 			main.push_back(*(it++));
-		if (static_cast<size_t>(std::distance(it, oddit)) < pairSize * 2)
+		if (static_cast<size_t>(std::distance(--it, oddit)) < pairSize * 2)
 			break;
 	}
 	for (;oddit != ignorit; oddit++)
@@ -285,7 +331,6 @@ void	PmergeMe::sortList()
 {
 	size_t	pairSize = 1;
 	swapList(pairSize);
-	std::cout << "good" << std::endl;
 	pairSize /= 2;
 	mergeList(pairSize);
 }
@@ -296,11 +341,11 @@ void	PmergeMe::sort()
 	std::clock_t	startVec = std::clock();
 	sortVec();
 	std::clock_t	endVec = std::clock();
-	displayList();
 	std::clock_t	startList = std::clock();
 	sortList();
 	std::clock_t	endList = std::clock();
 	std::cout << "After:   ";
+	displayList();
 	displayVec();
 	std::cout << "Time to process a range of " << m_vector.size() << " elements with std::vector: ";
 	std::cout << 1000000.0 * (endVec - startVec) / CLOCKS_PER_SEC << " µs" << std::endl;
