@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:47:12 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/02/01 17:49:45 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/01 19:46:23 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,25 +113,13 @@ std::vector<int>::iterator upper_bound_step(std::vector<int>::iterator first, st
 
 long	getJacob(int n)
 {
-//	return round((pow(2, n + 1) + pow(-1, n)) / 3);
 	return round((pow(2, n) - pow(-1, n)) / 3);
 }
-/*
-size_t	getJacob(int n)
-{
-	if (n == 0)
-		return 0;
-	if (n == 1)
-		return 1;
-	return getJacob(n - 1) + 2 * getJacob(n - 2);
-}
-*/
 
 void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend, size_t& pairSize)
 {
 	if (pend.size() / pairSize < 2)
 		main.insert(upper_bound_step(main.begin() + pairSize - 1, main.end() - 1, *(pend.begin() + pairSize - 1), pairSize), pend.begin(), pend.end());
-		//		main.insert(upper_bound_step(main.begin() + pairSize - 1, main.end(), *(pend.begin() + pairSize - 1), pairSize) - pairSize + 1, pend.begin(), pend.end());
 	else
 	{
 		int	jacob = 3;
@@ -143,7 +131,6 @@ void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend, size
 			for (long i = 0; i < nbElement; ++i)
 			{
 				std::vector<int>::iterator bound;
-//				if (10000 <= main.size())
 				if (((getJacob(jacob) + level - i) * pairSize + pairSize - 1) <= main.size())
 					bound = main.begin() + ((getJacob(jacob) + level - i) * pairSize + pairSize - 1);
 				else
@@ -153,17 +140,6 @@ void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend, size
 //				std::vector<int>::iterator bound = main.end() -1;
 				std::vector<int>::iterator	element = pend.begin() + ((nbElement - i) * pairSize) - 1;
 				std::vector<int>::iterator insertPoint = upper_bound_step(main.begin() + pairSize - 1, bound, *element, pairSize);
-//				if (*(insertPoint + pairSize - 1) < *element)
-//					insertPoint = main.end();
-				//				main.insert(stop, *element);
-				if (*(element - pairSize + 1) == 4818)
-				{
-					std::cout << "dans le 4818 insert = " << *insertPoint << std::endl;
-					std::cout << "pair size = " << pairSize << std::endl;
-					std::cout << "jacob = " << jacob << " / level = " << level <<std::endl;
-					std::cout << (getJacob(jacob + level)) << std::endl;
-					std::cout << (getJacob(jacob + level + 10) - i) * pairSize <<std::endl;
-				}
 				main.insert(insertPoint, element - pairSize + 1, element + 1);
 				for (size_t i = 0; i < pairSize; ++i)
 					pend.erase(element - i);
@@ -227,7 +203,6 @@ void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend, size
 
 void	PmergeMe::mergeVec(size_t& pairSize)
 {
-	std::cout << "pair s = " << pairSize << std::endl;
 	if (pairSize < 1)
 		return;
 	std::vector<int>	main, pend, odd, ignored;
@@ -249,13 +224,10 @@ void	PmergeMe::mergeVec(size_t& pairSize)
 		odd.push_back(*oddit);
 	for (; ignorit < m_vector.end(); ignorit++)
 		ignored.push_back(*ignorit);
-	std::cout << "pend = ";
-	printVec(pend);
 	if (!pend.empty())
 		mergePendVec(main, pend, pairSize);
 	if (!odd.empty())
 	{
-		printVec(main);
 		std::vector<int>::iterator stop = upper_bound_step(main.begin() + pairSize - 1, main.end() - 1, *(odd.begin() + pairSize - 1), pairSize);
 		if (*(stop + pairSize - 1) < *(odd.begin() + pairSize - 1))
 			stop = main.end();
@@ -266,7 +238,6 @@ void	PmergeMe::mergeVec(size_t& pairSize)
 		main.insert(main.end(), ignored.begin(), ignored.end());
 	m_vector = main;
 	pairSize /= 2;
-	//	if (pairSize > 0)
 	mergeVec(pairSize);
 }
 void	PmergeMe::swapVec(size_t& pairSize)
@@ -288,7 +259,6 @@ void	PmergeMe::sortVec()
 {
 	size_t	pairSize = 1;
 	swapVec(pairSize);
-	displayVec();
 	pairSize /= 2;
 	mergeVec(pairSize);
 }

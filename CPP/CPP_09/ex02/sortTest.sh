@@ -124,6 +124,14 @@ if [ $mode -eq 2 ]; then
 			printf ${bleu}"   Count : "${rouge}"[KO] ($actual_count/$x)"${neutre}
 		fi
 
+		# Vérification si la liste contient les memes nombres
+		sorted1=$(echo $after_list | tr ' ' '\n' | sort | tr '\n' ' ')
+		sorted2=$(echo $i | tr ' ' '\n' | sort | tr '\n' ' ')
+		if [ "$sorted1" = "$sorted2" ]; then
+			echo "identiques"
+			else
+			echo "pas pareil"
+		fi
 		# 🔹 Vérification si la liste est triée
 		is_sorted=1
 		prev=-999999999 # Petit nombre pour comparaison

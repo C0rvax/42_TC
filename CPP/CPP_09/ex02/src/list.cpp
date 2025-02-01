@@ -36,14 +36,14 @@ void	PmergeMe::mergePendList(std::list<int>& main, std::list<int>& pend)
 	else
 	{
 		int	jacob = 3;
-		int	level = 0;
+		int	nbInserted = 0;
 		while (!pend.empty())
 		{
 			size_t nbElement = getJacob(jacob) - getJacob(jacob - 1);
 			nbElement = std::min(nbElement, pend.size());
 			for (size_t i = 0; i < nbElement; ++i)
 			{
-				size_t	limit = getJacob(jacob + level) - i;
+				size_t	limit = getJacob(jacob + nbInserted) - i;
 				std::list<int>::iterator	stop = main.begin();
 				if (limit <= main.size())
 					std::advance(stop, limit);
@@ -54,7 +54,7 @@ void	PmergeMe::mergePendList(std::list<int>& main, std::list<int>& pend)
 				stop = std::upper_bound(main.begin(), stop, *pendit);
 				main.insert(stop, *(pendit));
 				pend.erase(pendit);
-				level++;
+				nbInserted++;
 			}
 			jacob++;
 		}
