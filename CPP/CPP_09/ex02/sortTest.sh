@@ -58,8 +58,8 @@ if [[ ! -e "list" ]]; then
 		done
 	bash getRndom.sh 100 10000
 	bash getRndom.sh 500 10000
-#	bash getRndom.sh 1000 10000
-#	bash getRndom.sh 3000 10000
+	bash getRndom.sh 1000 10000
+	bash getRndom.sh 3000 10000
 fi
 source list
 echo -e "${bleu}-----------------------------------------------------------${neutre}"

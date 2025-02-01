@@ -144,8 +144,8 @@ void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend, size
 			{
 				std::vector<int>::iterator bound;
 //				if (10000 <= main.size())
-				if (((getJacob(jacob + level + 20) - i) * pairSize + pairSize - 1) <= main.size())
-					bound = main.begin() + ((getJacob(jacob + level + 3) - i) * pairSize + pairSize - 1);
+				if (((getJacob(jacob) + level - i) * pairSize + pairSize - 1) <= main.size())
+					bound = main.begin() + ((getJacob(jacob) + level - i) * pairSize + pairSize - 1);
 				else
 					bound = main.end() - 1;
 //				size_t	limit = (getJacob(jacob + level + pairSize) + pairSize + 100) * pairSize;
@@ -156,6 +156,14 @@ void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend, size
 //				if (*(insertPoint + pairSize - 1) < *element)
 //					insertPoint = main.end();
 				//				main.insert(stop, *element);
+				if (*(element - pairSize + 1) == 4818)
+				{
+					std::cout << "dans le 4818 insert = " << *insertPoint << std::endl;
+					std::cout << "pair size = " << pairSize << std::endl;
+					std::cout << "jacob = " << jacob << " / level = " << level <<std::endl;
+					std::cout << (getJacob(jacob + level)) << std::endl;
+					std::cout << (getJacob(jacob + level + 10) - i) * pairSize <<std::endl;
+				}
 				main.insert(insertPoint, element - pairSize + 1, element + 1);
 				for (size_t i = 0; i < pairSize; ++i)
 					pend.erase(element - i);
