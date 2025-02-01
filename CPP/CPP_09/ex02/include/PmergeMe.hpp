@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:43:13 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/30 11:23:37 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/01 17:43:19 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class	PmergeMe
 
 	void	swapVec(size_t& pairSize);
 	void	mergeVec(size_t& pairSize);
-	void	mergePendVec(std::vector<int>& main, std::vector<int>& pend);
+	void	mergePendVec(std::vector<int>& main, std::vector<int>& pend, size_t& pairSize);
 	void	sortVec();
 	void	swapList(size_t& pairSize);
 	void	mergeList(size_t& pairSize);
@@ -46,6 +46,7 @@ class	PmergeMe
 };
 
 void	printVec(const std::vector<int>& vec);
-size_t	getJacob(int n);
+long	getJacob(int n);
+std::vector<int>::iterator upper_bound_step(std::vector<int>::iterator first, std::vector<int>::iterator last, int value, size_t step);
 
 #endif /* __PMERGEME_HPP__ */

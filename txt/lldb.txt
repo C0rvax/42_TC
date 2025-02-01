@@ -1,22 +1,54 @@
 			LLDB | GDB
 
 compiler avec le flag -g
-lancer le programme en écrivant lldb ./a.out | gdb ./a.out
-help -> affiche les options de lldb
-run -> lance le programme
-b [ligne][fonction] | br
-	exemples : b 24 ou b main
-n -> passer au step d'après (ne rentre pas dans la fonction)
-ni -> paaser à l'instruction d'après
-s -> passer au step d'après (rentre dans la fonction)
-bt -> backtrace (comment en est-on arrivés à cette étape)
-gui -> lance l'interface graphique
-q -> quit
-list -> affiche les qq lignes de code de là où on est
-start -> run un step
-ctrl+x + 1 -> lance l'interface graphique de GDB
-file [name] -> si quand déjà dans GDB, lance le prog name
-print [variable] -> affiche l'adresse et la valeur de la variable
-ctrl+x + o -> si en mode graphique de GDB, switch entre les fenetres
-info args -> affiche les arguments de la fonction dans laquelle on se trouve
-info breakpoint -> affiche les infos du breakpoint
+
+# START #
+lldb ./a.out | gdb ./a.out			# lance ./a.out
+gdb --args ./a.out [params]			# lance ./a.out avec les params
+help 								# affiche les options de lldb
+run (args)							# Démarre le programme avec des arguments
+start								# Démarre le programme et s'arrête à main()
+
+# BREAKPOINTS #
+break fichier.cpp:42 				# Arrête à la ligne 42 de fichier.cpp
+break maFonction					# Arrête à l'entrée de maFonction()
+break Classe::methode 				# Pour une méthode de classe
+break 42 if x == 10					# Arrête à la ligne 42 seulement si x == 10
+break maFonction if compteur > 5	# Arrête si compteur > 5
+watch maVariable					# Stoppe si maVariable change
+rwatch maVariable					# Stoppe si maVariable est lue
+awatch maVariable					# Stoppe si maVariable est lue ou écrite
+break 42 ignore 5					# Ignore les 5 premières fois, arrête à la 6ème
+
+# EXEC #
+continue (c)						# Continue l'exécution après un breakpoint
+step (s)							# Exécute la prochaine ligne (entre dans les fonctions)
+next (n)							# Exécute la prochaine ligne (sans entrer dans les fonctions)
+ni									# paser à l'instruction d'après
+finish								# Continue jusqu'à la fin de la fonction actuelle
+until								# Continue jusqu'à la fin de la boucle ou la ligne suivante
+return								# Force le retour immédiat de la fonction en cours
+kill								# Stoppe l'exécution du programme
+quit (q)							# Quitte GDB
+
+# DISPLAY VAR #
+print (p) variable					# Affiche la valeur d'une variable
+print *ptr							# Affiche la valeur pointée par un pointeur
+display variable					# Affiche automatiquement la variable à chaque pause
+undisplay [numéro]					# Supprime un display
+info locals							# Affiche toutes les variables locales
+info args							# Affiche les arguments de la fonction en cours
+set variable = valeur				# Change la valeur d'une variable en cours d'exécution
+
+# BACKTRACE #
+backtrace (bt)						# Affiche la pile d'appels (call stack)
+backtrace full						# Affiche la pile avec toutes les variables locales
+info stack							# Affiche des infos détaillées sur la pile
+info breakpoint 					# affiche les infos du breakpoint
+
+# VRAC #
+set environment VAR=valeur			# Définit une variable d'environnement pour le programme débogué
+gui 								# lance l'interface graphique
+list 								# affiche les qq lignes de code de là où on est
+ctrl+x + 1 							# lance l'interface graphique de GDB
+ctrl+x + o 							# si en mode graphique de GDB, switch entre les fenetres

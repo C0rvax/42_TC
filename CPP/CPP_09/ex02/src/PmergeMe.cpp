@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:47:12 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/30 17:37:58 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/01 17:49:45 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,37 @@ void	PmergeMe::initParam(const int& ac, char** av)
 	m_isOdd = --i % 2;
 }
 
-void	PmergeMe::swapVec(size_t& pairSize)
+// Fonction personnalisée upper_bound_step
+std::vector<int>::iterator upper_bound_step(std::vector<int>::iterator first, std::vector<int>::iterator last, int value, size_t step)
 {
-	if (m_vector.size() < pairSize * 2)
-		return;
-	size_t	offset = (m_vector.size() % (pairSize * 2)) + pairSize;
-	std::vector<int>::iterator	it = m_vector.begin() + pairSize - 1;
-	std::vector<int>::iterator	endit = m_vector.end() - offset;
-	for (; it < endit; it += (pairSize * 2))
-		if (*it > *(it + pairSize))
-			for (size_t i = 0; i < pairSize; ++i)
-				std::swap(*(it - pairSize + 1 + i), *(it + i + 1));
-	pairSize *= 2;
-	swapVec(pairSize);
+    std::vector<int>::iterator it;
+    std::iterator_traits<std::vector<int>::iterator>::difference_type count, half;
+    count = std::distance(first, last) + 1;
+
+    while (count > 0)
+	{
+		it = first;
+		half = count / (2 * step);
+		std::advance(it, half * step);
+		if (*it <= value)
+		{
+			first = it;
+			std::advance(first, step);
+			count -= (half * step) + step;
+		}
+		else
+			count = half * step;
+	}
+	if (*first < value)
+//	if (*first < value && first != last)
+		first++;
+	return first - step + 1;
 }
 
-size_t	getJacob(int n)
+long	getJacob(int n)
 {
-	return round((pow(2, n + 1) + pow(-1, n)) / 3);
+//	return round((pow(2, n + 1) + pow(-1, n)) / 3);
+	return round((pow(2, n) - pow(-1, n)) / 3);
 }
 /*
 size_t	getJacob(int n)
@@ -114,44 +127,76 @@ size_t	getJacob(int n)
 }
 */
 
-void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend)
+void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend, size_t& pairSize)
 {
-	if (pend.size() < 2)
-		main.insert(std::upper_bound(main.begin(), main.end(), *pend.begin()), pend.begin(), pend.end());
+	if (pend.size() / pairSize < 2)
+		main.insert(upper_bound_step(main.begin() + pairSize - 1, main.end() - 1, *(pend.begin() + pairSize - 1), pairSize), pend.begin(), pend.end());
+		//		main.insert(upper_bound_step(main.begin() + pairSize - 1, main.end(), *(pend.begin() + pairSize - 1), pairSize) - pairSize + 1, pend.begin(), pend.end());
 	else
 	{
-		 size_t jc = 3; // Start with the 3rd Jacobsthal number
-        size_t count = 0;
-        size_t idx;
-        size_t decrease;
-
-        // Sort 'pend' into 'main' using binary search 'upper_bound' with Jacobsthal as optimization.
-        while (!pend.empty()) {
-            idx = getJacob(jc) - getJacob(jc - 1);
-            if (idx > pend.size())
-                idx = pend.size();
-
-            decrease = 0;
-            while (idx) {
-                // Determine the insertion point based on the Jacobsthal index and insert the element.
-                std::vector<int>::iterator end = main.begin();
-                if (getJacob(jc + count) - decrease <= main.size())
-                    end = main.begin() + getJacob(jc + count) - decrease;
-                else
-                    end = main.end();
-                // Binary sort
-                end = std::upper_bound(main.begin(), end, *(pend.begin() + idx - 1));
-                main.insert(end, *(pend.begin() + idx - 1));
-                pend.erase(pend.begin() + idx - 1);
-
-                idx--;
-                decrease++;
-                count++;
-            }
-            jc++;
-        }
+		int	jacob = 3;
+		int	level = 0;
+		while (!pend.empty())
+		{
+			long nbElement = getJacob(jacob) - getJacob(jacob - 1);
+			nbElement = std::min(nbElement, static_cast<long>(pend.size()) / static_cast<long>(pairSize));
+			for (long i = 0; i < nbElement; ++i)
+			{
+				std::vector<int>::iterator bound;
+//				if (10000 <= main.size())
+				if (((getJacob(jacob + level + 20) - i) * pairSize + pairSize - 1) <= main.size())
+					bound = main.begin() + ((getJacob(jacob + level + 3) - i) * pairSize + pairSize - 1);
+				else
+					bound = main.end() - 1;
+//				size_t	limit = (getJacob(jacob + level + pairSize) + pairSize + 100) * pairSize;
+//				std::vector<int>::iterator	bound = limit <= main.size() ? main.begin() + limit - 1 : main.end() - 1;
+//				std::vector<int>::iterator bound = main.end() -1;
+				std::vector<int>::iterator	element = pend.begin() + ((nbElement - i) * pairSize) - 1;
+				std::vector<int>::iterator insertPoint = upper_bound_step(main.begin() + pairSize - 1, bound, *element, pairSize);
+//				if (*(insertPoint + pairSize - 1) < *element)
+//					insertPoint = main.end();
+				//				main.insert(stop, *element);
+				main.insert(insertPoint, element - pairSize + 1, element + 1);
+				for (size_t i = 0; i < pairSize; ++i)
+					pend.erase(element - i);
+				level++;
+			}
+			jacob++;
+		}
 	}
-	/*
+}
+/*
+		size_t jc = 3; // Start with the 3rd Jacobsthal number
+		size_t count = 0;
+		size_t idx;
+		size_t decrease;
+
+		// Sort 'pend' into 'main' using binary search 'upper_bound' with Jacobsthal as optimization.
+		while (!pend.empty()) {
+			idx = getJacob(jc) - getJacob(jc - 1);
+			if (idx > pend.size())
+				idx = pend.size();
+
+			decrease = 0;
+			while (idx) {
+				// Determine the insertion point based on the Jacobsthal index and insert the element.
+				std::vector<int>::iterator end = main.begin();
+				if (getJacob(jc + count) - decrease <= main.size())
+					end = main.begin() + getJacob(jc + count) - decrease;
+				else
+					end = main.end();
+				// Binary sort
+				end = std::upper_bound(main.begin(), end, *(pend.begin() + idx - 1));
+				main.insert(end, *(pend.begin() + idx - 1));
+				pend.erase(pend.begin() + idx - 1);
+
+				idx--;
+				decrease++;
+				count++;
+			}
+			jc++;
+		}
+	}
 		int	jacob = 3;
 		int	level = 0;
 		while (!pend.empty())
@@ -171,7 +216,6 @@ void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend)
 		}
 	}
 	*/
-}
 
 void	PmergeMe::mergeVec(size_t& pairSize)
 {
@@ -188,7 +232,7 @@ void	PmergeMe::mergeVec(size_t& pairSize)
 				main.push_back(*(it + i));
 		else
 			for (size_t i = 0; i < pairSize; ++i)
-				pend.push_back(*(it + i));
+			pend.push_back(*(it + i));
 		it += pairSize;
 		for (size_t i = 0; i < pairSize; ++i)
 			main.push_back(*(it + i));
@@ -197,26 +241,39 @@ void	PmergeMe::mergeVec(size_t& pairSize)
 		odd.push_back(*oddit);
 	for (; ignorit < m_vector.end(); ignorit++)
 		ignored.push_back(*ignorit);
-	std::cout << "----------------------------" << std::endl;
-	std::cout << "pend ";
+	std::cout << "pend = ";
 	printVec(pend);
 	if (!pend.empty())
-		mergePendVec(main, pend);
+		mergePendVec(main, pend, pairSize);
 	if (!odd.empty())
-		main.insert(std::upper_bound(main.begin(), main.end(), *odd.begin()), odd.begin(), odd.end());
+	{
+		printVec(main);
+		std::vector<int>::iterator stop = upper_bound_step(main.begin() + pairSize - 1, main.end() - 1, *(odd.begin() + pairSize - 1), pairSize);
+		if (*(stop + pairSize - 1) < *(odd.begin() + pairSize - 1))
+			stop = main.end();
+		main.insert(stop, odd.begin(), odd.end());
+//		main.insert(upper_bound_step(main.begin() + pairSize - 1, main.end(), *(odd.begin() + pairSize - 1), pairSize), odd.begin(), odd.end());
+	}
 	if (!ignored.empty())
 		main.insert(main.end(), ignored.begin(), ignored.end());
-	std::cout << "ignor ";
-	printVec(ignored);
-	std::cout << "odd ";
-	printVec(odd);
-	std::cout << "size = " << pairSize << " vec: ";
-	printVec(main);
 	m_vector = main;
 	pairSize /= 2;
-	std::cout << "pair s = " << pairSize << std::endl;
-	if (pairSize > 0)
-		mergeVec(pairSize);
+	//	if (pairSize > 0)
+	mergeVec(pairSize);
+}
+void	PmergeMe::swapVec(size_t& pairSize)
+{
+	if (m_vector.size() < pairSize * 2)
+		return;
+	size_t	offset = (m_vector.size() % (pairSize * 2)) + pairSize;
+	std::vector<int>::iterator	it = m_vector.begin() + pairSize - 1;
+	std::vector<int>::iterator	endit = m_vector.end() - offset;
+	for (; it < endit; it += (pairSize * 2))
+		if (*it > *(it + pairSize))
+			for (size_t i = 0; i < pairSize; ++i)
+				std::swap(*(it - pairSize + 1 + i), *(it + i + 1));
+	pairSize *= 2;
+	swapVec(pairSize);
 }
 
 void	PmergeMe::sortVec()
@@ -228,112 +285,6 @@ void	PmergeMe::sortVec()
 	mergeVec(pairSize);
 }
 
-void	PmergeMe::swapList(size_t& pairSize)
-{
-	if (m_list.size() < pairSize * 2)
-		return;
-	size_t	offset = (m_list.size() % (pairSize * 2)) + pairSize;
-	std::list<int>::iterator	it = m_list.begin();
-	std::advance(it, pairSize - 1);
-	std::list<int>::iterator	endit = m_list.end();
-	std::advance(endit, -offset);
-	for (; it != endit; std::advance(it, pairSize * 2))
-	{
-		std::list<int>::iterator next_it = it;
-		std::advance(next_it, pairSize);
-		if (*it > *next_it)
-			for (size_t i = 0; i < pairSize; ++i)
-			{
-				std::list<int>::iterator previt = it;
-				std::advance(previt, -(pairSize - 1 - i));
-				std::list<int>::iterator nextit = it;
-				std::advance(nextit, i + 1);
-				std::swap(*previt, *nextit);
-			}
-		if (static_cast<size_t>(std::distance(it, endit)) < pairSize * 2)
-			break;
-	}
-	pairSize *= 2;
-	swapList(pairSize);
-}
-
-void	PmergeMe::mergePendList(std::list<int>& main, std::list<int>& pend)
-{
-	if (pend.size() < 2)
-		main.insert(std::upper_bound(main.begin(), main.end(), *pend.begin()), pend.begin(), pend.end());
-	else
-	{
-		int	jacob = 3;
-		int	level = 0;
-		while (!pend.empty())
-		{
-			size_t nbElement = getJacob(jacob) - getJacob(jacob - 1);
-			nbElement = std::min(nbElement, pend.size());
-			for (size_t i = 0; i < nbElement; ++i)
-			{
-				size_t	limit = getJacob(jacob + level) - i;
-				std::list<int>::iterator	stop = main.begin();
-				if (limit <= main.size())
-					std::advance(stop, limit);
-				else
-					stop = main.end();
-				std::list<int>::iterator pendit = pend.begin();
-				std::advance(pendit, nbElement - i - 1);
-				stop = std::upper_bound(main.begin(), stop, *pendit);
-				main.insert(stop, *(pendit));
-				pend.erase(pendit);
-				level++;
-			}
-			jacob++;
-		}
-	}
-}
-
-void	PmergeMe::mergeList(size_t& pairSize)
-{
-	if (pairSize == 0)
-		return;
-	std::list<int>	main, pend, odd, ignored;
-	std::list<int>::iterator	oddit = m_list.end();
-	std::advance(oddit, -(m_list.size() % (pairSize * 2)));
-	std::list<int>::iterator	ignorit = m_list.end();
-	std::advance(ignorit,  -(m_list.size() % pairSize));
-	for (std::list<int>::iterator it = m_list.begin(); it != oddit; std::advance(it, pairSize))
-	{
-		if (it == m_list.begin())
-			for (size_t i = 0; i < pairSize; ++i)
-				main.push_back(*(it++));
-		else
-			for (size_t i = 0; i < pairSize; ++i)
-				pend.push_back(*(it++));
-//		std::advance(it, pairSize);
-		for (size_t i = 0; i < pairSize; ++i)
-			main.push_back(*(it++));
-		if (static_cast<size_t>(std::distance(--it, oddit)) < pairSize * 2)
-			break;
-	}
-	for (;oddit != ignorit; oddit++)
-		odd.push_back(*oddit);
-	for (; ignorit != m_list.end(); ignorit++)
-		ignored.push_back(*ignorit);
-	if (!pend.empty())
-		mergePendList(main, pend);
-	if (!odd.empty())
-		main.insert(std::upper_bound(main.begin(), main.end(), *odd.begin()), odd.begin(), odd.end());
-	if (!ignored.empty())
-		main.insert(main.end(), ignored.begin(), ignored.end());
-	m_list = main;
-	pairSize /= 2;
-	mergeVec(pairSize);
-}
-
-void	PmergeMe::sortList()
-{
-	size_t	pairSize = 1;
-	swapList(pairSize);
-	pairSize /= 2;
-	mergeList(pairSize);
-}
 void	PmergeMe::sort()
 {
 	std::cout << "Before:  ";
@@ -341,14 +292,14 @@ void	PmergeMe::sort()
 	std::clock_t	startVec = std::clock();
 	sortVec();
 	std::clock_t	endVec = std::clock();
-	std::clock_t	startList = std::clock();
-	sortList();
-	std::clock_t	endList = std::clock();
+	//	std::clock_t	startList = std::clock();
+	//	sortList();
+	//	std::clock_t	endList = std::clock();
 	std::cout << "After:   ";
-	displayList();
+	//	displayList();
 	displayVec();
 	std::cout << "Time to process a range of " << m_vector.size() << " elements with std::vector: ";
 	std::cout << 1000000.0 * (endVec - startVec) / CLOCKS_PER_SEC << " µs" << std::endl;
-	std::cout << "Time to process a range of " << m_list.size() << " elements with std::list: ";
-	std::cout << 1000000.0 * (endList - startList) / CLOCKS_PER_SEC << " µs" << std::endl;
+	//	std::cout << "Time to process a range of " << m_list.size() << " elements with std::list: ";
+	//	std::cout << 1000000.0 * (endList - startList) / CLOCKS_PER_SEC << " µs" << std::endl;
 }

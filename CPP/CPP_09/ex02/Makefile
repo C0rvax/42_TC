@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/01/29 01:46:08 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/01/31 15:31:45 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			= PmergeMe
 
 CXX				= c++
 
-CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS		= -g -Wall -Wextra -Werror -std=c++98
 
 HEADERS			= -Iinclude
 

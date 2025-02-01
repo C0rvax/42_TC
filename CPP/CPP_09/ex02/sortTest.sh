@@ -53,11 +53,13 @@ if [[ ! -e "list" ]]; then
 	echo "pas de list"
 	echo "ARG=(" >> list
 	echo ")" >> list
-	for i in {0..17}; do
+	for i in {1..33}; do
 		bash getRndom.sh "$i" 1000
 		done
-	bash getRndom.sh 1000 10000
-	bash getRndom.sh 3000 10000
+	bash getRndom.sh 100 10000
+	bash getRndom.sh 500 10000
+#	bash getRndom.sh 1000 10000
+#	bash getRndom.sh 3000 10000
 fi
 source list
 echo -e "${bleu}-----------------------------------------------------------${neutre}"
@@ -147,5 +149,5 @@ if [ $mode -eq 2 ]; then
 		rm errorFile
 	done
 fi
-#rm list
+rm list
 make fclean >/dev/null
