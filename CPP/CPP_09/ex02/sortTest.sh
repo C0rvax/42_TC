@@ -128,10 +128,11 @@ if [ $mode -eq 2 ]; then
 		sorted1=$(echo $after_list | tr ' ' '\n' | sort | tr '\n' ' ')
 		sorted2=$(echo $i | tr ' ' '\n' | sort | tr '\n' ' ')
 		if [ "$sorted1" = "$sorted2" ]; then
-			echo "identiques"
+			printf ${bleu}"   Same list : "${vert}"[OK]"${neutre}
 			else
-			echo "pas pareil"
+			printf ${bleu}"   Same list : "${rouge}"[KO]"${neutre}
 		fi
+
 		# 🔹 Vérification si la liste est triée
 		is_sorted=1
 		prev=-999999999 # Petit nombre pour comparaison
