@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:47:12 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/02/03 19:54:58 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/03 23:58:57 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ std::list<int>::iterator	upperBoundStep(std::list<int>& list, size_t size, int v
 	return first;
 }
 
-void	PmergeMe::mergePendList(std::list<int>& main, std::list<int>& pend, size_t& pairSize)
+void	PmergeMe::mergePendList(std::list<int>& main, std::list<int>& pend, const size_t& pairSize)
 {
 	if (pend.size() / pairSize < 2)
 	{
@@ -259,7 +259,7 @@ std::vector<int>::iterator	upperBoundStep(std::vector<int>& vec, size_t size, in
 	return first - step + 1;
 }
 
-void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend, size_t& pairSize)
+void	PmergeMe::mergePendVec(std::vector<int>& main, std::vector<int>& pend, const size_t& pairSize)
 {
 	if (pend.size() / pairSize < 2)
 		main.insert(upperBoundStep(main, main.size(), *(pend.begin() + pairSize - 1), pairSize), pend.begin(), pend.end());
@@ -359,8 +359,8 @@ void	PmergeMe::sort()
 	sortList();
 	std::clock_t	endList = std::clock();
 	std::cout << "After:   ";
-	displayList();
-//	displayVec();
+//	displayList();
+	displayVec();
 	std::cout << "Time to process a range of " << m_vector.size() << " elements with std::vector: ";
 	std::cout << 1000000.0 * (endVec - startVec) / CLOCKS_PER_SEC << " µs" << std::endl;
 	std::cout << "Time to process a range of " << m_list.size() << " elements with std::list: ";

@@ -1,28 +1,28 @@
 #!/bin/bash
 
 # Couleurs
-rouge='\e[1;31m'
-jaune='\e[1;33m'
-bleu='\e[1;34m'
-violet='\e[1;35m'
-vert='\e[1;32m'
-neutre='\e[0;m'
+RED='\e[1;31m'
+YELLOW='\e[1;33m'
+BLUE='\e[1;34m'
+VIOLET='\e[1;35m'
+GREEN='\e[1;32m'
+NEUTRAL='\e[0;m'
 
-echo -e "${bleu}"
+echo -e "${BLUE}"
 echo -e "		╔═╗┌┬┐┌─┐┬─┐┌─┐┌─┐╔╦╗┌─┐"
 echo -e "		╠═╝│││├┤ ├┬┘│ ┬├┤ ║║║├┤ "
 echo -e "		╩  ┴ ┴└─┘┴└─└─┘└─┘╩ ╩└─┘"
-echo -e "${neutre}"
+echo -e "${NEUTRAL}"
 
-echo -e "${bleu} ---------------------- ${vert}SELECT TEST ${bleu}----------------------"
-echo -e "${bleu}-----------------------------------------------------------${neutre}"
-echo -e "${bleu} --------------- ${vert}Display : Type D/d ${bleu}-----------------"
-echo -e "${bleu}-----------------------------------------------------------${neutre}"
-echo -e "${bleu} ----------------- ${vert}Test : Type T/t ${bleu}-----------------"
-echo -e "${bleu}-----------------------------------------------------------${neutre}"
-echo -e "${bleu} -------------------- ${vert}All : Type A/a ${bleu}---------------------"
-echo -e "${bleu}-----------------------------------------------------------${neutre}"
-echo -e "${vert}"
+echo -e "${BLUE} ---------------------- ${GREEN}SELECT TEST ${BLUE}----------------------"
+echo -e "${BLUE}-----------------------------------------------------------${NEUTRAL}"
+echo -e "${BLUE} --------------- ${GREEN}Display : Type D/d ${BLUE}-----------------"
+echo -e "${BLUE}-----------------------------------------------------------${NEUTRAL}"
+echo -e "${BLUE} ----------------- ${GREEN}Test : Type T/t ${BLUE}-----------------"
+echo -e "${BLUE}-----------------------------------------------------------${NEUTRAL}"
+echo -e "${BLUE} -------------------- ${GREEN}All : Type A/a ${BLUE}---------------------"
+echo -e "${BLUE}-----------------------------------------------------------${NEUTRAL}"
+echo -e "${GREEN}"
 read -p "                [d/t/a]" rep
 case $rep in
 D)
@@ -60,52 +60,52 @@ if [[ ! -e "list" ]]; then
 	bash getRndom.sh 3000 10000
 fi
 source list
-echo -e "${bleu}-----------------------------------------------------------${neutre}"
+echo -e "${BLUE}-----------------------------------------------------------${NEUTRAL}"
 
 if [ $mode -eq 1 ]; then
 	for i in "${ARG[@]}"; do # on parcours la liste d'argument ARG
 		size=$(echo "$i" | wc -w)
-		echo -e "     ${jaune}List Size : $size ${neutre}"
+		echo -e "     ${YELLOW}List Size : $size ${NEUTRAL}"
 
-		valgrind --track-fds=yes --leak-check=full ./PmergeMe $i 2>/dev/null # on copie stderr (2) vers un fichier temporaire (tmp) et stdout vers null
+		valgrind --track-fds=yes --leak-check=full ./PmergeMe $i 2>/dev/null
 	done
 fi
 
 if [ $mode -eq 2 ]; then
 	for i in "${ARG[@]}"; do # on parcours la liste d'argument ARG
 		size=$(echo "$i" | wc -w)
-		echo -e "     ${jaune}List Size : $size ${neutre}"
-		echo -e "        ${vert}$i${neutre}" # nom de l'argument (map)
+		echo -e "     ${YELLOW}List Size : $size ${NEUTRAL}"
+		#echo -e "        ${GREEN}$i${NEUTRAL}" # nom de l'argument (map)
 
-		valgrind --track-fds=yes --leak-check=full ./PmergeMe $i 2>errorFile >tmp # on copie stderr (2) vers un fichier temporaire (tmp) et stdout vers null
-		error=$(cat errorFile | grep "segmentation fault" | wc -l)                # on recupère le resultat de grep error sur tmp dans une variable : error
-		errjump=$(cat errorFile | grep "Conditional jump" | wc -l)                # on recupère le resultat de grep error sur tmp dans une variable : error
+		valgrind --track-fds=yes --leak-check=full ./PmergeMe $i 2>errorFile >tmp
+		error=$(cat errorFile | grep "segmentation fault" | wc -l)
+		errjump=$(cat errorFile | grep "Conditional jump" | wc -l)
 		leaks=$(cat errorFile | grep "no leaks are possible" | wc -l)
 		fdclose=$(cat errorFile | grep "FILE DESCRIPTOR" | awk '{gsub(/\(/, "", $6); print $6}')
 		fdopen=$(cat errorFile | grep "FILE DESCRIPTOR" | awk '{print $4}')
 
 		if [ $fdopen -ne $fdclose ]; then
-			success=${rouge}
+			success=${RED}
 		else
-			success=${vert}
+			success=${GREEN}
 		fi
 
-		printf ${bleu}"   Error : "
+		printf ${BLUE}"   Error : "
 		if [ $error -eq 1 ] || [ $errjump -eq 1 ]; then # si grep égale 1 alors ok
-			printf ${rouge}"[KO]"${neutre}
+			printf ${RED}"[KO]"${NEUTRAL}
 		else
-			printf ${vert}"[OK]"${neutre}
+			printf ${GREEN}"[OK]"${NEUTRAL}
 		fi
 
-		printf ${bleu}"   Leaks : "
+		printf ${BLUE}"   Leaks : "
 		if [ $leaks -eq 1 ]; then # si grep égale 1 alors ok
-			printf ${vert}"[OK]"${neutre}
+			printf ${GREEN}"[OK]"${NEUTRAL}
 		else
-			printf ${rouge}"[KO]"${neutre}
+			printf ${RED}"[KO]"${NEUTRAL}
 		fi
 
-		printf ${bleu}"   FDs : "
-		printf ${success}"$fdclose/$fdopen${neutre}\n"
+		printf ${BLUE}"   FDs : "
+		printf ${success}"$fdclose/$fdopen${NEUTRAL}\n"
 
 		# 🔹 Récupération du nombre d'éléments attendu (x)
 		x=$(grep -oP 'Time to process a range of \K\d+' tmp | head -n 1)
@@ -117,23 +117,23 @@ if [ $mode -eq 2 ]; then
 		actual_count=$(echo "$after_list" | wc -w)
 
 		if [ "$actual_count" -eq "$x" ]; then
-			printf ${bleu}"   Count : "${vert}"[OK]"${neutre}
+			printf ${BLUE}"   Count : "${GREEN}"[OK]"${NEUTRAL}
 		else
-			printf ${bleu}"   Count : "${rouge}"[KO] ($actual_count/$x)"${neutre}
+			printf ${BLUE}"   Count : "${RED}"[KO] ($actual_count/$x)"${NEUTRAL}
 		fi
 
 		# Vérification si la liste contient les memes nombres
 		sorted1=$(echo $after_list | tr ' ' '\n' | sort | tr '\n' ' ')
 		sorted2=$(echo $i | tr ' ' '\n' | sort | tr '\n' ' ')
 		if [ "$sorted1" = "$sorted2" ]; then
-			printf ${bleu}"   Same list : "${vert}"[OK]"${neutre}
+			printf ${BLUE}"   Same list : "${GREEN}"[OK]"${NEUTRAL}
 		else
-			printf ${bleu}"   Same list : "${rouge}"[KO]"${neutre}
+			printf ${BLUE}"   Same list : "${RED}"[KO]"${NEUTRAL}
 		fi
 
 		# 🔹 Vérification si la liste est triée
 		is_sorted=1
-		prev=-999999999 # Petit nombre pour comparaison
+		prev=-1 # Petit nombre pour comparaison
 
 		for num in $after_list; do
 			if [ "$num" -lt "$prev" ]; then
@@ -143,14 +143,14 @@ if [ $mode -eq 2 ]; then
 			prev=$num
 		done
 
-		printf ${bleu}"   Sorted : "
+		printf ${BLUE}"   Sorted : "
 		if [ "$is_sorted" -eq 1 ]; then
-			printf ${vert}"[OK]\n"${neutre}
+			printf ${GREEN}"[OK]\n"${NEUTRAL}
 		else
-			printf ${rouge}"[KO]\n"${neutre}
+			printf ${RED}"[KO]\n"${NEUTRAL}
 		fi
 
-		echo -e "${bleu}-----------------------------------------------------------${neutre}"
+		echo -e "${BLUE}-----------------------------------------------------------${NEUTRAL}"
 		echo ""
 		rm tmp
 		rm errorFile
