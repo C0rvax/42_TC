@@ -14,7 +14,6 @@ echo -e "		╠═╝│││├┤ ├┬┘│ ┬├┤ ║║║├┤ "
 echo -e "		╩  ┴ ┴└─┘┴└─└─┘└─┘╩ ╩└─┘"
 echo -e "${neutre}"
 
-
 echo -e "${bleu} ---------------------- ${vert}SELECT TEST ${bleu}----------------------"
 echo -e "${bleu}-----------------------------------------------------------${neutre}"
 echo -e "${bleu} --------------- ${vert}Display : Type D/d ${bleu}-----------------"
@@ -50,12 +49,11 @@ a)
 esac
 make 2>/dev/null >/dev/null
 if [[ ! -e "list" ]]; then
-	echo "pas de list"
-	echo "ARG=(" >> list
-	echo ")" >> list
+	echo "ARG=(" >>list
+	echo ")" >>list
 	for i in {1..33}; do
 		bash getRndom.sh "$i" 1000
-		done
+	done
 	bash getRndom.sh 100 10000
 	bash getRndom.sh 500 10000
 	bash getRndom.sh 1000 10000
@@ -80,8 +78,8 @@ if [ $mode -eq 2 ]; then
 		echo -e "        ${vert}$i${neutre}" # nom de l'argument (map)
 
 		valgrind --track-fds=yes --leak-check=full ./PmergeMe $i 2>errorFile >tmp # on copie stderr (2) vers un fichier temporaire (tmp) et stdout vers null
-		error=$(cat errorFile | grep "segmentation fault" | wc -l)                      # on recupère le resultat de grep error sur tmp dans une variable : error
-		errjump=$(cat errorFile | grep "Conditional jump" | wc -l)                      # on recupère le resultat de grep error sur tmp dans une variable : error
+		error=$(cat errorFile | grep "segmentation fault" | wc -l)                # on recupère le resultat de grep error sur tmp dans une variable : error
+		errjump=$(cat errorFile | grep "Conditional jump" | wc -l)                # on recupère le resultat de grep error sur tmp dans une variable : error
 		leaks=$(cat errorFile | grep "no leaks are possible" | wc -l)
 		fdclose=$(cat errorFile | grep "FILE DESCRIPTOR" | awk '{gsub(/\(/, "", $6); print $6}')
 		fdopen=$(cat errorFile | grep "FILE DESCRIPTOR" | awk '{print $4}')
@@ -129,7 +127,7 @@ if [ $mode -eq 2 ]; then
 		sorted2=$(echo $i | tr ' ' '\n' | sort | tr '\n' ' ')
 		if [ "$sorted1" = "$sorted2" ]; then
 			printf ${bleu}"   Same list : "${vert}"[OK]"${neutre}
-			else
+		else
 			printf ${bleu}"   Same list : "${rouge}"[KO]"${neutre}
 		fi
 

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:43:13 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/02/01 17:43:19 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:54:48 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,25 @@ class	PmergeMe
 	private:
 	std::vector<int>	m_vector;
 	std::list<int>		m_list;
-	int					m_isOdd;
 
+	void	sortVec();
 	void	swapVec(size_t& pairSize);
 	void	mergeVec(size_t& pairSize);
 	void	mergePendVec(std::vector<int>& main, std::vector<int>& pend, size_t& pairSize);
-	void	sortVec();
+	void	displayVec() const;
+
+	void	sortList();
 	void	swapList(size_t& pairSize);
 	void	mergeList(size_t& pairSize);
-	void	mergePendList(std::list<int>& main, std::list<int>& pend);
-	void	sortList();
-	void	displayVec() const;
+	void	mergePendList(std::list<int>& main, std::list<int>& pend, size_t& pairSize);
+	void	mergeOddList(std::list<int>& main, std::list<int>& odd, const size_t& pairSize);
 	void	displayList() const;
 };
 
+void	printList(const std::list<int>& list);
 void	printVec(const std::vector<int>& vec);
 long	getJacob(int n);
-std::vector<int>::iterator upper_bound_step(std::vector<int>::iterator first, std::vector<int>::iterator last, int value, size_t step);
+std::vector<int>::iterator	upperBoundStep(std::vector<int>& vec, size_t size, int value, size_t step);
+std::list<int>::iterator	upperBoundStep(std::list<int>& vec, size_t size, int value, size_t step);
 
 #endif /* __PMERGEME_HPP__ */
