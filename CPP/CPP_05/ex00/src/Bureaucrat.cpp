@@ -6,19 +6,19 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:02:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/12 17:34:32 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:23:58 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 #include <ostream>
 
-Bureaucrat::Bureaucrat	(void) : m_name("")
+Bureaucrat::Bureaucrat() : m_name("")
 {
 	this->m_grade = m_minGrade;
 }
 
-Bureaucrat::Bureaucrat	(std::string name, int grade) : m_name(name)
+Bureaucrat::Bureaucrat(const std::string& name, const int& grade) : m_name(name)
 {
 	this->m_grade = 150;
 	if (grade < m_maxGrade)
@@ -29,10 +29,7 @@ Bureaucrat::Bureaucrat	(std::string name, int grade) : m_name(name)
 		this->m_grade = grade;
 }
 
-Bureaucrat::Bureaucrat	(Bureaucrat const & src) : m_name(src.getName())
-{
-	this->m_grade = src.getGrade();
-}
+Bureaucrat::Bureaucrat(Bureaucrat const & src) : m_name(src.getName()), m_grade(src.getGrade()) {}
 
 Bureaucrat&	Bureaucrat::operator=(Bureaucrat const & rhs)
 {
@@ -41,16 +38,14 @@ Bureaucrat&	Bureaucrat::operator=(Bureaucrat const & rhs)
 	return *this;
 }
 
-Bureaucrat::~Bureaucrat	(void)
-{
-}
+Bureaucrat::~Bureaucrat() {}
 
-std::string	const	Bureaucrat::getName(void) const
+const std::string&	Bureaucrat::getName(void) const
 {
 	return (this->m_name);
 }
 
-int	Bureaucrat::getGrade(void) const
+const int&	Bureaucrat::getGrade(void) const
 {
 	return (this->m_grade);
 }
