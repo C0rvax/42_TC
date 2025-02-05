@@ -6,11 +6,12 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:23:04 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 18:00:37 by aduvilla         ###   ########.fr       */
+/*   Updated: 2024/11/15 14:33:56 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
+#include "Bureaucrat.hpp"
 #include <iostream>
 #include <fstream>
 

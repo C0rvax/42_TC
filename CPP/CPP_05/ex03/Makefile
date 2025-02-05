@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/01/16 15:53:45 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/02/05 19:55:14 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC				= main.cpp 								\
 				  RobotomyRequestForm.cpp				\
 				  Intern.cpp
 
-NAME			= Robo
+NAME			= intern
 
 all				: $(NAME)
 

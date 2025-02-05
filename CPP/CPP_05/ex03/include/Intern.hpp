@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:25:41 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 20:22:48 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:41:22 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class	Intern
 		Intern &operator=(Intern const & rhs);
 		~Intern(void);
 
-		AForm*	makeForm(std::string name, std::string target);
+		AForm*	makeForm(const std::string& name, const std::string& target);
 //		AForm*	createShrubbery(std::string target);
 //		AForm*	createRobotomy(std::string target);
 //		AForm*	createPresidential(std::string target);

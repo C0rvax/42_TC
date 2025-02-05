@@ -6,11 +6,12 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:18:18 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/14 17:27:35 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:00:17 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
+#include "Bureaucrat.hpp"
 #include <iostream>
 #include <cstdlib>
 
@@ -49,6 +50,7 @@ RobotomyRequestForm::~RobotomyRequestForm	(void)
 
 void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
+	srand(time(0));
 	if (!this->getSigned())
 		throw AForm::UnsignedException();
 	if (this->getExecuteGrade() < executor.getGrade())
