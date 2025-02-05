@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:50:37 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/22 14:24:54 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:16:51 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,20 @@ static void	printChar(std::string const & str)
 
 static void	printInt(std::string const & str)
 {
-	int	value = std::atoi(str.c_str());
-	std::cout << "char: " << ((value >= 32 && value <= 126) ? "'" + std::string(1, static_cast<char>(value)) + "'" : "Non displayable") << std::endl;
-	std::cout << "int: " << value << std::endl;
-	std::cout << "float: " << value << ".0f" << std::endl;
-	std::cout << "double: " << value << ".0" << std::endl;
+	double	db = std::atof(str.c_str());
+	if (db > std::numeric_limits<int>::max() || db < std::numeric_limits<int>::min())
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+	}
+	else
+	{
+		int	value = std::atoi(str.c_str());
+		std::cout << "char: " << ((value >= 32 && value <= 126) ? "'" + std::string(1, static_cast<char>(value)) + "'" : "Non displayable") << std::endl;
+		std::cout << "int: " << value << std::endl;
+	}
+	std::cout << "float: " << db << ".0f" << std::endl;
+	std::cout << "double: " << db << ".0" << std::endl;
 }
 
 static void	printFloatingPoint(std::string const & str)
@@ -98,7 +107,7 @@ static void	printFloatingPoint(std::string const & str)
 		std::cout << "double: " << std::fixed << std::setprecision(1) << value << std::endl;
 	}
 	else
-	{
+{
 		std::cout << "float: " << static_cast<float>(value) << "f" << std::endl;
 		std::cout << "double: " << value << std::endl;
 	}
@@ -119,7 +128,7 @@ static void	printPseudoLiteral(std::string const & str)
 		std::cout << "double: " << std::numeric_limits<double>::quiet_NaN() << std::endl;
 	}
 	else
-	{
+{
 		std::cout << "float: " << std::numeric_limits<float>::infinity() << 'f' << std::endl;
 		std::cout << "double: " << std::numeric_limits<double>::infinity() << std::endl;
 	}
