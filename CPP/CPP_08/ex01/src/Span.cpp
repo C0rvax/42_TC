@@ -6,13 +6,14 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:37:25 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/28 13:35:09 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:47:29 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <limits.h>
 #include <algorithm>
+#include <limits>
 #include <stdexcept>
 #include <vector>
 
@@ -76,7 +77,7 @@ unsigned int	Span::shortestSpan() const
 		throw std::logic_error("Error: Not enough values in vector");
 	std::vector<int>	sorted(m_vector);
 	std::sort(sorted.begin(), sorted.end());
-	int	shortSpan = INT_MAX;
+	int	shortSpan = std::numeric_limits<int>::max();
 	for (size_t i = 1; i < sorted.size(); i++)
 	{
 		shortSpan = std::min(shortSpan, sorted[i] - sorted[i - 1]);
