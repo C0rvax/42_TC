@@ -6,12 +6,17 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:53:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/15 14:32:21 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:26:02 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __AFORM_HPP__
 #define __AFORM_HPP__
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define YELLOW "\033[33m"
+# define YELLOWB "\033[1;4;33m"
+# define RESET "\033[0m"
 
 #include <string>
 
@@ -20,16 +25,16 @@ class	Bureaucrat;
 class	AForm
 {
 	public:
-		AForm	(void);
-		AForm	(std::string const name, int signGrade, int executeGrade);
-		AForm	(AForm const & src);
-		AForm&	operator=(AForm const & rhs);
-		virtual ~AForm	(void);
+		AForm();
+		AForm(const std::string&  name, const int signGrade, const int executeGrade);
+		AForm(const AForm& src);
+		AForm&	operator=(const AForm& rhs);
+		virtual ~AForm();
 
-		std::string const	getName(void) const;
-		bool				getSigned(void) const;
-		int 				getSignGrade(void) const;
-		int					getExecuteGrade(void) const;
+		const std::string&	getName(void) const;
+		const bool&			getSigned(void) const;
+		const int& 			getSignGrade(void) const;
+		const int&			getExecuteGrade(void) const;
 		void				beSigned(Bureaucrat & b);
 		virtual void		execute(Bureaucrat const & executor) const = 0;
 		
@@ -52,13 +57,13 @@ class	AForm
 		};
 
 	private:
-		std::string const	m_name;
+		const std::string	m_name;
 		bool				m_signed;
-		int	const			m_signGrade;
-		int const			m_executeGrade;
+		const int			m_signGrade;
+		const int			m_executeGrade;
 		
 };
 
-std::ostream&	operator<<(std::ostream & o, AForm const & rhs);
+std::ostream&	operator<<(std::ostream & o, const AForm& rhs);
 
 #endif  /* __AFORM_HPP__ */

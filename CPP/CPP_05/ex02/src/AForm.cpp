@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:23:42 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/15 14:31:49 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:26:40 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ AForm::AForm	(void) : m_name(""), m_signGrade(Bureaucrat::minGrade), m_executeGr
 	this->m_signed = false;
 }
 
-AForm::AForm	(std::string const name, int const signGrade, int const executeGrade) : m_name(name), m_signGrade(signGrade), m_executeGrade(executeGrade)
+AForm::AForm	(const std::string& name, const int signGrade, const int executeGrade) : m_name(name), m_signGrade(signGrade), m_executeGrade(executeGrade)
 {
 	this->m_signed = false;
 	if (signGrade < Bureaucrat::maxGrade || executeGrade < Bureaucrat::maxGrade)
@@ -28,12 +28,12 @@ AForm::AForm	(std::string const name, int const signGrade, int const executeGrad
 		throw AForm::GradeTooLowException();
 }
 
-AForm::AForm	(AForm const & src) : m_name(src.getName()), m_signGrade(src.getSignGrade()), m_executeGrade(src.getExecuteGrade())
+AForm::AForm	(const AForm& src) : m_name(src.getName()), m_signGrade(src.getSignGrade()), m_executeGrade(src.getExecuteGrade())
 {
 	this->m_signed = src.getSigned();
 }
 
-AForm&	AForm::operator=(AForm const & rhs)
+AForm&	AForm::operator=(const AForm& rhs)
 {
 	this->m_signed = rhs.getSigned();
 	return *this;
@@ -43,25 +43,13 @@ AForm::~AForm	(void)
 {
 }
 
-std::string const	AForm::getName(void) const
-{
-	return this->m_name;
-}
+const std::string&	AForm::getName(void) const { return this->m_name; }
 
-bool	AForm::getSigned(void) const
-{
-	return this->m_signed;
-}
+const bool&	AForm::getSigned(void) const { return this->m_signed; }
 
-int	AForm::getSignGrade(void) const
-{
-	return this->m_signGrade;
-}
+const int&	AForm::getSignGrade(void) const { return this->m_signGrade; }
 
-int	AForm::getExecuteGrade(void) const
-{
-	return this->m_executeGrade;
-}
+const int&	AForm::getExecuteGrade(void) const { return this->m_executeGrade; }
 
 void	AForm::beSigned(Bureaucrat & b)
 {
@@ -88,8 +76,9 @@ const char*	AForm::UnsignedException::what(void) const throw()
 
 std::ostream&	operator<<(std::ostream & o, AForm const & rhs)
 {
-	o << rhs.getName() << "(" << (rhs.getSigned() ? "signed" : "unsigned");
-	o << ") form, grade to sign " << rhs.getSignGrade();
-	o << ", grade to execute " << rhs.getExecuteGrade() << ".";
+	o << YELLOWB << rhs.getName() << RESET << (rhs.getSigned() ? GREEN : RED);
+	o << "[" << (rhs.getSigned() ? "SIGNED]" : "UNSIGNED]") << YELLOW;
+	o << " form, grade to sign " << rhs.getSignGrade();
+	o << ", grade to execute " << rhs.getExecuteGrade() << "." << RESET;
 	return o;
 }
