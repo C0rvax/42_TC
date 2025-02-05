@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:23:42 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/15 14:30:24 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:32:07 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Form::Form	(void) : m_name(""), m_signGrade(Bureaucrat::minGrade), m_executeGrad
 	this->m_signed = false;
 }
 
-Form::Form	(std::string const name, int const signGrade, int const executeGrade) : m_name(name), m_signGrade(signGrade), m_executeGrade(executeGrade)
+Form::Form	(const std::string& name, const int&  signGrade, const int& executeGrade) : m_name(name), m_signGrade(signGrade), m_executeGrade(executeGrade)
 {
 	this->m_signed = false;
 	if (signGrade < Bureaucrat::maxGrade || executeGrade < Bureaucrat::maxGrade)
@@ -48,17 +48,17 @@ std::string const	Form::getName(void) const
 	return this->m_name;
 }
 
-bool	Form::getSigned(void) const
+const bool&	Form::getSigned(void) const
 {
 	return this->m_signed;
 }
 
-int	Form::getSignGrade(void) const
+const int&	Form::getSignGrade(void) const
 {
 	return this->m_signGrade;
 }
 
-int	Form::getExecuteGrade(void) const
+const int&	Form::getExecuteGrade(void) const
 {
 	return this->m_executeGrade;
 }
