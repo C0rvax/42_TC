@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:52:15 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/12 17:39:11 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:32:56 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,26 @@ int	main()
 	{
 		std::cout << e.what() << std::endl;
 	}
-	std::cout << boss << std::endl;
-	std::cout << slave << std::endl;
+	try
+	{
+		std::cout << boss << std::endl;
+		std::cout << slave << std::endl;
 
-	std::cout << std::endl;
-	std::cout << --boss << std::endl;
-	std::cout << ++slave << std::endl;
-	std::cout << std::endl;
-	std::cout << boss-- << std::endl;
-	std::cout << slave++ << std::endl;
-	std::cout << std::endl;
-	std::cout << boss << std::endl;
-	std::cout << slave << std::endl;
-	
+		std::cout << std::endl;
+		std::cout << --boss << std::endl;
+		std::cout << ++slave << std::endl;
+		std::cout << std::endl;
+		std::cout << boss-- << std::endl;
+		std::cout << slave++ << std::endl;
+		std::cout << std::endl;
+		std::cout << boss << std::endl;
+		std::cout << slave << std::endl;
+
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+
 	return 0;
 }

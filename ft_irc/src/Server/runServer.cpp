@@ -135,6 +135,8 @@ void Server::handleCommand(const std::string line, Client &client)
 	commandMap["WHO"] = &Who::execute;
 	sendLog(itoa(client.getFD()) + " >> " + line);
 	Parsing parse(line);
+//	if (commandMap[parse.getCommand()])
+//		commandMap[parse.getCommand()](*this, parse, client);
 	std::map<std::string, CommandFunction>::iterator it = commandMap.find(parse.getCommand());
 	if (it != commandMap.end())
 		it->second(*this, parse, client);
