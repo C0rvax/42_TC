@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:02:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/15 14:32:39 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:50:31 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 #include "AForm.hpp"
 #include <iostream>
 
-Bureaucrat::Bureaucrat	(void) : m_name("")
-{
-	this->m_grade = minGrade;
-}
+Bureaucrat::Bureaucrat() : m_name(""), m_grade(minGrade) {}
 
-Bureaucrat::Bureaucrat	(std::string name, int grade) : m_name(name)
+Bureaucrat::Bureaucrat(const std::string& name, const int& grade) : m_name(name)
 {
 	this->m_grade = 150;
 	if (grade < maxGrade)
@@ -30,10 +27,7 @@ Bureaucrat::Bureaucrat	(std::string name, int grade) : m_name(name)
 		this->m_grade = grade;
 }
 
-Bureaucrat::Bureaucrat	(Bureaucrat const & src) : m_name(src.getName())
-{
-	this->m_grade = src.getGrade();
-}
+Bureaucrat::Bureaucrat(Bureaucrat const & src) : m_name(src.getName()), m_grade(src.getGrade()) {}
 
 Bureaucrat&	Bureaucrat::operator=(Bureaucrat const & rhs)
 {
@@ -42,21 +36,13 @@ Bureaucrat&	Bureaucrat::operator=(Bureaucrat const & rhs)
 	return *this;
 }
 
-Bureaucrat::~Bureaucrat	(void)
-{
-}
+Bureaucrat::~Bureaucrat() {}
 
-std::string	const	Bureaucrat::getName(void) const
-{
-	return (this->m_name);
-}
+const std::string&	Bureaucrat::getName() const { return (this->m_name); }
 
-int	Bureaucrat::getGrade(void) const
-{
-	return (this->m_grade);
-}
+const int&	Bureaucrat::getGrade() const { return (this->m_grade); }
 
-Bureaucrat& Bureaucrat::operator++(void)
+Bureaucrat& Bureaucrat::operator++()
 {
 	if (this->getGrade() - 1 < maxGrade)
 		throw Bureaucrat::GradeTooHighException();
@@ -104,9 +90,9 @@ const char*	Bureaucrat::GradeTooLowException::what(void) const throw()
 	return ("Cannot decrement: Bureaucrat have already the lowest grade");
 }
 
-std::ostream&	operator<<(std::ostream & o, Bureaucrat const & rhs)
+std::ostream&	operator<<(std::ostream& o, const Bureaucrat& rhs)
 {
-	o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << ".";
+	o << CYAN << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << "." << RESET;
 	return o;
 }
 

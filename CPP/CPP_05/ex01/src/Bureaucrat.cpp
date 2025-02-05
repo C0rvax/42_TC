@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:02:19 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/02/05 18:33:13 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:48:37 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ std::ostream&	operator<<(std::ostream& o, const Bureaucrat& rhs)
 	o << CYAN << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << "." << RESET;
 	return o;
 }
+
 void	Bureaucrat::signForm(Form& f)
 {
 	try

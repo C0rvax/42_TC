@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:52:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/02/05 18:40:15 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:47:19 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ class	Bureaucrat
 		static const int	maxGrade = 1;
 		static const int	minGrade = 150;
 	private:
-		std::string const	m_name;
+		const std::string	m_name;
 		int					m_grade;
 };
 

@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:53:45 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/02/05 18:40:02 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:55:00 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ class	Form
 	private:
 		const std::string	m_name;
 		bool				m_signed;
-		int	const			m_signGrade;
-		int const			m_executeGrade;
+		const int			m_signGrade;
+		const int			m_executeGrade;
 		
 };
 
-std::ostream&	operator<<(std::ostream & o, Form const & rhs);
+std::ostream&	operator<<(std::ostream& o, const Form& rhs);
 
 #endif  /* __FORM_HPP__ */

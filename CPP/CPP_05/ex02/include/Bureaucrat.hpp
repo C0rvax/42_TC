@@ -6,12 +6,14 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:52:35 by aduvilla          #+#    #+#             */
-/*   Updated: 2024/11/15 14:31:23 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:05:45 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __BUREAUCRAT_HPP__
 #define __BUREAUCRAT_HPP__
+# define CYAN "\033[1;36m"
+# define RESET "\033[0m"
 
 #include <string>
 
@@ -20,17 +22,17 @@ class	AForm;
 class	Bureaucrat
 {
 	public:
-		Bureaucrat	(void);
-		Bureaucrat	(std::string name, int grade);
-		Bureaucrat	(Bureaucrat const & src);
-		Bureaucrat&	operator=(Bureaucrat const & rhs);
-		~Bureaucrat	(void);
+		Bureaucrat();
+		Bureaucrat(const std::string& name, const int& grade);
+		Bureaucrat(const Bureaucrat& src);
+		Bureaucrat&	operator=(const Bureaucrat& rhs);
+		~Bureaucrat();
 
-		std::string const	getName(void) const;
-		int					getGrade(void) const;
-		Bureaucrat&			operator++(void);
+		const std::string&	getName() const;
+		const int&			getGrade() const;
+		Bureaucrat&			operator++();
 		Bureaucrat			operator++(int);
-		Bureaucrat&			operator--(void);
+		Bureaucrat&			operator--();
 		Bureaucrat			operator--(int);
 
 		class	GradeTooHighException : public std::exception
@@ -45,7 +47,7 @@ class	Bureaucrat
 				virtual const char *	what(void) const throw();
 		};
 
-		void	signForm(AForm & f);
+		void	signForm(AForm& f);
 		void	executeForm(AForm const & form);
 
 		static const int	maxGrade = 1;
