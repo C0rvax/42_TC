@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:10:47 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/28 13:30:32 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:30:10 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,14 @@
 class	Span
 {
 	public:
-	Span(void);
+	Span();
 	Span(const unsigned int& N);
-	Span(Span const & src);
-	Span &operator=(Span const & rhs);
-	~Span(void);
+	Span(const Span& src);
+	Span &operator=(const Span& rhs);
+	~Span();
 
 	void			addNumber(const int& value);
-	void			addManyNumbers(const unsigned int& number, const int& value);
-	void			addOffsetNumbers(const unsigned int& number, const int& value, const unsigned int& offset);
+	void			addManyNumbers(const unsigned int& number, const int& value, const unsigned int& offset = 1);
 	unsigned int	shortestSpan() const;
 	unsigned int	longestSpan() const;
 
