@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:26:51 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/02/05 14:32:15 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:37:56 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ Base::~Base() {}
 
 Base*	generte()
 {
-	srand(time(0));
+	static bool initTime = false;
+	if (!initTime)
+	{
+		srand(time(0));
+		initTime = true;
+	}
 	int random = std::rand() % 3;
 	switch (random)
 	{
