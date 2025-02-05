@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:08:09 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/22 15:31:18 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:40:59 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ class Serializer
 	private:
 	Serializer();
 	~Serializer();
+	Serializer(const Serializer& src);
+	Serializer& operator=(const Serializer& rhs);
 };
 
 #endif
