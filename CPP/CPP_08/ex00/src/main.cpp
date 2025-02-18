@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:39:03 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/28 11:49:03 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:50:41 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main()
 	int value = 2;
 	try
 	{
-		std::cout << "distance between begin and " << value << " in vector = " << easyfind(vec, value) << std::endl;
+		std::cout << "distance between begin and " << value << " in vector = " << easyfind(vec, value) << "\n";
 	}
 	catch (const std::exception& e)
 	{
@@ -31,7 +31,7 @@ int	main()
 	}
 	try
 	{
-		std::cout << "distance between begin and " << value << " in list = " << easyfind(list, value) << std::endl;
+		std::cout << "distance between begin and " << value << " in list = " << easyfind(list, value) << "\n";
 	}
 	catch (const std::exception& e)
 	{
@@ -47,13 +47,11 @@ int	main()
 		list.push_back(4);
 		list.push_back(8);
 		list.push_back(16);
-		std::cout << std::endl;
-		std::cout << "distance between begin and " << value << " in vector = " << easyfind(vec, value) << std::endl;
-		std::cout << "distance between begin and " << value << " in list = " << easyfind(list, value) << std::endl;
+		std::cout << "\ndistance between begin and " << value << " in vector = " << easyfind(vec, value) << "\n";
+		std::cout << "distance between begin and " << value << " in list = " << easyfind(list, value) << "\n";
 		value = 8;
-		std::cout << std::endl;
-		std::cout << "distance between begin and " << value << " in vector = " << easyfind(vec, value) << std::endl;
-		std::cout << "distance between begin and " << value << " in list = " << easyfind(list, value) << std::endl;
+		std::cout << "\ndistance between begin and " << value << " in vector = " << easyfind(vec, value) << "\n";
+		std::cout << "distance between begin and " << value << " in list = " << easyfind(list, value) << "\n";
 	}
 	catch (const std::exception& e)
 	{

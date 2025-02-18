@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:56:21 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/01/28 15:46:09 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:04:14 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class	MutantStack : public std::stack<T, Container>
 	MutantStack(MutantStack const & src) : std::stack<T, Container>(src) {}
 	MutantStack &operator=(MutantStack const & rhs)
 	{
-		if (this != rhs)
+		if (this != &rhs)
 			this->c = rhs.c;
 		return *this;
 	}
