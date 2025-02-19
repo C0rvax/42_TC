@@ -6,7 +6,7 @@
 /*   By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 12:47:12 by aduvilla          #+#    #+#             */
-/*   Updated: 2025/02/03 23:58:57 by aduvilla         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:55:43 by aduvilla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,8 +216,8 @@ void	PmergeMe::swapList(size_t& pairSize)
 	std::advance(endit, -offset);
 	for (; it != endit; std::advance(it, pairSize * 2))
 	{
-	  std::list<int>::iterator nextIt = it;
-	  std::advance(nextIt, pairSize);
+		std::list<int>::iterator nextIt = it;
+		std::advance(nextIt, pairSize);
 		if (*it > *(nextIt))
 		{
 			for (size_t i = 0; i < pairSize; ++i)

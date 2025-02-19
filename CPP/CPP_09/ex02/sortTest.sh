@@ -55,6 +55,7 @@ if [[ ! -e "list" ]]; then
 		bash getRndom.sh "$i" 1000
 	done
 	bash getRndom.sh 100 10000
+	bash getRndom.sh 200 10000
 	bash getRndom.sh 500 10000
 	bash getRndom.sh 1000 10000
 	bash getRndom.sh 3000 10000
