@@ -63,7 +63,7 @@ fi
 source list
 echo -e "${BLUE}-----------------------------------------------------------${NEUTRAL}"
 
-if [ $mode -eq 1 ]; then
+if [ $mode -eq 1 ] || [ $mode -eq 3 ]; then
 	for i in "${ARG[@]}"; do # on parcours la liste d'argument ARG
 		size=$(echo "$i" | wc -w)
 		echo -e "     ${YELLOW}List Size : $size ${NEUTRAL}"
@@ -72,7 +72,7 @@ if [ $mode -eq 1 ]; then
 	done
 fi
 
-if [ $mode -eq 2 ]; then
+if [ $mode -eq 2 ] || [ $mode -eq 3 ]; then
 	for i in "${ARG[@]}"; do # on parcours la liste d'argument ARG
 		size=$(echo "$i" | wc -w)
 		echo -e "     ${YELLOW}List Size : $size ${NEUTRAL}"
