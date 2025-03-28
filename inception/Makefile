@@ -6,39 +6,19 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2024/11/16 15:40:47 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/03/28 16:58:11 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CXX				= c++
+all			: up
 
-CXXFLAGS			= -Wall -Wextra -Werror -std=c++98
+up			:
+	docker-compose -f ./srcs/docker_compose.yml up -d
 
-OBJ				= $(SRC:.cpp=.o)
+start		:
+	docker-compose -f ./srcs/docker_compose.yml start
 
-HEADERS			= -I./include
+stop		:
+	docker-compose -f ./srcs/docker_compose.yml stop
 
-SRC				= main.cpp 								\
-				  ScalarConverter.cpp
-
-NAME			= convert
-
-all				: $(NAME)
-
-$(NAME)			: $(OBJ)
-	$(CXX) $(CXXLAGS) $^ -o $@
-
-%.o				: %.cpp
-	$(CXX) -MMD $(CXXFLAGS) $(HEADERS) -c $< -o $@
-
-clean			:
-	rm -rf $(OBJ) $(OBJ:.o=.d)
-
-fclean			: clean
-	rm -rf $(NAME)
-
-re				: fclean all
-
--include $(OBJ:.o=.d)
-
-.PHONY			: all clean fclean re
+.PHONY			: all up start stop
