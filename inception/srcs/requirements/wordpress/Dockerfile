@@ -1,8 +1,8 @@
 FROM debian:bullseye
 
-RUN apt-get update -y && apt-get install php-fpm -y
+RUN apt-get update -y && apt-get upgrade -y && apt-get install php-fpm -y
 
-#COPY ./conf/nginx.conf /etc/nginx/sites-available/
+COPY ./conf/wordpress.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 COPY ./tools/script.sh .
 

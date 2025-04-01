@@ -1,3 +1,5 @@
 #!/bin/bash
 
-php-fpm8.2 -F
+mkdir /run/php
+
+php-fpm7.4 -F

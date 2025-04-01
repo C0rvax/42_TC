@@ -1,10 +1,10 @@
 FROM debian:bullseye
 
-RUN apt-get update -y && apt-get install nginx -y && apt-get install openssl -y
+RUN apt-get update -y && apt-get upgrade -y && apt-get install nginx -y && apt-get install openssl -y
 #	vim -y\
 #	curl -y\
 
-#COPY ./conf/nginx.conf /etc/nginx/sites-available/
+COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 
 COPY ./tools/script.sh .
 
