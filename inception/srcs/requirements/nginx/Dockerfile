@@ -1,9 +1,6 @@
 FROM debian:bullseye
 
-RUN apt-get update -y && apt-get install\
-	nginx -y\
-	openssl -y\
-#	OpenSSL -y\
+RUN apt-get update -y && apt-get install nginx -y && apt-get install openssl -y
 #	vim -y\
 #	curl -y\
 
