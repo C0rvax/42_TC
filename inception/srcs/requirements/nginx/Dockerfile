@@ -8,6 +8,8 @@ RUN apt-get update -y && apt-get install nginx -y && apt-get install openssl -y
 
 COPY ./tools/script.sh .
 
+RUN chmod +x script.sh
+
 CMD ["./script.sh"]
 
 #RUN mkdir -p /etc/nginx/ssl
