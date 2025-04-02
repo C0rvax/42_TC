@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/04/01 19:02:00 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/04/02 13:11:13 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,12 +31,12 @@ down		: remove-env
 fdown		: remove-env
 	docker compose -f ./srcs/docker-compose.yml down --rmi all -v
 
-re			: fdown up
+logs		:
+	docker compose -f ./srcs/docker-compose.yml logs
 
-start		:
-	docker compose -f ./srcs/docker-compose.yml start
+re			: fdown up
 
 stop		:
 	docker compose -f ./srcs/docker-compose.yml stop
 
-.PHONY			: all up start stop
+.PHONY			: all up update-env remove-env down fdown logs re stop
