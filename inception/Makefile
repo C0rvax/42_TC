@@ -6,21 +6,30 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/04/03 17:45:50 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/04/03 18:15:38 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+ENV_FILE	= srcs/.env
+
+TEMP_ENV	= srcs/.env.bak
+
+CREDENTIALS	= secrets/credentials.txt \
+			  secrets/db_password.txt \
+			  secrets/db_admin_password.txt \
+			  secrets/db_root_password.txt \
+			  secrets/wp_user_password.txt
 
 all			: up
 
 update-env	:
-	echo "USER_PWD=$$(cat secrets/db_password.txt)" >> srcs/.env
-	echo "ADM_PWD=$$(cat secrets/db_admin_password.txt)" >> srcs/.env
-	echo "ROOT_PWD=$$(cat secrets/db_root_password.txt)" >> srcs/.env
+	@cat $(CREDENTIALS) >> $(ENV_FILE)
 
 remove-env	:
-	sed -i '/^USER_PWD=/d' srcs/.env
-	sed -i '/^ADM_PWD=/d' srcs/.env
-	sed -i '/^ROOT_PWD=/d' srcs/.env
+	@grep -Fvx -f $(CREDENTIALS) $(ENV_FILE) > $(TEMP_ENV) && mv $(TEMP_ENV) $(ENV_FILE)
+#	sed -i '/^USER_PWD=/d' srcs/.env
+#	sed -i '/^ADM_PWD=/d' srcs/.env
+#	sed -i '/^ROOT_PWD=/d' srcs/.env
 
 up			: update-env
 	mkdir -p ~/data/mariadb ~/data/wordpress
