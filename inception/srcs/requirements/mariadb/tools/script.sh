@@ -9,7 +9,7 @@ FLUSH PRIVILEGES;" >/etc/mysql/init.sql
 
 unset USER_PWD ADM_PWD ROOT_PWD
 
-mkdir /run/mysqld
+mkdir -p /run/mysqld
 
-mysqld
-#mysqld_safe
+#mysqld
+mysqld_safe
