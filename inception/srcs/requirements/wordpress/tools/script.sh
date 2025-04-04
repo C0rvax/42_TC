@@ -16,6 +16,6 @@ unset USER_PWD ADM_PWD ROOT_PWD WP_PWD
 
 cd
 
-mkdir /run/php
+mkdir -p /run/php
 
 php-fpm7.4 -F

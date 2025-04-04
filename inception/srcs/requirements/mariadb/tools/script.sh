@@ -7,7 +7,7 @@ GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$MYSQL_USER'@'%' ;
 ALTER USER 'root'@'localhost' IDENTIFIED BY '$ROOT_PWD' ;
 FLUSH PRIVILEGES;" >/etc/mysql/init.sql
 
-unset USER_PWD ADM_PWD ROOT_PWD
+unset USER_PWD ADM_PWD ROOT_PWD WP_PWD
 
 mkdir -p /run/mysqld
 

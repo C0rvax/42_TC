@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/04/04 13:09:37 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/04/04 13:39:39 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,9 @@ fdown		: remove-env
 	@sudo rm -rf ~/data
 	docker compose -f ./srcs/docker-compose.yml down --rmi all -v
 
+prune		: fdown
+	docker system prune -a --volumes --force
+
 logs		:
 	docker compose -f ./srcs/docker-compose.yml logs
 
@@ -49,4 +52,4 @@ re			: fdown up
 stop		:
 	docker compose -f ./srcs/docker-compose.yml stop
 
-.PHONY			: all up update-env remove-env down fdown logs re stop
+.PHONY			: all up update-env remove-env down fdown prune logs re stop

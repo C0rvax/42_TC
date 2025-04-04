@@ -15,6 +15,6 @@ openssl req -x509 -nodes \
 	-out ${SSL_CERT} \
 	-subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=${DOMAIN_NAME}"
 
-unset USER_PWD ADM_PWD ROOT_PWD
+unset USER_PWD ADM_PWD ROOT_PWD WP_PWD
 
 nginx -g "daemon off;"
