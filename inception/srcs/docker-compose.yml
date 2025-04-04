@@ -49,8 +49,14 @@ services:
     networks:
       - inception
     restart: always
+    healthcheck:
+      test: ["CMD", "nc", "-zv", "mariadb", "3306"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
 
 networks:
   inception:
     name: inception
+    driver: bridge
 
