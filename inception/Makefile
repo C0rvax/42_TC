@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/04/04 14:14:15 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/04/04 15:26:38 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ CREDENTIALS	= secrets/credentials.txt \
 			  secrets/db_user_pwd.txt \
 			  secrets/db_root_pwd.txt \
 			  secrets/wp_admin_pwd.txt \
-			  secrets/wp_user_pwd.txt
+			  secrets/wp_user_pwd.txt \
+			  secrets/ftp_pwd.txt
 
 all			: up
 

@@ -57,6 +57,60 @@ services:
       timeout: 5s
       retries: 10
 
+  redis:
+    build: ./requirements/bonus/redis/
+    container_name: redis
+    volumes:
+      - wordpress:/var/www/html
+    depends_on:
+      - wordpress
+    env_file: .env
+    networks:
+      - inception
+    restart: always
+
+  ftp:
+    build: ./requirements/bonus/ftp/
+    container_name: ftp
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009" # Pasive ports
+    env_file: .env
+    volumes:
+      - wordpress:/home/fetep/ftp/files
+    networks:
+      - inception
+    restart: always
+
+  adminer:
+    build: ./requirements/bonus/adminer/
+    container_name: adminer
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mariadb
+    networks:
+      - inception
+    restart: always
+
+  # static-site:
+  #   build: ./requirements/bonus/static-site/
+  #   container_name: static-site
+  #   ports:
+  #     - "8080:80"
+  #   networks:
+  #     - inception
+  #   restart: always
+  #
+  # grafana:
+  #   build: ./requirements/bonus/grafana/
+  #   container_name: grafana
+  #   ports:
+  #     - "3000:3000"
+  #   networks:
+  #     - inception
+  #   restart: always
+
 networks:
   inception:
     name: inception
