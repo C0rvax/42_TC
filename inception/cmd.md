@@ -85,11 +85,16 @@ docker exec -it <NGINX_CONTAINER> nginx -t
 docker exec -it <WORDPRESS_CONTAINER> wp --info
 ```
 
+### List of open files | Listen
+```bash
+sudo lsof -i -P -n | grep LISTEN
+```
+
 ### MariaDB: Access MariaDB CLI
 ```bash
 docker exec -it <MARIADB_CONTAINER> mysql -u <USERNAME> -p'<PASSWORD>'
 ```
-### Wordpress login
+### Wordpress: login page
 - Open your browser and navigate to `http://<SERVER_IP>/wp-admin`.
 
 ### Adminer: Access Adminer via browser
@@ -138,72 +143,13 @@ or
 SHOW COLUMNS FROM <TABLE_NAME>;
 ```
 
-## 🔨 2. Table Management
-
-### 🛠 Create a table
-```sql
-CREATE TABLE <USERS> (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50),
-    email VARCHAR(100) UNIQUE,
-    age INT
-);
-```
-
-### ❌ Drop a table
-```sql
-DROP TABLE <TABLE_NAME>;
-```
-
-### ✏ Modify a table (add a column)
-```sql
-ALTER TABLE <USERS> ADD COLUMN address VARCHAR(255);
-```
-
-## 📝 3. Data Manipulation
-
-### ➕ Insert data
-```sql
-INSERT INTO <USERS> (name, email, age) VALUES ('Alice', 'alice@example.com', 25);
-```
-
-### ✏ Update data
-```sql
-UPDATE <USERS> SET age = 26 WHERE name = 'Alice';
-```
-
-### 🗑 Delete data
-```sql
-DELETE FROM <USERS> WHERE name = 'Alice';
-```
-
-## 🔍 4. Queries and Data Selection
-
 ### 📋 Select all data from a table
 ```sql
 SELECT * FROM <USERS>;
 ```
 
-### 🎯 Filter results with WHERE
+### 🎯 Filter x results
 ```sql
-SELECT * FROM <USERS> WHERE age > 20;
+SELECT * FROM <USERS> LIMIT x;
 ```
 
-### 📊 Sort results
-```sql
-SELECT * FROM <USERS> ORDER BY age DESC;
-```
-
-### 🔢 Count the number of results
-```sql
-SELECT COUNT(*) FROM <USERS>;
-```
-
-## 🔐 5. User and Permissions Management
-
-### 🛡 Create a new user with permissions
-```sql
-CREATE USER '<USER>'@'%' IDENTIFIED BY '<PASSWORD>';
-GRANT ALL PRIVILEGES ON <DATABASE_NAME>.* TO '<USER>'@'%';
-FLUSH PRIVILEGES;
-```
