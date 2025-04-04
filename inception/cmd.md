@@ -89,6 +89,8 @@ docker exec -it <WORDPRESS_CONTAINER> wp --info
 ```bash
 docker exec -it <MARIADB_CONTAINER> mysql -u <USERNAME> -p'<PASSWORD>'
 ```
+### Wordpress login
+- Open your browser and navigate to `http://<SERVER_IP>/wp-admin`.
 
 ### Adminer: Access Adminer via browser
 - Open your browser and navigate to `http://<SERVER_IP>:<ADMINER_PORT>`.
