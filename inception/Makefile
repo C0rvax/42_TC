@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/04/03 18:15:38 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/04/04 10:21:08 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ update-env	:
 	@cat $(CREDENTIALS) >> $(ENV_FILE)
 
 remove-env	:
-	@grep -Fvx -f $(CREDENTIALS) $(ENV_FILE) > $(TEMP_ENV) && mv $(TEMP_ENV) $(ENV_FILE)
+	@cat $(CREDENTIALS) > $(TEMP_ENV)
+	@grep -Fvx -f $(TEMP_ENV) $(ENV_FILE) > $(ENV_FILE).tmp && mv $(ENV_FILE).tmp $(ENV_FILE)
+	@rm -f $(TEMP_ENV)
 #	sed -i '/^USER_PWD=/d' srcs/.env
 #	sed -i '/^ADM_PWD=/d' srcs/.env
 #	sed -i '/^ROOT_PWD=/d' srcs/.env
