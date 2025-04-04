@@ -23,18 +23,13 @@ CREDENTIALS	= secrets/credentials.txt \
 
 all			: up
 
-update-env	:
+up		:
 	@cat $(CREDENTIALS) >> $(ENV_FILE)
-
-remove-env	:
+	@mkdir -p ~/data/mariadb ~/data/wordpress ~/data/portainer
+	docker compose -f ./srcs/docker-compose.yml up -d
 	@cat $(CREDENTIALS) > $(TEMP_ENV)
 	@grep -Fvx -f $(TEMP_ENV) $(ENV_FILE) > $(ENV_FILE).tmp && mv $(ENV_FILE).tmp $(ENV_FILE)
 	@rm -f $(TEMP_ENV)
-
-up			: update-env
-	@mkdir -p ~/data/mariadb ~/data/wordpress
-	docker compose -f ./srcs/docker-compose.yml up -d
-	@$(MAKE) --silent remove-env
 
 down		:
 	docker compose -f ./srcs/docker-compose.yml down
@@ -54,4 +49,4 @@ re			: fdown up
 stop		:
 	docker compose -f ./srcs/docker-compose.yml stop
 
-.PHONY			: all up update-env remove-env down fdown prune logs re stop
+.PHONY			: all up down fdown prune logs re stop

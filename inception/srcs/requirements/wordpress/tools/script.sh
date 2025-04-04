@@ -12,6 +12,8 @@ wp config create --dbname=$DB_NAME --dbuser=$MYSQL_USER --dbpass=$USER_PWD --dbh
 wp core install --url=$DOMAIN_NAME/ --title=$TITLE --admin_user=$WP_ADM --admin_password=$ADM_PWD --admin_email=$WP_ADM_EMAIL --skip-email --allow-root
 wp user create $WP_USER $WP_USER_EMAIL --role=author --user_pass=$WP_PWD --allow-root
 
+wp plugin install prometheus --activate --allow-root
+
 wp plugin install redis-cache --activate --allow-root
 wp redis enable --allow-root
 

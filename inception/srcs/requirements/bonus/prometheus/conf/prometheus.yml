@@ -1,0 +1,14 @@
+global:
+  scrape_interval: 15s  # Intervalle entre les collectes de données
+
+scrape_configs:
+  - job_name: 'docker'
+    static_configs:
+      - targets: ['nginx:80', 'wordpress:80', 'mariadb:3306']
+
+scrape_configs:
+  # Scrape metrics from cAdvisor
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080'] # Docker service name 'cadvisor' and its default port
+
