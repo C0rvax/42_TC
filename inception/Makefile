@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/04/04 13:39:39 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/04/04 14:14:15 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,11 +33,12 @@ remove-env	:
 up			: update-env
 	@mkdir -p ~/data/mariadb ~/data/wordpress
 	docker compose -f ./srcs/docker-compose.yml up -d
+	@$(MAKE) --silent remove-env
 
-down		: remove-env
+down		:
 	docker compose -f ./srcs/docker-compose.yml down
 
-fdown		: remove-env
+fdown		:
 	@sudo rm -rf ~/data
 	docker compose -f ./srcs/docker-compose.yml down --rmi all -v
 
