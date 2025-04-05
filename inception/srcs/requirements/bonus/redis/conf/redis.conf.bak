@@ -84,7 +84,7 @@
 # you are sure you want clients from other hosts to connect to Redis
 # even if no authentication is configured, nor a specific set of interfaces
 # are explicitly listed using the "bind" directive.
-protected-mode yes
+protected-mode no
 
 # Accept connections on the specified port, default is 6379 (IANA #815344).
 # If port 0 is specified Redis will not listen on a TCP socket.
@@ -863,7 +863,7 @@ maxmemory 512mb
 # is reached. You can select one from the following behaviors:
 #
 # volatile-lru -> Evict using approximated LRU, only keys with an expire set.
-allkeys-lru #-> Evict any key using approximated LRU.
+# allkeys-lru -> Evict any key using approximated LRU.
 # volatile-lfu -> Evict using approximated LFU, only keys with an expire set.
 # allkeys-lfu -> Evict any key using approximated LFU.
 # volatile-random -> Remove a random key having an expire set.
@@ -888,7 +888,7 @@ allkeys-lru #-> Evict any key using approximated LRU.
 #
 # The default is:
 #
-# maxmemory-policy noeviction
+maxmemory-policy allkeys-lru
 
 # LRU, LFU and minimal TTL algorithms are not precise algorithms but approximated
 # algorithms (in order to save memory), so you can tune it for speed or

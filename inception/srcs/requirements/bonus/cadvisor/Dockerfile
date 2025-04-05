@@ -1,6 +1,7 @@
 FROM  debian:bullseye
 
-RUN apt-get update && apt-get install -y wget
+RUN apt-get update && apt-get install -y wget \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Téléchargement de la bonne version de cAdvisor
 RUN wget https://github.com/google/cadvisor/releases/download/v0.44.0/cadvisor && \

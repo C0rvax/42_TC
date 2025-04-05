@@ -2,7 +2,8 @@ FROM debian:bullseye
 
 # Installer les dépendances nécessaires
 RUN apt-get update -y && apt-get upgrade -y \
-    && apt-get install -y wget
+    && apt-get install -y wget \
+	&& rm -rf /var/lib/apt/lists/*
 
 # Télécharger Prometheus
 RUN wget https://github.com/prometheus/prometheus/releases/download/v2.44.0/prometheus-2.44.0.linux-amd64.tar.gz \

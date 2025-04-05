@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inception Project Checklist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Inception Project Checklist: ADUVILLA</h1>
+    <p>Use this page to verify that all the required points of the Inception subject are completed. Check the boxes as you progress.</p>
+    <p>Main access: <a href="https://aduvilla.42.fr" target="_blank">https://aduvilla.42.fr</a> <a href="https://127.0.0.1" target="_blank">https://127.0.0.1</a></p>
+
+    <section>
+        <h2>1. Container Services (Mandatory)</h2>
+        <h3>NGINX</h3>
+        <ul>
+            <li><input type="checkbox" id="nginx-running"><label for="nginx-running">Nginx container is running -> <code>docker ps -a</code></label></li>
+            <li><input type="checkbox" id="nginx-access"><label for="nginx-access">Access via <a href="https://aduvilla.42.fr" target="_blank">https://aduvilla.42.fr</a> and <a href="https://127.0.0.1" target="_blank">https://127.0.0.1</a> works.</label></li>
+            <li><input type="checkbox" id="nginx-port443"><label for="nginx-port443">Only port 443 is exposed on the host for Nginx. Access via <a href="http://aduvilla.42.fr" target="_blank">http://aduvilla.42.fr</a> fails or redirects.</label></li>
+            <li>
+                <input type="checkbox" id="nginx-tls"><label for="nginx-tls">TLSv1.2 or TLSv1.3 only:</label>
+                <ul>
+                    <li><code>curl -v --tlsv1.1 --tls-max 1.1 https://aduvilla.42.fr</code> -> Fails</li>
+                    <li><code>curl -v --tlsv1.3 --tls-max 1.3 https://aduvilla.42.fr</code> -> Succeeds</li>
+                </ul>
+            </li>
+            <li>
+                <input type="checkbox" id="nginx-entrypoint"><label for="nginx-entrypoint">Nginx is the only entry point to the infrastructure from the outside:</label>
+                <ul>
+                    <li>Check Nginx HTTPS (443): <code>nc -zv localhost 443</code></li>
+                    <li>Check Redis port: <code>nc -zv localhost 6379</code></li>
+                    <li>Check MariaDB port: <code>nc -zv localhost 3306</code></li>   
+                    <li>Check Nginx HTTP (80): <code>nc -zv localhost 80</code></li>
+                    <li>Check PHP-FPM (9000): <code>nc -zv localhost 9000</code></li>
+                </ul>
+            </li>
+        </ul>
+        <h3>WordPress</h3>
+        <ul>
+            <li><input type="checkbox" id="wp-running"><label for="wp-running">WordPress container is running -> <code>docker ps -a</code></label></li>
+            <li><input type="checkbox" id="wp-phpfpm"><label for="wp-phpfpm">Contains only PHP-FPM (no Nginx/Apache). Verify with <code>make ps</code> (docker exec [container] ps aux).</label></li>
+            <li><input type="checkbox" id="wp-install"><label for="wp-install">WordPress site is installed and accessible via Nginx.</label></li>
+            <li>
+                <input type="checkbox" id="wp-users"><label for="wp-users">WordPress users <a href="https://aduvilla.42.fr/wp-admin/users.php" target="_blank">https://aduvilla.42.fr/wp-admin/users.php</a></label>
+                <ul>
+                    <li>At least 2 users exist.</li>
+                    <li>One user is an Administrator.</li>
+                    <li>The admin's name does NOT contain 'admin', 'Admin', 'administrator', 'Administrator'.</li>
+                </ul>
+            </li>
+        </ul>
+        <h3>MariaDB</h3>
+        <ul>
+            <li><input type="checkbox" id="db-running"><label for="db-running">MariaDB container is running -> <code>docker ps -a</code></label></li>
+            <li><input type="checkbox" id="db-only"><label for="db-only">Contains only MariaDB (no Nginx/Apache). Verify with <code>make ps</code> (docker exec [container] ps aux).</label></li>
+            <li><input type="checkbox" id="db-connect"><label for="db-connect">WordPress can connect to the database (the site works).</label></li>
+            <li>
+                <input type="checkbox" id="db-tests"><label for="db-tests">Test MariaDB connection and display WordPress users:</label>
+                <ul>
+                    <li><code>docker exec -it mariadb mysql -u root -p</code> -> Connect to MariaDB.</li>
+                    <li><code>USE wordpress_db;</code> -> Select the WordPress database.</li>
+                    <li><code>SELECT * FROM wp_users;</code> -> Display all WordPress users.</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>2. Volumes</h2>
+        <ul>
+            <li><input type="checkbox" id="vol-ls"><label for="vol-ls">Two volumes exist : one for DB, one for WP files -> <code>docker volume ls</code></label></li>
+            <li><input type="checkbox" id="vol-persist"><label for="vol-persist">Persistence: Create a WP post -> <code>make down</code> -> <code>make up</code> -> The post is still there.</label></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Network</h2>
+        <ul>
+            <li><input type="checkbox" id="net-ls"><label for="net-ls">A custom Docker network exists -> <code>docker network ls</code></label></li>
+            <li><input type="checkbox" id="net-inspect"><label for="net-inspect">Containers (Nginx, WP, DB, Bonus) are connected to this network -> <code>docker network inspect inception</code></label></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>4. Security & Best Practices</h2>
+        <ul>
+            <li><input type="checkbox" id="sec-restart"><label for="sec-restart">Restart policy (<code>always</code> or <code>unless-stopped</code>) configured for main containers. Test with <code>docker kill [container]</code>.</label></li>
+            <li></li><input type="checkbox" id="sec-pid1"><label for="sec-pid1">Verify that PID 1 in each container is correct. Test with:<code>make ps</code></label></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>5. Bonus (If Implemented)</h2>
+        <h3>Redis Cache</h3>
+        <ul>
+            <li><input type="checkbox" id="bonus-redis-run"><label for="bonus-redis-run">Redis container is running.</label></li>
+            <li><input type="checkbox" id="bonus-redis-wp"><label for="bonus-redis-wp">Connected and activated in WP Admin (Settings -> Redis -> Status: Connected).</label></li>
+            <li><input type="checkbox" id="bonus-redis-cli"><label for="bonus-redis-cli">Test Redis commands:</label>
+                <ul>
+                    <li>Connect to Redis CLI -> <code>docker exec -it redis redis-cli</code></li>
+                    <li>Authenticate with password -> <code>AUTH [redis_pwd]</code></li>
+                    <li>Monitor Redis activity -> <code>MONITOR</code></li>
+                </ul>
+            </li>
+        </ul>
+        <h3>FTP Server</h3>
+        <ul>
+            <li><input type="checkbox" id="bonus-ftp-run"><label for="bonus-ftp-run">FTP container is running.</label></li>
+            <li><input type="checkbox" id="bonus-ftp-rw"><label for="bonus-ftp-rw">File operations (Upload/Download/List) work:</label>
+                <ul>
+                    <li>Connect to the FTP server -> <code>lftp -u [username] localhost</code></li>
+                    <li>Disable verify certificate -> <code>set ssl:verify-certificate no</code></li>
+                    <li>List files -> <code>ls</code></li>
+                    <li>Upload a file -> <code>put testfile.txt</code></li>
+                    <li>Download a file -> <code>get testfile.txt</code></li>
+                    <li>Exit the session -> <code>bye</code></li>
+                </ul>
+            </li>
+        </ul>
+        <h3>Adminer</h3>
+        <ul>
+            <li><input type="checkbox" id="bonus-adminer-run"><label for="bonus-adminer-run">Adminer container is running.</label></li>
+            <li><input type="checkbox" id="bonus-adminer-access"><label for="bonus-adminer-access">Adminer interface accessible -> <a href="http://localhost:8081" target="_blank">http://localhost:8081</a></label></li>
+            <li><input type="checkbox" id="bonus-adminer-connect"><label for="bonus-adminer-connect">Connection to MariaDB via Adminer succeeds (Server: <code>mariadb</code>, user/pass from env/secrets).</label></li>
+            <li><input type="checkbox" id="bonus-adminer-tables"><label for="bonus-adminer-tables">WordPress tables can be viewed.</label></li>
+        </ul>
+        <h3>This Site</h3>
+        <ul>
+            <li><input type="checkbox" id="bonus-checklist-run"><label for="bonus-checklist-run">Container for this static site is running.</label></li>
+            <li><input type="checkbox" id="bonus-checklist-nophp"><label for="bonus-checklist-nophp">This site does not use PHP.</label></li>
+        </ul>
+        <h3>Other Useful Service</h3>
+        <ul>
+            <li><input type="checkbox" id="bonus-other-run"><label for="bonus-other-run">Service container is running.</label></li>
+            <li><input type="checkbox" id="bonus-other-justification"><label for="bonus-other-justification">Justification of its usefulness is ready for the defense.</label></li>
+            <li><input type="checkbox" id="bonus-other-functional"><label for="bonus-other-functional">The service is functional and tested.</label></li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>INCEPTION.</p>
+    </footer>
+
+    <script>
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy: ' + err);
+            });
+        }
+    </script>
+
+</body>
+</html>

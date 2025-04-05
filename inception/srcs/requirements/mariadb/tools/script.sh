@@ -11,5 +11,4 @@ unset USER_PWD ADM_PWD ROOT_PWD WP_PWD
 
 mkdir -p /run/mysqld
 
-#mysqld
-mysqld_safe
+exec mysqld

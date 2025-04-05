@@ -23,4 +23,4 @@ chown $FTP_USER:$FTP_USER /home/$FTP_USER/ftp/files
 # Redémarrer le service vsftpd
 service vsftpd stop
 
-/usr/sbin/vsftpd /etc/vsftpd.conf
+exec /usr/sbin/vsftpd /etc/vsftpd.conf
