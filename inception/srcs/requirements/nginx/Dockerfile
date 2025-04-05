@@ -6,10 +6,9 @@ RUN apt-get update -y && apt-get upgrade -y \
 
 COPY ./conf/nginx.conf /etc/nginx/sites-available/default
 
-# Crée un dossier pour le site statique et copie les fichiers dedans
 RUN mkdir -p /var/www/static_site
-COPY ./html/index.html /var/www/static_site/index.html
-COPY ./html/style.css /var/www/static_site/style.css
+COPY ./static/index.html /var/www/static/index.html
+COPY ./static/style.css /var/www/static/style.css
 
 COPY ./tools/script.sh .
 RUN chmod +x script.sh
