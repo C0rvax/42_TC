@@ -13,7 +13,7 @@ echo "$FTP_USER:$FTP_PWD" | /usr/sbin/chpasswd
 echo "$FTP_USER" | tee -a /etc/vsftpd.userlist
 
 # Créer les dossiers nécessaires
-mkdir -p /home/$FTP_USER/ftp/files
+mkdir -p /home/$FTP_USER/ftp/files/themes/custom
 
 # Configurer les permissions
 chown $FTP_USER:$FTP_USER /home/$FTP_USER/ftp
