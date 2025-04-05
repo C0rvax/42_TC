@@ -8,12 +8,16 @@ service vsftpd start
 # Créer un utilisateur et définir son mot de passe
 adduser $FTP_USER --disabled-password
 
+usermod -aG www-data fetep
+
 echo "$FTP_USER:$FTP_PWD" | /usr/sbin/chpasswd
 
 echo "$FTP_USER" | tee -a /etc/vsftpd.userlist
 
 # Créer les dossiers nécessaires
-mkdir -p /home/$FTP_USER/ftp/files/themes/custom
+#mkdir -p /home/$FTP_USER/ftp/files/wp-content/themes/custom
+#chown -R www-data:www-data /home/$FTP_USER/ftp/files/wp-content/themes/custom
+
 
 # Configurer les permissions
 chown $FTP_USER:$FTP_USER /home/$FTP_USER/ftp

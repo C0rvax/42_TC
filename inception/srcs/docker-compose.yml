@@ -87,6 +87,8 @@ services:
     env_file: .env
     volumes:
       - wordpress:/home/fetep/ftp/files
+    depends_on:
+      - wordpress
     networks:
       - inception
     restart: always
@@ -152,12 +154,3 @@ services:
 #     networks:
 #       - inception
 #     restart: always
-
-  # static-site:
-  #   build: ./requirements/bonus/static-site/
-  #   container_name: static-site
-  #   ports:
-  #     - "8080:80"
-  #   networks:
-  #     - inception
-  #   restart: always
