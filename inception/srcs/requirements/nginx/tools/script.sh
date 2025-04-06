@@ -16,6 +16,6 @@ if [ ! -f "$SSL_KEY" ] || [ ! -f "$SSL_CERT" ]; then
 		-subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=${DOMAIN_NAME}"
 fi
 
-unset USER_PWD ADM_PWD ROOT_PWD WP_PWD
+unset USER_PWD ADM_PWD ROOT_PWD WP_PWD REDIS_PWD FTP_PWD
 
 exec nginx -g "daemon off;"

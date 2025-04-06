@@ -25,7 +25,7 @@ wp redis enable --allow-root
 chown -R www-data:www-data /var/www/html/wp-content
 chmod -R g+w /var/www/html/wp-content
 
-unset USER_PWD ADM_PWD ROOT_PWD WP_PWD
+unset USER_PWD ADM_PWD ROOT_PWD WP_PWD REDIS_PWD FTP_PWD
 
 cd
 

@@ -57,11 +57,11 @@ services:
     networks:
       - inception
     restart: always
-    healthcheck:
-      test: ["CMD", "nc", "-zv", "mariadb", "3306"]
-      interval: 3s
-      timeout: 5s
-      retries: 5
+    # healthcheck:
+    #   test: ["CMD", "nc", "-zv", "mariadb", "3306"]
+    #   interval: 3s
+    #   timeout: 5s
+    #   retries: 5
 
   redis:
     build: ./requirements/bonus/redis/
@@ -71,11 +71,11 @@ services:
     env_file: .env
     networks:
       - inception
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"] # Tente de pinger le serveur Redis
-      interval: 3s   # Vérifie toutes les 5 secondes
-      timeout: 5s    # Considère l'échec après 3 secondes
-      retries: 5     # Réessaie 5 fois avant de marquer comme 'unhealthy'
+    # healthcheck:
+    #   test: ["CMD", "redis-cli", "ping"] # ping Redis
+    #   interval: 3s
+    #   timeout: 5s
+    #   retries: 5
     restart: always
 
   ftp:
