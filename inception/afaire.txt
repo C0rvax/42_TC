@@ -1,0 +1,5 @@
+config grafana
+kill
+secret docker (sider)
+make bonus ?
+verif all
