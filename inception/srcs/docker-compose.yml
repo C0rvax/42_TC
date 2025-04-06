@@ -104,53 +104,57 @@ services:
       - inception
     restart: always
 
-  # portainer:
-  #   build: ./requirements/bonus/portainer/
-  #   container_name: portainer
-  #   ports:
-  #     - "9000:9000"  # Accès à l'interface web de Portainer
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #     - portainer_data:/data
-  #     - /usr/libexec/docker/cli-plugins:/usr/libexec/docker/cli-plugins:ro
-  #   networks:
-  #     - inception
-  #   restart: always
 
-#   grafana:
-#     build: ./requirements/bonus/grafana/
-#     container_name: grafana
+  grafana:
+    build: ./requirements/bonus/grafana/
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+        - prometheus
+    networks:
+      - inception
+    restart: always
+
+  prometheus:
+    build: ./requirements/bonus/prometheus/
+    container_name: prometheus
+    networks:
+      - inception
+    restart: always
+
+  cadvisor:
+    build: ./requirements/bonus/cadvisor/
+    container_name: cadvisor
+    volumes:
+      # Need access to Docker information on the host (read only)
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - inception
+    restart: always
+
+#   node_exporter:
+#     build: ./requirements/bonus/node_exporter/
+#     container_name: node_exporter
 #     ports:
-#       - "3000:3000"
-#     depends_on:
-#         - prometheus
+#       - "9100:9100"
 #     networks:
 #       - inception
 #     restart: always
 #
-#
-#   prometheus:
-#     build: ./requirements/bonus/prometheus/
-#     container_name: prometheus
+#   portainer:
+#     build: ./requirements/bonus/portainer/
+#     container_name: portainer
 #     ports:
-#       - "9090:9090"
-#     networks:
-#       - inception
-#     restart: always
-# #    expose:
-# #      - "9090"
-#
-#   cadvisor:
-#     build: ./requirements/bonus/cadvisor/
-#     container_name: cadvisor
+#       - "9000:9000"  # Accès à l'interface web de Portainer
 #     volumes:
-#       # Need access to Docker information on the host
-#       - /:/rootfs:ro
-#       - /var/run:/var/run:ro
-#       - /sys:/sys:ro
-#       - /var/lib/docker/:/var/lib/docker:ro
-#       # Mount docker socket (read-only is safer)
-#       - /var/run/docker.sock:/var/run/docker.sock:ro
+#       - /var/run/docker.sock:/var/run/docker.sock
+#       #- portainer_data:/data
+#       - /usr/libexec/docker/cli-plugins:/usr/libexec/docker/cli-plugins:ro
 #     networks:
 #       - inception
 #     restart: always
