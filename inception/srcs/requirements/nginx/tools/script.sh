@@ -1,11 +1,14 @@
 #!/bin/bash
 
+NGINX_CONF_FILE=/etc/nginx/conf.d/default.conf
+#NGINX_CONF_FILE=/etc/nginx/sites-available/default
+
 mkdir -p /etc/nginx/ssl
 
 # Replace with env values
-sed -i "s|\$DOMAIN_NAME|$DOMAIN_NAME|g" /etc/nginx/sites-available/default
-sed -i "s|\$SSL_CERT|$SSL_CERT|g" /etc/nginx/sites-available/default
-sed -i "s|\$SSL_KEY|$SSL_KEY|g" /etc/nginx/sites-available/default
+sed -i "s|\$DOMAIN_NAME|$DOMAIN_NAME|g" $NGINX_CONF_FILE
+sed -i "s|\$SSL_CERT|$SSL_CERT|g" $NGINX_CONF_FILE
+sed -i "s|\$SSL_KEY|$SSL_KEY|g" $NGINX_CONF_FILE
 
 # Output a self-signed cert instead of a cert request (x509) with no encryption (nodes)
 if [ ! -f "$SSL_KEY" ] || [ ! -f "$SSL_CERT" ]; then
@@ -17,8 +20,8 @@ if [ ! -f "$SSL_KEY" ] || [ ! -f "$SSL_CERT" ]; then
 fi
 
 mkdir -p /var/www/html/static
-mv index.html /var/www/html/static/index.html
-mv style.css /var/www/html/static/style.css
+mv /index.html /var/www/html/static/index.html
+mv /style.css /var/www/html/static/style.css
 
 unset USER_PWD ADM_PWD ROOT_PWD WP_PWD REDIS_PWD FTP_PWD
 

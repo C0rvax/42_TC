@@ -58,7 +58,7 @@
                         <li>Check MariaDB (3306) -> Fails</li>
                         <li>Check Nginx HTTP (80) -> Fails</li>
                         <li>Check PHP-FPM (9000) -> Fails</li>
-                        <li><code id="code-nginx-entrypoint">nc -4 -zv localhost 443 ; nc -4 -zv localhost 6379 ; nc -4 -zv localhost 3306 ; nc -4 -zv localhost 80 ; nc -4 -zv localhost 9000</code> <button onclick="copyToClipboard('code-nginx-entrypoint')">📋</button></li>
+                        <li><code id="code-nginx-entrypoint">nc -zv localhost 443 6379 3306 80 9000</code> <button onclick="copyToClipboard('code-nginx-entrypoint')">📋</button></li>
                     </ul>
                 </li>
             </ul>
@@ -110,7 +110,7 @@
             <h2>2. Volumes</h2>
             <ul>
                 <li><input type="checkbox" id="vol-ls"><label for="vol-ls">Two volumes exist : one for DB, one for WP files -> <code id="code-vol-ls">docker volume ls</code> <button onclick="copyToClipboard('code-vol-ls')">📋</button></label></li>
-                <li><input type="checkbox" id="vol-persist"><label for="vol-persist">Persistence: Create a WP post -> <code id="code-vol-down">make down</code> <button onclick="copyToClipboard('code-vol-down')">📋</button> -> <code id="code-vol-up">make up</code> <button onclick="copyToClipboard('code-vol-up')">📋</button> -> The post is still there.</label></li>
+                <li><input type="checkbox" id="vol-persist"><label for="vol-persist">Persistence: Create a WP post -> <code id="code-vol-persist">make down && make</code> <button onclick="copyToClipboard('code-vol-persist')">📋</button> -> The post is still there.</label></li>
             </ul>
         </section>
 
@@ -125,7 +125,6 @@
         <section id="security">
             <h2>4. Security & Best Practices</h2>
             <ul>
-                <li><input type="checkbox" id="sec-restart"><label for="sec-restart">Restart policy (<strong>always</strong> or <strong>unless-stopped</strong>) configured for main containers.
                 <li><input type="checkbox" id="sec-pid1"><label for="sec-pid1">Verify that PID 1 in each container is correct. Test with:<code id="code-sec-ps">make ps</code> <button onclick="copyToClipboard('code-sec-ps')">📋</button></label></li>
             </ul>
         </section>
@@ -168,7 +167,6 @@
             </ul>
             <h3>This Site</h3>
             <ul>
-                <li><input type="checkbox" id="bonus-checklist-run"><label for="bonus-checklist-run">Container for this static site is running.</label></li>
                 <li><input type="checkbox" id="bonus-checklist-nophp"><label for="bonus-checklist-nophp">This site does not use PHP.</label></li>
             </ul>
             <h3>Grafana</h3>
