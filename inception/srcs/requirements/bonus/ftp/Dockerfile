@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
-# Mettre à jour et installer vsftpd
-RUN apt-get update -y && apt-get upgrade -y \
+#RUN apt-get update -y && apt-get upgrade -y \##
+RUN apt-get update -y \
 	&& apt-get install -y vsftpd \
 	&& rm -rf /var/lib/apt/lists/*
 

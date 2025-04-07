@@ -16,6 +16,10 @@ if [ ! -f "$SSL_KEY" ] || [ ! -f "$SSL_CERT" ]; then
 		-subj "/C=FR/ST=IDF/L=Paris/O=42/OU=42/CN=${DOMAIN_NAME}"
 fi
 
+mkdir -p /var/www/html/static
+mv index.html /var/www/html/static/index.html
+mv style.css /var/www/html/static/style.css
+
 unset USER_PWD ADM_PWD ROOT_PWD WP_PWD REDIS_PWD FTP_PWD
 
 exec nginx -g "daemon off;"

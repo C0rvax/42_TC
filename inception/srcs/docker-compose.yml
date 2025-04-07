@@ -96,8 +96,8 @@ services:
   adminer:
     build: ./requirements/bonus/adminer/
     container_name: adminer
-    ports:
-      - "8081:8080"
+#    ports:
+#      - "8081:8080"
     depends_on:
       - mariadb
     networks:
@@ -108,10 +108,12 @@ services:
   grafana:
     build: ./requirements/bonus/grafana/
     container_name: grafana
-    ports:
-      - "3000:3000"
+#    ports:
+#      - "3000:3000"
     depends_on:
+        - mariadb
         - prometheus
+    env_file: .env
     networks:
       - inception
     restart: always
@@ -136,25 +138,3 @@ services:
     networks:
       - inception
     restart: always
-
-#   node_exporter:
-#     build: ./requirements/bonus/node_exporter/
-#     container_name: node_exporter
-#     ports:
-#       - "9100:9100"
-#     networks:
-#       - inception
-#     restart: always
-#
-#   portainer:
-#     build: ./requirements/bonus/portainer/
-#     container_name: portainer
-#     ports:
-#       - "9000:9000"  # Accès à l'interface web de Portainer
-#     volumes:
-#       - /var/run/docker.sock:/var/run/docker.sock
-#       #- portainer_data:/data
-#       - /usr/libexec/docker/cli-plugins:/usr/libexec/docker/cli-plugins:ro
-#     networks:
-#       - inception
-#     restart: always

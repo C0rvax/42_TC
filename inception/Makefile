@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/04/05 14:49:43 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/04/07 15:46:45 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,14 @@ TEMP_ENV	= srcs/.env.bak
 DC_FILE		= ./srcs/docker-compose.yml
 
 CREDENTIALS	= secrets/credentials.txt \
-			  secrets/db_user_pwd.txt \
-			  secrets/db_root_pwd.txt \
-			  secrets/wp_admin_pwd.txt \
-			  secrets/wp_user_pwd.txt \
-			  secrets/redis_pwd.txt \
-			  secrets/ftp_pwd.txt
+			  secrets/passwords.txt
+#			  secrets/db_user_pwd.txt \
+#			  secrets/db_root_pwd.txt \
+#			  secrets/wp_admin_pwd.txt \
+#			  secrets/wp_user_pwd.txt \
+#			  secrets/redis_pwd.txt \
+#			  secrets/gf_pwd.txt \
+#			  secrets/ftp_pwd.txt
 
 all			: up
 
@@ -57,7 +59,8 @@ prune		: fdown
 logs		:
 	docker compose -f $(DC_FILE) logs
 
-re			: fdown up
+restart		:
+	docker compose -f $(DC_FILE) restart
 
 stop		:
 	docker compose -f $(DC_FILE) stop
