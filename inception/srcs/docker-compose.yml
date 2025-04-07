@@ -96,8 +96,6 @@ services:
   adminer:
     build: ./requirements/bonus/adminer/
     container_name: adminer
-#    ports:
-#      - "8081:8080"
     depends_on:
       - mariadb
     networks:
@@ -108,8 +106,6 @@ services:
   grafana:
     build: ./requirements/bonus/grafana/
     container_name: grafana
-#    ports:
-#      - "3000:3000"
     depends_on:
         - mariadb
         - prometheus

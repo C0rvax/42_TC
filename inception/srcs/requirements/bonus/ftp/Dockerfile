@@ -1,13 +1,11 @@
 FROM debian:bullseye
 
-#RUN apt-get update -y && apt-get upgrade -y \##
 RUN apt-get update -y \
 	&& apt-get install -y vsftpd \
 	&& rm -rf /var/lib/apt/lists/*
 
 COPY ./conf/vsftpd.conf /etc/vsftpd.conf
 
-COPY ./tools/script.sh .
-RUN chmod +x script.sh
+COPY --chmod=0755 ./tools/script.sh /usr/local/bin/
 
-CMD ["./script.sh"]
+CMD ["/usr/local/bin/script.sh"]

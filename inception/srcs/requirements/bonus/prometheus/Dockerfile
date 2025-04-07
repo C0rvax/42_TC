@@ -1,13 +1,13 @@
 FROM debian:bullseye
 
-#RUN apt-get update -y && apt-get upgrade -y \##
 RUN apt-get update -y \
     && apt-get install -y wget \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN wget https://github.com/prometheus/prometheus/releases/download/v2.44.0/prometheus-2.44.0.linux-amd64.tar.gz \
     && tar -zxvf prometheus-2.44.0.linux-amd64.tar.gz \
-    && mv prometheus-2.44.0.linux-amd64 /usr/local/prometheus
+    && mv prometheus-2.44.0.linux-amd64 /usr/local/prometheus \
+    && rm prometheus-2.44.0.linux-amd64.tar.gz
 
 
 COPY ./conf/prometheus.yml /usr/local/prometheus/prometheus.yml

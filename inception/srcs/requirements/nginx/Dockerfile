@@ -8,10 +8,9 @@ COPY ./conf/default.conf /etc/nginx/sites-available/default
 
 COPY ./static/ .
 
-COPY ./tools/script.sh .
-RUN chmod +x script.sh
+COPY --chmod=0755 ./tools/script.sh /usr/local/bin/
 
-CMD ["./script.sh"]
+CMD ["/usr/local/bin/script.sh"]
 
 # FROM alpine:3.20
 #

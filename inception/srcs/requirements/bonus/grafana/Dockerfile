@@ -1,13 +1,13 @@
 FROM debian:bullseye
 
-#RUN apt-get update -y && apt-get upgrade -y \##
 RUN apt-get update -y \
     && apt-get install -y wget adduser libfontconfig1 procps\
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN wget https://dl.grafana.com/oss/release/grafana-8.5.5.linux-amd64.tar.gz \
     && tar -zxvf grafana-8.5.5.linux-amd64.tar.gz \
-    && mv grafana-8.5.5 /usr/share/grafana
+    && mv grafana-8.5.5 /usr/share/grafana \
+    && rm grafana-8.5.5.linux-amd64.tar.gz
 
 COPY ./conf/prometheus.yml /usr/share/grafana/conf/provisioning/datasources/prometheus.yml
 
