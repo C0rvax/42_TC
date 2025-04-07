@@ -17,14 +17,7 @@ TEMP_ENV	= srcs/.env.bak
 DC_FILE		= ./srcs/docker-compose.yml
 
 CREDENTIALS	= secrets/credentials.txt \
-			  secrets/passwords.txt
-#			  secrets/db_user_pwd.txt \
-#			  secrets/db_root_pwd.txt \
-#			  secrets/wp_admin_pwd.txt \
-#			  secrets/wp_user_pwd.txt \
-#			  secrets/redis_pwd.txt \
-#			  secrets/gf_pwd.txt \
-#			  secrets/ftp_pwd.txt
+		secrets/passwords.txt
 
 all			: up
 
@@ -65,4 +58,4 @@ restart		:
 stop		:
 	docker compose -f $(DC_FILE) stop
 
-.PHONY			: all up down fdown prune logs re stop
+.PHONY		: all up down fdown prune logs re stop
