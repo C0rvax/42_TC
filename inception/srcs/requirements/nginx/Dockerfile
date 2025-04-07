@@ -25,8 +25,8 @@ COPY conf/default.conf /etc/nginx/conf.d/default.conf
 
 COPY static/ /
 
-COPY tools/script.sh /script.sh
-RUN chmod +x /script.sh
+COPY --chmod=0755 tools/script.sh /usr/local/bin/
 
-ENTRYPOINT ["sh", "/script.sh"]
-#CMD ["sh", "/script.sh"]
+EXPOSE 443
+
+CMD ["sh", "/usr/local/bin/script.sh"]

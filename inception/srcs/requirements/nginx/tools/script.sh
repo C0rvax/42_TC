@@ -26,3 +26,4 @@ mv /style.css /var/www/html/static/style.css
 unset USER_PWD ADM_PWD ROOT_PWD WP_PWD REDIS_PWD FTP_PWD
 
 exec nginx -g "daemon off;"
+#exec $@

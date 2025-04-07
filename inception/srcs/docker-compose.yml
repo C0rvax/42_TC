@@ -24,7 +24,6 @@ services:
   nginx:
     build: ./requirements/nginx/
     container_name: nginx
-    image: nginx:ft
     ports:
       - "443:443"
     volumes:
@@ -39,7 +38,6 @@ services:
   wordpress:
     build: ./requirements/wordpress/
     container_name: wordpress
-    image: wordpress:ft
     volumes:
       - wordpress:/var/www/html
     env_file: .env
@@ -53,7 +51,6 @@ services:
   mariadb:
     build: ./requirements/mariadb/
     container_name: mariadb
-    image: mariadb:ft
     volumes:
       - mariadb:/var/lib/mysql
     env_file: .env
@@ -69,7 +66,6 @@ services:
   redis:
     build: ./requirements/bonus/redis/
     container_name: redis
-    image: redis:ft
     volumes:
       - wordpress:/var/www/html
     env_file: .env
@@ -105,7 +101,6 @@ services:
     networks:
       - inception
     restart: always
-
 
   grafana:
     build: ./requirements/bonus/grafana/
