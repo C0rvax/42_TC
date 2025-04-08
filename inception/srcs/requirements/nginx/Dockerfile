@@ -1,17 +1,3 @@
-# FROM debian:bullseye
-#
-# RUN apt-get update -y \
-# 	&& apt-get install -y nginx openssl procps \
-# 	&& rm -rf /var/lib/apt/lists/*
-#
-# COPY ./conf/default.conf /etc/nginx/sites-available/default
-#
-# COPY ./static/ .
-#
-# COPY --chmod=0755 ./tools/script.sh /usr/local/bin/
-#
-# CMD ["/usr/local/bin/script.sh"]
-
 FROM alpine:3.20
 
 RUN apk update && \
@@ -30,3 +16,17 @@ COPY --chmod=0755 tools/script.sh /usr/local/bin/
 EXPOSE 443
 
 CMD ["sh", "/usr/local/bin/script.sh"]
+
+# FROM debian:bullseye
+#
+# RUN apt-get update -y \
+# 	&& apt-get install -y nginx openssl procps \
+# 	&& rm -rf /var/lib/apt/lists/*
+#
+# COPY ./conf/default.conf /etc/nginx/sites-available/default
+#
+# COPY ./static/ .
+#
+# COPY --chmod=0755 ./tools/script.sh /usr/local/bin/
+#
+# CMD ["/usr/local/bin/script.sh"]

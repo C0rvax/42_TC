@@ -7,7 +7,7 @@ if ! id "$FTP_USER" &>/dev/null; then
     echo "$FTP_USER:$FTP_PWD" | /usr/sbin/chpasswd
     echo "$FTP_USER" | tee -a /etc/vsftpd.userlist
 
-    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    openssl req -x509 -nodes -newkey rsa:2048 \
     -keyout $FTP_KEY \
     -out $FTP_CERT \
     -subj "/C=FR/ST=IDF/L=Paris/O=42/CN=ftp.local" \
