@@ -11,5 +11,6 @@ RUN wget https://dl.grafana.com/oss/release/grafana-8.5.5.linux-amd64.tar.gz \
 
 COPY ./conf/prometheus.yml /usr/share/grafana/conf/provisioning/datasources/prometheus.yml
 
+COPY --chmod=0755 ./tools/script.sh /usr/local/bin/
 
-CMD ["/usr/share/grafana/bin/grafana-server", "--homepath=/usr/share/grafana"]
+CMD ["/usr/local/bin/script.sh"]

@@ -12,35 +12,20 @@
 
 ENV_FILE	= srcs/.env
 
-TEMP_ENV	= srcs/.env.bak
-
 DC_FILE		= ./srcs/docker-compose.yml
 
-CREDENTIALS	= secrets/credentials.txt \
-		secrets/passwords.txt
+CREDENTIALS	= secrets/credentials.txt
 
 all			: up
 
 up			:
-	@cat $(CREDENTIALS) >> $(ENV_FILE)
+	@grep -Fvx -f $(CREDENTIALS) $(ENV_FILE) > $(ENV_FILE).tmp || true
+	@cat $(CREDENTIALS) >> $(ENV_FILE).tmp
+	@mv $(ENV_FILE).tmp $(ENV_FILE)
 	@mkdir -p ~/data/mariadb ~/data/wordpress
 	docker compose -f ./srcs/docker-compose.yml up -d
-	@cat $(CREDENTIALS) > $(TEMP_ENV)
-	@grep -Fvx -f $(TEMP_ENV) $(ENV_FILE) > $(ENV_FILE).tmp && mv $(ENV_FILE).tmp $(ENV_FILE)
-	@rm -f $(TEMP_ENV)
-
-cert		:
-	bash ./srcs/requirements/tools/copyCert.sh
-
-ps			:
-	@echo "<<< Showing processes (ps aux) in all containers >>>"
-	@docker compose -f $(DC_FILE) config --services | xargs -I {} sh -c 'echo; \
-	echo "--------------------------------------------------"; \
-	echo "    --- Processes in Container: {} ---"; \
-	echo "--------------------------------------------------"; \
-	docker exec -t {} ps aux || echo "Error executing ps in {}"; \
-	echo "--------------------------------------------------";'
-	@echo
+	@grep -Fvx -f $(CREDENTIALS) $(ENV_FILE) > $(ENV_FILE).tmp || true
+	@mv $(ENV_FILE).tmp $(ENV_FILE)
 
 down		:
 	docker compose -f $(DC_FILE) down
@@ -61,4 +46,17 @@ restart		:
 stop		:
 	docker compose -f $(DC_FILE) stop
 
-.PHONY		: all up down fdown prune logs re stop
+ps			:
+	@echo "<<< Showing processes (ps aux) in all containers >>>"
+	@docker compose -f $(DC_FILE) config --services | xargs -I {} sh -c 'echo; \
+	echo "--------------------------------------------------"; \
+	echo "    --- Processes in Container: {} ---"; \
+	echo "--------------------------------------------------"; \
+	docker exec -t {} ps aux || echo "Error executing ps in {}"; \
+	echo "--------------------------------------------------";'
+	@echo
+
+cert		:
+	bash ./srcs/requirements/tools/copyCert.sh
+
+.PHONY		: all up down fdown prune logs re stop ps

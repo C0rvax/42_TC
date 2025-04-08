@@ -23,6 +23,4 @@ if ! id "$FTP_USER" &>/dev/null; then
     usermod -aG www-data $FTP_USER
 fi
 
-unset USER_PWD ADM_PWD ROOT_PWD WP_PWD REDIS_PWD FTP_PWD
-
 exec /usr/sbin/vsftpd /etc/vsftpd.conf

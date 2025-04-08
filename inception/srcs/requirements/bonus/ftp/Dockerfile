@@ -6,8 +6,6 @@ RUN apt-get update -y \
 
 COPY ./conf/vsftpd.conf /etc/vsftpd.conf
 
-ENV FTP_PWD /run/secrets/ftp_pwd
-
 EXPOSE 21 30000-30009
 
 COPY --chmod=0755 ./tools/script.sh /usr/local/bin/

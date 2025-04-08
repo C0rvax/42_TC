@@ -1,5 +1,7 @@
 #!/bin/bash
 
+REDIS_PWD=$(cat "$REDIS_PWD_FILE")
+
 mkdir -p /var/www/html/data
 
 cat <<EOF > /etc/redis/redis.conf
@@ -12,8 +14,6 @@ maxmemory 512mb
 maxmemory-policy allkeys-lru
 requirepass $REDIS_PWD
 EOF
-
-unset USER_PWD ADM_PWD ROOT_PWD WP_PWD REDIS_PWD FTP_PWD
 
 sysctl vm.overcommit_memory=1
 

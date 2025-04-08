@@ -33,6 +33,10 @@ secrets:
     file: ../secrets/redis_pwd.txt
   ftp_pwd:
     file: ../secrets/ftp_pwd.txt
+  gf_admin_pwd:
+    file: ../secrets/gf_admin_pwd.txt
+  gf_db_pwd:
+    file: ../secrets/gf_db_pwd.txt
 
 services:
   nginx:
@@ -52,9 +56,19 @@ services:
   wordpress:
     build: ./requirements/wordpress/
     container_name: wordpress
+    secrets:
+      - wp_adm_pwd
+      - wp_author_pwd
+      - redis_pwd
+      - db_user_pwd
     volumes:
       - wordpress:/var/www/html
     env_file: .env
+    environment:
+      - WP_ADM_PWD_FILE=/run/secrets/wp_adm_pwd
+      - WP_AUTHOR_PWD_FILE=/run/secrets/wp_author_pwd
+      - REDIS_PWD_FILE=/run/secrets/redis_pwd
+      - DB_USER_PWD_FILE=/run/secrets/db_user_pwd
     depends_on:
       - mariadb
       - redis
@@ -86,9 +100,13 @@ services:
   redis:
     build: ./requirements/bonus/redis/
     container_name: redis
+    secrets:
+      - redis_pwd
     volumes:
       - wordpress:/var/www/html
     env_file: .env
+    environment:
+      - REDIS_PWD_FILE=/run/secrets/redis_pwd
     networks:
       - inception
     # healthcheck:
@@ -129,10 +147,16 @@ services:
   grafana:
     build: ./requirements/bonus/grafana/
     container_name: grafana
+    secrets:
+      - gf_admin_pwd
+      - gf_db_pwd
     depends_on:
         - mariadb
         - prometheus
     env_file: .env
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/gf_admin_pwd
+      - GF_DATABASE_PASSWORD__FILE=/run/secrets/gf_db_pwd
     networks:
       - inception
     restart: always

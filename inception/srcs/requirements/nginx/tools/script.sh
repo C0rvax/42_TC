@@ -21,7 +21,4 @@ if [ -f "/index.html" ] && [ -f "/style.css" ]; then
 	mv /style.css /var/www/html/static/style.css
 fi
 
-unset USER_PWD ADM_PWD ROOT_PWD WP_PWD REDIS_PWD FTP_PWD
-
 exec nginx -g "daemon off;"
-#exec $@
