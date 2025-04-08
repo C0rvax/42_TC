@@ -20,6 +20,20 @@ networks:
     name: inception
     driver: bridge
 
+secrets:
+  db_root_pwd:
+    file: ../secrets/db_root_pwd.txt
+  db_user_pwd:
+    file: ../secrets/db_user_pwd.txt
+  wp_adm_pwd:
+    file: ../secrets/wp_adm_pwd.txt
+  wp_author_pwd:
+    file: ../secrets/wp_author_pwd.txt
+  redis_pwd:
+    file: ../secrets/redis_pwd.txt
+  ftp_pwd:
+    file: ../secrets/ftp_pwd.txt
+
 services:
   nginx:
     build: ./requirements/nginx/
@@ -51,9 +65,15 @@ services:
   mariadb:
     build: ./requirements/mariadb/
     container_name: mariadb
+    secrets:
+      - db_root_pwd
+      - db_user_pwd
     volumes:
       - mariadb:/var/lib/mysql
     env_file: .env
+    environment:
+      - DB_ROOT_PWD_FILE=/run/secrets/db_root_pwd
+      - DB_USER_PWD_FILE=/run/secrets/db_user_pwd
     networks:
       - inception
     restart: always
@@ -81,10 +101,14 @@ services:
   ftp:
     build: ./requirements/bonus/ftp/
     container_name: ftp
+    secrets:
+      - ftp_pwd
     ports:
       - "21:21"
       - "30000-30009:30000-30009" # Pasive ports
     env_file: .env
+    environment:
+      - FTP_PWD_FILE=/run/secrets/ftp_pwd
     volumes:
       - wordpress:/home/fetep/ftp/files
     depends_on:

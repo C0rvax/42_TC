@@ -1,5 +1,7 @@
 #!/bin/bash
 
+FTP_PWD=$(cat "$FTP_PWD_FILE")
+
 mkdir -p /var/run/vsftpd/empty
 
 if ! id "$FTP_USER" &>/dev/null; then
