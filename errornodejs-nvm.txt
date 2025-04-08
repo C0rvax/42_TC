@@ -1,0 +1,15 @@
+/usr/share/nvim/runtime/lua/vim/lsp/rpc.lua:800: Spawning language server with cmd: '{ "node", [3] "--stdio" } failed. The language server is either not insstalled, midding from PATH, or not exsecutable.
+
+sudo apt remove nodejs npm -y
+curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+sudo apt install -y nodejs
+
+curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+source ~/.bashrc  # ou ~/.zshrc si tu utilises zsh
+nvm install node  # Installe la dernière version stable
+nvm use node
+
+node -v
+
+nvm install 18  # Installer Node.js 18
+nvm use 18      # Utiliser Node.js 18

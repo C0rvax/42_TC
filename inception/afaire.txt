@@ -1,4 +1,0 @@
-kill
-ftp sans ports
-make bonus ?
-verif all

@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/04/07 15:46:45 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/04/08 15:51:34 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CREDENTIALS	= secrets/credentials.txt \
 
 all			: up
 
-up		:
+up			:
 	@cat $(CREDENTIALS) >> $(ENV_FILE)
 	@mkdir -p ~/data/mariadb ~/data/wordpress
 	docker compose -f ./srcs/docker-compose.yml up -d
@@ -29,7 +29,10 @@ up		:
 	@grep -Fvx -f $(TEMP_ENV) $(ENV_FILE) > $(ENV_FILE).tmp && mv $(ENV_FILE).tmp $(ENV_FILE)
 	@rm -f $(TEMP_ENV)
 
-ps		:
+cert		:
+	bash ./srcs/requirements/tools/copyCert.sh
+
+ps			:
 	@echo "<<< Showing processes (ps aux) in all containers >>>"
 	@docker compose -f $(DC_FILE) config --services | xargs -I {} sh -c 'echo; \
 	echo "--------------------------------------------------"; \

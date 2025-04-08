@@ -1,22 +1,17 @@
 #!/bin/bash
 
 mkdir -p /var/www/html/data
-echo "
+
+cat <<EOF > /etc/redis/redis.conf
 protected-mode yes
-
 port 6379
-
 daemonize no
-
 loglevel notice
-
 dir /var/www/html/data
-
 maxmemory 512mb
-
 maxmemory-policy allkeys-lru
-
-requirepass $REDIS_PWD" >/etc/redis/redis.conf
+requirepass $REDIS_PWD
+EOF
 
 unset USER_PWD ADM_PWD ROOT_PWD WP_PWD REDIS_PWD FTP_PWD
 
