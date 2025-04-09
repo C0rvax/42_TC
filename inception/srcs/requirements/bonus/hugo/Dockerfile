@@ -1,6 +1,4 @@
-FROM    alpine:3.20
-
-WORKDIR /var/hugo/static
+FROM alpine:3.20
 
 RUN apk update && apk add --update --no-cache \
     hugo \
@@ -8,15 +6,10 @@ RUN apk update && apk add --update --no-cache \
     shadow \
     && rm -f /var/cache/apk/*
 
-RUN hugo new site /var/hugo/static \
- 	&& cd /var/hugo/static \
-    && hugo -b https://aduvilla.42.fr/hugo
+RUN hugo new site /var/hugo/static
 
+WORKDIR /var/hugo/static
 
-COPY ./conf/config.toml /var/hugo/static/config.toml
-COPY ./conf/index.html /var/hugo/static/layouts/index.html
-COPY ./conf/style.css /var/hugo/static/static/style.css
+COPY ./conf/ .
 
-EXPOSE 8800
-
-CMD     ["hugo", "server", "--bind=0.0.0.0", "--baseURL=https://aduvilla.42.fr/hugo", "-p", "8800", "--appendPort=false"]
+CMD ["hugo", "server", "--bind=0.0.0.0", "--baseURL=https://aduvilla.42.fr/hugo/", "-p", "8800", "--appendPort=false"]

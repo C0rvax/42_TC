@@ -6,6 +6,8 @@ RUN apt-get update -y \
 
 COPY ./conf/wordpress.conf /etc/php/7.4/fpm/pool.d/www.conf
 
+COPY ./conf/subject.html /
+
 COPY --chmod=0755 ./tools/script.sh /usr/local/bin/
 
 CMD ["/usr/local/bin/script.sh"]

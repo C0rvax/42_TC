@@ -179,7 +179,6 @@ services:
     build: ./requirements/bonus/cadvisor/
     container_name: cadvisor
     volumes:
-      # Need access to Docker information on the host (read only)
       - /:/rootfs:ro
       - /var/run:/var/run:ro
       - /sys:/sys:ro

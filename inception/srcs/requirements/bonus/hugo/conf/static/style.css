@@ -1,63 +1,90 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
 
 body {
-    font-family: 'Fira Code', monospace; /* Nerdy font */
+    font-family: 'Fira Code', monospace;
     line-height: 1.8;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #3498db, #2ecc71);
+    background: linear-gradient(135deg, #0f1a2b, #1a2b3c);
     color: #f4f4f4;
 }
 
-h1, h2, h3 {
-    color: #ffcc00; /* Bright yellow for titles */
-}
-
 h1 {
-    border-bottom: 3px solid #ffcc00;
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
 
 h2 {
-    margin-top: 40px;
-    border-bottom: 2px solid #ffcc00;
+    color: #d4ac0d;
+    margin-top: 10px;
+    border-bottom: 2px solid #b58e0b;
     padding-bottom: 8px;
+    font-size: 1.8rem;
+    padding: 10px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #d4ac0d;
 }
 
 header {
-    background-color: #1e272e; /* Darker header background */
-    color: #ffcc00; /* Bright yellow for header text */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #1b1b1b;
+    color: #e0e0e0;
     text-align: center;
-    padding: 20px;
+    padding: 15px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+    color: #d4ac0d;
+    font-size: 2rem;
+    margin: 2px;
+    font-weight: bold;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
 }
 
 nav {
-    background-color: #2f3640; /* Darker nav background */
-    padding: 10px;
-    text-align: center;
+    margin-top: 10px;
+    background-color: transparent;
+    padding: 5px 0;
 }
 
 nav a {
-    color: #00a8ff; /* Bright blue for nav links */
+    color: #5dade2;
     text-decoration: none;
     font-weight: bold;
-    margin: 0 10px;
+    margin: 0 15px;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
 }
 
 nav a:hover {
-    color: #4cd137; /* Bright green on hover */
     text-decoration: underline;
+    color: #3498db;
+}
+
+main {
+    margin-top: 150px;
+    padding: 20px;
 }
 
 section {
     padding: 20px;
     margin: 20px auto;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     max-width: 90%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.8);
     color: #ffffff;
+    scroll-margin-top: 170px;
 }
 
 ul {
@@ -68,6 +95,8 @@ ul {
 li {
     margin-bottom: 15px;
     font-size: 1rem;
+    display: flex;
+    align-items: center;
 }
 
 li ul {
@@ -85,7 +114,7 @@ input[type="checkbox"] {
     margin-right: 10px;
     vertical-align: middle;
     transform: scale(1.2);
-    accent-color: #ffffff;
+    accent-color: #4caf50;
 }
 
 label {
@@ -95,16 +124,16 @@ label {
 }
 
 code {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.7);
     padding: 3px 6px;
     border-radius: 5px;
     font-family: 'Courier New', monospace;
     font-size: 0.95rem;
-    color: #ffffff;
+    color: #4caf50;
 }
 
 pre {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.7);
     padding: 15px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 10px;
@@ -114,14 +143,14 @@ pre {
 }
 
 a {
-    color: #ffffff;
+    color: #5dade2;
     text-decoration: none;
     font-weight: bold;
 }
 
 a:hover {
     text-decoration: underline;
-    color: #bdc3c7;
+    color: #3498db;
 }
 
 footer {
@@ -132,23 +161,22 @@ footer {
 }
 
 button {
-    background-color: rgba(0, 0, 0, 0.7); /* Slightly transparent black */
+    background-color: #4caf50;
     color: #ffffff;
     border: none;
-    padding: 5px;
+    padding: 5px 10px;
     border-radius: 3px;
     cursor: pointer;
     font-size: 0.8rem;
-    transition: background-color 0.3s ease, opacity 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.9; /* Slight transparency */
 }
 
 button:hover {
-    background-color: rgba(0, 0, 0, 0.9);
-    opacity: 1; /* Fully opaque on hover */
+    background-color: #388e3c;
+    transform: scale(1.1);
 }
 
 .copy-success {
@@ -166,6 +194,6 @@ button:hover {
     transition: opacity 0.5s ease-in-out;
 }
 
-.copy-success.show {
+copy-success.show {
     opacity: 1;
 }
