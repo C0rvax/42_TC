@@ -161,6 +161,13 @@ services:
       - inception
     restart: always
 
+  hugo:
+    build: ./requirements/bonus/hugo/
+    container_name: hugo
+    networks:
+      - inception
+    restart: always
+
   prometheus:
     build: ./requirements/bonus/prometheus/
     container_name: prometheus

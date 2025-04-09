@@ -1,0 +1,3 @@
+baseURL = "https://aduvilla.42.fr/hugo/"
+languageCode = "en-en"
+title = "My Static Site"

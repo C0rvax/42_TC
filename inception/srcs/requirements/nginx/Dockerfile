@@ -9,8 +9,6 @@ RUN apk update && \
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 COPY conf/default.conf /etc/nginx/conf.d/default.conf
 
-COPY static/ /
-
 COPY --chmod=0755 tools/script.sh /usr/local/bin/
 
 EXPOSE 443
