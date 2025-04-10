@@ -12,7 +12,7 @@ COPY --chmod=0755 tools/script.sh /usr/local/bin/
 
 EXPOSE 443
 
-CMD ["sh", "/usr/local/bin/script.sh"]
+CMD ["/usr/local/bin/script.sh"]
 
 # FROM debian:bullseye
 #
