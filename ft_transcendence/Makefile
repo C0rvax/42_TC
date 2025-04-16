@@ -6,13 +6,13 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/04/16 15:27:01 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/04/16 23:33:50 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ENV_FILE	= srcs/.env
 
-DC_FILE		= ./docker-compose.yml
+DC_FILE		= ./simple/docker-compose.yml
 
 CREDENTIALS	= secrets/credentials.txt
 
@@ -33,7 +33,7 @@ down		:
 re			: down up
 
 fdown		:
-	@sudo rm -rf ~/data
+#	@sudo rm -rf ~/data
 	docker compose -f $(DC_FILE) down --rmi all -v
 
 prune		: fdown
