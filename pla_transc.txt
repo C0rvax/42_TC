@@ -1,0 +1,325 @@
+Okay, let's break down your module selection for ft_transcendence (version 16.1) and create a roadmap.
+
+1. Module Coherence and Count:
+
+You've selected:
+
+Web:
+
+Backend Framework (Fastify/Node.js) - Major (1)
+
+Frontend Framework/Toolkit (Tailwind CSS + TypeScript) - Minor (0.5)
+
+Database (SQLite) - Minor (0.5)
+
+Total Web: 2 Major equivalents
+
+User Management:
+
+Standard User Management - Major (1)
+
+Total User Mgmt: 1 Major equivalent
+
+Gameplay:
+
+Remote Players - Major (1)
+
+Multiplayer (>2 players) - Major (1)
+
+Game Customization - Minor (0.5)
+
+Total Gameplay: 2.5 Major equivalents
+
+AI-Algo:
+
+AI Opponent - Major (1)
+
+Stats Dashboards - Minor (0.5)
+
+Total AI-Algo: 1.5 Major equivalents
+
+DevOps:
+
+Microservices Backend - Major (1)
+
+Monitoring (Prometheus/Grafana) - Minor (0.5)
+
+Total DevOps: 1.5 Major equivalents
+
+Accessibility:
+
+SSR Integration - Minor (0.5)
+
+Total Accessibility: 0.5 Major equivalents
+
+Server-Side Pong:
+
+Replace with Server-Side Pong + API - Major (1)
+
+Total Server-Side: 1 Major equivalent
+
+Total Major Module Equivalents: 2 + 1 + 2.5 + 1.5 + 1.5 + 0.5 + 1 = 10
+
+This selection exceeds the minimum requirement of 7 major modules for 100%.
+
+Coherence:
+
+Strong Synergies: Choosing Server-Side Pong + API is highly synergistic with Remote Players and Multiplayer. Having the game logic centralized on the server makes managing multiple clients (remote players, multiplayer) much more feasible and robust.
+
+Standard Stack: Fastify (Node.js) + TypeScript + Tailwind + SQLite is a coherent, modern web development stack.
+
+Logical Additions: Standard User Management, AI, Customization, Stats, and Monitoring all build logically upon the core web app and game.
+
+Major Challenge - Microservices: Implementing the backend as microservices adds significant architectural complexity, especially regarding inter-service communication, data consistency, and deployment (Docker Compose setup). You need a clear plan for how you will split the services (e.g., Auth, User Profiles, Game Logic, Matchmaking).
+
+Potential Difficulty - SSR: Integrating SSR with a basic TypeScript + Tailwind setup (without a dedicated SSR framework like Next.js or Nuxt.js, which seem disallowed by the "nothing else" constraint in the Frontend module description) can be tricky. You'll likely need to implement custom server-side rendering logic within your Fastify backend. This might be more complex than it seems for a minor module. Confirm if any small helper libraries for SSR with Fastify are permissible under the rules.
+
+Overall, the selection is ambitious but technically coherent. The biggest challenges will be managing the complexity of microservices and potentially the SSR implementation.
+
+2. Technologies to Learn:
+
+Based on your modules and the subject constraints (v16.1):
+
+Backend:
+
+Node.js: Asynchronous JavaScript runtime. (Core)
+
+Fastify: High-performance Node.js web framework. (Major Module)
+
+TypeScript: Superset of JavaScript adding static types. (Required for Frontend, highly recommended for Backend consistency).
+
+Frontend:
+
+TypeScript: (Mandatory base, reinforced by Frontend Module)
+
+HTML/CSS: Standard web fundamentals.
+
+Tailwind CSS: Utility-first CSS framework. (Minor Module)
+
+SPA Concepts: Client-side routing, state management (even simple), interacting with APIs.
+
+Database:
+
+SQLite: File-based relational database. (Minor Module)
+
+SQL: Standard Query Language for interacting with the database.
+
+(Optional but Recommended): A Node.js SQLite driver (like sqlite3) or a query builder/minimal ORM (like Knex.js - check if allowed, often seen as a "small library").
+
+Real-time Communication:
+
+WebSockets: Protocol for persistent, bidirectional communication. (Essential for Remote Players, Multiplayer, Server-Side Pong state sync). You'll likely use a library like ws or socket.io with Fastify.
+
+DevOps & Architecture:
+
+Docker: Containerization technology. (Mandatory)
+
+Docker Compose: Tool for defining and running multi-container Docker applications. (Essential for microservices, monitoring stack).
+
+Microservice Concepts: API Gateways (optional), inter-service communication (REST APIs, potentially message queues - though likely overkill, direct API calls might suffice), service discovery.
+
+Prometheus: Monitoring system and time series database. (Minor Module)
+
+Grafana: Visualization and analytics platform (often used with Prometheus). (Minor Module)
+
+Node.js Application Instrumentation: How to expose metrics from your Fastify apps for Prometheus to scrape.
+
+AI:
+
+Game AI Algorithms: State machines, basic prediction, pathfinding (but not A*), opponent modeling. Focus on simulating input with the 1-second refresh constraint.
+
+Accessibility:
+
+Server-Side Rendering (SSR) Concepts: How to render initial HTML on the server (using Fastify/Node.js) before sending it to the client. Potentially using Node.js template engines if needed/allowed (e.g., EJS, Handlebars).
+
+Security:
+
+Password Hashing: bcrypt library for Node.js is standard.
+
+Input Validation: Libraries or custom logic to sanitize/validate data from users/APIs. Fastify has built-in validation capabilities using JSON Schema.
+
+HTTPS: Setting up TLS/SSL (often handled via a reverse proxy like Nginx/Caddy in Docker, or directly if needed).
+
+API Security: Protecting routes, potentially JWT (JSON Web Tokens) if implementing robust auth between services or client/server.
+
+Version Control:
+
+Git: Distributed version control system. (Mandatory)
+
+3. Where to Learn (Online Resources):
+
+Official Documentation: ALWAYS the best starting point.
+
+Node.js Docs
+
+Fastify Docs
+
+TypeScript Handbook
+
+Tailwind CSS Docs
+
+SQLite Docs
+
+MDN Web Docs (for HTML, CSS, JS, WebSockets)
+
+Docker Docs
+
+Prometheus Docs
+
+Grafana Docs
+
+Tutorial Sites:
+
+freeCodeCamp (Covers many web technologies)
+
+DigitalOcean Community Tutorials (Excellent for backend/DevOps topics)
+
+Smashing Magazine (Frontend/UX)
+
+CSS-Tricks (CSS, Frontend)
+
+Video Tutorials:
+
+YouTube Channels (Search for specific tech: "Fastify tutorial", "Tailwind CSS crash course", "WebSockets Node.js", "Docker microservices Node.js")
+
+Courses (often paid, check for free tiers/trials):
+
+Udemy, Coursera, Pluralsight, Frontend Masters
+
+Specific Topics:
+
+Microservices: Search for "microservices patterns", "Node.js microservices tutorial". Martin Fowler's site is a classic resource for architectural patterns.
+
+WebSockets: Search "Fastify WebSockets tutorial", "socket.io tutorial".
+
+SSR with Fastify: This might require specific searching like "Fastify server-side rendering without framework" or looking into Fastify plugins like point-of-view for templating.
+
+Game AI: Look for resources on simple game AI, Finite State Machines (FSMs) for games, basic prediction algorithms.
+
+4. How to Start & Steps:
+
+This is a large project. Start simple and build incrementally. Do not try to implement everything at once.
+
+Phase 0: Setup & Foundations (Team)
+
+Team Alignment: Discuss coding standards, Git workflow (e.g., Gitflow, feature branches), communication plan, task allocation.
+
+Basic Docker Setup: Create a Dockerfile for a minimal Fastify + TypeScript backend and another for a basic TypeScript + Tailwind frontend (or combine if simpler initially).
+
+Basic Docker Compose: Create a docker-compose.yml to run the backend and frontend services. Ensure they can communicate (e.g., frontend fetches data from backend API). Get a "Hello World" running via docker compose up.
+
+Git Repository: Initialize Git, create a .gitignore (especially for node_modules, .env, build artifacts).
+
+Phase 1: Core Application (Mandatory + Key Modules)
+
+Backend API (Fastify):
+
+Set up basic project structure.
+
+Implement basic user registration/login endpoints (without full features yet).
+
+Integrate SQLite using a driver/query builder. Store hashed passwords (bcrypt).
+
+Set up basic input validation.
+
+Frontend SPA (TS/Tailwind):
+
+Set up basic project structure.
+
+Implement client-side routing (e.g., using history API or a minimal router).
+
+Create basic pages: Login, Register, Dashboard/Home.
+
+Build forms and connect them to the backend API. Handle basic authentication state.
+
+Basic Local Pong: Implement Pong first on the frontend or directly on the server if you are confident. Focus on the core game mechanics (paddles, ball, scoring, boundaries) for two players on the same machine (shared keyboard).
+
+Phase 2: Server-Side & Real-time (Crucial Modules)
+
+Server-Side Pong Logic:
+
+Move/Implement the core Pong game logic within your Fastify backend.
+
+Design the Game State representation.
+
+API for Game:
+
+Create API endpoints (RESTful) for creating games, joining games, maybe getting game lists.
+
+WebSockets Integration:
+
+Add WebSocket support to Fastify.
+
+Implement real-time communication: sending game state updates from server to clients, sending player input (paddle movement) from client to server.
+
+Frontend Integration: Modify the frontend Pong game to:
+
+Connect via WebSockets.
+
+Receive state updates from the server and render the game.
+
+Send player input to the server.
+
+Remote Play: Extend the server logic and matchmaking (even if very basic initially) to allow two different clients (browsers) to connect to the same game instance via the WebSocket server. Handle disconnections gracefully.
+
+Phase 3: Feature Expansion (Remaining Modules)
+
+Standard User Management: Flesh out user profiles, avatars, friend system (requires DB changes, API endpoints, frontend UI), win/loss stats, match history (integrate with game completion logic).
+
+Multiplayer (>2): Adapt the server-side game logic, state representation, and WebSocket communication to handle more than two players. Update the frontend rendering. Define the rules/layout for >2 players.
+
+AI Opponent: Implement the AI logic on the server. Add an option to play against the AI. Ensure it adheres to the input simulation/refresh constraints.
+
+Game Customization: Add options (power-ups, maps) to the server-side logic and allow players to select them when starting a game. Update frontend UI for options and rendering.
+
+Stats Dashboards: Create new API endpoints to fetch aggregated stats. Build frontend components/pages to display these stats (potentially using a simple charting library if allowed, or just text/tables).
+
+Phase 4: Architecture & Ops (DevOps Modules)
+
+Microservices Refactoring: Plan carefully!
+
+Define service boundaries (e.g., Auth, UserProfile, GameService, MatchmakingService).
+
+Split your existing Fastify codebase into separate services.
+
+Define APIs for communication between services.
+
+Update docker-compose.yml to run all services.
+
+Ensure data consistency (this can be hard).
+
+Monitoring:
+
+Instrument your Node.js/Fastify services to expose metrics (e.g., using prom-client).
+
+Set up Prometheus via Docker Compose to scrape these metrics.
+
+Set up Grafana via Docker Compose and configure it to use Prometheus as a data source. Create basic dashboards.
+
+SSR Integration: Implement server-side rendering for initial page loads. This likely involves rendering HTML templates on the Fastify server based on the request URL.
+
+Phase 5: Polish & Security
+
+Security Hardening: Review all input validation, ensure HTTPS is enforced, check dependencies for vulnerabilities, implement CSRF protection if needed, secure API endpoints properly.
+
+Testing & Bug Fixing: Thoroughly test all features, fix bugs, improve usability.
+
+Documentation: Ensure your code is well-commented and you have a README explaining setup and architecture.
+
+Key Advice:
+
+Read the Subject Carefully: Especially the constraints on libraries and specific technologies.
+
+Prioritize: Focus on the mandatory parts and the core modules (Server-Side Pong, Remote Play) first.
+
+Iterate: Build features incrementally. Don't try to perfect everything in one go.
+
+Communicate: Constant communication within the team is crucial.
+
+Version Control: Commit often, use meaningful messages, use branches.
+
+Keep it Manageable: Microservices add a lot of complexity. Ensure your team is ready for it. If it becomes overwhelming, consider if simplifying the architecture is possible while still meeting the module requirements (e.g., fewer, larger services initially).
+
+Re-evaluate SSR: If the SSR implementation proves excessively difficult without a framework, check if you can swap that minor module for another less complex one if needed.
+
+Good luck! This is a challenging but rewarding project.

@@ -1,0 +1,973 @@
+Okay, let's break down how to implement the "Standard user management, authentication and users across tournaments" major module (IV.3) within the context of the ft_transcendence project.
+
+This module fundamentally changes the user experience from temporary aliases per tournament to persistent user accounts. It requires a backend and a database.
+
+Assumptions:
+
+Backend: You will need a backend. Based on the subject, the default is pure PHP, but you might have chosen the "Web Framework" module (Fastify/Node.js). The explanation below will be conceptually applicable to both, focusing on what needs to happen rather than the exact syntax of a specific framework.
+
+Database: You will need a database. The "Database" module specifies SQLite. This module is practically dependent on having a database.
+
+SPA: Your frontend is a Single Page Application (likely using Typescript as per the default or the "FrontEnd" module).
+
+Concrete Implementation Steps:
+
+1. Database Schema Design (SQLite)
+
+You'll need database tables to store user information, relationships, and potentially match history.
+
+users Table:
+
+id (INTEGER PRIMARY KEY AUTOINCREMENT) - Unique user identifier.
+
+username (TEXT UNIQUE NOT NULL) - The login username.
+
+email (TEXT UNIQUE NOT NULL) - User's email (often used for login/recovery).
+
+password_hash (TEXT NOT NULL) - Never store plain text passwords! Use a strong hashing algorithm (like bcrypt).
+
+display_name (TEXT UNIQUE NOT NULL) - The name shown in games, leaderboards, chat. This replaces the temporary aliases.
+
+avatar_url (TEXT NULL) - Path/URL to the user's avatar image. Can be NULL to indicate using a default.
+
+wins (INTEGER DEFAULT 0) - Total game wins.
+
+losses (INTEGER DEFAULT 0) - Total game losses.
+
+status (TEXT DEFAULT 'offline') - User's current status ('online', 'offline', 'in-game').
+
+created_at (TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+
+updated_at (TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+
+friendships Table: (To manage friend relationships)
+
+id (INTEGER PRIMARY KEY AUTOINCREMENT)
+
+user_id1 (INTEGER NOT NULL, FOREIGN KEY(user_id1) REFERENCES users(id)) - ID of the user initiating or involved in the friendship.
+
+user_id2 (INTEGER NOT NULL, FOREIGN KEY(user_id2) REFERENCES users(id)) - ID of the other user.
+
+status (TEXT NOT NULL) - e.g., 'pending', 'accepted', 'blocked'.
+
+created_at (TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+
+Constraint: Ensure user_id1 < user_id2 to prevent duplicate entries in reverse order.
+
+Constraint: Ensure (user_id1, user_id2) pair is unique.
+
+matches Table: (To store match history)
+
+id (INTEGER PRIMARY KEY AUTOINCREMENT)
+
+player1_id (INTEGER NOT NULL, FOREIGN KEY(player1_id) REFERENCES users(id))
+
+player2_id (INTEGER NOT NULL, FOREIGN KEY(player2_id) REFERENCES users(id))
+
+player1_score (INTEGER NOT NULL)
+
+player2_score (INTEGER NOT NULL)
+
+winner_id (INTEGER NULL, FOREIGN KEY(winner_id) REFERENCES users(id)) - NULL if it's a draw or TBD.
+
+match_date (TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+
+game_type (TEXT DEFAULT 'pong') - Useful if you add more games later.
+
+tournament_id (INTEGER NULL) - Optional: Link matches to specific tournaments if you implement a tournament structure.
+
+2. Backend Implementation (API Endpoints)
+
+Your backend needs to provide API endpoints that the frontend can call. Here's a RESTful approach (adapt method/path as needed):
+
+Authentication:
+
+POST /api/auth/register:
+
+Input: username, email, password, display_name.
+
+Action: Validate input (check for duplicates, password strength). Hash the password using bcrypt. Insert the new user into the users table.
+
+Output: Success message or error (e.g., "Username already exists").
+
+POST /api/auth/login:
+
+Input: username (or email), password.
+
+Action: Find user by username/email. Compare the provided password with the stored password_hash using bcrypt's compare function. If successful, create a session (e.g., using secure cookies or JWT if using that module). Update user status to 'online'.
+
+Output: Success message + session identifier/token, or error ("Invalid credentials").
+
+POST /api/auth/logout:
+
+Input: (Requires active session).
+
+Action: Destroy the user's session. Update user status to 'offline'.
+
+Output: Success message.
+
+User Profile & Settings:
+
+GET /api/users/me:
+
+Input: (Requires active session).
+
+Action: Fetch data for the currently logged-in user from the users table (excluding password_hash).
+
+Output: User object (id, username, email, display_name, avatar_url, wins, losses, status).
+
+PUT /api/users/me:
+
+Input: Fields to update (e.g., display_name, email). (Requires active session).
+
+Action: Validate input (check for display_name uniqueness if changed). Update the user's record in the users table.
+
+Output: Updated user object.
+
+POST /api/users/me/avatar:
+
+Input: Image file (use multipart/form-data). (Requires active session).
+
+Action: Validate file type/size. Save the image to a persistent storage location (e.g., a server directory, cloud storage). Update the avatar_url in the users table for the logged-in user.
+
+Output: New avatar_url.
+
+GET /api/users/:userId/profile:
+
+Input: User ID in the path. (May or may not require active session depending on privacy settings).
+
+Action: Fetch public profile data (display_name, avatar_url, wins, losses, status) for the specified userId.
+
+Output: Public user profile object.
+
+Friends Management:
+
+GET /api/friends:
+
+Input: (Requires active session).
+
+Action: Fetch all accepted friendships (status = 'accepted') involving the logged-in user from the friendships table. Retrieve the friend's details (id, display_name, avatar_url, status) from the users table.
+
+Output: List of friend objects.
+
+GET /api/friends/requests: (To see incoming/outgoing requests)
+
+Input: (Requires active session).
+
+Action: Fetch pending friendships (status = 'pending') involving the logged-in user. Differentiate between requests sent by the user and requests sent to the user.
+
+Output: List of pending friend request objects.
+
+POST /api/friends/requests:
+
+Input: targetUserId. (Requires active session).
+
+Action: Create a new entry in friendships with user_id1 = logged-in user ID, user_id2 = targetUserId, and status = 'pending'. Ensure they aren't already friends or have a pending request.
+
+Output: Success or error message.
+
+PUT /api/friends/requests/:requestId:
+
+Input: action ('accept' or 'reject'). (Requires active session of the recipient of the request).
+
+Action: Find the friendship request by requestId. If 'accept', update status to 'accepted'. If 'reject', delete the friendship record. Ensure the logged-in user is user_id2 of the request.
+
+Output: Success or error message.
+
+DELETE /api/friends/:friendshipId:
+
+Input: ID of the friendship record. (Requires active session).
+
+Action: Delete the friendship record. Ensure the logged-in user is part of this friendship.
+
+Output: Success or error message.
+
+Match History:
+
+GET /api/users/:userId/matches:
+
+Input: User ID. (Requires active session).
+
+Action: Fetch all matches from the matches table where player1_id or player2_id equals userId. Order by match_date descending. Include opponent details.
+
+Output: List of match history objects (including date, opponent display name, scores, result).
+
+Internal: When a game finishes, the game logic (wherever it runs) needs to call an internal function or API endpoint to record the match result in the matches table and update the wins/losses counters in the users table for both players.
+
+Online Status:
+
+This is best handled with WebSockets.
+
+Backend: When a user logs in (connects via WebSocket), update their status to 'online' in the DB and notify their friends via WebSocket. When they disconnect or log out, update status to 'offline' and notify friends. Update status to 'in-game' when they start a match.
+
+Frontend: Establish a WebSocket connection upon login. Listen for status updates for friends and update the UI accordingly.
+
+3. Frontend Implementation (Typescript SPA)
+
+Routing: Set up routes for /login, /register, /profile/me, /profile/:userId, /settings, /friends, etc. Use the browser History API for navigation without full page reloads.
+
+Authentication Flow:
+
+Login/Register forms that call the respective backend API endpoints.
+
+Store session information securely (e.g., in HttpOnly cookies managed by the backend, or tokens in local/session storage if using JWT).
+
+Protect routes that require login (redirect to /login if not authenticated).
+
+Provide a Logout button that calls the /api/auth/logout endpoint and clears local session state.
+
+Components:
+
+UserProfile: Displays user info (avatar, display name, stats, match history). Fetches data from /api/users/:userId/profile or /api/users/me. Includes a default avatar if avatar_url is null.
+
+UserSettings: Form to update display_name, email, includes an avatar upload component calling /api/users/me/avatar. Fetches current data from /api/users/me and submits updates via PUT /api/users/me.
+
+FriendsList: Fetches data from /api/friends. Displays friends with their status (requires WebSocket updates for real-time). Includes buttons/links to view profiles or challenge to a game.
+
+FriendRequests: Fetches data from /api/friends/requests. Shows incoming requests with Accept/Reject buttons (calling PUT /api/friends/requests/:requestId) and outgoing requests.
+
+UserSearch: (Optional) An interface to search for users (e.g., by display_name) to send friend requests.
+
+MatchHistory: Fetches data from /api/users/:userId/matches and displays it clearly (e.g., "You vs Opponent | 5 - 3 | Win | Date").
+
+State Management: Keep track of the logged-in user's state globally within the SPA. Manage loading states and error handling for API calls.
+
+WebSocket Client: Implement logic to connect to the backend WebSocket server after login, send necessary authentication info, and handle incoming messages (e.g., friend status updates).
+
+4. Security Considerations (Crucial!)
+
+Password Hashing: Use bcrypt on the backend.
+
+Input Validation: Validate all input on the backend (length, format, type, uniqueness checks). Frontend validation is good for UX but not sufficient for security.
+
+SQL Injection Prevention: Use parameterized queries or an ORM that handles this automatically. Never concatenate user input directly into SQL queries.
+
+XSS Prevention: Sanitize user-generated content (like display names) before rendering it in the HTML on the frontend. Use framework features for escaping if available. Set appropriate Content-Security-Policy headers.
+
+Authentication/Authorization: Ensure API endpoints that modify data or access private information are protected and verify the user's session/token on every request. Check if the logged-in user has permission to perform the requested action (e.g., only the recipient can accept a friend request).
+
+HTTPS: Mandatory as per the subject. Ensure your Docker setup uses TLS/SSL certificates (e.g., self-signed for development, Let's Encrypt for production).
+
+5. Integration with Tournaments/Gameplay
+
+Remove the temporary alias input when starting a game/tournament.
+
+Use the logged-in user's id and display_name from their session.
+
+When a game concludes, trigger the backend logic to record the match in the matches table and update wins/losses in the users table.
+
+By following these steps, you can build a robust user management system that meets the requirements of the module, providing persistent accounts, profiles, friend lists, and match history integrated into your ft_transcendence project. Remember to choose appropriate libraries for tasks like password hashing (bcrypt) and potentially database interaction (an ORM like TypeORM or Prisma if using Node.js, or PDO with prepared statements in PHP).
+
+
+
+----------------------------------------------
+
+
+Okay, perfect! Using Fastify (a high-performance Node.js web framework) and SQLite (a lightweight file-based SQL database) is a solid choice for this project.
+
+Here's a more concrete breakdown of implementing the "Standard user management" module with this stack:
+
+1. Project Setup & Dependencies
+
+Initialize Node.js project:
+
+npm init -y
+# or yarn init -y
+
+
+Install core dependencies:
+
+npm install fastify @fastify/sensible @fastify/cors sqlite3 bcrypt knex fastify-plugin @fastify/jwt @fastify/cookie @fastify/multipart @fastify/websocket dotenv
+# or yarn add fastify @fastify/sensible @fastify/cors sqlite3 bcrypt knex fastify-plugin @fastify/jwt @fastify/cookie @fastify/multipart @fastify/websocket dotenv
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Bash
+IGNORE_WHEN_COPYING_END
+
+fastify: The core framework.
+
+@fastify/sensible: Adds sensible defaults (error handling, etc.).
+
+@fastify/cors: Handles Cross-Origin Resource Sharing (needed for your SPA frontend).
+
+sqlite3: The SQLite driver for Node.js.
+
+bcrypt: For securely hashing passwords.
+
+knex: A powerful SQL query builder. Makes interacting with SQLite much cleaner and safer than raw SQL strings.
+
+fastify-plugin: Utility for creating reusable Fastify plugins.
+
+@fastify/jwt: Handles JSON Web Token generation and verification for authentication.
+
+@fastify/cookie: Needed by @fastify/jwt if you plan to send JWTs via cookies (though Authorization header is more common for SPAs). Also useful for session-based auth if you prefer that.
+
+@fastify/multipart: To handle file uploads (like avatars).
+
+@fastify/websocket: For real-time features like online status.
+
+dotenv: To manage environment variables (like JWT secrets) securely.
+
+2. Database Setup (SQLite + Knex)
+
+Configure Knex: Create a knexfile.js in your project root:
+
+// knexfile.js
+require('dotenv').config(); // Load .env variables
+
+module.exports = {
+  development: {
+    client: 'sqlite3',
+    connection: {
+      filename: process.env.DB_FILENAME || './mydb.sqlite' // Store DB path in .env
+    },
+    useNullAsDefault: true, // Recommended for SQLite
+    migrations: {
+      directory: './db/migrations'
+    },
+    seeds: {
+      directory: './db/seeds'
+    }
+  },
+  // Add production config if needed
+};
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+JavaScript
+IGNORE_WHEN_COPYING_END
+
+Create .env file:
+
+# .env
+DB_FILENAME=./transcendence_dev.sqlite
+JWT_SECRET=a_very_strong_and_secret_key_change_me # Change this!
+# Add other config like PORT if needed
+PORT=3000
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Dotenv
+IGNORE_WHEN_COPYING_END
+
+IMPORTANT: Add .env and *.sqlite to your .gitignore file!
+
+Create Migration Files:
+
+npx knex migrate:make create_users_table --knexfile knexfile.js
+npx knex migrate:make create_friendships_table --knexfile knexfile.js
+npx knex migrate:make create_matches_table --knexfile knexfile.js
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Bash
+IGNORE_WHEN_COPYING_END
+
+Define Schemas in Migrations: Edit the generated files in ./db/migrations/:
+
+*_create_users_table.js:
+
+exports.up = function(knex) {
+  return knex.schema.createTable('users', (table) => {
+    table.increments('id').primary();
+    table.string('username').unique().notNullable();
+    table.string('email').unique().notNullable();
+    table.string('password_hash').notNullable();
+    table.string('display_name').unique().notNullable();
+    table.string('avatar_url').nullable();
+    table.integer('wins').defaultTo(0).notNullable();
+    table.integer('losses').defaultTo(0).notNullable();
+    table.string('status').defaultTo('offline').notNullable(); // 'online', 'offline', 'in-game'
+    table.timestamps(true, true); // Adds created_at and updated_at
+  });
+};
+exports.down = function(knex) {
+  return knex.schema.dropTable('users');
+};
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+JavaScript
+IGNORE_WHEN_COPYING_END
+
+*_create_friendships_table.js:
+
+exports.up = function(knex) {
+  return knex.schema.createTable('friendships', (table) => {
+    table.increments('id').primary();
+    table.integer('user_id1').unsigned().notNullable().references('id').inTable('users').onDelete('CASCADE');
+    table.integer('user_id2').unsigned().notNullable().references('id').inTable('users').onDelete('CASCADE');
+    table.string('status').notNullable(); // 'pending', 'accepted', 'blocked'
+    table.timestamps(true, true);
+    table.unique(['user_id1', 'user_id2']); // Prevent duplicate pairs
+    table.check('user_id1 < user_id2'); // Convention to avoid duplicates like (1,2) and (2,1)
+  });
+};
+exports.down = function(knex) {
+  return knex.schema.dropTable('friendships');
+};
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+JavaScript
+IGNORE_WHEN_COPYING_END
+
+*_create_matches_table.js:
+
+exports.up = function(knex) {
+  return knex.schema.createTable('matches', (table) => {
+    table.increments('id').primary();
+    table.integer('player1_id').unsigned().notNullable().references('id').inTable('users').onDelete('CASCADE');
+    table.integer('player2_id').unsigned().notNullable().references('id').inTable('users').onDelete('CASCADE');
+    table.integer('player1_score').notNullable();
+    table.integer('player2_score').notNullable();
+    table.integer('winner_id').unsigned().nullable().references('id').inTable('users').onDelete('SET NULL');
+    table.string('game_type').defaultTo('pong').notNullable();
+    // tournament_id can be added later if needed
+    table.timestamp('match_date').defaultTo(knex.fn.now());
+  });
+};
+exports.down = function(knex) {
+    return knex.schema.dropTable('matches');
+};
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+JavaScript
+IGNORE_WHEN_COPYING_END
+
+Run Migrations:
+
+npx knex migrate:latest --knexfile knexfile.js
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Bash
+IGNORE_WHEN_COPYING_END
+
+This will create your transcendence_dev.sqlite file (or whatever you named it) with the tables defined.
+
+3. Fastify Backend Implementation
+
+Project Structure (Suggestion):
+
+.
+├── db/
+│   ├── migrations/
+│   └── seeds/      # Optional for test data
+├── plugins/
+│   ├── db.js       # Knex setup plugin
+│   └── auth.js     # Authentication logic plugin
+├── routes/
+│   ├── auth.js     # /api/auth/* routes
+│   ├── users.js    # /api/users/* routes
+│   ├── friends.js  # /api/friends/* routes
+│   └── ws.js       # WebSocket route
+├── services/       # Business logic (optional separation)
+├── uploads/        # Directory to store uploaded avatars (add to .gitignore!)
+├── .env
+├── .gitignore
+├── knexfile.js
+├── package.json
+└── server.js       # Main application entry point
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+IGNORE_WHEN_COPYING_END
+
+Knex Plugin (plugins/db.js):
+
+// plugins/db.js
+const fp = require('fastify-plugin');
+const knex = require('knex');
+
+async function dbConnector(fastify, options) {
+  try {
+    const knexConfig = require('../knexfile')[process.env.NODE_ENV || 'development'];
+    const knexInstance = knex(knexConfig);
+
+    // Test connection (optional but recommended)
+    await knexInstance.raw('SELECT 1');
+
+    fastify.decorate('knex', knexInstance);
+    fastify.log.info('Knex connection successful');
+
+    fastify.addHook('onClose', (instance, done) => {
+      instance.knex.destroy(done);
+    });
+  } catch (err) {
+    fastify.log.error('Knex connection error:', err);
+    process.exit(1); // Exit if DB connection fails
+  }
+}
+
+module.exports = fp(dbConnector);
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+JavaScript
+IGNORE_WHEN_COPYING_END
+
+Auth Plugin (plugins/auth.js):
+
+// plugins/auth.js
+const fp = require('fastify-plugin');
+const jwt = require('@fastify/jwt');
+
+async function authPlugin(fastify, options) {
+  fastify.register(jwt, {
+    secret: process.env.JWT_SECRET,
+    cookie: { // Optional: if you want to use cookies
+      cookieName: 'token',
+      signed: false // Use true if you sign cookies separately
+    }
+  });
+
+  // Decorator to easily protect routes
+  fastify.decorate('authenticate', async function(request, reply) {
+    try {
+      await request.jwtVerify();
+    } catch (err) {
+      reply.code(401).send({ message: 'Unauthorized: Invalid or missing token', error: err.message });
+    }
+  });
+}
+
+module.exports = fp(authPlugin);
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+JavaScript
+IGNORE_WHEN_COPYING_END
+
+Main Server (server.js):
+
+// server.js
+require('dotenv').config();
+const path = require('path');
+const Fastify = require('fastify');
+
+const fastify = Fastify({
+  logger: true // Enable logging
+});
+
+// Register essential plugins
+fastify.register(require('@fastify/cors'), { origin: '*' /* Configure properly for production */ });
+fastify.register(require('@fastify/sensible'));
+fastify.register(require('@fastify/cookie')); // Needed for JWT cookie support if used
+fastify.register(require('@fastify/multipart')); // For avatar uploads
+
+// Register custom plugins
+fastify.register(require('./plugins/db'));
+fastify.register(require('./plugins/auth'));
+
+// Register WebSocket plugin *before* WebSocket routes
+fastify.register(require('fastify-websocket'));
+
+// Register routes
+fastify.register(require('./routes/auth'), { prefix: '/api/auth' });
+fastify.register(require('./routes/users'), { prefix: '/api/users' });
+fastify.register(require('./routes/friends'), { prefix: '/api/friends' });
+fastify.register(require('./routes/ws'), { prefix: '/ws' }); // WebSocket endpoint
+
+// Simple health check route
+fastify.get('/ping', async (request, reply) => {
+  return { pong: 'it worked!' };
+});
+
+// Start the server
+const start = async () => {
+  try {
+    await fastify.listen({ port: process.env.PORT || 3000, host: '0.0.0.0' }); // Listen on all interfaces for Docker
+  } catch (err) {
+    fastify.log.error(err);
+    process.exit(1);
+  }
+};
+start();
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+JavaScript
+IGNORE_WHEN_COPYING_END
+
+Example Route (routes/auth.js - Registration):
+
+// routes/auth.js
+const bcrypt = require('bcrypt');
+const saltRounds = 10; // Cost factor for bcrypt
+
+// Basic validation schema (consider using Zod for more complex validation)
+const registerSchema = {
+  body: {
+    type: 'object',
+    required: ['username', 'email', 'password', 'display_name'],
+    properties: {
+      username: { type: 'string', minLength: 3 },
+      email: { type: 'string', format: 'email' },
+      password: { type: 'string', minLength: 6 },
+      display_name: { type: 'string', minLength: 3 }
+    }
+  }
+};
+
+async function authRoutes(fastify, options) {
+
+  fastify.post('/register', { schema: registerSchema }, async (request, reply) => {
+    const { username, email, password, display_name } = request.body;
+    const knex = fastify.knex; // Access Knex instance
+
+    try {
+      // Check for existing user/email (handle potential race conditions in production)
+      const existingUser = await knex('users')
+        .where({ username })
+        .orWhere({ email })
+        .orWhere({ display_name })
+        .first();
+
+      if (existingUser) {
+        // Be specific about the conflict if possible, but avoid revealing too much
+        if (existingUser.username === username) throw fastify.httpErrors.conflict('Username already exists');
+        if (existingUser.email === email) throw fastify.httpErrors.conflict('Email already registered');
+        if (existingUser.display_name === display_name) throw fastify.httpErrors.conflict('Display name already taken');
+      }
+
+      // Hash the password
+      const password_hash = await bcrypt.hash(password, saltRounds);
+
+      // Insert the new user
+      const [newUser] = await knex('users')
+        .insert({
+          username,
+          email,
+          password_hash,
+          display_name,
+        })
+        .returning(['id', 'username', 'email', 'display_name', 'created_at']); // Return some user data
+
+      reply.code(201).send({ message: 'User registered successfully', user: newUser });
+
+    } catch (err) {
+      // Log the detailed error internally
+      request.log.error(err);
+      // Send a generic or specific error response
+      if (err.statusCode) { // If it's a pre-defined Fastify HTTP error
+         reply.code(err.statusCode).send({ message: err.message });
+      } else {
+         reply.code(500).send({ message: 'Registration failed due to an internal error.' });
+      }
+    }
+  });
+
+  // --- LOGIN ROUTE ---
+  const loginSchema = {
+    body: {
+      type: 'object',
+      required: ['login', 'password'], // 'login' can be username or email
+      properties: {
+        login: { type: 'string' },
+        password: { type: 'string' }
+      }
+    }
+  };
+  fastify.post('/login', { schema: loginSchema } ,async (request, reply) => {
+      const { login, password } = request.body;
+      const knex = fastify.knex;
+
+      try {
+          const user = await knex('users')
+              .where('username', login)
+              .orWhere('email', login)
+              .first();
+
+          if (!user) {
+              throw fastify.httpErrors.unauthorized('Invalid credentials');
+          }
+
+          const match = await bcrypt.compare(password, user.password_hash);
+
+          if (!match) {
+              throw fastify.httpErrors.unauthorized('Invalid credentials');
+          }
+
+          // --- Generate JWT ---
+          const tokenPayload = {
+              id: user.id,
+              username: user.username,
+              // Add other non-sensitive info if needed
+          };
+          const token = await reply.jwtSign(tokenPayload, { expiresIn: '1h' }); // Token expires in 1 hour
+
+          // Update status to 'online' (potentially via WebSocket later)
+          await knex('users').where({ id: user.id }).update({ status: 'online', updated_at: knex.fn.now() });
+          // Notify friends via WebSocket here if implemented
+
+           // Send token back to client
+          reply.send({ message: 'Login successful', token: token, userId: user.id });
+
+      } catch(err) {
+          request.log.error(err);
+          if (err.statusCode) {
+              reply.code(err.statusCode).send({ message: err.message });
+          } else {
+              reply.code(500).send({ message: 'Login failed due to an internal error.' });
+          }
+      }
+  });
+
+
+  // --- LOGOUT ROUTE --- (Needs authentication)
+  fastify.post('/logout', { preHandler: [fastify.authenticate] }, async (request, reply) => {
+      const userId = request.user.id; // Decoded from JWT by preHandler
+      const knex = fastify.knex;
+
+      try {
+          // Update status to offline
+          await knex('users').where({ id: userId }).update({ status: 'offline', updated_at: knex.fn.now() });
+          // Notify friends via WebSocket here if implemented
+
+          // Client side should discard the token upon receiving success
+          reply.send({ message: 'Logout successful' });
+
+      } catch (err) {
+          request.log.error(err);
+          reply.code(500).send({ message: 'Logout failed' });
+      }
+  });
+
+  // Add other auth-related routes if needed (e.g., password reset)
+}
+
+module.exports = authRoutes;
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+JavaScript
+IGNORE_WHEN_COPYING_END
+
+User Profile Route (routes/users.js - Get Self):
+
+// routes/users.js
+
+async function userRoutes(fastify, options) {
+  const knex = fastify.knex;
+
+  // Get logged-in user's profile
+  fastify.get('/me', { preHandler: [fastify.authenticate] }, async (request, reply) => {
+    const userId = request.user.id; // From JWT payload
+
+    try {
+      const userProfile = await knex('users')
+        .select('id', 'username', 'email', 'display_name', 'avatar_url', 'wins', 'losses', 'status', 'created_at') // Exclude password_hash!
+        .where({ id: userId })
+        .first();
+
+      if (!userProfile) {
+        throw fastify.httpErrors.notFound('User not found');
+      }
+      reply.send(userProfile);
+    } catch (err) {
+      request.log.error(err);
+       if (err.statusCode) {
+           reply.code(err.statusCode).send({ message: err.message });
+       } else {
+           reply.code(500).send({ message: 'Error fetching profile' });
+       }
+    }
+  });
+
+  // --- Add PUT /me for updates ---
+  // --- Add POST /me/avatar for upload ---
+  // --- Add GET /:userId/profile for public profiles ---
+  // --- Add GET /:userId/matches for match history ---
+
+}
+
+module.exports = userRoutes;
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+JavaScript
+IGNORE_WHEN_COPYING_END
+
+WebSocket Route (routes/ws.js):
+
+// routes/ws.js
+
+// Store active connections (In-memory is simple, consider Redis for scaling)
+const connections = new Map(); // Map<userId, WebSocketConnection>
+
+async function websocketRoutes(fastify, options) {
+    const knex = fastify.knex;
+
+    fastify.get('/', { websocket: true }, async (connection /* SocketStream */, req /* FastifyRequest */) => {
+        let userId = null;
+
+        // 1. Authenticate WebSocket connection (e.g., using a token in query param or first message)
+        try {
+            // Example: Token in query string ?token=...
+            const token = req.query.token;
+            if (!token) throw new Error('No token provided');
+
+            const decoded = await fastify.jwt.verify(token); // Verify the token passed during connection
+            userId = decoded.id;
+
+             // Check if user exists and is valid
+             const user = await knex('users').where({ id: userId }).first();
+             if (!user) throw new Error('Invalid user');
+
+            // Check for existing connection for this user (optional: disconnect old one?)
+            if (connections.has(userId)) {
+                console.warn(`User ${userId} already connected. Closing previous connection.`);
+                connections.get(userId).socket.close(1001, 'New connection established');
+            }
+
+            // Store the connection
+            connections.set(userId, connection);
+            req.log.info(`WebSocket connected for user ${userId}`);
+
+            // Update user status in DB to 'online'
+            await knex('users').where({ id: userId }).update({ status: 'online', updated_at: knex.fn.now() });
+            // TODO: Notify friends user came online
+
+        } catch (err) {
+            req.log.error(`WebSocket authentication failed: ${err.message}`);
+            connection.socket.close(1008, 'Authentication failed'); // Close with policy violation code
+            return; // Stop processing if auth fails
+        }
+
+
+        // 2. Handle messages from the client
+        connection.socket.on('message', message => {
+            try {
+              // Handle incoming messages (chat, game invites, etc.)
+              req.log.info(`Received message from user ${userId}: ${message}`);
+              // Example: Broadcast message (you'll need more logic for specific actions)
+              // connections.forEach(conn => conn.socket.send(`User ${userId} says: ${message}`));
+            } catch (err) {
+               req.log.error(`Error processing message from user ${userId}: ${err}`);
+            }
+        });
+
+        // 3. Handle disconnection
+        connection.socket.on('close', async (code, reason) => {
+            req.log.info(`WebSocket disconnected for user ${userId}. Code: ${code}, Reason: ${reason}`);
+            if (userId && connections.get(userId) === connection) { // Ensure we remove the correct connection
+                connections.delete(userId);
+                // Update user status in DB to 'offline' only if no other connections exist for this user
+                 if (!connections.has(userId)) {
+                    await knex('users').where({ id: userId }).update({ status: 'offline', updated_at: knex.fn.now() });
+                    // TODO: Notify friends user went offline
+                }
+            }
+        });
+
+         // 4. Handle errors
+         connection.socket.on('error', error => {
+            req.log.error(`WebSocket error for user ${userId}: ${error}`);
+             // Consider closing the connection on certain errors
+        });
+    });
+
+    // Helper function to send message to a specific user (if needed)
+    fastify.decorate('sendWsMessage', (targetUserId, message) => {
+        const connection = connections.get(targetUserId);
+        if (connection) {
+            connection.socket.send(JSON.stringify(message)); // Always send JSON is a good practice
+            return true;
+        }
+        return false;
+    });
+
+    // Helper function to broadcast (if needed)
+     fastify.decorate('broadcastWsMessage', (message, excludeUserId = null) => {
+        const stringifiedMessage = JSON.stringify(message);
+        connections.forEach((conn, userId) => {
+            if (userId !== excludeUserId) {
+                conn.socket.send(stringifiedMessage);
+            }
+        });
+    });
+}
+
+module.exports = websocketRoutes;
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+JavaScript
+IGNORE_WHEN_COPYING_END
+
+4. Frontend Interaction (Typescript SPA)
+
+Use fetch or a library like axios to make requests to your Fastify API endpoints (/api/auth/register, /api/auth/login, /api/users/me, etc.).
+
+JWT Handling:
+
+After successful login, store the received JWT securely (e.g., in localStorage or sessionStorage - be aware of XSS risks with localStorage).
+
+For subsequent requests to protected API routes, include the JWT in the Authorization header:
+
+const token = localStorage.getItem('authToken'); // Or wherever you store it
+fetch('/api/users/me', {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  }
+});
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+TypeScript
+IGNORE_WHEN_COPYING_END
+
+WebSocket Client:
+
+Use the browser's built-in WebSocket API.
+
+Connect to your backend's WebSocket endpoint (e.g., ws://yourdomain.com/ws?token=YOUR_JWT_TOKEN). Pass the JWT for authentication.
+
+Implement onopen, onmessage, onerror, and onclose handlers to manage the connection and react to server messages (like friend status updates).
+
+5. Security & Refinements
+
+Input Validation: Use Fastify's built-in schema validation (schema property in route options) or libraries like zod for robust validation on the backend. Never trust frontend validation alone.
+
+Error Handling: Use @fastify/sensible and try...catch blocks with proper logging and user-friendly error responses.
+
+Rate Limiting: Implement rate limiting (e.g., using @fastify/rate-limit) on sensitive endpoints like login/register to prevent brute-force attacks.
+
+Environment Variables: Keep secrets (JWT secret, database credentials) out of your code using .env.
+
+HTTPS: Ensure your Docker setup enforces HTTPS.
+
+Avatar Uploads:
+
+Use @fastify/multipart.
+
+Validate file types and sizes strictly on the backend.
+
+Store files securely (e.g., in a designated /uploads volume) and save the path/URL in the avatar_url column. Consider using a file naming strategy that avoids conflicts and doesn't expose internal paths directly.
+
+Friendship Logic: Implement the logic for sending, accepting, rejecting, and blocking friends in routes/friends.js, updating the friendships table accordingly. Use WebSockets to notify users of new requests or status changes in real-time.
+
+Match History: After a game finishes, the game logic needs to make an API call (e.g., POST /api/matches) to record the result, updating the matches table and the wins/losses columns in the users table.
+
+This detailed setup provides a strong foundation for your user management system using Fastify and SQLite. Remember to implement the remaining routes (user updates, friend management, match history) following similar patterns.
