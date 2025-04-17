@@ -1,3 +1,4 @@
+// Accès à la base de données (getUserByUsername, etc.)
 import { getDb } from '../config/dbConfig.js';
 
 export async function getUserByUsername(username) {

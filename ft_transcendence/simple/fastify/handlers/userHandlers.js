@@ -1,3 +1,4 @@
+// Gère les requêtes Fastify (req, reply)
 import { getAllUsers, createUserAccount } from '../services/dbService.js';
 
 export async function getUsersHandler(req, reply) {
