@@ -1,11 +1,11 @@
 import Fastify from 'fastify';
+import { initializeDb } from './config/dbConfig.js';
+import userRoutes from './routes/users.js';
+
+// Static test
 import fastifyStatic from '@fastify/static';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
-// Imports des modules et routes
-import { initializeDb } from './config/dbConfig.js';
-import userRoutes from './routes/users.js';
 
 // __dirname équivalent en ESModules
 const __filename = fileURLToPath(import.meta.url);
@@ -19,18 +19,14 @@ fastify.register(fastifyStatic, {
   wildcard: false,
 });
 
-// Charger les routes
+// Fin du Static - reg routes
 fastify.register(userRoutes);
 
-// Démarrer l'application
 const start = async () => {
-  // Initialiser la base de données
-  await initializeDb();
-
-  // Lancer le serveur
+  await initializeDb(); // Initialiser la base de données
   try {
     await fastify.listen({ port: 3000, host: '0.0.0.0' });
-    console.log('Serveur démarré sur http://localhost:3000');
+    console.log('Serveur démarré sur https://KingPong.fr');
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);

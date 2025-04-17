@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 let db;
 
 // Ouvre la base de données SQLite
-export const initializeDb = async () => {
+export async function initializeDb() {
   const dbPath = path.join(__dirname, '..', 'db', 'database.sqlite');
 
   try {
@@ -33,5 +33,7 @@ export const initializeDb = async () => {
   }
 };
 
-export const getDb = () => db;
-
+export function getDb() {
+  if (!db) throw new Error('DB not initialized');
+  return db;
+}
