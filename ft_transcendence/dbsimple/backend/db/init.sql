@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS matches (
     FOREIGN KEY(winner_id) REFERENCES users(id)
 );
 
-INSERT INTO users (username, email, password_hash, display_name, avatar_url)
+INSERT OR IGNORE INTO users (username, email, password_hash, display_name, avatar_url)
 VALUES
   ('john_doe', 'john@example.com', 'hashed_password_123', 'John Doe', 'https://gravatar.com/avatar/3bd177d6fdf72eecc626c6cc19dfbdc6?s=400&d=identicon&r=g'),
   ('jane_doe', 'jane@example.com', 'hashed_password_456', 'Jane Doe', 'https://example.com/avatar2.jpg'),

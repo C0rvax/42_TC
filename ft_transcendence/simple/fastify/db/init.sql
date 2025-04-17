@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT UNIQUE NOT NULL,
@@ -19,10 +18,10 @@ CREATE TABLE IF NOT EXISTS friendships (
     user2_id INTEGER NOT NULL,
     status TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY(user_id1) REFERENCES users(id),
-    FOREIGN KEY(user_id2) REFERENCES users(id),
-    CONSTRAINT user_order CHECK (user_id1 < user_id2),
-    CONSTRAINT unique_pair UNIQUE (user_id1, user_id2)
+    FOREIGN KEY(user1_id) REFERENCES users(id),
+    FOREIGN KEY(user2_id) REFERENCES users(id),
+    CONSTRAINT user_order CHECK (user1_id < user2_id),
+    CONSTRAINT unique_pair UNIQUE (user1_id, user2_id)
 );
 
 CREATE TABLE IF NOT EXISTS matches (
@@ -41,3 +40,8 @@ CREATE TABLE IF NOT EXISTS matches (
     FOREIGN KEY(winner_id) REFERENCES users(id)
 );
 
+INSERT OR IGNORE INTO users (username, email, password_hash, display_name, avatar_url)
+VALUES
+  ('john_doe', 'john@example.com', 'hashed_password_123', 'John Doe', 'https://gravatar.com/avatar/3bd177d6fdf72eecc626c6cc19dfbdc6?s=400&d=identicon&r=g'),
+  ('jane_doe', 'jane@example.com', 'hashed_password_456', 'Jane Doe', 'https://example.com/avatar2.jpg'),
+  ('alice_smith', 'alice@example.com', 'hashed_password_789', 'Alice Smith', 'https://example.com/avatar3.jpg');
