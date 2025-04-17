@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 
 // Imports des modules et routes
 import { initializeDb } from './config/dbConfig.js';
-import userRoutes from './routes/index.js';
+import userRoutes from './routes/users.js';
 
 // __dirname équivalent en ESModules
 const __filename = fileURLToPath(import.meta.url);
