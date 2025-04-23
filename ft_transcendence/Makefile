@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-ENV_FILE	= srcs/.env
+ENV_FILE	= app/.env
 
-DC_FILE		= ./simple/docker-compose.yml
+DC_FILE		= app/docker-compose.yml
 
 CREDENTIALS	= secrets/credentials.txt
 

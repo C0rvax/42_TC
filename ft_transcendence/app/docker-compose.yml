@@ -1,0 +1,69 @@
+services:
+  gateaway: # entrypoint for services
+    container_name: gateaway
+    build: ./gateaway
+    ports:
+      - "8443:8443"
+      - "443:443"
+      - "80:80"
+    restart: always
+    env_file: .env
+    volumes:
+      - frontdata:/usr/share/nginx/html:ro
+    depends_on:
+      - user_service
+      - game_service
+      - frontend
+    networks:
+      - tranet
+
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    restart: always
+    volumes:
+      - frontdata:/app/dist
+    networks:
+      - tranet
+
+  user_service:
+    build: ./services/users
+    container_name: users
+    ports:
+      - "4000:4000"
+    env_file: .env
+    restart: always
+    networks:
+      - tranet
+
+  game_service:
+    build: ./services/game
+    ports:
+      - "3001:3001"
+    restart: always
+    networks:
+      - tranet
+
+  openapi_service:
+    build: ./services/openapi
+    ports:
+      - "8080:8080" # for internal use
+    networks:
+      - tranet
+    
+networks:
+  tranet:
+    name: tranet
+    driver: bridge
+
+volumes:
+  frontdata:
+    name: frontdata
+
+  userdb:
+    name: userdb
+    driver: local
+    driver_opts:
+      device: /home/${LOGNAME}/data/userdb
+      o: bind
+      type: none
