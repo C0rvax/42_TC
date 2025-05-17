@@ -6,7 +6,7 @@
 #    By: aduvilla <aduvilla@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 22:29:59 by aduvilla          #+#    #+#              #
-#    Updated: 2025/04/16 23:33:50 by aduvilla         ###   ########.fr        #
+#    Updated: 2025/05/15 23:48:57 by aduvilla         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ re			: down up
 
 fdown		:
 #	@sudo rm -rf ~/data
-	docker compose -f $(DC_FILE) down --rmi all -v
+	docker compose -f $(DC_FILE) down --rmi all -v --remove-orphans
 
 prune		: fdown
 	docker system prune -a --volumes --force
