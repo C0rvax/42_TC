@@ -4,26 +4,29 @@
 
 ## arthur
 
-- [ ] display_name unique ? soit changer edit soit register
-- [ ] logout -> supprimer token
-- [ ] login/logout maj du status
-- [ ] Affichage du status
+- [x] display_name unique
+- [x] logout -> supprimer token
+- [x] login/logout maj du status
+- [ ] confirmation par mail
+- [ ] changement mdp
+- [x] Affichage du status
 - [ ] tout matches
+- [ ] -> zod 
+- [x] La cle de securite (avec quoi on genere, ou est-ce qu'on la garde) -> cookie jwt_token
+- [x] httpOnly cookie for server-side ? -> yes
+- [ ] grafana
 
 ## 📌 Tâches initiales
 
 - [ ] jeu en local
 - [ ] redis pour les scores
-- [ ] Confirmation par mail
 - [ ] Pages && components && services in frontend to clean !
 - [ ] Les touches sensibles au click + Enter plus les fleches (experience user agreable)
 - [ ] Create Data Models + put match to DB (how we're handling data for score, etc ? -> local variable sent with socket to front
 at the end of a match -> call to database if need matchhistory)
-- [ ] La cle de securite (avec quoi on genere, ou est-ce qu'on la garde)
 - [ ] La gestion d'erreurs 
 - [ ] Implementer les models pour les appels a la base de donnee
 - [ ] POST a Artur avec les donnees du match
-- [ ] httpOnly cookie for server-side ?
 
 
 ---
@@ -31,7 +34,7 @@ at the end of a match -> call to database if need matchhistory)
 ## 🔐 Sécurité & Réseau
 
 - [ ] Ajouter des headers de sécurité dans Nginx (`X-Frame-Options`, `Content-Security-Policy`, etc.)
-- [ ] Protéger les communications inter-services avec un token (ex : JWT)
+- [x] Protéger les communications inter-services avec un token (ex : JWT)
 
 ---
 

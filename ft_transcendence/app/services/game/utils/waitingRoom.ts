@@ -1,7 +1,9 @@
 import { fastify } from "../server.ts";
-import db from "../database/connectDB.ts";
-// import Game from "../models/gameModel.js";
 import { clearMatchTimeout } from "../sockets/matchSocketHandler.ts";
+import { insertMatchToDB } from "../database/dbModels.ts";
+import { updateStatus } from "../database/dbModels.ts";
+
+// import Game from "../models/gameModel.js";
 
 let waitingList: Map<string, string> = new Map();
 
@@ -19,8 +21,11 @@ export async function waitingRoom() {
             return;
         }
         
+        // --- clear match timeout for matchmaking
+        clearMatchTimeout(player1.socketId);
+        clearMatchTimeout(player2.socketId);
+
         const matchId = crypto.randomUUID();
-        
         
         // assign sides random function ?
         const player1Data = {
@@ -39,11 +44,17 @@ export async function waitingRoom() {
         
         if (player1 && player2) { // si les jouers sont toujours dans le waiting room
             
-            // put to DB (plutot a la fin?)
-            // db
+            // put to db with game state ?
 
-            clearMatchTimeout(player1.socketId);
-            clearMatchTimeout(player2.socketId);
+            insertMatchToDB({
+                matchId,
+                player1_id: player1.playerId,
+                player2_id: player2.playerId,
+                player1_socket: player1.socketId,
+                player2_socket: player2.socketId
+            });
+            
+            updateStatus('in_progress', matchId);
 
             // notify players that they are matched
             fastify.io.to(player1.socketId).emit('matchFound', player1Data);
@@ -56,15 +67,9 @@ export async function waitingRoom() {
             fastify.log.error('Matchmaking aborted: one or both players disconnected');
             return;
         }
-        // TODO: create a game room for the players
-        // dans le game room a verifier si le joueur est bien dans la room (si il a pas deconnecte avant)
-        // const gameId = new Game(player1.playerId, player2.playerId);
-        // fastify.log.info("Game created with ID:", gameId); // how to generate a gameId ?
-        
     } catch (error) {
         fastify.log.error('Error during matchmaking:', error);
     }
-        
 }
 
 // --- Simple mathcmaking system : first in first out ---
@@ -78,10 +83,6 @@ function firstInFirstOut() {
 }
 
 // --- Waiting list management ---
-export async function getWaitingList() {
-    return waitingList;
-}
-
 export function getWaitingListSize() {
     return waitingList.size;
 }
@@ -94,7 +95,7 @@ export async function removePlayerFromWaitingList(socketId: string) {
             return;
         }
     }
-    fastify.log.warn(`Player with socket ID ${socketId} not found in waiting list.`);
+   // fastify.log.warn(`Player with socket ID ${socketId} not found in waiting list.`);
 }
 
 export async function addPlayerToWaitingList(display_name: string, socketId: string) {

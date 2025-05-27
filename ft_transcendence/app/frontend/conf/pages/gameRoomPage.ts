@@ -126,7 +126,8 @@ function initGame(container: HTMLButtonElement) {
 
 	// --- Event: quit button ---
 	container.addEventListener('click', () => {
-		socket.emit('quit', socket.id);
+		const matchId = sessionStorage.getItem('matchId');
+		socket.emit('quit', socket.id, matchId);
 		console.log('Quit game clicked');
 		cleanupSocket(socket);
 		sessionStorage.clear(); // clean storage --> users have to put there aliases again
@@ -134,8 +135,11 @@ function initGame(container: HTMLButtonElement) {
 	});
 
 	socket.on('gameFinished', () => {
-		// jaffiche une petit message avec le gangnant ?
-		showToast('You won!');
+		// TODO: une fenetre avec tous les infos sur le match
+		alert('You won!');
+		cleanupSocket(socket);
+		sessionStorage.clear();
+		navigateTo('/game');
 	});
 
 }
