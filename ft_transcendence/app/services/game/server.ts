@@ -7,15 +7,17 @@ import db from './database/connectDB.ts'
 import { setupPlugins } from './shared/auth-plugin/tokens.js'
 import matchRoutes from './routes/matchRoutes.ts'
 import { matchSocketHandler } from './sockets/matchSocketHandler.ts';
-// import { gameShemas } from './schemas/matchSchemas.ts'; TODO
+import { ZodTypeProvider } from "fastify-type-provider-zod"
+
+
 // import settingsRoutes from './routes/settings.ts' TODO
 
 
-const fastify: FastifyInstance = Fastify({ logger: true });
+const fastify: FastifyInstance = Fastify({ logger: true }).withTypeProvider<ZodTypeProvider>();
 
 // Initilize socket.io
 const io: Server = new Server(fastify.server, {
-  // cors -> dit au server depuis quels domains/ports il peut charger les resources 
+  // cors -> dit au server depuis quels domaine/ports il peut charger les resources 
     cors: {
       origin: "http://localhost:5000", // l'url du frontend
       methods: ["GET", "POST"],
@@ -39,7 +41,7 @@ fastify.setSerializerCompiler(serializerCompiler);
 
 // Register routes
 const registerRoutes = () => {
-  fastify.register(matchRoutes, { prefix: '/api/game/match' });
+  fastify.register(matchRoutes, { prefix: '/api/game/' });
   // fastify.register(settingsRoutes); TODO
 };
 
@@ -66,7 +68,6 @@ const start = async () => {
 
 const run = async() => {
   await setupPlugins(fastify);
-  // await registerAuthPlugin();
   registerRoutes();
   start();
 };

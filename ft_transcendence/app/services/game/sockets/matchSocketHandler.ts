@@ -1,12 +1,17 @@
 import { fastify } from "../server.ts";
 import type { Socket } from "socket.io";
-import { waitingRoom, removePlayerFromWaitingList, addPlayerToWaitingList, getWaitingListSize } from "../utils/waitingRoom.ts";
 import db from '../database/connectDB.ts';
+import { waitingRoom, removePlayerFromWaitingList, addPlayerToWaitingList, getWaitingListSize } from "../utils/waitingRoom.ts";
+import { fetchFirst, setGameResult } from "../database/dbModels.ts";
+// import { handlePlayerMove } from "./pongGame.ts";
+// import { PongGame } from "../sockets/pongGame.ts";
+import { createGameState, resetScore } from "./pongGame.ts";
+// @ts-ignore
+import { GameState, FRAME_RATE, TIMEOUT_MS } from "../shared/gameTypes.js";
+import { gameLoop, handleKeydown, handleKeyup} from "./pongGame.ts";
 
-import { fetchFirst, getRowByMatchId, setGameResult, updateStatus } from "../database/dbModels.ts";
-
-const TIMEOUT_MS = 60000; // 1 minute
 const timeouts: Map<string, NodeJS.Timeout> = new Map();
+//export let gameList: Map<string, PongGame> = new Map(); // string pour matchId
 
 // --- Socket.io handler for local and remote games ---
 export async function matchSocketHandler(socket: Socket): Promise<void> {
@@ -14,22 +19,22 @@ export async function matchSocketHandler(socket: Socket): Promise<void> {
     fastify.log.info(`Player connected: ${socket.id}`); 
 
     localSocketEvents(socket);
-    onlineSocketEvents(socket);
+   // onlineSocketEvents(socket);
 }
 
 // --- Main function for remote game socket handling
-function onlineSocketEvents(socket: Socket) {
+async function onlineSocketEvents(socket: Socket) {
     waitingRoomHandler(socket);
-    gameRoutine(socket);
+  //  gameRoutine(socket);
     disconnectionHandler(socket);
 }
 
 async function waitingRoomHandler(socket: Socket) {
     
-    socket.on('authenticate', async (display_name: string) => {
+    socket.on('authenticate', async ({ display_name, userId }) => {
         try {
             // store display_name and socket.id in waiting list if not already in        
-            const newPlayer = await addPlayerToWaitingList(display_name, socket.id);
+            const newPlayer = await addPlayerToWaitingList(display_name,userId, socket.id);
             
             if (newPlayer) {
                 socket.emit('inQueue');
@@ -48,24 +53,29 @@ async function waitingRoomHandler(socket: Socket) {
             throw err;
         }
     });
+
 }
 
 // --- Main function for game routine handling 
-async function gameRoutine(socket: Socket) {
-    socket.on('playerMove', (movement) => {
-        fastify.log.info(movement);
-        // handlePlayerMove(); // la logique du jeu est ici (ca update le state du jeu)
-    });
-}
+// async function gameRoutine(socket: Socket) {
+//     socket.on('playerMove', ({ leftPaddle, rightPaddle }) => {
+
+//         fastify.log.info(leftPaddle);
+//         fastify.log.info(rightPaddle);
+
+//         handlePlayerMove(leftPaddle, rightPaddle); // la logique du jeu est ici (ca update le state du jeu)
+//     });
+// }
+
 
 async function disconnectionHandler(socket: Socket)  {
     
     // quit Button on game
-    socket.on('quit', async (socketId: string, matchId: string, opponentId: string) =>  {
+    socket.on('quit', async (matchId: string, opponentId: string) =>  {
         
-        fastify.log.info(`Player with socket id ${socketId} quit the game`);
+        fastify.log.info(`Player with socket id ${socket.id} quit the game`);
         try {
-            const opponentSocketId: string | null = await getOpponentSocketId(socketId);
+            const opponentSocketId: string | null = await getOpponentSocketId(socket.id);
             if (opponentSocketId) {
                 fastify.io.to(opponentSocketId).emit('gameFinished', matchId);
                 // --- TEST ---
@@ -77,6 +87,7 @@ async function disconnectionHandler(socket: Socket)  {
             fastify.log.error(`Failed to find opponentSocketId: ${err}`);
             throw err;
         }
+   //     resetScore();
     });
     
     socket.on('disconnect', () => {
@@ -92,17 +103,15 @@ async function disconnectionHandler(socket: Socket)  {
 
 async function getOpponentSocketId(socketId: string): Promise<string | null> {
     const sql = `
-    SELECT * FROM matches
-    WHERE player1_socket = ? OR player2_socket = ?
-    ORDER BY created_at DESC
-    LIMIT 1
+        SELECT * FROM matches
+        WHERE player1_socket = ? OR player2_socket = ?
+        ORDER BY created_at DESC
+        LIMIT 1
     `;
     
     try {
         const match = await fetchFirst(db, sql, [socketId, socketId]);
         if (!match) return null;       
-        // fastify.log.info("PLAYER 1 SOCKET:" + match.player1_socket);
-        // fastify.log.info("PLAYER 2 SOCKET:" + match.player2_socket);
         if (match.player1_socket === socketId) {
             return match.player2_socket;
         } else {
@@ -117,12 +126,48 @@ async function getOpponentSocketId(socketId: string): Promise<string | null> {
 function localSocketEvents(socket: Socket) {
     
     // --- !!! TESTING FOR LOCAL ----
-    socket.on('startLocalGame', () => {
-        fastify.log.info('Game started locally');
-        socket.emit('gameStarted');
+    const state = createGameState();
+
+    socket.on('start',  () => {
+     
+        fastify.log.info('Game started locally.');
+        
+        startGameInterval(state, socket);        
     });
+    
+    socket.on('keydown', (keyCode: string) => {
+        handleKeydown(parseInt(keyCode))
+    });
+
+    socket.on('keyup', (keyCode: string) => {
+        handleKeyup(parseInt(keyCode));
+    });
+
+    
+    
     // -------------------------------
 }
+
+function startGameInterval(state: GameState, socket: Socket) {
+    const intervalId = setInterval(() => {
+        const winner: number = gameLoop(state, socket); // if == 0, game continue, == 1, player 1 win, == 2 player 2 won
+        
+        if (!winner) {
+            socket.emit('gameState', state);
+        } else {
+            socket.emit('gameOver');
+            resetScore();
+            clearInterval(intervalId);
+        }
+    }, 1000 / FRAME_RATE);
+
+    socket.on('quitGame', () => {
+        resetScore();
+        clearInterval(intervalId);
+        return ;
+    })
+}
+
 
 // --- Helper functions
 let matchmakingLock = false;
