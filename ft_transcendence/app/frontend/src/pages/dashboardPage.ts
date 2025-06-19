@@ -19,6 +19,7 @@ import { UserList, UserListProps } from '../components/userList.js';
 import { HeaderComponent } from '../components/headerComponent.js';
 import { showToast } from '../components/toast.js';
 import { MatchHistoryComponent } from '../components/matchHistoryComponent.js';
+import { t } from '../services/i18nService.js';
 
 export async function DashboardPage(): Promise<HTMLElement> {
 	const currentUser: User | null = getUserDataFromStorage();
@@ -27,7 +28,7 @@ export async function DashboardPage(): Promise<HTMLElement> {
 		navigateTo('/login');
 		const redirectMsg = document.createElement('div');
 		redirectMsg.className = 'min-h-screen flex items-center justify-center text-xl';
-		redirectMsg.textContent = 'Redirecting to login...';
+		redirectMsg.textContent = t('msg.redirect.login');
 		return redirectMsg;
 	}
 
@@ -37,7 +38,7 @@ export async function DashboardPage(): Promise<HTMLElement> {
 		console.error("Failed to fetch CSRF token:", error);
 		const errorMsg = document.createElement('div');
 		errorMsg.className = 'min-h-screen flex items-center justify-center text-xl text-red-500';
-		errorMsg.textContent = 'Error initializing page. Please try refreshing.';
+		errorMsg.textContent = t('msg.error.initializing');
 		return errorMsg;
 	}
 
@@ -79,12 +80,12 @@ export async function DashboardPage(): Promise<HTMLElement> {
 		return item;
 	}
 
-	sidebar.appendChild(createSidebarItem('Username', currentUser.username));
-	sidebar.appendChild(createSidebarItem('Display Name', currentUser.display_name));
-	sidebar.appendChild(createSidebarItem('Email', currentUser.email));
-	sidebar.appendChild(createSidebarItem('Creation Date', new Date(currentUser.created_at)));
-	sidebar.appendChild(createSidebarItem('Wins', currentUser.wins ?? 'N/A'));
-	sidebar.appendChild(createSidebarItem('Losses', currentUser.losses ?? 'N/A'));
+	sidebar.appendChild(createSidebarItem(t('sidebar.username'), currentUser.username));
+	sidebar.appendChild(createSidebarItem(t('sidebar.displayName'), currentUser.display_name));
+	sidebar.appendChild(createSidebarItem(t('sidebar.email'), currentUser.email));
+	sidebar.appendChild(createSidebarItem(t('sidebar.createdAt'), new Date(currentUser.created_at)));
+	sidebar.appendChild(createSidebarItem(t('sidebar.wins'), currentUser.wins ?? 'N/A'));
+	sidebar.appendChild(createSidebarItem(t('sidebar.losses'), currentUser.losses ?? 'N/A'));
 
 	// --- Contenu à onglets ---
 	const tabContentWrapper = document.createElement('div');
@@ -94,10 +95,10 @@ export async function DashboardPage(): Promise<HTMLElement> {
 	tabNavigation.className = 'flex space-x-1 border-b border-gray-200 mb-6';
 
 	const TABS = [
-		{ id: 'users', label: 'All Users', componentLoader: loadUsersContent },
-		{ id: 'friends', label: 'Friends', componentLoader: loadFriendsContent },
-		{ id: 'pending', label: 'Pending', componentLoader: loadPendingRequestsContent },
-		{ id: 'history', label: 'History Match', componentLoader: loadMatchHistoryContent },
+		{ id: 'users', label: t('dashboard.tabs.users'), componentLoader: loadUsersContent },
+		{ id: 'friends', label: t('dashboard.tabs.friends'), componentLoader: loadFriendsContent },
+		{ id: 'pending', label: t('dashboard.tabs.pending'), componentLoader: loadPendingRequestsContent },
+		{ id: 'history', label: t('dashboard.tabs.history'), componentLoader: loadMatchHistoryContent },
 	];
 	let activeTabId = TABS[0].id;
 
@@ -225,9 +226,9 @@ export async function DashboardPage(): Promise<HTMLElement> {
 		return FriendRequestsComponent({
 			receivedRequests: received,
 			sentRequests: sent,
-			onAcceptRequest: handleAcceptFriendRequest, // Réutilisation du handler global
-			onDeclineRequest: handleDeclineFriendRequest, // Réutilisation du handler global
-			onCancelRequest: handleCancelFriendRequest, // Réutilisation du handler global
+			onAcceptRequest: handleAcceptFriendRequest,
+			onDeclineRequest: handleDeclineFriendRequest,
+			onCancelRequest: handleCancelFriendRequest,
 		});
 	}
 
@@ -237,12 +238,11 @@ export async function DashboardPage(): Promise<HTMLElement> {
 		} else {
 			const errorMsg = document.createElement('div');
 			errorMsg.className = 'min-h-screen flex items-center justify-center text-xl text-red-500';
-			errorMsg.textContent = 'User not found. Please log in.';
+			errorMsg.textContent = t('error.user.notFound');
 			return errorMsg;
 		}
 	}
 
-	// Charger le contenu de l'onglet initial
 	await loadActiveTabContent();
 
 	return pageContainer;

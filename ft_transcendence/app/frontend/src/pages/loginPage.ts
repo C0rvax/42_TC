@@ -4,6 +4,7 @@ import { navigateTo } from '../services/router.js';
 import { LoginForm } from '../components/loginForm.js';
 import { LoginRequestBody } from '../shared/schemas/usersSchemas.js';
 import { ApiResult } from '../utils/types.js';
+import { t } from '../services/i18nService.js';
 
 export function LoginPage(): HTMLElement {
 	const container = document.createElement('div');
@@ -14,7 +15,7 @@ export function LoginPage(): HTMLElement {
 
 	const title = document.createElement('h2');
 	title.className = 'text-3xl font-bold mb-6 text-center text-gray-800';
-	title.textContent = 'Login';
+	title.textContent = t('login.title'); // Traduction
 
 	formContainer.appendChild(title);
 
@@ -24,7 +25,7 @@ export function LoginPage(): HTMLElement {
 	};
 
 	// Fonction de rappel pour le succès de la connexion
-	const handleLoginSuccess = (_userData: any) => {
+	const handleLoginSuccess = (userData: any) => {
 		setTimeout(() => { navigateTo('/dashboard'); }, 500);
 	};
 
@@ -40,11 +41,11 @@ export function LoginPage(): HTMLElement {
 	linksDiv.className = 'mt-6 text-center';
 	linksDiv.innerHTML = `
         <a href="/" data-link class="text-blue-600 hover:text-blue-800 text-sm">
-            Back to Home
+            ${t('login.backToHome')}
         </a>
         <span class="mx-2 text-gray-400">|</span>
         <a href="/register" data-link class="text-blue-600 hover:text-blue-800 text-sm">
-            Don't have an account? Register
+            ${t('login.registerLink')}
         </a>
     `;
 	formContainer.appendChild(linksDiv);

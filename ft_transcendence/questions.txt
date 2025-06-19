@@ -1,11 +1,7 @@
-- gestion des volumes docker
+- quels sont les wins types et a quoi ils peuvent nous servir ? 
 
-- dossier shared ?
+- environnement dev / prod ? on rend le projet deja compiler en prod ? fichiers persistants
 
-- changement de mdp ? validation par mail ? (pas dans le sujet)
+- road map
 
-- organisation .env (plusieurs fichiers .env ?)
-
-- scripts pour inject des variables .env dans les json ?
-
-- images dans le docker-compose ? (doit la dl a chaque run)
+- repartition travail
