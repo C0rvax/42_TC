@@ -9,33 +9,33 @@ import { GameState } from '../shared/gameTypes.js';
 // import { showToast } from '../components/toast.js';
 const PADDLE_HEIGHT = 120;
 const PADDLE_WIDTH = 20;
+const PADDLE_X_LEFT = 20;
+const PADDLE_X_RIGHT = 770;
+const BALL_RADIUS = 15;
 const BG_COLOUR = "rgb(0, 0, 0) ";
 const BALL_COLOUR = "rgb(255, 255, 255) ";
 const PADDLE_COLOUR = "rgb(255, 255, 255) ";
 
 const gameState: GameState = {
 	leftPaddle: {
-		x: 20,
 		y: 200,
-		vy: 0, // need to remove
 	},
 	rightPaddle: {
-		x: 770,
 		y: 200,
-		vy: 0,
 	},
 	ball: {
 		x: 400,
 		y: 250,
-		radius: 15,
-		vx: 0,
-		vy: 0,
 	},
+	score1: 0, // left
+	score2: 0 // right
 } 
 
 // boolean qui sert pour arreter dessiner le jeu
 let isGameOver = false;
 
+
+// TODO: JE PEUX UTILISER MODE ICI ET NE PAS FAIRE UN APPEL A SESSION STORAGE !
 export function GameRoomPage(mode: GameMode): HTMLElement {
 	
 	// Conteneur principal
@@ -100,6 +100,11 @@ export function GameRoomPage(mode: GameMode): HTMLElement {
 	container.appendChild(quitButton);
 	
 	const gameMode = sessionStorage.getItem('gameMode');
+	if (!gameMode) {
+		console.error('Match ID not found in sessionStorage');
+		return container;
+	}
+
 	if (gameMode === 'local') {
 		rightUsername.textContent = sessionStorage.getItem('player1');
 		leftUsername.textContent = sessionStorage.getItem('player2');
@@ -116,57 +121,13 @@ export function GameRoomPage(mode: GameMode): HTMLElement {
 	// --- Event: quit button ---
 	quitButton.addEventListener('click', quitButtonHandler);
 	
-	drawGame(gameState, ctx);
-
-	clientSocketHandler(scoreDisplay, gameMode, ctx);
-
+	updateScore(scoreDisplay, gameState);
+	
+	drawGame(gameState, ctx, scoreDisplay);
+	
+	clientSocketHandler(gameMode, ctx, scoreDisplay);
+	
 	return container;
-}
-
-
-function drawGame(state: GameState, ctx: CanvasRenderingContext2D) {
-	
-	// Efface tout le canvas
-	ctx.fillStyle = BG_COLOUR;
-	ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-	 
-	// DRAW BALL
-	const ball = state.ball;
-	 
-	ctx.fillStyle = BALL_COLOUR;
-	ctx.beginPath();
-	ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-	ctx.fill();
-	ctx.closePath();
-	
-	ctx.fillStyle = PADDLE_COLOUR;
-	
-	// DRAW LEFT PADDLE
-	const leftPaddle = state.leftPaddle;
-	
-	ctx.fillRect(leftPaddle.x, leftPaddle.y, PADDLE_WIDTH, PADDLE_HEIGHT);
-	
-	// DRAW RIGHT PADDLE
-	const rightPaddle = state.rightPaddle;
-	
-	ctx.fillRect(rightPaddle.x, rightPaddle.y, PADDLE_WIDTH, PADDLE_HEIGHT);
-	
-	
-}
-
-async function quitButtonHandler() {
-	const confirmed = await showCustomConfirm("Are you sure you want to quit this game?");
-	
-	if (confirmed) {
-		// const matchId = sessionStorage.getItem('matchId');
-		// const opponentId = sessionStorage.getItem('opponent');
-		isGameOver = true;
-		socket.emit('quitGame');
-		cleanupSocket(socket);
-		sessionStorage.clear(); // clean storage --> users have to put there aliases again
-		navigateTo('/local-game');
-		isGameOver = false;
-	}
 }
 
 // Function to set usernames if they're playing in remote
@@ -174,6 +135,11 @@ function setBoard(leftUsername: HTMLDivElement, rightUsername: HTMLDivElement) {
 	const side = sessionStorage.getItem('side');
 	const displayName = sessionStorage.getItem('displayName');
 	const opponent = sessionStorage.getItem('opponent');
+	
+	if (!side || !displayName || !opponent ) {
+		console.error("Session storaged doesn't contain what you need to set the board.");
+		return;
+	}
 	
 	if (side === 'left') {
 		leftUsername.textContent = displayName;
@@ -185,40 +151,180 @@ function setBoard(leftUsername: HTMLDivElement, rightUsername: HTMLDivElement) {
 }
 
 
-function clientSocketHandler(scoreDisplay: HTMLDivElement, gameMode: string | null, ctx: CanvasRenderingContext2D) {
+function drawGame(state: GameState, ctx: CanvasRenderingContext2D, scoreDisplay: HTMLDivElement) {
+	
+	
+	// Efface tout le canvas
+	ctx.fillStyle = BG_COLOUR;
+	ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+	
+	// DRAW BALL
+	const ball = state.ball;
+	
+	ctx.fillStyle = BALL_COLOUR;
+	ctx.beginPath();
+	ctx.arc(ball.x, ball.y, BALL_RADIUS, 0, Math.PI * 2);
+	ctx.fill();
+	ctx.closePath();
+	
+	ctx.fillStyle = PADDLE_COLOUR;
+	
+	// DRAW LEFT PADDLE
+	const leftPaddle = state.leftPaddle;
+	
+	ctx.fillRect(PADDLE_X_LEFT, leftPaddle.y, PADDLE_WIDTH, PADDLE_HEIGHT);
+	
+	// DRAW RIGHT PADDLE
+	const rightPaddle = state.rightPaddle;
+	
+	ctx.fillRect(PADDLE_X_RIGHT, rightPaddle.y, PADDLE_WIDTH, PADDLE_HEIGHT);
+	
+	
+}
+
+function updateScore(scoreDisplay: HTMLDivElement, state: GameState) {
+	if (scoreDisplay) {
+		scoreDisplay.textContent = `${state.score1} - ${state.score2}`;
+	}
+}
+
+function clientSocketHandler(gameMode: string | null, ctx: CanvasRenderingContext2D, scoreDisplay: HTMLDivElement) {
 	
 	if (!socket.connected) {
 		socket.connect();
 	}
 	
-	socket.emit('start');
+	
+	if (gameMode === 'remote') {
+		handleRemoteEvents(ctx, scoreDisplay);
+	}
+	
+	if (gameMode === 'local') {
+		handleLocalEvents(ctx, scoreDisplay);
+	}
 	
 	document.addEventListener('keydown', keydown);
 	document.addEventListener('keyup', keyup);
+	
+}
 
+function handleRemoteEvents(ctx: CanvasRenderingContext2D, scoreDisplay: HTMLDivElement) {
+	
+	
 	socket.on('gameState', (state: GameState) => {
-		handleGameState(state, ctx);
+		handleGameState(state, ctx, scoreDisplay);
+	});
+	
+	
+	socket.on('gameOver', () => {
+		onGameOver();
 	});
 
-	socket.on('scoreUpdated', ({ score1, score2 }: {score1: number, score2: number})  => {
-		if (scoreDisplay) {
-			scoreDisplay.textContent = `${score1} - ${score2}`;
-		}
-	});
+	socket.on('opponentLeft', () => {
+		onGameOver();
+	})
 
+}
+
+async function onGameOver() {
+	const matchId = sessionStorage.getItem('matchId');
+	if (!matchId) {
+		console.error("Match ID not found in sessionStorage.");
+		return;
+	}
+	
+	// fetch results with game DB
+	try {
+		const matchRes = await fetch(`/api/game/match/remote/${matchId}`);
+		if (!matchRes.ok) throw new Error('Failed to fetch match info');
+		const data = await matchRes.json();
+		
+		
+		const player1: number = parseInt(data.player1_id);
+		const player2: number = parseInt(data.player2_id);
+		const score1: number = parseInt(data.player1_score);
+		const score2: number = parseInt(data.player2_score);
+		
+		const url1: string = await getUserAvatar(player1);
+		const url2: string = await getUserAvatar(player2);
+		const name1: string = await getDisplayName(player1);
+		const name2: string = await getDisplayName(player2);
+		
+		setTimeout(() => {
+			showGameResult(name1, name2, score1, score2, url1, url2);
+			// stop drawing && clean
+			isGameOver = true;
+			cleanupSocket(socket);
+			cleanupListeners();
+			sessionStorage.clear();
+			navigateTo('/game');
+			isGameOver = false;
+		}, 500);
+		
+	} catch (err: unknown) {
+		console.log(`Failed to fetch data from db: ${err}`);
+		throw err;
+	}
+	
+}
+
+function handleLocalEvents(ctx: CanvasRenderingContext2D, scoreDisplay: HTMLDivElement) {
+	const matchId = sessionStorage.getItem('matchId');
+	if (!matchId) {
+		console.error("Match ID not found in sessionStorage.");
+		return;
+	}
+	socket.emit('startLocal', matchId);
+	
+	socket.on('gameState', (state: GameState) => {
+		handleGameState(state, ctx, scoreDisplay);
+	});
+	
 	socket.on('gameOver', () => {
 		isGameOver = true;
-		// showToast ? You want to play again ? 
 		cleanupSocket(socket);
-		sessionStorage.clear();
+		cleanupListeners();
+		if (sessionStorage.getItem('gameRegime') === 'tournament') {
+			navigateTo('/tournament');
+		}
 		navigateTo('/local-game');
+		sessionStorage.clear();
 		isGameOver = false;
 	});
 	
 }
 
+function handleGameState(state: GameState, ctx: CanvasRenderingContext2D, scoreDisplay: HTMLDivElement) {
+	if (isGameOver) return;
+	requestAnimationFrame(() => drawGame(state, ctx, scoreDisplay));
+	updateScore(scoreDisplay, state);
+}
+
+async function quitButtonHandler() {
+	const confirmed = await showCustomConfirm("Are you sure you want to quit this game?");
+	
+	if (confirmed) {
+		isGameOver = true;
+		cleanupSocket(socket);
+		cleanupListeners();
+		
+		const gameMode = sessionStorage.getItem('gameMode');
+		if (!gameMode) {
+			console.error('Game mode not found in session storage');
+			return;
+		}
+		if (gameMode === 'local'){
+			navigateTo('/local-game');
+		} else if (gameMode === 'remote') {
+			navigateTo('/game');
+		}
+		
+		sessionStorage.clear(); // clean storage --> users have to put there aliases again
+		isGameOver = false;
+	}
+}
+
 function keydown(e: KeyboardEvent) {
-//	console.log(e);
 	socket.emit('keydown', e.keyCode);
 }
 
@@ -226,22 +332,15 @@ function keyup(e: KeyboardEvent) {
 	socket.emit('keyup', e.keyCode);
 }
 
-
-function handleGameState(state: GameState, ctx: CanvasRenderingContext2D) {
-	if (isGameOver) return;
-	requestAnimationFrame(() => drawGame(state, ctx));
-}
-
-
 async function getDisplayName(userId: number) : Promise<string> {
 	const userRes = await fetch(`api/users/${userId}`);
 	if (!userRes.ok) throw new Error('Failed to fetch user info');
 	const userData = await userRes.json();
 	const displayName = userData.display_name;
-	
+					
 	return displayName;
 }
-
+				
 async function getUserAvatar(userId: number) : Promise<string> {
 	const userRes = await fetch(`/api/users/${userId}`);
 	if (!userRes.ok) throw new Error('Failed to fetch user info');
@@ -251,65 +350,7 @@ async function getUserAvatar(userId: number) : Promise<string> {
 	return url;
 }
 
-// function startOnlineGame(socket: SocketIOClient.Socket) {
-	
-// 	const side = sessionStorage.getItem('side');
-// 	let paddleMovement = 0;
-
-// 	document.addEventListener('keydown', (event) => {
-	// 		if (event.key === 'ArrowUp') {
-		// 			paddleMovement = -1;
-		// 		} else if (event.key === 'ArrowDown') {
-			// 			paddleMovement = 1;
-			// 		}
-			// 		socket.emit('playerMove', {
-				// 			side,
-				// 			paddleMovement,
-				// 		});
-				// 	})
-				
-				// 	document.addEventListener('keyup', (event) => {
-					// 		if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-						// 			paddleMovement = 0;
-						// 			socket.emit('playerMove', {
-							// 				side,
-							// 				paddleMovement,
-							// 			});
-							// 		}
-							// 	});
-							
-							// socket.on('stateUpdate', (data: string) => {
-	// 	const { leftPaddleUpdated, rightPaddleUpdated, ballUpdated } = JSON.parse(data);
-	// 	document.getElementById('left-paddle')!.style.top = `${leftPaddleUpdated}px`;
-	// 	document.getElementById('right-paddle')!.style.top = `${rightPaddleUpdated}px`;
-	// 	document.getElementById('ball')!.style.left = `${ballUpdated.x}px`;
-	// 	document.getElementById('ball')!.style.top = `${ballUpdated.y}px`;
-	// });
-	
-	//}
-	
-
-// socket.on('gameFinished', async (matchId: string) => {
-	// 	try {
-		// 		const matchRes = await fetch(`/api/game/match/${matchId}`);
-		// 		if (!matchRes.ok) throw new Error('Failed to fetch match info');
-		// 		const matchData = await matchRes.json();
-		// 		const data = matchData.data;
-		// 		const player1: number = data.player1_id; // userid
-		// 		const player2: number = data.player2_id;
-		// 		const score1: number = data.player1_score;
-		// 		const score2: number = data.player2_score;
-		
-		// 		const url1: string = await getUserAvatar(player1);
-		// 		const url2: string = await getUserAvatar(player2);
-		// 		const name1: string = await getDisplayName(player1);
-// 		const name2: string = await getDisplayName(player2);
-
-// 		setTimeout(() => {
-	// 			showGameResult(name1, name2, score1, score2, url1, url2);
-	// 		}, 2000);
-	
-	// 	} catch (err: unknown) {
-		// 		console.log(`Failed to fetch data from db: ${err}`);
-		// 	}
-		// });
+function cleanupListeners() {
+	document.removeEventListener('keydown', keydown);
+	document.removeEventListener('keyup', keyup);
+}

@@ -19,6 +19,7 @@ export const UserBaseSchema = z.object({
     status: UserOnlineStatusSchema.default(UserOnlineStatus.OFFLINE),
     created_at: z.string(), // Ou z.date()
     updated_at: z.string(), // Ou z.date()
+    is_two_fa_enabled: z.boolean().default(false),
 });
 export type User = z.infer<typeof UserBaseSchema>;
 
@@ -26,6 +27,12 @@ export const UserWithPasswordHashSchema = UserBaseSchema.extend({
     password_hash: z.string(),
 });
 export type UserWithPasswordHash = z.infer<typeof UserWithPasswordHashSchema>;
+
+export const UserWithSecretsSchema = UserBaseSchema.extend({
+    password_hash: z.string(),
+    two_fa_secret: z.string().nullable(),
+});
+export type UserWithSecrets = z.infer<typeof UserWithSecretsSchema>;
 
 // --- Schemas for API requests (Body, Params, Responses) ---
 
@@ -68,8 +75,40 @@ export const LoginRouteSchema = {
     response: {
         200: z.object({
             message: z.string(),
-            user: UserBaseSchema,
+            user: UserBaseSchema.optional(),
+            two_fa_required: z.boolean().optional(),
             // csrfToken: z.string().optional(),
+        }).refine(data => data.user || data.two_fa_required, {
+            message: "Either user data or two-factor authentication requirement must be present."
+        }),
+        400: ErrorResponseSchema,
+        401: ErrorResponseSchema,
+        403: ErrorResponseSchema,
+        500: ErrorResponseSchema
+    }
+};
+
+// --- CSRF TOKEN ---
+export const GetCsrfTokenResponseSchema = z.object({
+    csrfToken: z.string(),
+});
+
+export const GetCsrfTokenRouteSchema = {
+    response: {
+        200: GetCsrfTokenResponseSchema,
+        500: ErrorResponseSchema // En cas d'erreur de génération du token
+    }
+};
+
+// LOGIN WITH 2FA
+export const Login2FARouteSchema = {
+    response: {
+        200: z.object({
+            message: z.string(),
+            user: UserBaseSchema.optional(),
+            two_fa_required: z.boolean().optional(),
+        }).refine(data => data.user || data.two_fa_required, {
+            message: "Either user data or two-factor authentication requirement must be present."
         }),
         400: ErrorResponseSchema,
         401: ErrorResponseSchema,
@@ -110,6 +149,8 @@ export const UpdateUserBodySchema = z.object({
     email: UserBaseSchema.shape.email.optional(),
     display_name: UserBaseSchema.shape.display_name.optional(),
     avatar_url: UserBaseSchema.shape.avatar_url.optional(),
+    is_two_fa_enabled: UserBaseSchema.shape.is_two_fa_enabled.optional(),
+    two_fa_secret: UserWithSecretsSchema.shape.two_fa_secret.optional(),
 }).refine(data => Object.keys(data).length > 0, {
     message: "At least one change."
 });
@@ -168,3 +209,66 @@ export const JWTPayloadSchema = z.object({
 });
 export type JWTPayload = z.infer<typeof JWTPayloadSchema>;
 
+// --- 2FA Schemas ---
+export const Generate2FAResponseSchema = z.object({
+    qrCodeDataURL: z.string().url(),
+});
+export type Generate2FAResponse = z.infer<typeof Generate2FAResponseSchema>;
+
+export const Verify2FABodySchema = z.object({
+    token: z.string().length(6, "Token must be 6 digits.").regex(/^\d+$/),
+});
+export type Verify2FABodySchema = z.infer<typeof Verify2FABodySchema>;
+
+export const MessageResponseSchema = z.object({ message: z.string() });
+
+export const Generate2FARouteSchema = {
+    response: {
+        200: Generate2FAResponseSchema,
+        401: ErrorResponseSchema,
+        500: ErrorResponseSchema,
+    }
+};
+
+export const Verify2FARouteSchema = {
+    body: Verify2FABodySchema,
+    response: {
+        200: MessageResponseSchema,
+        400: ErrorResponseSchema,
+        401: ErrorResponseSchema,
+        500: ErrorResponseSchema,
+    }
+};
+
+export const Disable2FARouteSchema = {
+    response: {
+        200: MessageResponseSchema,
+        401: ErrorResponseSchema,
+        500: ErrorResponseSchema,
+    }
+};
+
+// UPDATE USER STATS
+export const UpdateUserStatsBodySchema = z.object({
+    result: z.enum(['win', 'loss'], {
+        required_error: "Result required.",
+        invalid_type_error: "Result must be 'win' or 'loss'."
+    })
+});
+export type UpdateUserStatsBody = z.infer<typeof UpdateUserStatsBodySchema>;
+
+export const UpdateUserStatsRouteSchema = {
+    params: UserIdParamsSchema,
+    body: UpdateUserStatsBodySchema,
+    response: {
+        200: z.object({
+            message: z.string(),
+            user: UserBaseSchema
+        }),
+        400: ErrorResponseSchema,
+        401: ErrorResponseSchema,
+        403: ErrorResponseSchema,
+        404: ErrorResponseSchema,
+        500: ErrorResponseSchema
+    }
+};

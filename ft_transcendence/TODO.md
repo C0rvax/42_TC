@@ -13,19 +13,22 @@
 - [x] verifier matches avec sasha
 - [x] -> zod/back 
 - [x] -> zod/front 
-- [ ] Réponse schemas
+- [x] Réponse schemas
 - [x] La cle de securite (avec quoi on genere, ou est-ce qu'on la garde) -> cookie jwt_token
 - [x] httpOnly cookie for server-side ? -> yes
-- [ ] 2FA
+- [x] 2FA
+- [ ] enable 2FA dans register page
 - [x] grafana
 - [ ] grafana/dashboards
 - [x] env
 - [x] fichiers partagés
-- [ ] tout traduire
-- [ ] La gestion d'erreurs 
+- [x] tout traduire
+- [ ] Vérifier les traductions
+- [x] La gestion d'erreurs 
 - [ ] nettoyage
-- [ ] Boutons pour amis pour lancer un match
-- [ ] Route pour update win loses / Permissions pour faire ca ?
+- [x] Route pour update win loses / Permissions pour faire ca ? -> pour l'instant n'importe qui d'identifié -> /api/users/:userId/stats en envoyant result: win/lose
+- [ ] Droit admin pour la route update win/lose
+- [x] Header partout
 
 ## 📌 Tâches initiales
 
@@ -37,8 +40,7 @@
 - [ ] Create Data Models + put match to DB (how we're handling data for score, etc ? -> local variable sent with socket to front
 at the end of a match -> call to database if need matchhistory)
 - [ ] La gestion d'erreurs 
-- [ ] Implementer les models pour les appels a la base de donnee
-- [ ] POST a Artur avec les donnees du match
+- [x] POST a Artur avec les donnees du match -> route pour les recuperer
 - [ ] Uniformiser les module et mduleResolution dans tsconfig.json
 
 ---
@@ -56,7 +58,7 @@ at the end of a match -> call to database if need matchhistory)
 - [ ] Ajouter des tests d’intégration (communication entre services)
 
 ---
-Implicit conversion of a 'symbol' to a 'string' will fail at runtime. Consider wrapping this expression in 'String(...)'.ts(2731)
+
 ## 🛠️ Observabilité & DevOps
 
 - [ ] Ajouter des logs lisibles et structurés dans chaque service

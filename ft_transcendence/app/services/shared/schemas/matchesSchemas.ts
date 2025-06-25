@@ -17,10 +17,10 @@ export const MatchBaseSchema = z.object({
     player2_id: z.number().int(),
     player1_socket: z.string(),
     player2_socket: z.string(),
-    player1_score: z.number().int().min(0).max(10),
-    player2_score: z.number().int().min(0).max(10),
-    winner_id: z.number().int(),
-    win_type: z.string(),
+    player1_score: z.number().int(),
+    player2_score: z.number().int(),
+    winner_id: z.number().nullable(),
+    win_type: z.string().nullable(),
     created_at: z.string(), // Ou z.date()
     // game_type: z.string(), // ajout arthur au cas ou
     // tournament_id: z.number().int().nullable(), // ajout arthur au cas ou
@@ -37,7 +37,6 @@ export type Match = z.infer<typeof MatchBaseSchema>;
 export const createLocalMatchBody = z.object({
     player1: z.string().min(1),
     player2: z.string().min(1),
-    isLocal: z.boolean(),
 }).strict();
 
 export type createLocalMatchRequestBody = z.infer<typeof createLocalMatchBody>;

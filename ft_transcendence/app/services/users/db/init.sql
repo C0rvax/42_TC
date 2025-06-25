@@ -9,7 +9,9 @@ CREATE TABLE IF NOT EXISTS users (
     losses INTEGER DEFAULT 0,
     status TEXT NOT NULL DEFAULT 'offline',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_two_fa_enabled BOOLEAN DEFAULT FALSE,
+    two_fa_secret TEXT DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS friendships (
@@ -43,4 +45,8 @@ VALUES
     (1, 4, 4, 'accepted'),-- Serge et jane sont amis (jane a initié)
     (1, 3, 3, 'pending'),-- Donkey_kong a envoyé une demande d'ami à Serge (en attente)
     (1, 2, 2, 'pending'),-- Xavier a envoyé une demande d'ami à Serge (en attente)
-    (2, 5, 5, 'blocked');-- Alice a bloqué Xavier
+    (2, 3, 2, 'pending'),-- Xavier a envoyé une demande d'ami à Donkey_kong (en attente)
+    (2, 4, 4, 'pending'),-- Jane a envoyé une demande d'ami à Xavier (en attente)
+    (2, 5, 5, 'accepted'),-- Alice a accepté la demande d'ami de Xavier (Xavier a initié)
+    (3, 4, 4, 'accepted'),-- Jane a accepté la demande d'ami de Donkey_kong (Donkey_kong a initié)
+    (3, 5, 5, 'accepted');-- Alice a accepté la demande d'ami de Donkey_kong (Donkey_kong a initié)

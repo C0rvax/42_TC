@@ -12,7 +12,6 @@ export const cookieOptions: CookieSerializeOptions = {
 	path: '/',
 	httpOnly: true,
 	secure: true,
-	// secure: config.NODE_ENV === 'production',
 	sameSite: 'strict',
 	maxAge: 60 * 60 * 24 * 7,
 };
@@ -21,7 +20,6 @@ export const csrfOptions: CookieSerializeOptions = {
 	path: '/',
 	httpOnly: true,
 	secure: true,
-	// secure: config.NODE_ENV === 'production',
 	sameSite: 'lax',
 	signed: true,
 	maxAge: 60 * 60 * 24 * 7,
@@ -91,7 +89,6 @@ declare module 'fastify' {
 		user: JWTPayload;
 	}
 }
-
 
 declare module '@fastify/jwt' {
 	interface FastifyJWT {

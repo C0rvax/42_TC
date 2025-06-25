@@ -20,6 +20,7 @@ import { HeaderComponent } from '../components/headerComponent.js';
 import { showToast } from '../components/toast.js';
 import { MatchHistoryComponent } from '../components/matchHistoryComponent.js';
 import { t } from '../services/i18nService.js';
+import { translateResultMessage } from '../services/error.js';
 
 export async function DashboardPage(): Promise<HTMLElement> {
 	const currentUser: User | null = getUserDataFromStorage();
@@ -42,23 +43,17 @@ export async function DashboardPage(): Promise<HTMLElement> {
 		return errorMsg;
 	}
 
-	// --- Conteneur principal de la page ---
 	const pageContainer = document.createElement('div');
 	pageContainer.className = 'min-h-screen bg-gray-200 p-4 sm:p-8 flex flex-col items-center';
 
-	// --- Le "Dashboard" lui-même ---
 	const dashboardWrapper = document.createElement('div');
 	dashboardWrapper.className = 'bg-white rounded-2xl shadow-2xl w-full max-w-6xl flex flex-col overflow-hidden';
 
-	// --- Section du haut (Langue, User Header) ---
 	const headerElement = HeaderComponent({ currentUser: currentUser! });
-	// Note: The global click listener for menu close is in HeaderComponent.
 
-	// --- Section principale (Sidebar + Contenu à onglets) ---
 	const mainSection = document.createElement('div');
-	mainSection.className = 'flex flex-1 min-h-[calc(100vh-150px)]'; // Hauteur minimale pour le contenu
+	mainSection.className = 'flex flex-1 min-h-[calc(100vh-150px)]';
 
-	// --- Sidebar ---
 	const sidebar = document.createElement('div');
 	sidebar.className = 'w-1/4 p-6 bg-gray-50 border-r border-gray-200 space-y-3 overflow-y-auto';
 
@@ -80,14 +75,13 @@ export async function DashboardPage(): Promise<HTMLElement> {
 		return item;
 	}
 
-	sidebar.appendChild(createSidebarItem(t('sidebar.username'), currentUser.username));
-	sidebar.appendChild(createSidebarItem(t('sidebar.displayName'), currentUser.display_name));
-	sidebar.appendChild(createSidebarItem(t('sidebar.email'), currentUser.email));
-	sidebar.appendChild(createSidebarItem(t('sidebar.createdAt'), new Date(currentUser.created_at)));
-	sidebar.appendChild(createSidebarItem(t('sidebar.wins'), currentUser.wins ?? 'N/A'));
-	sidebar.appendChild(createSidebarItem(t('sidebar.losses'), currentUser.losses ?? 'N/A'));
+	sidebar.appendChild(createSidebarItem(t('user.username'), currentUser.username));
+	sidebar.appendChild(createSidebarItem(t('user.displayName'), currentUser.display_name));
+	sidebar.appendChild(createSidebarItem(t('user.email'), currentUser.email));
+	sidebar.appendChild(createSidebarItem(t('user.createdAt'), new Date(currentUser.created_at)));
+	sidebar.appendChild(createSidebarItem(t('user.wins'), currentUser.wins ?? 'N/A'));
+	sidebar.appendChild(createSidebarItem(t('user.losses'), currentUser.losses ?? 'N/A'));
 
-	// --- Contenu à onglets ---
 	const tabContentWrapper = document.createElement('div');
 	tabContentWrapper.className = 'w-3/4 p-6 flex flex-col overflow-y-auto';
 
@@ -130,32 +124,30 @@ export async function DashboardPage(): Promise<HTMLElement> {
 	dashboardWrapper.appendChild(mainSection);
 	pageContainer.appendChild(dashboardWrapper);
 
-	// --- Fonctions de rappel pour les actions d'amitié (utilisées par UserList) ---
 	const handleSendFriendRequest = async (targetUserId: number) => {
 		const result = await sendFriendRequest(targetUserId);
-		showToast(result.message);
+		showToast(translateResultMessage(result.message), 'success');
 		if (activeTabId === 'users' || activeTabId === 'pending') await loadActiveTabContent(); // Recharger si l'onglet users ou pending est actif
 	};
 
 	const handleCancelFriendRequest = async (friendshipId: number) => {
 		const result = await cancelFriendRequest(friendshipId);
-		showToast(result.message);
+		showToast(translateResultMessage(result.message), 'success');
 		if (activeTabId === 'users' || activeTabId === 'pending') await loadActiveTabContent();
 	};
 
 	const handleAcceptFriendRequest = async (friendshipId: number) => {
 		const result = await acceptFriendRequest(friendshipId);
-		showToast(result.message, 'success');
+		showToast(translateResultMessage(result.message), 'success');
 		if (['users', 'pending', 'friends'].includes(activeTabId)) await loadActiveTabContent();
 	};
 
 	const handleDeclineFriendRequest = async (friendshipId: number) => {
 		const result = await declineFriendRequest(friendshipId);
-		showToast(result.message, 'success');
+		showToast(translateResultMessage(result.message), 'success');
 		if (activeTabId === 'users' || activeTabId === 'pending') await loadActiveTabContent();
 	};
 
-	// --- Logique de chargement et de changement d'onglet ---
 	async function switchTab(tabId: string) {
 		activeTabId = tabId;
 		tabNavigation.querySelectorAll('button').forEach(btn => {
@@ -183,7 +175,6 @@ export async function DashboardPage(): Promise<HTMLElement> {
 		}
 	}
 
-	// --- Fonctions de chargement spécifiques pour chaque onglet ---
 	async function loadUsersContent(): Promise<HTMLElement> {
 		const [usersData, friendsData, sentRequestsData, receivedRequestsData] = await Promise.all([
 			fetchUsers(),
@@ -212,7 +203,7 @@ export async function DashboardPage(): Promise<HTMLElement> {
 			friends: friends,
 			onRemoveFriend: async (friendshipId) => {
 				const result = await removeFriend(friendshipId);
-				showToast(result.message);
+				showToast(translateResultMessage(result.message), 'success');
 				if (['friends', 'users'].includes(activeTabId)) await loadActiveTabContent();
 			},
 		});

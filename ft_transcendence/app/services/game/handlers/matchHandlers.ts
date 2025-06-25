@@ -1,11 +1,14 @@
-import { type FastifyReply, type FastifyRequest } from 'fastify';
+import { FastifyReply, FastifyRequest } from 'fastify';
 import { getRowByMatchId, getMatchesByUserId } from '../database/dbModels.ts';
-import { MatchIdParams, MatchUserIdParams } from '../shared/schemas/matchesSchemas.ts';
+import { MatchIdParams, MatchUserIdParams } from '../middleware/matchesSchemas.ts';
+import { RemoteMatchBaseSchema } from '../middleware/matchesSchemas.ts';
+import { localGames } from '../pong/matchSocketHandler.ts';
+//@ts-ignore
+import { JWTPayload } from '../shared/schemas/usersSchemas.js';
+import { createGameState } from '../pong/pongGame.ts';
 
-// http post /api/game/match
-export async function createMatchHandler(req: FastifyRequest, reply: FastifyReply) {
-    req.log.info(`Client envoie: ${JSON.stringify(req.validatedBody)}`);
-    
+// POST /api/match/local 
+export async function createLocalMatchHandler(req: FastifyRequest, reply: FastifyReply) {    
     const { player1, player2 } = req.validatedBody;
 
     const match = {
@@ -15,10 +18,43 @@ export async function createMatchHandler(req: FastifyRequest, reply: FastifyRepl
         startTime: new Date().toISOString(),
     };
 
+    const state = createGameState();
+    const intervalId: NodeJS.Timeout | null = null;
+
+    localGames.set(match.matchId, { state, intervalId });
+    
     return reply.code(201).send(match);
 }
 
-// Handler to get match details by matchId
+// POST /api/match/local/cancel : HTTP API endpoint allowing partial usage of game via CLI (you can cancel a match via a terminal)
+export async function cancelLocalMatchHandler(req: FastifyRequest, reply: FastifyReply) {
+    const { matchId } = req.validatedBody;
+
+    const game = localGames.get(matchId);
+
+    if (!game) {
+        return reply.code(404).send({ error: 'Match not found or already cancelled' });
+    }
+
+    localGames.delete(matchId);
+
+    return reply.code(201).send({ message: `Match ${matchId} cancelled`});
+}
+
+// GET /api/match/local/state/:matchId : HTTP API endpoint that can be used via CLI to follow game state in real time (left/right paddles positions, ball position, score)
+export async function getLocalMatchState(req: FastifyRequest<{ Params: MatchIdParams }>, reply: FastifyReply) {
+    const { matchId } = req.params;
+
+    const game = localGames.get(matchId);
+
+    if (!game) {
+        return reply.code(404).send({ error: 'Match not found or already cancelled' });
+    }
+
+    return reply.code(200).send(game.state); 
+}
+
+// GET /api/match/remote/:matchId
 export async function getMatchIdHandler(req: FastifyRequest<{ Params: MatchIdParams }>, reply: FastifyReply) {
     const { matchId } = req.params;
 
@@ -30,8 +66,8 @@ export async function getMatchIdHandler(req: FastifyRequest<{ Params: MatchIdPar
     try {
         const match = await getRowByMatchId(matchId);
         if (match) {
-            return reply.code(200).send({
-                data: {
+
+            const res = {
                     id: match.id,
                     matchId: match.matchId,
                     player1_id: match.player1_id,
@@ -44,8 +80,11 @@ export async function getMatchIdHandler(req: FastifyRequest<{ Params: MatchIdPar
                     win_type: match.win_type,
                     created_at: match.created_at,
                     status: match.status
-                }
-            });
+            };
+
+            const validatedRes = RemoteMatchBaseSchema.parse(res);
+
+            return reply.code(200).send(validatedRes);
         }  else {
             return reply.code(404).send({ error: 'Match not found' });
         }
@@ -58,23 +97,23 @@ export async function getMatchIdHandler(req: FastifyRequest<{ Params: MatchIdPar
     }
 }
 
-// si tu utilises des schemas zod pour tes routes, tu peux faire comme ca
-// type AuthenticatedRequest = FastifyRequest & { user: JWTPayload };
-// export async function getMatchByUserHandler(req: AuthenticatedRequest, reply: FastifyReply) {
-export async function getMatchByUserHandler(req: FastifyRequest<{ Params: MatchUserIdParams}>, reply: FastifyReply) {
-    // tu recois forcement une sting ici dans req.params.userId donc
-    // const userId = parseInt(req.params.userId, 10); // si pas de schemas zod pour tes routes
-    // const userId = parseInt((req.params as UserIdParams).userId, 10); // si tu utilises des schemas zod pour tes routes
-    const { userId } = req.params;
+type AuthenticatedRequest = FastifyRequest & { user: JWTPayload };
+
+// GET /history/:userId : all matches fetched for this userId
+export async function getMatchByUserHandler(req: AuthenticatedRequest, reply: FastifyReply) {
+    const userId = parseInt((req.params as MatchUserIdParams).userId, 10);
 
     if (!userId) {
         return reply.code(400).send({ error: 'UserId is required'});
     }
-    req.log.info(`Fetching matches history for user: ${userId}`);
     
     try {
         const matches = await getMatchesByUserId(userId);
-        // console.log(matches);
+
+        if (!matches) {
+            return reply.code(404).send({ error: 'Matches not found' });
+        }
+
         return reply.code(200).send(matches);
 
     } catch (err: unknown) {
@@ -83,30 +122,4 @@ export async function getMatchByUserHandler(req: FastifyRequest<{ Params: MatchU
             return reply.code(500).send({ error: err.message });
         }
     }
-
 }
-
-// --- PAS ENCORE IMPLEMENTE -----------
-export async function getMatchStateHandler(eq: FastifyRequest, reply: FastifyReply) {
-
-}
-
-export async function quitMatchHandler(req: FastifyRequest, reply: FastifyReply) {
-
-}
-
-// MAYBE BE DEPRECATED
-export async function startMatchHandler(req: FastifyRequest, reply: FastifyReply) {
-
-}
-
-// FOR INVITATION FUNCTIONALITY
-export async function acceptMatchHandler(req: FastifyRequest, reply: FastifyReply) {
-
-}
-
-export async function rejectMatchHandler(req: FastifyRequest, reply: FastifyReply) {
-
-}
-
-// --------------------------------------

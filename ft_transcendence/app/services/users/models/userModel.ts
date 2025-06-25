@@ -1,7 +1,21 @@
-// app/services/users/models/userModel.ts
 import { getDb } from '../utils/dbConfig.js';
-// import { ERROR_KEYS } from '../utils/appError.js';
-import { User, UserWithPasswordHash, CreateUserPayload, UpdatedUserResult, UpdateUserPayload, UserOnlineStatus } from '../shared/schemas/usersSchemas.js'; // Importez vos types
+import { User, UserWithSecrets, CreateUserPayload, UpdatedUserResult, UpdateUserPayload, UserOnlineStatus } from '../shared/schemas/usersSchemas.js'; // Importez vos types
+
+function toAppUser(dbUser: any): User {
+    if (!dbUser) return dbUser;
+    return {
+        ...dbUser,
+        is_two_fa_enabled: dbUser.is_two_fa_enabled === 1
+    };
+}
+
+function toAppUserWithSecrets(dbUser: any): UserWithSecrets {
+    if (!dbUser) return dbUser;
+    return {
+        ...dbUser,
+        is_two_fa_enabled: dbUser.is_two_fa_enabled === 1
+    };
+}
 
 /**
  * Retrieves all users from the database.
@@ -9,37 +23,41 @@ import { User, UserWithPasswordHash, CreateUserPayload, UpdatedUserResult, Updat
  */
 export async function getAllUsersFromDb(): Promise<User[]> {
 	const db = getDb();
-	return db.all<User[]>('SELECT id, username, email, display_name, avatar_url, wins, losses, status, created_at, updated_at FROM users');
+	const users = await db.all<any[]>('SELECT id, username, email, display_name, avatar_url, wins, losses, status, created_at, updated_at, is_two_fa_enabled FROM users');
+    return users.map(toAppUser);
 }
 
 /**
  * Retrieves a user by their display name.
  * @param {string} displayName - The display name of the user.
- * @returns {Promise<UserWithPasswordHash | undefined>} The user object or undefined if not found.
+ * @returns {Promise<UserWithSecrets | undefined>} The user object or undefined if not found.
  */
-export async function getUserByDisplayNameFromDb(displayName: string): Promise<UserWithPasswordHash | undefined> {
+export async function getUserByDisplayNameFromDb(displayName: string): Promise<UserWithSecrets | undefined> {
 	const db = getDb();
-	return db.get<UserWithPasswordHash>('SELECT * FROM users WHERE display_name = ?', [displayName]);
+	const user = await db.get<any>('SELECT * FROM users WHERE display_name = ?', [displayName]);
+    return user ? toAppUserWithSecrets(user) : undefined;
 }
 
 /**
  * Retrieves a user by their username.
  * @param {string} username - The username of the user.
- * @returns {Promise<UserWithPasswordHash | undefined>} The user object or undefined if not found.
+ * @returns {Promise<UserWithSecrets | undefined>} The user object or undefined if not found.
  */
-export async function getUserByUsernameFromDb(username: string): Promise<UserWithPasswordHash | undefined> {
+export async function getUserByUsernameFromDb(username: string): Promise<UserWithSecrets | undefined> {
 	const db = getDb();
-	return db.get<UserWithPasswordHash>('SELECT * FROM users WHERE username = ?', [username]);
+	const user = await db.get<any>('SELECT * FROM users WHERE username = ?', [username]);
+    return user ? toAppUserWithSecrets(user) : undefined;
 }
 
 /**
  * Retrieves a user by their email.
  * @param {string} email - The email of the user.
- * @returns {Promise<UserWithPasswordHash | undefined>} The user object or undefined if not found.
+ * @returns {Promise<UserWithSecrets | undefined>} The user object or undefined if not found.
  */
-export async function getUserByEmailFromDb(email: string): Promise<UserWithPasswordHash | undefined> {
+export async function getUserByEmailFromDb(email: string): Promise<UserWithSecrets | undefined> {
 	const db = getDb();
-	return db.get<UserWithPasswordHash>('SELECT * FROM users WHERE email = ?', [email]);
+	const user = await db.get<any>('SELECT * FROM users WHERE email = ?', [email]);
+    return user ? toAppUserWithSecrets(user) : undefined;
 }
 
 /**
@@ -49,7 +67,19 @@ export async function getUserByEmailFromDb(email: string): Promise<UserWithPassw
  */
 export async function getUserByIdFromDb(userId: number): Promise<User | undefined> {
 	const db = getDb();
-	return db.get<User>('SELECT id, username, email, display_name, avatar_url, wins, losses, status, created_at, updated_at FROM users WHERE id = ?', [userId]);
+	const user = await db.get<any>('SELECT id, username, email, display_name, avatar_url, wins, losses, status, created_at, updated_at, is_two_fa_enabled FROM users WHERE id = ?', [userId]);
+    return user ? toAppUser(user) : undefined;
+}
+
+/**
+ * Retrieves a user with their secrets by ID. For internal use.
+ * @param {number} userId - The ID of the user to retrieve.
+ * @returns {Promise<UserWithSecrets | undefined>} The user object with secrets, or undefined if not found.
+ */
+export async function getUserWithSecretsByIdFromDb(userId: number): Promise<UserWithSecrets | undefined> {
+	const db = getDb();
+	const user = await db.get<any>('SELECT * FROM users WHERE id = ?', [userId]);
+    return user ? toAppUserWithSecrets(user) : undefined;
 }
 
 /**
@@ -79,12 +109,12 @@ export async function createUser(
  */
 export async function updateUserInDb(userId: number, updates: UpdateUserPayload): Promise<UpdatedUserResult> {
 	const db = getDb();
-	const fields = Object.keys(updates).filter(k => typeof k === 'string') as Array<keyof UpdateUserPayload>; // Clés typées
+	const fields = Object.keys(updates).filter(k => (updates as any)[k] !== undefined) as Array<keyof UpdateUserPayload>;
 	if (fields.length === 0) {
 		return { changes: 0 };
 	}
 	const setClause = fields.map((field) => `${String(field)} = ?`).join(', ');
-	const values: (string | number)[] = fields.map((field) => updates[field] as string | number);
+	const values: (string | number | boolean | null)[] = fields.map((field) => (updates as any)[field]);
 
 	const sql = `UPDATE users SET ${setClause}, updated_at = CURRENT_TIMESTAMP WHERE id = ?`;
 	values.push(userId);
@@ -111,7 +141,6 @@ export async function deleteUserFromDb(userId: number): Promise<void> {
 	const db = getDb();
 	const result = await db.run('DELETE FROM users WHERE id = ?', [userId]);
 	if (result.changes === 0) {
-		// throw new Error(ERROR_MESSAGES.USER_NOT_FOUND);
 		throw new Error(`User with ID ${userId} not found for deletion.`);
 	}
 }
@@ -153,4 +182,34 @@ export async function isDisplayNameInDb(display_name: string, id?: number): Prom
 	query += ') AS "exists"';
 	const row = await db.get<{ exists: number }>(query, params);
 	return row?.exists === 1;
+}
+
+/**
+ * Incrémente le compteur de victoires ou de défaites d'un utilisateur dans la base de données.
+ * @param {number} userId - L'ID de l'utilisateur à mettre à jour.
+ * @param {'win' | 'loss'} result - Le résultat du match.
+ * @returns {Promise<UpdatedUserResult>} Le résultat de l'opération de la base de données.
+ */
+export async function incrementUserStatsInDb(userId: number, result: 'win' | 'loss'): Promise<UpdatedUserResult> {
+    const db = getDb();
+    const columnToUpdate = result === 'win' ? 'wins' : 'losses';
+
+    // On utilise `??` pour s'assurer que columnToUpdate ne sera jamais une valeur non autorisée,
+    // même si c'est déjà garanti par le type. C'est une sécurité supplémentaire contre l'injection SQL.
+    if (!['wins', 'losses'].includes(columnToUpdate)) {
+        throw new Error('Invalid column name for stats update.');
+    }
+
+    const sql = `UPDATE users SET ${columnToUpdate} = ${columnToUpdate} + 1, updated_at = CURRENT_TIMESTAMP WHERE id = ?`;
+
+    try {
+        const dbResult = await db.run(sql, [userId]);
+        if (dbResult.changes === 0) {
+            throw new Error(`User with ID ${userId} not found for stats update.`);
+        }
+        return { changes: dbResult.changes };
+    } catch (error: any) {
+        console.error('Error updating user stats:', error);
+        throw error;
+    }
 }
