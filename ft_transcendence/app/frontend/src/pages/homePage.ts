@@ -7,18 +7,13 @@ export function HomePage(): HTMLElement {
 
 	const pageWrapper = document.createElement('div');
 	pageWrapper.className = 'flex flex-col min-h-screen bg-cover bg-center';
-	pageWrapper.style.backgroundImage = "url('/assets/jungle1.jpg')";
-	// pageWrapper.className = 'flex flex-col min-h-screen bg-gray-100';
+	pageWrapper.style.backgroundImage = "url('/assets/background.jpg')";
 
 	const headerElement = HeaderComponent({ currentUser });
 	pageWrapper.appendChild(headerElement);
 
 	const container = document.createElement('div');
 	container.className = 'relative bg-cover bg-center flex-grow text-white flex flex-col items-center justify-center p-4 sm:p-8';
-	// container.style.backgroundImage = "url('/assets/jungle1.jpg')";
-
-	const overlay = document.createElement('div');
-	overlay.className = 'absolute inset-0 bg-black/40';
 
 	const mainContent = document.createElement('main');
 	mainContent.className = 'relative z-10 flex flex-col items-center text-center';
@@ -33,15 +28,8 @@ export function HomePage(): HTMLElement {
 
 	const playButton = document.createElement('a');
 	playButton.href = '/local-game';
-	// playButton.href = currentUser ? '/game' : '/local-game'; // If you want to redirect to the game page for logged-in users
 	playButton.setAttribute('data-link', '');
-	playButton.className = `
-		bg-red-600 hover:bg-red-500 text-white font-black 
-		text-2xl sm:text-4xl py-4 sm:py-6 px-10 sm:px-16 rounded-full shadow-2xl 
-		uppercase tracking-widest 
-		transition-all duration-300 ease-in-out 
-		transform hover:scale-110 hover:shadow-red-500/50
-	`;
+	playButton.className = 'bg-red-600 hover:bg-red-500 text-white font-black text-2xl sm:text-4xl py-4 sm:py-6 px-10 sm:px-16 rounded-full shadow-2xl uppercase tracking-widest transition-all duration-300 ease-in-out transform hover:scale-110 hover:shadow-red-500/50';
 	playButton.textContent = t('app.button');
 
 	mainContent.appendChild(title);
@@ -49,7 +37,6 @@ export function HomePage(): HTMLElement {
 	mainContent.appendChild(playButton);
 
 	const footer = document.createElement('footer');
-	// footer.className = 'relative z-10 w-full text-center py-4';
 	footer.className = 'relative z-10 w-full text-center py-2 bg-gray-900 bg-opacity-70';
 
 	const apiLink = document.createElement('a');
@@ -60,7 +47,6 @@ export function HomePage(): HTMLElement {
 
 	footer.appendChild(apiLink);
 
-	container.appendChild(overlay);
 	container.appendChild(mainContent);
 
 	pageWrapper.appendChild(container);
