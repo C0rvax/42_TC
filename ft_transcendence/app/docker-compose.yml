@@ -1,0 +1,190 @@
+secrets:
+  gf_admin_pwd:
+    file: ../secrets/gf_admin_pwd.txt
+  jwt_secret:
+    file: ../secrets/jwt_secret.txt
+  cookie_secret:
+    file: ../secrets/cookie_secret.txt
+  session_secret:
+    file: ../secrets/session_secret.txt
+  crypto_secret:
+    file: ../secrets/crypto_secret.txt
+  api_key:
+    file: ../secrets/api_key.txt
+
+networks:
+  tranet:
+    name: tranet
+    driver: bridge
+  monitoring:
+    name: monitoring
+    driver: bridge
+
+volumes:
+  frontdata:
+    name: frontdata
+
+services:
+  gateaway: # entrypoint for services
+    container_name: gateaway
+    build: ./gateaway
+    ports:
+      - "8443:8443"
+    restart: always
+    env_file: ./env/gateaway.env
+    volumes:
+      - frontdata:/usr/share/nginx/html:ro
+    depends_on:
+      - users
+      - game
+      - frontend
+    networks:
+      - tranet
+      - monitoring
+
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    restart: always
+    ports:
+      - "5000:5000" # for development (live-server)
+    volumes:
+      - frontdata:/app/dist
+    networks:
+      - tranet
+
+  users:
+    build: ./services/users
+    container_name: users
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./env/common.env
+      - ./env/routes.env
+    environment:
+      - JWT_SECRET__FILE=/run/secrets/jwt_secret
+      - COOKIE_SECRET__FILE=/run/secrets/cookie_secret
+      - SESSION_SECRET__FILE=/run/secrets/session_secret
+      - CRYPTO_SECRET__FILE=/run/secrets/crypto_secret
+      - API_KEY__FILE=/run/secrets/api_key
+    secrets:
+      - jwt_secret
+      - cookie_secret
+      - session_secret
+      - crypto_secret
+      - api_key
+    restart: always
+    volumes:
+      - ./services/shared:/app/shared:ro
+    networks:
+      - tranet
+
+  game:
+    build: ./services/game
+    container_name: game
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./env/common.env
+      - ./env/routes.env
+    environment:
+      - JWT_SECRET__FILE=/run/secrets/jwt_secret
+      - COOKIE_SECRET__FILE=/run/secrets/cookie_secret
+      - SESSION_SECRET__FILE=/run/secrets/session_secret
+      - CRYPTO_SECRET__FILE=/run/secrets/crypto_secret
+      - API_KEY__FILE=/run/secrets/api_key
+    secrets:
+      - jwt_secret
+      - cookie_secret
+      - session_secret
+      - crypto_secret
+      - api_key
+    restart: always
+    volumes:
+      - ./services/shared:/app/shared:ro
+    networks:
+      - tranet
+
+  tournament:
+    build: ./services/tournament
+    container_name: tournament
+    ports:
+      - "6001:6001"
+    env_file:
+      - ./env/common.env
+      - ./env/routes.env
+    environment:
+      - JWT_SECRET__FILE=/run/secrets/jwt_secret
+      - COOKIE_SECRET__FILE=/run/secrets/cookie_secret
+      - SESSION_SECRET__FILE=/run/secrets/session_secret
+      - CRYPTO_SECRET__FILE=/run/secrets/crypto_secret
+      - API_KEY__FILE=/run/secrets/api_key
+    secrets:
+      - jwt_secret
+      - cookie_secret
+      - session_secret
+      - crypto_secret
+      - api_key
+    restart: always
+    volumes:
+      - ./services/shared:/app/shared:ro
+    networks:
+      - tranet
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.49.2
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - monitoring
+    restart: always
+  
+  prometheus:
+    build: ./services/prometheus
+    container_name: prometheus
+    networks:
+      - monitoring
+    depends_on:
+      - cadvisor
+      # - nginx_exporter
+    restart: always
+  
+  grafana:
+    build: ./services/grafana
+    container_name: grafana
+    secrets:
+      - gf_admin_pwd
+    depends_on:
+      - users
+      - prometheus
+    env_file: ./env/grafana.env
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/gf_admin_pwd
+    networks:
+      - monitoring
+    restart: always
+
+  # nginx_exporter:
+  #   image: nginx/nginx-prometheus-exporter:0.11
+  #   container_name: nginx_exporter
+  #   command:
+  #     - '-nginx.scrape-uri=http://gateaway:8081/stub_status'
+  #   networks:
+  #     - tranet
+  #     - monitoring
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - gateaway
+
+#openapi:
+#build: ./services/openapi
+#ports:
+#   - "8080:8080" # for internal use
+#  networks:
+#  - tranet
