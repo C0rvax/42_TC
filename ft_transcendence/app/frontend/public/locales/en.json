@@ -20,6 +20,7 @@
 		"wins": "Wins",
 		"losses": "Losses",
 		"loading": "Loading user data...",
+		"noUser": "No other user found.",
 		"status": {
 			"title": "Status",
 			"online": "Online",
@@ -37,6 +38,7 @@
 			"savingMsg2": "Saving...",
 			"success": "Changes saved successfully!",
 			"error": "Error saving changes.",
+			"noChanges": "No changes to save.",
 			"denied": "Access denied.",
 			"deniedMsg": "You must be logged in to access this page.",
 			"profileInfoTitle": "Identity",
@@ -49,6 +51,23 @@
 			"qrCodeAlt": "Scan this QR code with your authenticator app to set up Two-Factor Authentication.",
 			"qrCodeError": "Error generating QR code. Please try again later.",
 			"2faTokenInvalid": "Invalid verification code. Please try again."
+		}
+	},
+	"time": {
+		"ago": {
+			"now": "just now",
+			"minute": "1 minute ago",
+			"minutes": "{count} minutes ago",
+			"hour": "1 hour ago",
+			"hours": "{count} hours ago",
+			"day": "1 day ago",
+			"days": "{count} days ago",
+			"week": "1 week ago",
+			"weeks": "{count} weeks ago",
+			"month": "1 month ago",
+			"months": "{count} months ago",
+			"year": "1 year ago",
+			"years": "{count} years ago"
 		}
 	},
 	"game": {
@@ -101,7 +120,7 @@
 		"dashboard": "Dashboard",
 		"settings": "Settings",
 		"logout": "Logout",
-		"language": "FR",
+		"language": "Language Selection",
 		"logoutSuccess": "You have been logged out successfully.",
 		"logoutError": "Error while logging out."
 	},
@@ -175,6 +194,7 @@
 			"loading": "Loading match history...",
 			"noMatches": "No matches found for this user.",
 			"unknownOpponent": "Unknown Opponent",
+			"vs": "VS",
 			"victory": "Victory",
 			"defeat": "Defeat",
 			"draw": "Draw/Cancel",
@@ -202,6 +222,8 @@
 	"general": {
 		"yes": "Yes",
 		"no": "No",
+		"on": "On",
+		"at": "At",
 		"error": "Error",
 		"loading": "Loading...",
 		"cancel": "Cancel",
@@ -221,6 +243,7 @@
 			"unknown": "An unknown error occurred.",
 			"malformedResponse": "The server's error response was malformed.",
 			"networkError": "Network error or could not reach the server.",
+			"loadingContent": "Error loading content. Please try again later.",
 			"login": {
 				"invalidCredentials": "Invalid identifier or password.",
 				"accountBanned": "This account has been banned."

@@ -37,6 +37,7 @@
 			"savingMsg2": "Sauvegarde...",
 			"success": "Modifications enregistrées avec succès !",
 			"error": "Erreur lors de l'enregistrement des modifications.",
+			"noChanges": "Aucun changement à enregistrer.",
 			"denied": "Accès refusé.",
 			"deniedMsg": "Vous devez être connecté pour accéder à cette page.",
 			"profileInfoTitle": "Identité",
@@ -51,6 +52,21 @@
 			"2faTokenInvalid": "Code de vérification invalide. Veuillez réessayer."
 		}
 	},
+	"time": {
+		"ago": {
+            "now": "à l'instant",
+            "minute": "il y a 1 minute",
+            "minutes": "il y a {count} minutes",
+            "hour": "il y a 1 heure",
+            "hours": "il y a {count} heures",
+            "day": "il y a 1 jour",
+            "days": "il y a {count} jours",
+            "month": "il y a 1 mois",
+            "months": "il y a {count} mois",
+            "year": "il y a 1 an",
+            "years": "il y a {count} ans"
+        }
+    },
 	"game": {
 		"title": "Jeu",
 		"welcome": "Bienvenue dans le jeu",
@@ -101,7 +117,7 @@
 		"dashboard": "Tableau de Bord",
 		"settings": "Paramètres",
 		"logout": "Déconnexion",
-		"language": "ENG",
+		"language": "Selection de la langue",
 		"logoutSuccess": "Vous avez été déconnecté avec succès.",
 		"logoutError": "Erreur lors de la déconnexion."
 	},
@@ -175,8 +191,9 @@
 			"loading": "Chargement de l'historique des matchs...",
 			"noMatches": "Aucun match trouvé.",
 			"unknownOpponent": "Adversaire inconnu",
+			"vs": "VS",
 			"victory": "Victoire",
-			"defeat": "Défaite",
+			"defeat": "Defaite",
 			"draw": "Match nul/Annulé",
 			"opponent": "Adversaire",
 			"error": "Erreur lors du chargement de l'historique des matchs."
@@ -202,6 +219,8 @@
 	"general": {
 		"yes": "Oui",
 		"no": "Non",
+		"on": "Le",
+		"at": "à",
 		"error": "Erreur",
 		"loading": "Chargement...",
 		"cancel": "Annuler",
@@ -221,6 +240,7 @@
 			"unknown": "Une erreur inconnue est survenue.",
 			"malformedResponse": "La réponse du serveur est mal formée.",
 			"networkError": "Erreur de réseau ou impossible de joindre le serveur.",
+			"loadingContent": "Erreur lors du chargement du contenu. Veuillez réessayer plus tard.",
 			"login": {
 				"invalidCredentials": "Identifiant ou mot de passe invalide.",
 				"accountBanned": "Ce compte a été banni."

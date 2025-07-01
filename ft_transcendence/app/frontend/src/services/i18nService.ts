@@ -1,8 +1,10 @@
 import { router } from '../main.js';
+import { getUserDataFromStorage } from './authService.js';
 
 let currentLanguage: string = 'en';
 let translations: Record<string, any> = {};
-const supportedLanguages = ['fr', 'en'];
+const supportedLanguages = ['fr', 'en', 'es', 'ru'];
+
 
 async function loadTranslations(lang: string): Promise<void> {
     try {
@@ -20,12 +22,20 @@ async function loadTranslations(lang: string): Promise<void> {
     }
 }
 
-/**
- * Initialise le service i18n. Doit être appelé au démarrage de l'application.
- */
 export async function initI18n(): Promise<void> {
-    let lang = localStorage.getItem('language');
+    const user = getUserDataFromStorage();
+    let lang: string | null = null;
 
+    // 1. Priorité à la langue de l'utilisateur connecté (depuis la DB via localStorage)
+    if (user && user.language) {
+        lang = user.language;
+    } 
+    // 2. Sinon, on regarde dans le localStorage (pour les non-connectés)
+    else {
+        lang = localStorage.getItem('language');
+    }
+    
+    // 3. Sinon, on prend la langue du navigateur
     if (!lang) {
         const browserLang = navigator.language.split('-')[0];
         if (supportedLanguages.includes(browserLang)) {
@@ -33,17 +43,15 @@ export async function initI18n(): Promise<void> {
         }
     }
 
+    // 4. Langue par défaut si rien n'est trouvé
     currentLanguage = lang || 'en';
+    
     localStorage.setItem('language', currentLanguage);
 
     await loadTranslations(currentLanguage);
 }
 
-/**
- * Change la langue de l'application, recharge les traductions et rafraîchit l'interface.
- * @param lang La nouvelle langue ('fr', 'en', etc.)
- */
-export async function setLanguage(lang: string): Promise<void> {
+export async function setLanguage(lang: string, options: { reloadRoute?: boolean } = { reloadRoute: true }): Promise<void> {
     if (!supportedLanguages.includes(lang)) {
         console.warn(`Language '${lang}' is not supported.`);
         return;
@@ -51,12 +59,12 @@ export async function setLanguage(lang: string): Promise<void> {
     currentLanguage = lang;
     localStorage.setItem('language', currentLanguage);
     await loadTranslations(currentLanguage);
-    router();
+    
+    if (options.reloadRoute) {
+        router();
+    }
 }
 
-/**
- * Récupère la langue actuellement configurée.
- */
 export function getLanguage(): string {
     return currentLanguage;
 }

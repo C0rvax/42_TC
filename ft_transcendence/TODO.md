@@ -23,7 +23,11 @@
 
 - [x] message login pas bonne couleur
 - [x] sidebar cases trop petites
-- [ ] mails tronqués dans sidebar si trop longs
+- [x] mails tronqués dans sidebar si trop longs -> on réduit et sinon on truncate
+- [x] affiche email et date en survolant dans sidebar
+- [x] pas de username dans l'onglet request + refonte
+
+- [ ] SESSION PLUTOT QUE LOCAL STORAGE
 
 - [x] Route pour update win loses / Permissions pour faire ca ? -> pour l'instant n'importe qui d'identifié -> /api/users/:userId/stats en envoyant result: win/lose
 - [x] Droit admin pour la route update win/lose -> authenticateService avec API_KEY
@@ -31,7 +35,11 @@
 - [x] Page home bouton settings et logout inaccessible quand logedin
 
 - [x] tout traduire
-- [ ] certain check avec des value de string donc faire attention comme par ex: game.quitButton (anciennement Quit)
+- [x] 3e langue (fr, en, es) -> ajouter dans le front
+- [x] changer header component pour qu'il prenne en compte la langue
+- [x] mettre en place db et settings pour garder la langue de l'utilisateur
+- [x] certain check avec des value de string donc faire attention comme par ex: game.quitButton (anciennement Quit)
+- [ ] voir ci-desssus avec sasha la refonte des fichiers
 - [ ] Vérifier les traductions
 
 - [x] La cle de securite (avec quoi on genere, ou est-ce qu'on la garde) -> cookie jwt_token
@@ -43,12 +51,12 @@
 
 ## Etienne
 
-- [ ] Feuille quand on scroll
-- [ ] la fenetre bouge avec les fleches directionnelles
-- [ ] fix dashboard (cadvisor) 
+- [x] Feuille quand on scroll
+- [x] la fenetre bouge avec les fleches directionnelles
 
 - [x] grafana
 - [ ] grafana/dashboards
+- [ ] fix dashboard (cadvisor) 
 
 ## 📌 Tâches initiales
 

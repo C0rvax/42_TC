@@ -45,7 +45,7 @@ export async function loginUser({ identifier, password }: LoginRequestBody): Pro
  */
 export async function createUserAccount(userData: RegisterRequestBody): Promise<void> {
 	console.log('Creating a new user account');
-	const { username, email, password, display_name, avatar_url } = userData;
+	const { username, email, password, display_name, avatar_url, language } = userData;
 
 	if (await userModel.isUsernameInDb(username)) {
 		throw new ConflictError(ERROR_KEYS.REGISTER_USERNAME_EXISTS, { username: username });
@@ -64,6 +64,7 @@ export async function createUserAccount(userData: RegisterRequestBody): Promise<
 		password_hash: hashedPassword,
 		display_name,
 		avatar_url: avatar_url && avatar_url.trim() !== "" ? avatar_url : generateDefaultAvatarUrl(display_name),
+		language: language,
 	};
 	await userModel.createUser(payload);
 }
@@ -133,6 +134,9 @@ export async function updateUserProfile(userId: number, updates: UpdateUserPaylo
 	if (updates.avatar_url !== undefined) {
 		processedUpdates.avatar_url = updates.avatar_url;
 	}
+	if (updates.language !== undefined) {
+        processedUpdates.language = updates.language;
+    }
 
 	const changesToApply: UpdateUserPayload = {};
 	for (const key in processedUpdates) {
@@ -142,6 +146,9 @@ export async function updateUserProfile(userId: number, updates: UpdateUserPaylo
 			(changesToApply as any)[typedKey] = value;
 		}
 	}
+	if (updates.language && !currentUserWithSecrets.language) {
+        changesToApply.language = updates.language;
+    }
 	if (Object.keys(changesToApply).length === 0) {
 		console.log(`No effective changes detected for user ${userId}. Profile remains unchanged.`);
 		const { password_hash, two_fa_secret, ...user } = currentUserWithSecrets;
@@ -173,10 +180,21 @@ export async function updateUserProfile(userId: number, updates: UpdateUserPaylo
  * Updates the status of a user.
  * @param {number} userId - The ID of the user whose status to update.
  * @param {UserOnlineStatus} status - The new online status of the user.
- * @returns {Promise<void>}
+ * @returns {Promise<User>} The updated user object.
  */
-export async function updateUserStatus(userId: number, status: UserOnlineStatus): Promise<void> {
+export async function updateUserStatus(userId: number, status: UserOnlineStatus): Promise<User> {
+	const userExists = await userModel.getUserByIdFromDb(userId);
+    if (!userExists) {
+        throw new NotFoundError(ERROR_KEYS.USER_NOT_FOUND);
+    }
 	await userModel.updateStatusInDb(userId, status);
+	const updatedUser = await userModel.getUserByIdFromDb(userId);
+	if (!updatedUser) {
+		throw new AppError(ERROR_KEYS.DATABASE_ERROR, 500, { detail: `Could not re-fetch user ${userId} after status update.` });
+	}
+
+	console.log(`Status updated successfully for user ID: ${userId} to ${status}`);
+    return updatedUser;
 }
 
 /**

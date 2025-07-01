@@ -17,6 +17,7 @@ export const UserBaseSchema = z.object({
     wins: z.number().int().default(0),
     losses: z.number().int().default(0),
     status: UserOnlineStatusSchema.default(UserOnlineStatus.OFFLINE),
+    language: z.string().length(2).default('en'),
     created_at: z.string(), // Ou z.date()
     updated_at: z.string(), // Ou z.date()
     is_two_fa_enabled: z.boolean().default(false),
@@ -49,6 +50,7 @@ export const RegisterBodySchema = z.object({
     email: UserBaseSchema.shape.email,
     password: z.string().min(8).max(100),
     display_name: UserBaseSchema.shape.display_name,
+    language: UserBaseSchema.shape.language.optional(),
     avatar_url: UserBaseSchema.shape.avatar_url.optional(),
 });
 export type RegisterRequestBody = z.infer<typeof RegisterBodySchema>;
@@ -149,6 +151,7 @@ export const UpdateUserBodySchema = z.object({
     email: UserBaseSchema.shape.email.optional(),
     display_name: UserBaseSchema.shape.display_name.optional(),
     avatar_url: UserBaseSchema.shape.avatar_url.optional(),
+    language: UserBaseSchema.shape.language.optional(),
     is_two_fa_enabled: UserBaseSchema.shape.is_two_fa_enabled.optional(),
     two_fa_secret: UserWithSecretsSchema.shape.two_fa_secret.optional(),
 }).refine(data => Object.keys(data).length > 0, {
@@ -197,6 +200,7 @@ export const CreateUserPayloadSchema = z.object({
     email: UserBaseSchema.shape.email,
     password_hash: z.string(),
     display_name: UserBaseSchema.shape.display_name,
+    language: UserBaseSchema.shape.language.optional(),
     avatar_url: UserBaseSchema.shape.avatar_url.optional(),
 });
 export type CreateUserPayload = z.infer<typeof CreateUserPayloadSchema>;
@@ -210,17 +214,12 @@ export const JWTPayloadSchema = z.object({
 export type JWTPayload = z.infer<typeof JWTPayloadSchema>;
 
 // --- 2FA Schemas ---
+export const MessageResponseSchema = z.object({ message: z.string() });
+
 export const Generate2FAResponseSchema = z.object({
     qrCodeDataURL: z.string().url(),
 });
 export type Generate2FAResponse = z.infer<typeof Generate2FAResponseSchema>;
-
-export const Verify2FABodySchema = z.object({
-    token: z.string().length(6, "Token must be 6 digits.").regex(/^\d+$/),
-});
-export type Verify2FABodySchema = z.infer<typeof Verify2FABodySchema>;
-
-export const MessageResponseSchema = z.object({ message: z.string() });
 
 export const Generate2FARouteSchema = {
     response: {
@@ -229,6 +228,11 @@ export const Generate2FARouteSchema = {
         500: ErrorResponseSchema,
     }
 };
+
+export const Verify2FABodySchema = z.object({
+    token: z.string().length(6, "Token must be 6 digits.").regex(/^\d+$/),
+});
+export type Verify2FABodySchema = z.infer<typeof Verify2FABodySchema>;
 
 export const Verify2FARouteSchema = {
     body: Verify2FABodySchema,
@@ -248,7 +252,7 @@ export const Disable2FARouteSchema = {
     }
 };
 
-// UPDATE USER STATS
+// UPDATE USER STATS (INTERNAL)
 export const UpdateUserStatsBodySchema = z.object({
     result: z.enum(['win', 'loss'], {
         required_error: "Result required.",
@@ -260,6 +264,28 @@ export type UpdateUserStatsBody = z.infer<typeof UpdateUserStatsBodySchema>;
 export const UpdateUserStatsRouteSchema = {
     params: UserIdParamsSchema,
     body: UpdateUserStatsBodySchema,
+    response: {
+        200: z.object({
+            message: z.string(),
+            user: UserBaseSchema
+        }),
+        400: ErrorResponseSchema,
+        401: ErrorResponseSchema,
+        403: ErrorResponseSchema,
+        404: ErrorResponseSchema,
+        500: ErrorResponseSchema
+    }
+};
+
+// UPDATE USER STATUS (INTERNAl)
+export const UpdateUserStatusBodySchema = z.object({
+    status: UserOnlineStatusSchema,
+});
+export type UpdateUserStatusBody = z.infer<typeof UpdateUserStatusBodySchema>;
+
+export const UpdateUserStatusRouteSchema = {
+    params: UserIdParamsSchema,
+    body: UpdateUserStatusBodySchema,
     response: {
         200: z.object({
             message: z.string(),

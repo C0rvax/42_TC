@@ -2,119 +2,141 @@ import { navigateTo } from '../services/router.js';
 import { getUserDataFromStorage, fetchUsers, checkAuthStatus } from '../services/authService.js';
 import { fetchCsrfToken } from '../services/csrf.js';
 import { User } from '../shared/schemas/usersSchemas.js';
-import {
-	getReceivedFriendRequests,
-	getSentFriendRequests,
-	acceptFriendRequest,
-	declineFriendRequest,
-	cancelFriendRequest,
-	getFriendsList,
-	sendFriendRequest,
-	removeFriend,
-} from '../services/friendService.js';
+import * as FriendService from '../services/friendService.js';
 import { FriendsListComponent } from '../components/friendsList.js';
 import { FriendRequestsComponent } from '../components/friendRequests.js';
-import { UserList, UserListProps } from '../components/userList.js';
+import { UserList } from '../components/userList.js';
 import { HeaderComponent } from '../components/headerComponent.js';
 import { showToast } from '../components/toast.js';
 import { MatchHistoryComponent } from '../components/matchHistoryComponent.js';
-import { t } from '../services/i18nService.js';
+import { t, getLanguage } from '../services/i18nService.js';
 import { translateResultMessage } from '../services/responseService.js';
+import { createElement, clearElement } from '../utils/domUtils.js';
+
+const DASHBOARD_ACTIVE_TAB_KEY = 'dashboardActiveTab';
+
+function nextFrame(): Promise<void> {
+    return new Promise(resolve => requestAnimationFrame(() => resolve()));
+}
+
+export async function adjustFontSizeToFit(
+    element: HTMLElement,
+    fontSizes: string[] = ['text-2xl', 'text-xl', 'text-lg', 'text-base', 'text-sm', 'text-xs'],
+    truncateClass: string = 'truncate'
+) {
+    element.classList.add('whitespace-nowrap', 'overflow-hidden');
+
+    await nextFrame();
+
+    for (const sizeClass of fontSizes) {
+        fontSizes.forEach(s => element.classList.remove(s));
+        element.classList.add(sizeClass);
+
+        await nextFrame();
+
+        if (element.scrollWidth <= element.clientWidth) {
+            element.classList.remove(truncateClass);
+            return;
+        }
+    }
+
+    element.classList.add(truncateClass);
+}
 
 export async function DashboardPage(): Promise<HTMLElement> {
 	let currentUser: User | null = getUserDataFromStorage();
 
 	if (!currentUser) {
 		navigateTo('/login');
-		const redirectMsg = document.createElement('div');
-		redirectMsg.className = 'min-h-screen flex items-center justify-center text-xl';
-		redirectMsg.textContent = t('msg.redirect.login');
-		return redirectMsg;
+		return createElement('div', { textContent: t('msg.redirect.login'), className: 'min-h-screen flex items-center justify-center text-xl' });
 	}
 
 	try {
 		await fetchCsrfToken();
 	} catch (error) {
 		console.error("Failed to fetch CSRF token:", error);
-		const errorMsg = document.createElement('div');
-		errorMsg.className = 'min-h-screen flex items-center justify-center text-xl text-red-500';
-		errorMsg.textContent = t('msg.error.initializing');
-		return errorMsg;
+		return createElement('div', { textContent: t('msg.error.initializing'), className: 'min-h-screen flex items-center justify-center text-xl text-red-500' });
 	}
 
-	const pageContainer = document.createElement('div');
-	pageContainer.className = 'min-h-screen p-4 sm:p-8 flex flex-col items-center bg-cover bg-center bg-fixed';
-	pageContainer.style.backgroundImage = "url('/assets/background.jpg')";
+	const sidebar = createElement('div', { className: 'w-1/4 p-6 border-r border-gray-400/30 space-y-3 overflow-y-auto' });
+	const activeTabContentContainer = createElement('div', { id: 'active-tab-content', className: 'flex-grow overflow-y-auto min-h-0' });
+	const tabNavigation = createElement('div', { className: 'flex-shrink-0 flex space-x-1 border-b border-gray-400/30 mb-6' });
+	const tabContentWrapper = createElement('div', { className: 'w-3/4 p-6 flex flex-col' }, [ tabNavigation, activeTabContentContainer ]);
+	const mainSection = createElement('div', { className: 'flex flex-1 min-h-0' }, [sidebar, tabContentWrapper]);
+	let headerElement = HeaderComponent({ currentUser: currentUser! });
+	
+	const dashboardWrapper = createElement('div', {
+		className: 'bg-gray-900/60 backdrop-blur-lg border border-gray-400/30 w-full max-w-6xl mx-auto my-8 rounded-2xl shadow-2xl flex flex-col flex-1 min-h-0'
+	}, [headerElement, mainSection]);
 
-	const dashboardWrapper = document.createElement('div');
-	dashboardWrapper.className = `bg-gray-900/60 backdrop-blur-lg border border-gray-400/30 rounded-2xl shadow-2xl w-full max-w-6xl flex flex-col overflow-hidden`;
-
-	const headerElement = HeaderComponent({ currentUser: currentUser! });
-
-	const mainSection = document.createElement('div');
-	mainSection.className = 'flex flex-1 min-h-[calc(100vh-150px)]';
-
-	const sidebar = document.createElement('div');
-	sidebar.className = 'w-1/4 p-6 border-r border-gray-400/30 space-y-3 overflow-y-auto';
-
-	function populateSidebar(user: User) {
-		sidebar.innerHTML = '';
-		const profileHeader = document.createElement('div');
-		profileHeader.className = 'flex flex-col items-center pb-4 mb-4 border-b border-gray-400/20';
-
-		const avatarImg = document.createElement('img');
-		avatarImg.src = user.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.display_name)}&background=random&color=fff&size=128`;
-		avatarImg.alt = `Avatar de ${user.display_name}`;
-		avatarImg.className = 'w-24 h-24 rounded-full object-cover border-4 border-gray-400/30 shadow-lg mb-3';
-
-		const displayNameEl = document.createElement('h2');
-		displayNameEl.className = 'text-xl font-bold text-white text-center';
-		displayNameEl.textContent = user.display_name;
-
-		profileHeader.appendChild(avatarImg);
-		profileHeader.appendChild(displayNameEl);
-		sidebar.appendChild(profileHeader);
-
-		sidebar.appendChild(createSidebarItem(t('user.username'), user.username));
-		sidebar.appendChild(createSidebarItem(t('user.displayName'), user.display_name));
-		sidebar.appendChild(createSidebarItem(t('user.email'), user.email));
-		sidebar.appendChild(createSidebarItem(t('user.createdAt'), new Date(user.created_at)));
-		sidebar.appendChild(createSidebarItem(t('user.wins'), user.wins));
-		sidebar.appendChild(createSidebarItem(t('user.losses'), user.losses));
-	}
+	const pageContainer = createElement('div', { className: 'flex flex-col h-screen' }, [dashboardWrapper]);
 
 	function createSidebarItem(label: string, value: string | number | Date | undefined | null): HTMLElement {
-		const item = document.createElement('div');
-		item.className = 'p-4 bg-black/20 border border-gray-400/20 rounded-lg';
+        const isEmailField = label === t('user.email');
+		const isDateField = value instanceof Date;
 
-		const labelEl = document.createElement('span');
-		labelEl.className = 'text-sm text-gray-300 block mb-1';
-		labelEl.textContent = label;
+		const valueClass = 'font-beach font-medium text-2xl text-gray-200 overflow-hidden whitespace-nowrap';
+		
+		let valueText: string;
+        let titleText: string | undefined;
 
-		const valueEl = document.createElement('p');
-		if (label === t('user.email')) {
-			valueEl.className = 'text-base text-white font-semibold truncate';
+        if (isDateField) {
+            const date = value as Date;
+			const currentAppLanguage = getLanguage();
+            valueText = new Intl.DateTimeFormat(currentAppLanguage, {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            }).format(date);
+
+			const datePart = date.toLocaleDateString(currentAppLanguage);
+            const timePart = date.toLocaleTimeString(currentAppLanguage);
+            titleText = `${t('general.on')} ${datePart} ${t('general.at')} ${timePart}`;
 		} else {
-			valueEl.className = 'text-lg text-white font-semibold truncate';
-		}
+            valueText = value?.toString() || 'N/A';
+            if (isEmailField) {
+                titleText = valueText;
+            }
+        }
 
-		if (value instanceof Date) {
-			valueEl.textContent = value.toLocaleDateString();
-		} else {
-			valueEl.textContent = value?.toString() || 'N/A';
-		}
-		item.appendChild(labelEl);
-		item.appendChild(valueEl);
-		return item;
+        const valueElement = createElement('p', { 
+            textContent: valueText, 
+            className: valueClass, 
+            title: titleText 
+        });
+		adjustFontSizeToFit(valueElement, ['text-2xl', 'text-xl', 'text-lg', 'text-base', 'text-sm', 'text-xs']);
+
+        return createElement('div', { className: 'p-4 bg-black/20 border border-gray-400/20 rounded-lg' }, [
+			createElement('span', { textContent: label, className: 'text-sm text-gray-300 block mb-1' }),
+            valueElement
+		]);
+	}
+
+	function populateSidebar(user: User) {
+		clearElement(sidebar);
+
+		const avatarImg = createElement('img', {
+			src: user.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.display_name)}&background=random&color=fff&size=128`,
+			alt: `Avatar de ${user.display_name}`,
+			className: 'w-24 h-24 rounded-full object-cover border-4 border-gray-400/30 shadow-lg mb-3'
+		});
+
+		const profileHeader = createElement('div', { className: 'flex flex-col items-center pb-4 mb-4 border-b border-gray-400/20' }, [
+			avatarImg,
+		]);
+
+		sidebar.append(
+			profileHeader,
+			createSidebarItem(t('user.username'), user.username),
+			createSidebarItem(t('user.displayName'), user.display_name),
+			createSidebarItem(t('user.email'), user.email),
+			createSidebarItem(t('user.createdAt'), new Date(user.created_at)),
+			createSidebarItem(t('user.wins'), user.wins),
+			createSidebarItem(t('user.losses'), user.losses)
+		);
 	}
 
 	populateSidebar(currentUser);
-
-	const tabContentWrapper = document.createElement('div');
-	tabContentWrapper.className = 'w-3/4 p-6 flex flex-col overflow-y-auto';
-
-	const tabNavigation = document.createElement('div');
-	tabNavigation.className = 'flex space-x-1 border-b border-gray-400/30 mb-6';
 
 	const TABS = [
 		{ id: 'users', label: t('dashboard.tabs.users'), componentLoader: loadUsersContent },
@@ -122,115 +144,93 @@ export async function DashboardPage(): Promise<HTMLElement> {
 		{ id: 'pending', label: t('dashboard.tabs.pending'), componentLoader: loadPendingRequestsContent },
 		{ id: 'history', label: t('dashboard.tabs.history'), componentLoader: loadMatchHistoryContent },
 	];
-	let activeTabId = TABS[0].id;
 
-	const activeTabContentContainer = document.createElement('div');
-	activeTabContentContainer.id = 'active-tab-content';
-	activeTabContentContainer.className = 'flex-1';
+	const savedTabId = sessionStorage.getItem(DASHBOARD_ACTIVE_TAB_KEY);
+	let activeTabId = (savedTabId && TABS.some(t => t.id === savedTabId)) ? savedTabId : TABS[0].id;
+
+	function switchTab(tabId: string) {
+		activeTabId = tabId;
+		sessionStorage.setItem(DASHBOARD_ACTIVE_TAB_KEY, tabId);
+		tabNavigation.querySelectorAll('button').forEach(btn => {
+			const isActive = btn.dataset.tabId === tabId;
+			btn.className = `py-2 px-4 text-2xl font-beach focus:outline-none transition-colors ${
+				isActive ? 'border-b-2 border-blue-400 text-white' : 'text-gray-300 hover:text-white hover:border-gray-300/70'
+			}`;
+		});
+		loadActiveTabContent();
+	}
 
 	TABS.forEach(tabInfo => {
-		const tabButton = document.createElement('button');
+		const tabButton = createElement('button', {
+			textContent: tabInfo.label,
+			className: `py-2 px-4 text-2xl font-beach focus:outline-none transition-colors ${
+				tabInfo.id === activeTabId ? 'border-b-2 border-blue-400 text-white' : 'text-gray-300 hover:text-white hover:border-gray-300/70'
+			}`
+		});
 		tabButton.dataset.tabId = tabInfo.id;
-		tabButton.textContent = tabInfo.label;
-		tabButton.className = `py-2 px-4 text-sm font-medium focus:outline-none transition-colors`;
-		if (tabInfo.id === activeTabId) {
-			tabButton.className = 'py-2 px-4 text-sm font-medium focus:outline-none transition-colors border-b-2 border-blue-400 text-white';
-		} else {
-			tabButton.className = 'py-2 px-4 text-sm font-medium focus:outline-none transition-colors text-gray-300 hover:text-white hover:border-gray-300/70';
-		}
 		tabButton.addEventListener('click', () => switchTab(tabInfo.id));
 		tabNavigation.appendChild(tabButton);
 	});
 
-	tabContentWrapper.appendChild(tabNavigation);
-	tabContentWrapper.appendChild(activeTabContentContainer);
-
-	mainSection.appendChild(sidebar);
-	mainSection.appendChild(tabContentWrapper);
-
-	dashboardWrapper.appendChild(headerElement);
-	dashboardWrapper.appendChild(mainSection);
-	pageContainer.appendChild(dashboardWrapper);
+	async function loadActiveTabContent() {
+		clearElement(activeTabContentContainer);
+		activeTabContentContainer.appendChild(createElement('p', { textContent: t('general.loading'), className: 'text-center text-gray-200 py-10' }));
+		const currentTab = TABS.find(t => t.id === activeTabId);
+		if (currentTab) {
+			try {
+				const contentElement = await currentTab.componentLoader();
+				clearElement(activeTabContentContainer);
+				activeTabContentContainer.appendChild(contentElement);
+			} catch (error) {
+				console.error(`Error loading content for tab ${activeTabId}:`, error);
+				clearElement(activeTabContentContainer);
+				activeTabContentContainer.appendChild(createElement('p', { textContent: t('msg.error.loadingContent'), className: 'text-center text-red-400 py-10' }));
+			}
+		}
+	}
 
 	const handleSendFriendRequest = async (targetUserId: number) => {
-		const result = await sendFriendRequest(targetUserId);
+		const result = await FriendService.sendFriendRequest(targetUserId);
 		showToast(translateResultMessage(result.message), 'success');
-		if (activeTabId === 'users' || activeTabId === 'pending') await loadActiveTabContent(); // Recharger si l'onglet users ou pending est actif
+		if (activeTabId === 'users' || activeTabId === 'pending') await loadActiveTabContent();
 	};
 
 	const handleCancelFriendRequest = async (friendshipId: number) => {
-		const result = await cancelFriendRequest(friendshipId);
+		const result = await FriendService.cancelFriendRequest(friendshipId);
 		showToast(translateResultMessage(result.message), 'success');
 		if (activeTabId === 'users' || activeTabId === 'pending') await loadActiveTabContent();
 	};
 
 	const handleAcceptFriendRequest = async (friendshipId: number) => {
-		const result = await acceptFriendRequest(friendshipId);
+		const result = await FriendService.acceptFriendRequest(friendshipId);
 		showToast(translateResultMessage(result.message), 'success');
 		if (['users', 'pending', 'friends'].includes(activeTabId)) await loadActiveTabContent();
 	};
 
 	const handleDeclineFriendRequest = async (friendshipId: number) => {
-		const result = await declineFriendRequest(friendshipId);
+		const result = await FriendService.declineFriendRequest(friendshipId);
 		showToast(translateResultMessage(result.message), 'success');
 		if (activeTabId === 'users' || activeTabId === 'pending') await loadActiveTabContent();
 	};
-
-	async function switchTab(tabId: string) {
-		activeTabId = tabId;
-		tabNavigation.querySelectorAll('button').forEach(btn => {
-			if (btn.dataset.tabId === tabId) {
-				btn.className = 'py-2 px-4 text-sm font-medium focus:outline-none transition-colors border-b-2 border-blue-400 text-white';
-			} else {
-				btn.className = 'py-2 px-4 text-sm font-medium focus:outline-none transition-colors text-gray-300 hover:text-white hover:border-gray-300/70';
-			}
-		});
-		await loadActiveTabContent();
-	}
-
-	async function loadActiveTabContent() {
-		activeTabContentContainer.innerHTML = '<p class="text-center text-gray-200 py-10">Loading...</p>';
-		const currentTab = TABS.find(t => t.id === activeTabId);
-		if (currentTab) {
-			try {
-				const contentElement = await currentTab.componentLoader();
-				activeTabContentContainer.innerHTML = '';
-				activeTabContentContainer.appendChild(contentElement);
-			} catch (error) {
-				console.error(`Error loading content for tab ${activeTabId}:`, error);
-				activeTabContentContainer.innerHTML = `<p class="text-center text-red-400 py-10">Error loading content for ${activeTabId}.</p>`;
-			}
-		}
-	}
-
+    
 	async function loadUsersContent(): Promise<HTMLElement> {
 		const [usersData, friendsData, sentRequestsData, receivedRequestsData] = await Promise.all([
-			fetchUsers(),
-			getFriendsList(),
-			getSentFriendRequests(),
-			getReceivedFriendRequests()
+			fetchUsers(), FriendService.getFriendsList(), FriendService.getSentFriendRequests(), FriendService.getReceivedFriendRequests()
 		]);
-
-		const userListProps: UserListProps = {
-			users: usersData as User[],
-			friends: friendsData,
-			sentRequests: sentRequestsData,
-			receivedRequests: receivedRequestsData,
-			currentUserId: currentUser!.id,
-			onSendRequest: handleSendFriendRequest,
-			onCancelRequest: handleCancelFriendRequest,
-			onAcceptRequest: handleAcceptFriendRequest,
-			onDeclineRequest: handleDeclineFriendRequest,
-		};
-		return UserList(userListProps);
+		return UserList({
+			users: usersData as User[], friends: friendsData, sentRequests: sentRequestsData,
+			receivedRequests: receivedRequestsData, currentUserId: currentUser!.id,
+			onSendRequest: handleSendFriendRequest, onCancelRequest: handleCancelFriendRequest,
+			onAcceptRequest: handleAcceptFriendRequest, onDeclineRequest: handleDeclineFriendRequest,
+		});
 	}
 
 	async function loadFriendsContent(): Promise<HTMLElement> {
-		const friends = await getFriendsList();
+		const friends = await FriendService.getFriendsList();
 		return FriendsListComponent({
 			friends: friends,
 			onRemoveFriend: async (friendshipId) => {
-				const result = await removeFriend(friendshipId);
+				const result = await FriendService.removeFriend(friendshipId);
 				showToast(translateResultMessage(result.message), 'success');
 				if (['friends', 'users'].includes(activeTabId)) await loadActiveTabContent();
 			},
@@ -238,29 +238,18 @@ export async function DashboardPage(): Promise<HTMLElement> {
 	}
 
 	async function loadPendingRequestsContent(): Promise<HTMLElement> {
-		const [received, sent] = await Promise.all([
-			getReceivedFriendRequests(),
-			getSentFriendRequests(),
-		]);
+		const [received, sent] = await Promise.all([FriendService.getReceivedFriendRequests(), FriendService.getSentFriendRequests()]);
 		return FriendRequestsComponent({
-			receivedRequests: received,
-			sentRequests: sent,
-			onAcceptRequest: handleAcceptFriendRequest,
-			onDeclineRequest: handleDeclineFriendRequest,
+			receivedRequests: received, sentRequests: sent,
+			onAcceptRequest: handleAcceptFriendRequest, onDeclineRequest: handleDeclineFriendRequest,
 			onCancelRequest: handleCancelFriendRequest,
 		});
 	}
 
 	async function loadMatchHistoryContent(): Promise<HTMLElement> {
-		if (currentUser) {
-			return await MatchHistoryComponent({ userId: currentUser.id });
-		} else {
-			const errorMsg = document.createElement('div');
-			errorMsg.className = 'min-h-screen flex items-center justify-center text-xl text-red-500';
-			errorMsg.textContent = t('msg.error.user.notFound');
-			return errorMsg;
-		}
+		return MatchHistoryComponent({ userId: currentUser!.id });
 	}
+
 
 	await loadActiveTabContent();
 
@@ -269,7 +258,8 @@ export async function DashboardPage(): Promise<HTMLElement> {
 			currentUser = freshUser;
 			populateSidebar(freshUser);
 			const newHeader = HeaderComponent({ currentUser: freshUser });
-			headerElement.replaceWith(newHeader);
+			dashboardWrapper.replaceChild(newHeader, headerElement);
+			headerElement = newHeader;
 		}
 	}).catch(err => {
 		console.error("Could not refresh user data in the background:", err);
