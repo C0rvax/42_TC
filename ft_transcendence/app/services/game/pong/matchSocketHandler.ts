@@ -57,7 +57,7 @@ function startLocalGameInterval(state: GameState, socket: Socket, matchId: strin
             socket.emit('gameState', state);
         }
         if (winner) {
-            socket.emit('gameOver');
+            socket.emit('gameOver', state);
             localGames.delete(matchId);
             clearInterval(intervalId);
             return;
@@ -103,9 +103,11 @@ function handleClientInput(socket: Socket) {
         const gameSession = findRemoteGameSessionBySocketId(socket.id);
         if (gameSession) {
             const playerSide = gameSession.getPlayerSide(socket.id);
-            if (playerSide) handleKeydownRemote(parseInt(keyCode), playerSide);
+            // if (playerSide) handleKeydownRemote(parseInt(keyCode), playerSide);
+            if (playerSide) handleKeydownRemote(keyCode, playerSide);
         } else {
-             handleKeydownLocal(parseInt(keyCode))
+            //  handleKeydownLocal(parseInt(keyCode))
+            handleKeydownLocal(keyCode);
         }
     });
     
@@ -113,9 +115,11 @@ function handleClientInput(socket: Socket) {
            const gameSession = findRemoteGameSessionBySocketId(socket.id);
         if (gameSession) {
             const playerSide = gameSession.getPlayerSide(socket.id);
-            if (playerSide) handleKeyupRemote(parseInt(keyCode), playerSide);
+            // if (playerSide) handleKeyupRemote(parseInt(keyCode), playerSide);
+            if (playerSide) handleKeyupRemote(keyCode, playerSide);
         } else {
-             handleKeyupLocal(parseInt(keyCode))
+            //  handleKeyupLocal(parseInt(keyCode))
+            handleKeyupLocal(keyCode);
         }
     });
     
@@ -135,9 +139,10 @@ async function disconnectionHandler(socket: Socket)  {
 
             const opponentSocketId = [...gameSession.players.keys()].find(id => id !== socket.id);
 
-            if (opponentSocketId) {
-                fastify.io.to(opponentSocketId).emit('opponentLeft');
-            }
+            // if (opponentSocketId) {
+            //     fastify.io.to(opponentSocketId).emit('opponentLeft');
+            // }
+
             // set game Result to DB
             const match = await getRowByMatchId(gameSession.matchId);
             const looserId = gameSession.getPlayerSide(socket.id) === 'left' ? match.player1_id : match.player2_id;
@@ -153,6 +158,10 @@ async function disconnectionHandler(socket: Socket)  {
             // clean up game session
             gameSession.clearGameInterval();
             gameSessions.delete(gameSession.roomName);
+            
+             if (opponentSocketId) {
+                fastify.io.to(opponentSocketId).emit('opponentLeft');
+            }
         }
     });
     

@@ -2,10 +2,20 @@ const USER_API_PREFIX = '/api/users';
 const GAME_API_PREFIX = '/api/game';
 
 export const config = {
+    storage: {
+        user: {
+            dataKey: 'userDataKey',
+            expirationKey: 'userExpirationKey',
+            ttl: 24 * 60 * 60 * 1000, // 24 hours
+            tokenKey: 'userTokenKey',
+            csrfToken: 'csrfTokenKey',
+        },
+    },
     api: {
         users: {
             all: `${USER_API_PREFIX}/`, // URL_ALL_USERS
             byId: (userId: number | string) => `${USER_API_PREFIX}/${userId}`, // URL_USER
+            public: (userId: number | string) => `${USER_API_PREFIX}/${userId}/public`, // URL_USER_PUBLIC
             me: `${USER_API_PREFIX}/me`, // URL_USER_ME
             matchesByUserId: (userId: number | string) => `${USER_API_PREFIX}/${userId}/matches`, // URL_USER_MATCH
             twoFa: {

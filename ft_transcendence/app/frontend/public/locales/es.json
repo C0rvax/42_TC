@@ -3,12 +3,15 @@
 		"title": "King-Pong",
 		"subtitle": "Un Juego de Pong Multijugador",
 		"catchPhrase": "Domina la mesa. ¡Conviértete en el Rey del Pong!",
+		"enter": "Entra en la jungla",
 		"button": "JUGAR",
 		"gameApi": "Consultar la API del juego"
 	},
 	"link": {
 		"home": "Volver al inicio",
 		"dashboard": "Volver al panel",
+		"newGame": "Volver a la sala de juego",
+		"tournament": "Volver al torneo",
 		"lobby": "Volver a la sala"
 	},
 	"user": {
@@ -233,16 +236,20 @@
 			"game": "Redirigiendo al juego..."
 		},
 		"error": {
+			"fail": "Error al",
 			"any": "Ocurrió un error.",
 			"initializing": "Error al inicializar la página. Por favor, intenta refrescar la página.",
 			"unauthorized": "No autorizado. Por favor, inicia sesión.",
 			"forbidden": "Acceso prohibido. No tienes los permisos necesarios.",
 			"unknown": "Ocurrió un error desconocido.",
+			"notFound": "404 - Página no encontrada.",
+			"notFoundMsg": "oops! La página que estás buscando no existe.",
 			"malformedResponse": "La respuesta del servidor está mal formada.",
 			"networkError": "Error de red o no se pudo contactar al servidor.",
 			"loadingContent": "Error al cargar el contenido. Por favor, inténtalo de nuevo más tarde.",
 			"login": {
 				"invalidCredentials": "Identificador o contraseña no válidos.",
+				"unknown": "error desconocido al iniciar sesión.",
 				"accountBanned": "Esta cuenta ha sido bloqueada."
 			},
 			"register": {
@@ -257,6 +264,8 @@
 			"user": {
 				"invalidId": "ID de usuario no válido.",
 				"errorCsrf": "Error de seguridad: el token CSRF no coincide. Por favor, refresca la página e inténtalo de nuevo.",
+				"missCsrf": "Falta el token CSRF. Por favor, refresca la página e inténtalo de nuevo.",
+				"fetchCsrf": "Fallo al obtener el token CSRF. Por favor, refresca la página e inténtalo de nuevo.",
 				"loadingProfile": "Ocurrió un error al cargar el perfil del usuario.",
 				"notFound": "Usuario no encontrado."
 			}

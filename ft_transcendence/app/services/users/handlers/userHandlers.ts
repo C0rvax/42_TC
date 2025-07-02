@@ -30,15 +30,24 @@ export async function updateUserMeHandler(req: AuthenticatedRequest, reply: Fast
 
 export async function getUserInfoHandler(req: AuthenticatedRequest, reply: FastifyReply) {
 	const userId = parseInt((req.params as UserIdParams).userId, 10);
+	const requesterId = req.user.id;
+
+	if (isNaN(userId)) {
+		return reply.code(400).send({ error: 'Invalid user ID.' });
+	}
+	const user = await userService.getUserById(userId, requesterId);
+
+	return reply.code(200).send(user);
+}
+
+export async function getUserPublicHandler(req: FastifyRequest, reply: FastifyReply) {
+	const userId = parseInt((req.params as UserIdParams).userId, 10);
 
 	if (isNaN(userId)) {
 		return reply.code(400).send({ error: 'Invalid user ID.' });
 	}
 
-	const user = await userService.getUserById(userId);
-	if (!user) {
-		return reply.code(404).send({ error: 'User not found.' });
-	}
+	const user = await userService.getUserPublicInfo(userId);
 
 	return reply.code(200).send(user);
 }

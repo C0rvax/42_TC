@@ -35,16 +35,16 @@ export async function ProfilePage(params: { userId?: string }): Promise<HTMLElem
 		className: 'min-h-screen p-4 sm:p-8 flex flex-col items-center bg-cover bg-center bg-fixed'
 	});
 	pageContainer.style.backgroundImage = "url('/assets/background.jpg')";
-	
+
 	const contentArea = createElement('div', { className: 'flex flex-1 w-full' });
-	
+
 	const profileWrapper = createElement('div', {
 		className: 'bg-gray-900/60 backdrop-blur-lg border border-gray-400/30 rounded-2xl shadow-2xl w-full max-w-6xl flex flex-col overflow-hidden'
 	}, [
 		HeaderComponent({ currentUser: loggedInUser }),
 		createElement('div', { className: 'flex flex-1 min-h-[calc(100vh-150px)]' }, [contentArea])
 	]);
-	
+
 	pageContainer.append(profileWrapper);
 
 	const loadingProfileMsg = createElement('p', {
@@ -55,12 +55,10 @@ export async function ProfilePage(params: { userId?: string }): Promise<HTMLElem
 
 	try {
 		const profiledUser = await fetchUserDetails(userIdToView);
-		loadingProfileMsg.remove(); // Enlève le message de chargement
+		loadingProfileMsg.remove();
 
-		// --- Création de la Sidebar ---
 		const sidebar = createProfileSidebar(profiledUser, loggedInUser);
-		
-		// --- Création du contenu principal ---
+
 		const matchHistoryElement = await MatchHistoryComponent({ userId: profiledUser.id });
 		const contentWrapper = createElement('main', {
 			className: 'w-3/4 p-6 flex flex-col overflow-y-auto'
@@ -70,7 +68,7 @@ export async function ProfilePage(params: { userId?: string }): Promise<HTMLElem
 
 	} catch (error) {
 		console.error("An error occurred when loading profile page:", error);
-		loadingProfileMsg.textContent = `${t('msg.error.user.loadingProfile')} : ${(error as Error).message}.`;
+		loadingProfileMsg.textContent = `${t('msg.error.user.loadingProfile')} : ${t((error as Error).message)}.`;
 		loadingProfileMsg.classList.replace('text-gray-200', 'text-red-400');
 	}
 
@@ -78,7 +76,6 @@ export async function ProfilePage(params: { userId?: string }): Promise<HTMLElem
 }
 
 
-// --- Helper pour créer la sidebar, pour plus de clarté ---
 function createProfileSidebar(profiledUser: User, loggedInUser: User): HTMLElement {
 	const createSidebarItem = (label: string, value: string | number | Date | undefined | null, isSensitive: boolean = false): HTMLElement | null => {
 		if (isSensitive && loggedInUser.id !== profiledUser.id) {
@@ -90,10 +87,10 @@ function createProfileSidebar(profiledUser: User, loggedInUser: User): HTMLEleme
 			createElement('p', { textContent: valueText, className: 'text-sm text-white font-medium truncate' })
 		]);
 	};
-	
+
 	const avatarImg = createElement('img', {
 		src: profiledUser.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(profiledUser.display_name)}&background=random&color=fff&size=128`,
-		alt: `Avatar de ${profiledUser.display_name}`,
+		alt: `Avatar of ${profiledUser.display_name}`,
 		className: 'w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover border-4 border-gray-400/30 shadow-md mb-2'
 	});
 
@@ -115,6 +112,7 @@ function createProfileSidebar(profiledUser: User, loggedInUser: User): HTMLEleme
 	].filter(item => item !== null) as HTMLElement[];
 
 	return createElement('aside', {
-		className: 'w-1/4 p-6 border-r border-gray-400/30 space-y-4 overflow-y-auto flex flex-col'
+		className: 'w-1/4 p-6 border-r border-gray-400/30 space-y-4 overflow-y-auto flex flex-col',
+		role: 'complementary' // Ajout du role pour le test
 	}, [avatarContainer, ...infoItems]);
 }
