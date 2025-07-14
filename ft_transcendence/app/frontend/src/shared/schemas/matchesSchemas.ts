@@ -6,8 +6,9 @@ export enum MatchStatus {
     IN_PROGRESS = 'in_progress',
     FINISHED = 'finished'
 }
-
 export const MatchStatusSchema = z.nativeEnum(MatchStatus);
+
+export type GameMode = 'local' | 'remote' | 'tournament' | 'onlineTournament';
 
 // --- Local Match Schemas  ---
 export const LocalMatchBaseSchema = z.object({
@@ -37,7 +38,6 @@ export const createLocalMatchBody = z.object({
     player1: z.string().min(1),
     player2: z.string().min(1),
 }).strict();
-
 export type createLocalMatchRequestBody = z.infer<typeof createLocalMatchBody>;
 
 export const createLocalMatchRouteSchema = {
@@ -77,43 +77,42 @@ export const cancelLocalMatchRouteSchema = {
 
 // ---------------------------------------------------------------------------------------- //
 
-// --- Remote Base Schemas ---
-export const RemoteMatchBaseSchema = z.object({
+// --- Base Schemas ---
+export const MatchBaseSchema = z.object({
     id: z.number().int(),
-    matchId: z.string(),
+    matchId: z.string(), // ou i min
     player1_id: z.number().int(),
     player2_id: z.number().int(),
-    player1_socket: z.string(),
-    player2_socket: z.string(),
-    player1_score: z.number().int().nullable(),
-    player2_score: z.number().int().nullable(),
+    player1_socket: z.string().nullable(), // Nullable if player is not connected
+    player2_socket: z.string().nullable(), // Nullable if player is not connected
+    player1_score: z.number().int().default(0),
+    player2_score: z.number().int().default(0),
     winner_id: z.number().nullable(),
     win_type: z.string().nullable(),
-    created_at: z.string(),
+    created_at: z.string(), // Ou z.date()
+    tournament_id: z.string().nullable(),
     status: MatchStatusSchema.default(MatchStatus.PENDING)
-
 });
+export type Match = z.infer<typeof MatchBaseSchema>;
 
-export type Match = z.infer<typeof RemoteMatchBaseSchema>;
-
-// --- Get Match by MatchId (which is unique URL) ---
+// GET MATCH by MATCH_ID (unique URL)
 export const MatchIdParamsSchema = z.object({
     matchId: z.string().uuid()
-});
+})
 
 export type MatchIdParams = z.infer<typeof MatchIdParamsSchema>;
 
 export const GetMatchIdRouteSchema = {
     params: MatchIdParamsSchema,
     response: {
-        200: RemoteMatchBaseSchema,
+        200: MatchBaseSchema,
         400: z.object({ error: z.string() }),
         404: z.object({ error: z.string() }),
         500: z.object({ error: z.string() })
     }
 };
 
-// --- Get Match History by UserID --- 
+// GET MATCH HISTORY by USER_ID
 export const MatchUserIdParamsSchema = z.object({
     userId: z.string().regex(/^\d+$/, "User ID must be a positive integer."),
 });
@@ -123,10 +122,40 @@ export type MatchUserIdParams = z.infer<typeof MatchUserIdParamsSchema>;
 export const GetMatchByUserIdRouteSchema = {
     params: MatchUserIdParamsSchema,
     response: {
-        200: z.array(RemoteMatchBaseSchema),
+        200: z.array(MatchBaseSchema),
         400: z.object({ error: z.string() }),
-        404: z.object({ error: z.string() }),
         500: z.object({ error: z.string() })
     }
+}
+
+export interface MatchHistoryComponentProps {
+	userId: number;
+}
+
+export type TournamentData = {
+	pairs: { player1: string, player2: string }[];
+	results: (number | null)[];
+	round: number;
 };
 
+export type TournamentStateData = {
+    rounds: Rounds;
+    isFinished: boolean;
+    winner_id?: number;
+    totalRounds: number;
+};
+
+export type Rounds = {
+	[round: number]: Match[];
+};
+
+export type Tournament = {
+	id: string;
+	player1: string;
+	player2: string;
+	winner: string | null;
+	player1_id?: number;
+	player2_id?: number;
+	winner_id?: number | null;
+	ready_players?: number[];
+};

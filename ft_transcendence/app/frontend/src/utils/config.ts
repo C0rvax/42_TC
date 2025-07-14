@@ -11,6 +11,22 @@ export const config = {
             csrfToken: 'csrfTokenKey',
         },
     },
+    settings: {
+        game: {
+            paddleHeight: 120,
+            paddleWidth: 20,
+            paddleXLeft: 20,
+            paddleXRight: 770,
+            ballRadius: 15,
+            backgroundColor: 'rgba(17, 24, 39, 0.8)',
+            ballColor: 'rgb(234, 179, 8)',
+            paddleColor: 'rgb(209, 213, 219)',
+        },
+        online: {
+            waitTimeout: 60,
+            tournamentTimeout: 60 * 5, // 5 minutes
+        },
+    },
     api: {
         users: {
             all: `${USER_API_PREFIX}/`, // URL_ALL_USERS

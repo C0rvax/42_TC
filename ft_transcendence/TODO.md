@@ -20,6 +20,15 @@
 - [x] La gestion d'erreurs 
 - [x] Remplacer error simple dans back
 
+- [x] tournoi local BUG: rounds suivants deja remplis (BYE)
+- [x] Pas de page fin de tournoi dans tournoi online mais apparait avec quickMatch
+- [x] voir au dessus -> removeItem tournoi dans quickMatch et reparation online tournament
+- [x] pas de noms dans la page de jeu dans online tournament
+- [x] match qui se lance par le back dans online tournament -> mettre un bouton
+- [x] verifier le clean de socket et storage dans tous les cas de figure
+
+- [x] fonctions au bons endroits
+
 - [x] message login pas bonne couleur
 - [x] sidebar cases trop petites
 - [x] mails tronqués dans sidebar si trop longs -> on réduit et sinon on truncate
@@ -40,10 +49,11 @@
 - [x] certain check avec des value de string donc faire attention comme par ex: game.quitButton (anciennement Quit)
 - [ ] voir ci-desssus avec sasha la refonte des fichiers
 
+- [ ] utilisation helper db
+
 - [x] La cle de securite (avec quoi on genere, ou est-ce qu'on la garde) -> cookie jwt_token
 - [x] 2FA
 - [x] chiffrer 2fa string dans db
-- [ ] ajouter sms (twilio) et emails (sendGrid)
 
 - [x] style que dans background
 
@@ -52,8 +62,8 @@
 - [x] score pas affichés dans gameResult
 - [x] score après local game
 
-- [ ] signe @ du font-beach pas jojo
-- [ ] Vérifier les traductions
+- [x] signe @ du font-beach pas jojo
+- [x] Vérifier les traductions
 - [ ] nettoyage
 
 ## Etienne

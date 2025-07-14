@@ -24,32 +24,8 @@
 
 @font-face {
   font-display: swap;
-  font-family: SpiritFox;
-  src: url('../fonts/SpiritFox.woff2') format('woff2');
-}
-
-@font-face {
-  font-display: swap;
-  font-family: JungleFever;
-  src: url('../fonts/JungleFever.woff2') format('woff2');
-}
-
-@font-face {
-  font-display: swap;
   font-family: JungleRoar;
   src: url('../fonts/JungleRoar.woff2') format('woff2');
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Workout;
-  src: url('../fonts/Workout.woff2') format('woff2');
-}
-
-@font-face {
-  font-display: swap;
-  font-family: Gulag;
-  src: url('../fonts/Gulag.woff2') format('woff2');
 }
 
 @font-face {
@@ -66,17 +42,50 @@
 
 @font-face {
   font-display: swap;
-  font-family: Maksimir;
-  src: url('../fonts/Maksimir.woff2') format('woff2');
+  font-family: MoreIsLess;
+  src: url('../fonts/MoreIsLess.woff2') format('woff2');
 }
 
 @theme {
-  --font-spirtit-fox: SpiritFox, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-workout: Workout, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-jurassic: JurassicPark, Beograd, ZeroCool, Maksimir, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-jurassic: JurassicPark, MoreIsLess, ZeroCool, Beograd, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-roar: JungleRoar, ZeroCool, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-fever: JungleFever, Beograd, ZeroCool, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-beach: Beachclub, JungleRoar, Beograd, ZeroCool, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-beach: Beachclub, JungleRoar, MoreIsLess, ZeroCool, Beograd, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@layer utilities {
+    .animate-pulse-custom {
+      animation: pulseCustom 2s infinite;
+    }
+  
+    @keyframes pulseCustom {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+
+    /* Custom scrollbar styles */
+    .overflow-y-auto::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    .overflow-y-auto::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+    
+    .overflow-y-auto::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        border: 2px solid transparent;
+        background-clip: content-box;
+    }
+    
+    .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
 }
 
 /* --- Styles pour les plantes --- */
@@ -142,22 +151,6 @@
   100% { transform: rotate(0deg); }
 }
 
-/* --- Styles de input.css --- */
-@layer utilities {
-    .animate-pulse-custom {
-      animation: pulseCustom 2s infinite;
-    }
-  
-    @keyframes pulseCustom {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.1); opacity: 0.7; }
-    }
-
-    .animate-spin {
-      animation: spin 1s linear infinite;
-    }
-}
-
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
@@ -172,12 +165,11 @@
 } */
 
 /* --- Styles de Showcase --- */
-.king_pong{
+.titleText{
 	fill-opacity: 0;
-	stroke: #000;
 	stroke-width: 2px;
-	stroke-dasharray: 330;
-	stroke-dashoffset: 330;
+	stroke-dasharray: 390;
+	stroke-dashoffset: 390;
 	animation: titleAnimation 2s ease-in-out 1 forwards;
 }
 
@@ -189,11 +181,96 @@
 		fill-opacity: 0;
 	}
 	100%{
-		fill-opacity: 100;
+		fill-opacity: 60;
 		stroke-dashoffset: 0;
 	}
 }
 
+/* .titlePaddle{ */
+	/* stroke-dasharray: 222; */
+	/* stroke-dashoffset: 0; */
+	/* animation: titlePaddleAnimation 2s ease-in-out 1 forwards; */
+/* } */
+
+@keyframes titlePaddleAnimation {
+	0%{
+		fill-opacity: 0;
+		stroke-dasharray: 50;
+	}
+	70%{
+		fill-opacity: 0;
+	}
+	80%{
+		fill-opacity: 1;
+	}
+}
+
+/* .titleHandle{
+	stroke-dasharray: 123.456;
+	stroke-dashoffset: 0;
+	/* animation: titleHandleAnimation 2s ease-in-out 1 forwards; */
+/* }  */
+
+@keyframes titleHandleAnimation {
+	0%{
+		stroke-dashoffset: 123.456;
+		fill-opacity: 0;
+	}
+	70%{
+		stroke-dashoffset: 0;
+		fill-opacity: 0;
+	}
+	80%{
+		stroke-dashoffset: 0;
+		fill-opacity: 1;
+	}
+}
+
+#Ball{
+	opacity: 0;
+	animation: titleBallAnimation 2s ease-in-out 1 forwards;
+}
+@keyframes titleBallAnimation {
+	0%{
+		opacity: 0;
+		stroke-dashoffset: 50;
+		transform: translate(100px, -50px);
+	}
+	79%{
+		stroke-dashoffset: 50;
+		opacity: 0;
+		transform: translate(100px, -50px);
+	}
+	80%{
+		stroke-dashoffset: 0;
+		opacity: 1;
+		transform: translate(100px, -50px);
+	}
+	95%{
+		transform: translate(-2px, 1px);
+		opacity: 1;
+	}
+	100%{
+		opacity: 1;
+		transform: translate(0px, 0px);
+	}
+}
+
+.titleEffect{
+	opacity: 0;
+	animation: titleEffectAnimation 2s ease-in-out 1 forwards;
+}
+@keyframes titleEffectAnimation {
+	0%{
+		opacity: 0;
+	}
+	90%{
+		opacity: 0;
+	}
+	100%{
+		opacity: 1;
+	}
+}
 .button-53 {
   background-color: #13b02f;
   border: 0 solid #E5E7EB;

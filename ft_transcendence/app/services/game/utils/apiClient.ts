@@ -18,7 +18,6 @@ export async function updatePlayerStats(userId: number, result: 'win' | 'loss'):
 
     try {
         const response = await fetch(`${USER_SERVICE_URL}/api/users/${userId}/stats`, {
-        // const response = await fetch(`http://users:4000/api/users/${userId}/stats`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

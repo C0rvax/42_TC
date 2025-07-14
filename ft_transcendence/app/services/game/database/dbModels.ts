@@ -7,20 +7,23 @@ const matchTable: string = `
 	CREATE TABLE IF NOT EXISTS matches (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	matchId TEXT UNIQUE NOT NULL,
+	tournament_id TEXT,
+	round_number INTEGER,
 	player1_id INTEGER NOT NULL,
 	player2_id INTEGER NOT NULL,
-	player1_socket TEXT NOT NULL,
-	player2_socket TEXT NOT NULL,
+	player1_socket TEXT,
+	player2_socket TEXT,
 	player1_score INTEGER,
 	player2_score INTEGER,
 	winner_id INTEGER,
 	win_type TEXT DEFAULT 'score',
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	status TEXT NOT NULL CHECK (status IN ('pending', 'in_progress', 'finished'))
+	status TEXT NOT NULL CHECK (status IN ('pending', 'in_progress', 'finished')),
+	FOREIGN KEY (tournament_id) REFERENCES tournaments(id) ON DELETE SET NULL
 	)`;
 
 const neSupprimePasStpCommente: string = `
-	INSERT INTO matches( matchId, player1_id, player2_id, player1_socket, player2_socket, player1_score, player2_score, winner_id, status)
+	INSERT OR IGNORE INTO matches( matchId, player1_id, player2_id, player1_socket, player2_socket, player1_score, player2_score, winner_id, status)
 	VALUES
 	('match1', 1, 2, 'socket1', 'socket2', 10, 8, 1, 'finished'),
 	('match2', 1, 3, 'socket3', 'socket4', 10, 9, 1, 'finished'),
@@ -40,13 +43,30 @@ const neSupprimePasStpCommente: string = `
 	('match16', 6, 8, 'socket31', 'socket32', 0, 10, 8, 'finished'),
 	('match17', 7, 8, 'socket33', 'socket34', 0, 10, 8, 'finished');`;
 
-// --- HELPER FUNCTIONS FOR GENERAL DB ACTIONS (all(), get(), run(), exec() etc.)
+const tournamentTable = `
+CREATE TABLE IF NOT EXISTS tournaments (
+    id TEXT PRIMARY KEY,
+	player_count INTEGER NOT NULL DEFAULT 2,
+    status TEXT NOT NULL CHECK(status IN ('pending', 'in_progress', 'finished')) DEFAULT 'in_progress',
+    winner_id INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);`;
+
+const tournamentPlayersTable = `
+CREATE TABLE IF NOT EXISTS tournament_players (
+    tournament_id TEXT NOT NULL,
+    user_id INTEGER NOT NULL,
+    PRIMARY KEY (tournament_id, user_id),
+    FOREIGN KEY (tournament_id) REFERENCES tournaments(id)
+);`;
+
 export async function createMatchTable() {
 	try {
+		await execute(db, tournamentTable);
 		await execute(db, matchTable);
-		console.log('Matches table created or already exists.');
+        await execute(db, tournamentPlayersTable);
 		await execute(db, neSupprimePasStpCommente);
-		console.log('Sample matches inserted into the table.');
+		console.log('All tables created or already exist.');
 
 	} catch (err: unknown) {
 		console.error(`Error creating matches table: ${err}`);
@@ -54,8 +74,8 @@ export async function createMatchTable() {
 	}
 };
 
-// pourquoi winner_id est une string ? 
-export async function setGameResult(matchId: string, player1_score: number, player2_score: number, winner_id: string, win_type: string) {
+export async function setGameResult(matchId: string, player1_score: number, player2_score: number, winner_id: number, win_type: string) {
+
 	
 	const existingMatch = await getRowByMatchId(matchId);
 
@@ -64,14 +84,19 @@ export async function setGameResult(matchId: string, player1_score: number, play
 	}
 
 	if (existingMatch.status === 'finished') {
-		throw new Error(`Match with id ${matchId} is already finished.`);
+		console.warn(`Match with id ${matchId} is already finished.`);
 	}
 	
 	// Update player stats in the database
-	const winnerId = parseInt(winner_id, 10);
-	const loserId = (winner_id === existingMatch.player1_id) ? existingMatch.player2_id : existingMatch.player1_id;
+	const loserId = winner_id === existingMatch.player1_id ? existingMatch.player2_id : existingMatch.player1_id;
 
-	await updatePlayerStats(winnerId, 'win');
+	// On vérifie que le perdant n'est pas le gagnant (cas d'erreur)
+	if (winner_id === loserId) {
+		console.error(`Winner and loser are the same for match ${matchId}`);
+		return;
+	}
+
+	await updatePlayerStats(winner_id, 'win');
 	await updatePlayerStats(loserId, 'loss');
 
 	const sql = `
@@ -175,7 +200,6 @@ export async function getRowByMatchId(matchId: string) {
 	}
 }
 
-// peut-etre a enlever
 export async function updateStatus(status: MatchStatus, matchId: string) {
 	
 	let sql = `UPDATE matches SET status = ? WHERE matchId = ? `;
@@ -217,7 +241,6 @@ export async function deleteRow(id: number) {
 
 // --- WRAPPERS FOR DB ACTIONS ---
 export const execute = async (db: any, sql: string, params: any[] = []): Promise<void> => {
-	// to execute an INSERT statement or UPDATE
 	if (params && params.length > 0) {
 		return new Promise<void>((resolve, reject) => {
 			db.run(sql, params, (err: Error | null) => {
@@ -245,10 +268,73 @@ export const fetchAll = async (db: any, sql: string, params: any[]): Promise<any
 
 export const fetchFirst = async (db: any, sql: string, params: any): Promise<any> => {
 	return new Promise<any>((resolve, reject) => {
-		// check if row: any ? or better type
 		db.get(sql, params, (err: Error | null, row: any) => {
 			if (err) reject(err);
 			resolve(row);
 		});
 	});
+}
+
+export async function createTournament(tournamentId: string, playerIds: number[]) {
+    await execute(db, 'INSERT INTO tournaments (id, player_count) VALUES (?, ?)', [tournamentId, playerIds.length]);
+    const stmt = db.prepare('INSERT INTO tournament_players (tournament_id, user_id) VALUES (?, ?)');
+    for (const userId of playerIds) {
+        stmt.run(tournamentId, userId);
+    }
+    stmt.finalize();
+}
+
+export async function addMatchToTournament(tournamentId: string, matchId: string, p1Id: number, p2Id: number, round: number) {
+    const sql = `
+    INSERT INTO matches(matchId, tournament_id, player1_id, player2_id, round_number, status)
+    VALUES(?, ?, ?, ?, ?, ?)`;
+    await execute(db, sql, [matchId, tournamentId, p1Id, p2Id, round, 'pending']);
+}
+
+export async function updateTournamentWinner(tournamentId: string, winnerId: number) {
+    const sql = `UPDATE tournaments SET winner_id = ?, status = 'finished' WHERE id = ?`;
+	try {
+		await execute(db, sql, [winnerId, tournamentId]);
+		console.log(`Tournament ${tournamentId} winner updated to ${winnerId}`);
+	} catch (err: unknown) {
+		console.error(`Failed to update tournament winner: ${err}`);
+		throw err;
+	}
+}
+
+export async function getTournamentById(tournamentId: string) {
+    const tournamentSql = `SELECT * FROM tournaments WHERE id = ?`;
+
+    const matchesSql = `
+        SELECT *
+        FROM matches
+        WHERE tournament_id = ?
+        ORDER BY round_number
+    `;
+
+    const tournament = await fetchFirst(db, tournamentSql, [tournamentId]);
+    const matches = await fetchAll(db, matchesSql, [tournamentId]);
+    return { tournament, matches };
+}
+
+export async function getMatchesByTournamentId(tournamentId: string) {
+    const sql = `SELECT * FROM matches WHERE tournament_id = ? ORDER BY round_number, created_at`;
+    try {
+        const matches = await fetchAll(db, sql, [tournamentId]);
+        return matches;
+    } catch (err: unknown) {
+        console.error(`Failed to find matches for tournament ${tournamentId}: ${err}`);
+        throw err;
+    }
+}
+
+export async function updateMatchWinner(matchId: string, winnerId: number) {
+    const sql = `UPDATE matches SET winner_id = ?, status = 'finished' WHERE matchId = ?`;
+    try {
+        await execute(db, sql, [winnerId, matchId]);
+        console.log(`Match ${matchId} winner updated to ${winnerId}`);
+    } catch (err: unknown) {
+        console.error(`Failed to update match winner for ${matchId}: ${err}`);
+        throw err;
+    }
 }
