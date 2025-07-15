@@ -10,34 +10,8 @@ import { fetchUserPublicDetails } from '../services/authService.js';
 import { UserPublic } from '../shared/schemas/usersSchemas.js';
 import { createActionButton } from "../utils/domUtils.js";
 import { initCountdown } from "../components/countdown.js";
-
-type TournamentStateData = {
-    rounds: Rounds;
-    isFinished: boolean;
-    winner_id?: number;
-    totalRounds: number;
-};
-
-type Match = {
-	id: string;
-	player1: string;
-	player2: string;
-	winner: string | null;
-	player1_id?: number;
-	player2_id?: number;
-	winner_id?: number | null;
-	ready_players?: number[];
-};
-
-type Rounds = {
-	[round: number]: Match[];
-};
-
-type TournamentData = {
-	pairs: { player1: string, player2: string }[];
-	results: (number | null)[];
-	round: number;
-};
+import { TournamentData, Rounds, Tournament, TournamentStateData } from "../shared/schemas/matchesSchemas.js";
+import { tournamentSocket } from "../services/socket.js";
 
 export function TournamentPage(params?: { id?: string }): HTMLElement {
 	if (params?.id) {
@@ -49,7 +23,7 @@ export function TournamentPage(params?: { id?: string }): HTMLElement {
 
 function LocalTournamentPage(): HTMLElement {
 	const currentUser = getUserDataFromStorage();
-	if (!currentUser) { navigateTo('/login'); return createElement('div'); }
+	// if (!currentUser) { navigateTo('/login'); return createElement('div'); }
 
 	const title = createElement('h2', { className: 'flex-shrink-0 text-3xl font-bold mb-6 text-center text-gray-300 font-beach', textContent: t('tournament.title') });
 
@@ -104,7 +78,7 @@ function LocalTournamentPage(): HTMLElement {
 			}
 
 			const winners = previousRoundMatches.map(match => match.winner!);
-			const nextRoundMatches: Match[] = [];
+			const nextRoundMatches: Tournament[] = [];
 			for (let i = 0; i < winners.length; i += 2) {
 				const player1 = winners[i];
 				const player2 = winners[i + 1] || 'BYE';
@@ -243,6 +217,8 @@ function OnlineTournamentPage(tournamentId: string): HTMLElement {
 
 	if (!socket.connected) socket.connect();
 	socket.removeAllListeners();
+	// if (!tournamentSocket.connected) tournamentSocket.connect();
+    // tournamentSocket.removeAllListeners();
 
 	const handleTournamentState = async (data: TournamentStateData) => {
 		await renderOnlineBracket(data, bracketContainer, currentUser.id, tournamentId);
@@ -312,11 +288,10 @@ async function renderOnlineBracket(data: TournamentStateData, container: HTMLEle
 	for (const [roundNumStr, matches] of sortedRounds) {
         const roundNum = Number(roundNumStr);
 		const roundEl = createElement('div', { className: 'bg-blue-100/5 shadow-lg rounded-lg p-4 border border-blue-200/10' });
-		// const header = createElement('h2', { textContent: `${t('tournament.round')} ${roundNumStr}`, className: 'text-xl font-semibold font-beach mb-3 text-blue-300' });
+        
         const isFinal = roundNum === totalRounds && matches.length === 1;
         const headerText = isFinal ? t('tournament.finale') : `${t('tournament.round')} ${roundNumStr}`;
 		const header = createElement('h2', { textContent: headerText, className: 'text-xl font-semibold font-beach mb-3 text-blue-300' });
-
 		roundEl.appendChild(header);
 
 		const list = createElement('ul', { className: 'space-y-2' });

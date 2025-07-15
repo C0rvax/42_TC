@@ -5,18 +5,19 @@ import { LoginRequestBody, User } from '../shared/schemas/usersSchemas.js';
 import { t, setLanguage, getLanguage } from '../services/i18nService.js';
 import { HeaderComponent } from '../components/headerComponent.js';
 import { createElement } from '../utils/domUtils.js';
+import { config } from '../utils/config.js';
 
 export function LoginPage(): HTMLElement {
 	const currentUser = getUserDataFromStorage();
 
-	const GOOGLE_CLIENT_ID = '381285000900-rcla6jmd3aldv8kk9k7ga84o7jrm5dj0.apps.googleusercontent.com';
-    const REDIRECT_URI = 'http://localhost:8443/auth/google/callback';
+	const GOOGLE_CLIENT_ID = config.auth.googleId;
+    const REDIRECT_URI = config.auth.callbackUri;
 
 	const headerElement = HeaderComponent({ currentUser });
 
 	const title = createElement('h2', {
 		textContent: t('login.title'),
-		className: 'text-3xl font-bold mb-6 text-center text-white'
+		className: 'text-3xl font-semibold font-beach mb-6 text-center text-gray-200'
 	});
 
 	const handleLoginAttempt = (credentials: LoginRequestBody) => attemptLogin(credentials);
@@ -50,7 +51,7 @@ export function LoginPage(): HTMLElement {
 
 	const googleLoginButton = createElement('a', {
         href: `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=openid%20profile%20email`,
-        className: 'mt-4 w-full flex items-center justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium bg-white text-gray-700 hover:bg-gray-50 border'
+        className: 'mt-4 w-full flex items-center justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium bg-blue-300 text-gray-700 hover:bg-gray-50 border'
     }, [
         createElement('img', { src: '/assets/google-icon.svg', className: 'h-5 w-5 mr-3' }),
         document.createTextNode(t('login.google'))
@@ -61,7 +62,7 @@ export function LoginPage(): HTMLElement {
 	}, [
 		title,
 		loginFormComponent,
-		createElement('p', { textContent: 'OR', className: 'my-4 text-center text-gray-400' }), // Séparateur
+		createElement('p', { textContent: t('general.or'), className: 'my-4 text-center text-gray-400' }),
         googleLoginButton,
 		linksDiv
 	]);
@@ -74,7 +75,7 @@ export function LoginPage(): HTMLElement {
 		className: 'flex flex-col min-h-screen bg-cover bg-center bg-fixed'
 	}, [headerElement, container]);
 
-	pageWrapper.style.backgroundImage = "url('/assets/background.jpg')";
+	pageWrapper.style.backgroundImage = "url('/assets/background.webp')";
 
 	return pageWrapper;
 }
