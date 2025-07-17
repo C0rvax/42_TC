@@ -5,11 +5,9 @@ import { t } from '../services/i18nService.js'
 import { HeaderComponent } from '../components/headerComponent.js';
 import { navigateTo } from '../services/router.js';
 import { getUserDataFromStorage } from '../services/authService.js';
-import socket from "../services/socket.js";
 import { fetchUserPublicDetails } from '../services/authService.js';
 import { UserPublic } from '../shared/schemas/usersSchemas.js';
 import { createActionButton } from "../utils/domUtils.js";
-import { initCountdown } from "../components/countdown.js";
 import { TournamentData, Rounds, Tournament, TournamentStateData } from "../shared/schemas/matchesSchemas.js";
 import { tournamentSocket } from "../services/socket.js";
 
@@ -23,7 +21,6 @@ export function TournamentPage(params?: { id?: string }): HTMLElement {
 
 function LocalTournamentPage(): HTMLElement {
 	const currentUser = getUserDataFromStorage();
-	// if (!currentUser) { navigateTo('/login'); return createElement('div'); }
 
 	const title = createElement('h2', { className: 'flex-shrink-0 text-3xl font-bold mb-6 text-center text-gray-300 font-beach', textContent: t('tournament.title') });
 
@@ -215,10 +212,8 @@ function OnlineTournamentPage(tournamentId: string): HTMLElement {
 		createElement('div', { className: 'flex-grow flex items-center justify-center p-4 sm:p-8' }, [tournamentContentContainer])
 	);
 
-	if (!socket.connected) socket.connect();
-	socket.removeAllListeners();
-	// if (!tournamentSocket.connected) tournamentSocket.connect();
-    // tournamentSocket.removeAllListeners();
+	if (!tournamentSocket.connected) tournamentSocket.connect();
+	tournamentSocket.removeAllListeners();
 
 	const handleTournamentState = async (data: TournamentStateData) => {
 		await renderOnlineBracket(data, bracketContainer, currentUser.id, tournamentId);
@@ -227,33 +222,26 @@ function OnlineTournamentPage(tournamentId: string): HTMLElement {
 		}
 	};
 
-	socket.on('connect', () => {
-		socket.emit('authenticate', { display_name: currentUser.display_name, userId: currentUser.id });
-		socket.emit('joinTournamentRoom', { tournamentId });
+	tournamentSocket.on('connect', () => {
+		tournamentSocket.emit('authenticate', { display_name: currentUser.display_name, userId: currentUser.id });
+		tournamentSocket.emit('joinTournamentRoom', { tournamentId });
 	});
-	if (socket.connected) {
-		socket.emit('authenticate', { display_name: currentUser.display_name, userId: currentUser.id });
-		socket.emit('joinTournamentRoom', { tournamentId });
+	if (tournamentSocket.connected) {
+		tournamentSocket.emit('authenticate', { display_name: currentUser.display_name, userId: currentUser.id });
+		tournamentSocket.emit('joinTournamentRoom', { tournamentId });
 	}
 
-	socket.on('tournamentState', handleTournamentState);
+	tournamentSocket.on('tournamentState', handleTournamentState);
 
-	socket.on('startTournamentMatch', async ({ matchId, side, opponent }: { matchId: string, side: string, opponent: string }) => {
+	tournamentSocket.on('startTournamentMatch', async ({ matchId, side, opponent }: { matchId: string, side: string, opponent: string }) => {
+		cleanupSocket(tournamentSocket);
+		sessionStorage.setItem('showCountdown', 'true');
 		sessionStorage.setItem('onlineTournamentId', tournamentId);
 		sessionStorage.setItem('gameMode', 'onlineTournament');
 		sessionStorage.setItem('matchId', matchId);
 		sessionStorage.setItem('side', side);
 		sessionStorage.setItem('opponent', opponent);
 		sessionStorage.setItem('displayName', currentUser.display_name);
-
-		const countdownContainer = createElement('div');
-		countdownContainer.className = `
-            fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50
-            text-white text-7xl font-beach [text-shadow:_0_3px_6px_rgb(0_0_0_/_50%)]
-        `;
-		document.body.appendChild(countdownContainer);
-
-		await initCountdown(countdownContainer);
 
 		navigateTo(`/game-room?matchId=${matchId}`);
 	});
@@ -275,7 +263,7 @@ async function getPlayerDetails(playerId: number): Promise<Partial<UserPublic>> 
 
 async function renderOnlineBracket(data: TournamentStateData, container: HTMLElement, currentUserId: number, tournamentId: string) {
 	const { rounds, totalRounds } = data;
-    if (!rounds) {
+	if (!rounds) {
 		container.innerHTML = `<p class="text-white text-center">${t('general.loading')}</p>`;
 		return;
 	}
@@ -286,11 +274,11 @@ async function renderOnlineBracket(data: TournamentStateData, container: HTMLEle
 	const sortedRounds = Object.entries(rounds).sort((a, b) => Number(a[0]) - Number(b[0]));
 
 	for (const [roundNumStr, matches] of sortedRounds) {
-        const roundNum = Number(roundNumStr);
+		const roundNum = Number(roundNumStr);
 		const roundEl = createElement('div', { className: 'bg-blue-100/5 shadow-lg rounded-lg p-4 border border-blue-200/10' });
-        
-        const isFinal = roundNum === totalRounds && matches.length === 1;
-        const headerText = isFinal ? t('tournament.finale') : `${t('tournament.round')} ${roundNumStr}`;
+
+		const isFinal = roundNum === totalRounds && matches.length === 1;
+		const headerText = isFinal ? t('tournament.finale') : `${t('tournament.round')} ${roundNumStr}`;
 		const header = createElement('h2', { textContent: headerText, className: 'text-xl font-semibold font-beach mb-3 text-blue-300' });
 		roundEl.appendChild(header);
 
@@ -326,9 +314,9 @@ async function renderOnlineBracket(data: TournamentStateData, container: HTMLEle
 					const readyButton = createActionButton({
 						text: t('tournament.ready'),
 						variant: 'primary',
-                        baseClass: 'bg-blue-700 hover:bg-blue-500 text-white border border-blue-600/50 text-lg font-beach font-thin py-1 px-2.5 rounded transition-all duration-200',
+						baseClass: 'bg-blue-700 hover:bg-blue-500 text-white border border-blue-600/50 text-lg font-beach font-thin py-1 px-2.5 rounded transition-all duration-200',
 						onClick: () => {
-							socket.emit('playerReadyForTournamentMatch', { tournamentId, matchId: match.id });
+							tournamentSocket.emit('playerReadyForTournamentMatch', { tournamentId, matchId: match.id });
 						}
 					});
 					actionContainer.appendChild(readyButton);
@@ -351,8 +339,8 @@ async function renderOnlineBracket(data: TournamentStateData, container: HTMLEle
 	}
 }
 
-async function displayTournamentWinner(winnerId: number, bracketContainer: HTMLElement, mainContainer: HTMLElement) {
-	if (bracketContainer.querySelector('.tournament-winner-banner')) {
+async function displayTournamentWinner(winnerId: number, _bracketContainer: HTMLElement, mainContainer: HTMLElement) {
+	if (mainContainer.querySelector('.tournament-winner-banner')) {
 		return;
 	}
 
@@ -372,7 +360,7 @@ async function displayTournamentWinner(winnerId: number, bracketContainer: HTMLE
 		e.preventDefault();
 		sessionStorage.removeItem('onlineTournamentId');
 		sessionStorage.removeItem('gameMode');
-		cleanupSocket(socket);
+		cleanupSocket(tournamentSocket);
 		navigateTo('/game');
 	});
 

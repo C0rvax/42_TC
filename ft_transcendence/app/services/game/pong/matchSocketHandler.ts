@@ -7,25 +7,76 @@ import { RemoteGameSession, gameSessions, findRemoteGameSessionBySocketId } from
 import { cleanOnDisconnection, makeid } from "../utils/waitingRoomUtils.ts";
 // @ts-ignore
 import { GameState, FRAME_RATE, TIMEOUT_MS } from "../shared/gameTypes.js";
-import { updateUserStatus } from "../utils/apiClient.ts";
+import { reportMatchResultToTournamentService, updateUserStatus } from "../utils/apiClient.ts";
 import { UserOnlineStatus } from "../shared/schemas/usersSchemas.js";
-import { handleTournamentLogic, handleMatchEnd } from "../handlers/tournamentHandler.ts";
 import { removePlayerFromWaitingList, addPlayerToWaitingList, firstInFirstOut, getWaitingListSize, PlayerInfo, waitingList } from "../utils/waitingListUtils.ts";
 
 
 export const timeouts: Map<string, NodeJS.Timeout> = new Map();
 export const localGames: Map<string, { state: GameState, intervalId: NodeJS.Timeout | null}> = new Map();
-
+const matchWaitingRoom = new Map<string, { socket: Socket, playerInfo: PlayerInfo }[]>();
 
 export async function matchSocketHandler(socket: Socket): Promise<void> {
 
-    socket.on('authenticate', async ({ display_name, userId }) => {
+    socket.on('authenticate', async ({ display_name, userId }, callback) => {
         (socket as any).playerInfo = { display_name, userId, socket };
         await updateUserStatus(userId, UserOnlineStatus.ONLINE);
         fastify.log.info(`Player ${display_name} (ID: ${userId}, Socket: ${socket.id}) authenticated.`);
+        if (typeof callback === 'function') {
+        callback();
+    }
+    });
+    socket.on('playerReadyForGame', async ({ matchId }) => {
+        const playerInfo = (socket as any).playerInfo as PlayerInfo | undefined;
+
+        if (!playerInfo) {
+            fastify.log.warn(`Unauthenticated socket ${socket.id} tried to join game ${matchId}`);
+            return socket.emit('error', { message: 'Authentication required.' });
+        }
+
+        fastify.log.info(`Player ${playerInfo.display_name} is ready for game ${matchId}`);
+
+        if (!matchWaitingRoom.has(matchId)) {
+            matchWaitingRoom.set(matchId, []);
+        }
+        const waitingPlayers = matchWaitingRoom.get(matchId)!;
+
+        if (!waitingPlayers.some(p => p.playerInfo.userId === playerInfo.userId)) {
+            waitingPlayers.push({ socket, playerInfo });
+        }
+
+        if (waitingPlayers.length === 2) {
+            const [player1, player2] = waitingPlayers;
+            
+            const matchData = await getRowByMatchId(matchId);
+            if (!matchData) {
+                fastify.log.error(`Match data for ${matchId} not found in DB.`);
+                player1.socket.emit('error', { message: 'Match data not found.' });
+                player2.socket.emit('error', { message: 'Match data not found.' });
+                matchWaitingRoom.delete(matchId);
+                return;
+            }
+
+            const isTournament = !!matchData.tournament_id;
+
+            const p1Socket = player1.playerInfo.userId === matchData.player1_id ? player1.socket : player2.socket;
+            const p2Socket = player1.playerInfo.userId === matchData.player2_id ? player1.socket : player2.socket;
+
+            await updateUserStatus(matchData.player1_id, UserOnlineStatus.IN_GAME);
+            await updateUserStatus(matchData.player2_id, UserOnlineStatus.IN_GAME);
+            
+            const gameSession = startRemoteGame(p1Socket, p2Socket, matchId);
+            gameSession.isTournamentMatch = isTournament;
+            
+            if (isTournament) {
+                (p1Socket as any).tournamentInfo = { tournamentId: matchData.tournament_id, matchId };
+                (p2Socket as any).tournamentInfo = { tournamentId: matchData.tournament_id, matchId };
+            }
+            
+            matchWaitingRoom.delete(matchId);
+        }
     });
     handleQuickMatchQueue(socket);
-    handleTournamentLogic(socket);
     serverSocketEvents(socket);
     disconnectionHandler(socket);
 }
@@ -38,9 +89,7 @@ function handleQuickMatchQueue(socket: Socket) {
             return socket.emit('error', { message: 'Player not authenticated.'});
         }
 
-        await updateUserStatus(playerInfo.userId, UserOnlineStatus.IN_GAME);
         const isNew = addPlayerToWaitingList(playerInfo.display_name, playerInfo.userId, socket);
-
         if (isNew) {
             socket.emit('inQueue');
             
@@ -68,6 +117,7 @@ async function tryMatchPlayers() {
         if (!player1 || !player2) {
             if (player1) waitingList.set(player1.socket.id, player1);
             fastify.log.error('Matchmaking failed: not enough players found after dequeue.');
+            matchmakingLock = false;
             return;
         }
         
@@ -84,8 +134,6 @@ async function tryMatchPlayers() {
         removePlayerFromWaitingList(player1.socket.id);
         removePlayerFromWaitingList(player2.socket.id);
         
-        setTimeout(() => startRemoteGame(player1.socket, player2.socket, matchId), 3000);
-
     } catch (error: unknown) {
         if (error instanceof Error) {
             fastify.log.error({ msg: 'Error during matchmaking:', err: { message: error.message, stack: error.stack } });
@@ -105,7 +153,6 @@ function clearMatchmakingTimeout(socketId: string) {
     }
 }
 
-
 function serverSocketEvents(socket: Socket) {
     socket.on('startLocal',  (matchId: string) => {    
         fastify.log.info('Game started locally'); 
@@ -117,6 +164,15 @@ function serverSocketEvents(socket: Socket) {
         startLocalGameInterval(game.state, socket, matchId);      
     });
     
+    socket.on('leaveQueue', () => {
+        const playerInfo: PlayerInfo | undefined = (socket as any).playerInfo;
+        if (playerInfo) {
+            fastify.log.info(`Player ${playerInfo.display_name} (${socket.id}) explicitly left the quick match queue.`);
+            removePlayerFromWaitingList(socket.id);
+            clearMatchmakingTimeout(socket.id);
+        }
+    });
+
     handleClientInput(socket);
 }
 
@@ -206,7 +262,7 @@ async function disconnectionHandler(socket: Socket) {
                 const winnerSocket = winnerSocketId ? fastify.io.sockets.sockets.get(winnerSocketId) : undefined;
                 if (winnerSocket) {
                     const winnerId = (winnerSocket as any).playerInfo.userId;
-                    await handleMatchEnd(tournamentInfo.tournamentId, tournamentInfo.matchId, winnerId);
+                    await reportMatchResultToTournamentService(tournamentInfo.tournamentId, tournamentInfo.matchId, winnerId);
                 }
             } else {
                 const match = await getRowByMatchId(gameSession.matchId);

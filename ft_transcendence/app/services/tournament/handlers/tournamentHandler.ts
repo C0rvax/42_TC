@@ -3,7 +3,7 @@ import { Socket } from "socket.io";
 import { fastify, io } from "../server.ts";
 import { PlayerInfo, tournamentQueues, removePlayerFromTournamentQueues } from "../utils/waitingListUtils.ts";
 import { createTournament, getTournamentById, updateTournamentWinner, getMatchesForTournament, addMatchToTournament, updateMatchWinnerInTournamentDB } from "../database/dbModels.ts";
-import { createMatchInGameService, updateUserStatus } from "../utils/apiClient.ts";
+import { createMatchInGameService, updateUserStatus, declareForfeitInGameService } from "../utils/apiClient.ts";
 import { UserOnlineStatus } from "../shared/schemas/usersSchemas.js";
 import { LocalTournamentBodySchema } from '../middleware/tournaments.schemas.ts';
 import { singleEliminationMatches } from '../utils/matchmaking.ts';
@@ -20,11 +20,8 @@ export async function createLocalTournament(req: FastifyRequest, reply: FastifyR
     }
 
     const { players } = parseResult.data;
-
     const pairs = singleEliminationMatches(players);
-
     console.log("Sending response: ", JSON.stringify(pairs));
-
     return reply.code(200).send({ pairs });
 };
 
@@ -40,6 +37,72 @@ export async function handleTournamentLogic(socket: Socket) {
     socket.on('joinTournamentQueue', (data) => joinTournamentQueue(socket, data));
     socket.on('joinTournamentRoom', (data) => joinTournamentRoom(socket, data));
     socket.on('playerReadyForTournamentMatch', (data) => playerReadyForTournamentMatch(socket, data));
+
+    socket.on('leaveTournamentQueue', () => {
+        const playerInfo: PlayerInfo | undefined = (socket as any).playerInfo;
+        if (playerInfo) {
+            fastify.log.info(`Player ${playerInfo.display_name} (${socket.id}) explicitly left ALL tournament queues.`);
+            removePlayerFromTournamentQueues(socket.id);
+
+            tournamentQueues.forEach((queue, size) => {
+                io.to(`tournament_queue_${size}`).emit('tournamentQueueUpdate', {
+                    current: queue.length,
+                    required: size,
+                });
+            });
+        }
+    });
+
+    // socket.on('disconnect', () => {
+    //     const playerInfo: PlayerInfo | undefined = (socket as any).playerInfo;
+    //     if (playerInfo) {
+    //         fastify.log.info(`Player ${playerInfo.display_name} disconnected.`);
+    //         removePlayerFromTournamentQueues(socket.id);
+    //         updateUserStatus(playerInfo.userId, UserOnlineStatus.OFFLINE);
+    //     }
+    // })
+    socket.on('disconnect', async () => {
+        const playerInfo: PlayerInfo | undefined = (socket as any).playerInfo;
+        const tournamentId: string | undefined = (socket as any).tournamentId;
+
+        if (playerInfo) {
+            fastify.log.info(`Player ${playerInfo.display_name} disconnected.`);
+            removePlayerFromTournamentQueues(socket.id);
+            if (!tournamentId) {
+                updateUserStatus(playerInfo.userId, UserOnlineStatus.OFFLINE);
+            }
+        }
+
+        // Si le joueur était dans un tournoi actif et non dans un match
+        if (tournamentId) {
+            fastify.log.info(`Player ${playerInfo?.userId} disconnected from active tournament ${tournamentId}. Processing forfeit...`);
+
+            const allMatches = await getMatchesForTournament(tournamentId);
+            const activeMatch = allMatches.find(m => 
+                (m.player1_id === playerInfo?.userId || m.player2_id === playerInfo?.userId) && m.status !== 'finished'
+            );
+            
+            // S'il y a un match en attente pour lui, on le déclare forfait.
+            if (activeMatch) {
+                const winnerId = activeMatch.player1_id === playerInfo?.userId ? activeMatch.player2_id : activeMatch.player1_id;
+                
+                if (winnerId) {
+                    fastify.log.info(`Declaring user ${winnerId} as winner by forfeit for match ${activeMatch.matchId}`);
+                    await declareForfeitInGameService(activeMatch.matchId, winnerId);
+                    await handleMatchEnd(tournamentId, activeMatch.matchId, winnerId);
+                }
+            }
+        }
+    });
+
+    socket.on('joinTournamentRoom', async (data) => {
+        const playerInfo: PlayerInfo | undefined = (socket as any).playerInfo;
+        if (playerInfo) {
+            // On stocke l'ID du tournoi dans le socket pour le retrouver lors de la déconnexion
+            (socket as any).tournamentId = data.tournamentId;
+        }
+        await joinTournamentRoom(socket, data);
+    });
 }
 
 /**
@@ -85,21 +148,27 @@ async function startTournament(players: PlayerInfo[]) {
         const p1 = shuffledPlayers[i];
         const p2 = shuffledPlayers[i + 1];
 
-        // Demander au service GAME de créer le match
         try {
-            await createMatchInGameService({
+            const { matchId } = await createMatchInGameService({
                 player1_id: p1.userId,
                 player2_id: p2.userId,
                 tournament_id: tournamentId,
                 round_number: 1
             });
+            if (matchId) {
+                fastify.log.info(`Match created: ${matchId} for tournament ${tournamentId}`);
+                await addMatchToTournament(tournamentId, matchId, p1.userId, p2.userId, 1);
+            } else {
+                fastify.log.error(`Failed to create match for tournament ${tournamentId}`);
+                throw new Error("Match creation failed");
+            }
         } catch (error) {
             fastify.log.error(error, `Failed to create match for tournament ${tournamentId}`);
             // Gérer l'erreur (annuler le tournoi, notifier les joueurs, etc.)
+            return;
         }
     }
 
-    // Notifier les joueurs que le tournoi commence et qu'ils doivent rejoindre la salle
     const tournamentState = await getTournamentState(tournamentId);
     players.forEach(p => {
         p.socket.join(`tournament-${tournamentId}`);
@@ -125,7 +194,6 @@ async function playerReadyForTournamentMatch(socket: Socket, { tournamentId, mat
     if (!playerInfo) return;
 
     if (!matchReadyState.has(matchId)) matchReadyState.set(matchId, new Set());
-    
     const readyPlayers = matchReadyState.get(matchId)!;
     readyPlayers.add(playerInfo.userId);
     
@@ -145,6 +213,7 @@ async function playerReadyForTournamentMatch(socket: Socket, { tournamentId, mat
             if (p1Socket && p2Socket) {
                 p1Socket.emit('startTournamentMatch', { matchId, side: 'left', opponent: (p2Socket as any).playerInfo.display_name });
                 p2Socket.emit('startTournamentMatch', { matchId, side: 'right', opponent: (p1Socket as any).playerInfo.display_name });
+                fastify.log.info(`Sent 'startTournamentMatch' to players for match ${matchId}. Game service will handle the start.`);
                 matchReadyState.delete(matchId);
             }
         }
@@ -173,12 +242,25 @@ export async function handleMatchEnd(tournamentId: string, matchId: string, winn
             await finishTournament(tournamentId, winners[0]);
         } else {
             for (let i = 0; i < winners.length; i += 2) {
-                await createMatchInGameService({
-                    player1_id: winners[i],
-                    player2_id: winners[i + 1],
-                    tournament_id: tournamentId,
-                    round_number: currentRoundNumber + 1
-                });
+                const player1Id = winners[i];
+                const player2Id = winners[i + 1];
+
+                try {
+                    const { matchId } = await createMatchInGameService({
+                        player1_id: player1Id,
+                        player2_id: player2Id,
+                        tournament_id: tournamentId,
+                        round_number: currentRoundNumber + 1
+                    });
+                    if (matchId) {
+                        fastify.log.info(`Match ${matchId} created in game service for tournament ${tournamentId}. Adding to tournament DB.`);
+                        await addMatchToTournament(tournamentId, matchId, player1Id, player2Id, currentRoundNumber + 1);
+                    } else {
+                        fastify.log.error(`Game service did not return a matchId for tournament ${tournamentId}`);
+                    }
+                } catch (error) {
+                    fastify.log.error(error, `Failed to create next round match for tournament ${tournamentId}`);
+                }
             }
         }
     }

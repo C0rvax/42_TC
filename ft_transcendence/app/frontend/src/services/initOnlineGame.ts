@@ -7,13 +7,14 @@ import { initCountdown } from "../components/countdown.js";
 import { config } from "../utils/config.js";
 import { t } from "./i18nService.js";
 
-export async function handleOnlineGame(display_name: string, userId: number): Promise<void> {
+export async function handleOnlineGame(display_name: string, userId: number, controller: AbortController): Promise<void> {
     try {
-        await initOnlineGame(display_name, userId);
+        await initOnlineGame(display_name, userId, controller);
     } catch (err: unknown) {
         console.log(err);
-        showToast(t('msg.error.any'), 'error');
-        navigateTo('/game');
+        // showToast(t('msg.error.any'), 'error');
+        // navigateTo('/game');
+        throw err;
     }
 }
 
@@ -22,76 +23,53 @@ type TournamentMatch = {
     player2: string;
 };
 
-// --- Fonction pour la recherche de tournoi ---
-export async function handleTournamentSearch(size: number, displayName: string, userId: number): Promise<void> {
-    const controller: AbortController = new AbortController();
+export async function handleTournamentSearch(size: number, displayName: string, userId: number, controller: AbortController): Promise<void> {
+    // const controller: AbortController = new AbortController();
 
-    // if (tournamentSocket.connected) {
-    //     tournamentSocket.disconnect();
-    // }
-    // tournamentSocket.removeAllListeners();
-
-    if (socket.connected) {
-        socket.disconnect();
+    if (tournamentSocket.connected) {
+        tournamentSocket.disconnect();
     }
-    socket.removeAllListeners();
+    tournamentSocket.removeAllListeners();
 
     sessionStorage.removeItem('tournamentData');
     sessionStorage.removeItem('onlineTournamentId');
 
-    // Show initial waiting toast
-    showWaitingToast(socket, controller, config.settings.online.waitTimeout, t('tournament.waitingForPlayers', { current: '1', required: size.toString() }));
-    // showWaitingToast(tournamentSocket, controller, config.settings.online.waitTimeout, t('tournament.waitingForPlayers', { current: '1', required: size.toString() }));
+    showWaitingToast(tournamentSocket, controller, config.settings.online.waitTimeout, t('tournament.waitingForPlayers', { current: '1', required: size.toString() }));
 
-    // Listen for queue updates
-    // tournamentSocket.on('tournamentQueueUpdate', ({ current, required }: { current: number; required: number }) => {
-    socket.on('tournamentQueueUpdate', ({ current, required }: { current: number; required: number }) => {
-        showWaitingToast(socket, controller, config.settings.online.waitTimeout, t('tournament.waitingForPlayers', { current: current.toString(), required: required.toString() }));
-        // showWaitingToast(tournamentSocket, controller, config.settings.online.waitTimeout, t('tournament.waitingForPlayers', { current: current.toString(), required: required.toString() }));
+    tournamentSocket.on('tournamentQueueUpdate', ({ current, required }: { current: number; required: number }) => {
+        showWaitingToast(tournamentSocket, controller, config.settings.online.waitTimeout, t('tournament.waitingForPlayers', { current: current.toString(), required: required.toString() }));
     });
 
-    // Listen for tournament start
-    // tournamentSocket.on('tournamentStarting', ({ tournamentId, matches }: { tournamentId: string; matches: TournamentMatch[] }) => {
-    socket.on('tournamentStarting', ({ tournamentId, matches }: { tournamentId: string; matches: TournamentMatch[] }) => {
+    tournamentSocket.on('tournamentStarting', ({ tournamentId, matches }: { tournamentId: string; matches: TournamentMatch[] }) => {
         removeWaitingToast();
         sessionStorage.setItem('onlineTournamentId', tournamentId);
         navigateTo(`/tournament/${tournamentId}`);
     });
 
-    // Handle timeout
-    // tournamentSocket.on('matchTimeout', () => {
-    socket.on('matchTimeout', () => {
+    tournamentSocket.on('matchTimeout', () => {
         showToast(t('tournament.timeout'), 'error');
-        cleanupSocket(socket);
-        // cleanupSocket(tournamentSocket);
+        cleanupSocket(tournamentSocket);
         removeWaitingToast();
         navigateTo('/game');
     });
 
-    // Standard error handling
-    // tournamentSocket.on('connect_error', (err: Error) => {
-    socket.on('connect_error', (err: Error) => {
+    tournamentSocket.on('connect_error', (err: Error) => {
         console.error(`Connection error: ${err.message}`);
         showToast(t('msg.error.any'), 'error');
-        cleanupSocket(socket);
-        // cleanupSocket(tournamentSocket);
+        cleanupSocket(tournamentSocket);
         removeWaitingToast();
     });
 
-    // tournamentSocket.on('connect', () => {
-    socket.on('connect', () => {
+    tournamentSocket.on('connect', () => {
         console.log('Connected to the server for tournament search');
-        // tournamentSocket.emit('authenticate', { display_name: displayName, userId });
-        // tournamentSocket.emit('joinTournamentQueue', { size });
-        socket.emit('authenticate', { display_name: displayName, userId });
-        socket.emit('joinTournamentQueue', { size });
+        tournamentSocket.emit('authenticate', { display_name: displayName, userId });
+        tournamentSocket.emit('joinTournamentQueue', { size });
     });
-    socket.connect();
-    // tournamentSocket.connect();
+    tournamentSocket.connect();
 }
 
-export async function initOnlineGame(display_name: string, userId: number) {
-    const controller: AbortController = new AbortController();
+export async function initOnlineGame(display_name: string, userId: number, controller: AbortController): Promise<void> {
+    // const controller: AbortController = new AbortController();
 
     if (socket.connected) {
         socket.disconnect();
@@ -109,7 +87,6 @@ export async function initOnlineGame(display_name: string, userId: number) {
         showWaitingToast(socket, controller, config.settings.online.waitTimeout, t('game.waitOpponent'));
     });
 
-    // --- Socket listener on matchFound event --> if opponenet is found
     socket.on('matchFound', async ({ matchId, displayName, side, opponent }: { matchId: UUID; displayName: string, side: 'left' | 'right'; opponent: string}) => {
 
         sessionStorage.setItem('matchId', matchId);
@@ -128,7 +105,6 @@ export async function initOnlineGame(display_name: string, userId: number) {
         navigateTo(`/game-room?matchId=${matchId}`);
     });
     
-    // --- Socket listeners on errors from the server side
     socket.on('disconnect', (reason: string, details?: any) => { 
         console.log(`Disconnected from the server: reason ${reason}`);
         if (details){
@@ -156,5 +132,7 @@ export async function initOnlineGame(display_name: string, userId: number) {
 // --- Helper to cleanup Socket connexion ---
 export function cleanupSocket(socket: SocketIOClient.Socket) {
     socket.removeAllListeners();
-    socket.disconnect();
+    if (socket.connected) {
+        socket.disconnect();
+    }
 }

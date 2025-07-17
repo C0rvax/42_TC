@@ -4,6 +4,8 @@ import { navigateTo } from "../services/router.js";
 import { t } from '../services/i18nService.js';
 import { createElement } from '../utils/domUtils.js';
 import { initializeGame, quitGameHandler } from "../services/gameService.js";
+import { initCountdown } from '../components/countdown.js';
+import socket from '../services/socket.js';
 
 export function GameRoomPage(mode: GameMode): HTMLElement {
 	const leftUsername = createElement('div', { id: 'left-username', className: 'w-48 text-center text-3xl font-beach text-white bg-teal-800/50 border-4 border-teal-500/50 p-3 rounded-lg shadow-xl' });
@@ -31,14 +33,50 @@ export function GameRoomPage(mode: GameMode): HTMLElement {
 
 	setupUsernames(leftUsername, rightUsername, gameMode);
 
-	const ctx = canvas.getContext('2d');
-	if (!ctx) throw new Error('Canvas context not supported');
+	const startGameFlow = async () => {
+        const matchId = sessionStorage.getItem('matchId');
+        if (!matchId) {
+            console.error("No matchId found, cannot start game flow.");
+            navigateTo('/game');
+            return;
+        }
+        if (!socket.connected) {
+            socket.connect();
+        }
+        await new Promise<void>(resolve => {
+            if (socket.connected) {
+                resolve();
+            } else {
+                socket.once('connect', () => resolve());
+            }
+        });
 
-	initializeGame(gameMode, ctx, scoreDisplay);
+        const ctx = canvas.getContext('2d');
+        if (!ctx) throw new Error('Canvas context not supported');
+        initializeGame(gameMode, ctx, scoreDisplay);
 
-	quitButton.addEventListener('click', quitGameHandler);
+        const showCountdown = sessionStorage.getItem('showCountdown') === 'true';
+        if (showCountdown) {
+            sessionStorage.removeItem('showCountdown');
+            const countdownContainer = createElement('div', {
+                className: `fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 text-white text-7xl font-beach [text-shadow:_0_3px_6px_rgb(0_0_0_/_50%)]`
+            });
+            document.body.appendChild(countdownContainer);
+            await initCountdown(countdownContainer);
+        }
+        
+        console.log(`Emitting playerReadyForGame for match ${matchId}`);
+        socket.emit('playerReadyForGame', { matchId });
+    };
 
-	return pageWrapper;
+    startGameFlow().catch(error => {
+        console.error("Failed to start game flow:", error);
+        navigateTo('/dashboard');
+    });
+
+    quitButton.addEventListener('click', () => quitGameHandler());
+
+    return pageWrapper;
 }
 
 function setupUsernames(leftUsername: HTMLElement, rightUsername: HTMLElement, gameMode: GameMode) {

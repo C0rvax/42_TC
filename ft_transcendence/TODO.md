@@ -27,6 +27,9 @@
 - [x] match qui se lance par le back dans online tournament -> mettre un bouton
 - [x] verifier le clean de socket et storage dans tous les cas de figure
 
+- [ ] Compte à rebours pour le tournoi local et partie local
+- [ ] en fin de tournoi online tjrs in-game
+
 - [x] fonctions au bons endroits
 
 - [x] message login pas bonne couleur
