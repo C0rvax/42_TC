@@ -12,36 +12,9 @@ import { MatchHistoryComponent } from '../components/matchHistoryComponent.js';
 import { t, getLanguage } from '../services/i18nService.js';
 import { translateResultMessage } from '../services/responseService.js';
 import { createElement, clearElement } from '../utils/domUtils.js';
+import { adjustFontSizeToFit } from '../utils/format.js';
 
 const DASHBOARD_ACTIVE_TAB_KEY = 'dashboardActiveTab';
-
-function nextFrame(): Promise<void> {
-	return new Promise(resolve => requestAnimationFrame(() => resolve()));
-}
-
-export async function adjustFontSizeToFit(
-	element: HTMLElement,
-	fontSizes: string[] = ['text-2xl', 'text-xl', 'text-lg', 'text-base', 'text-sm', 'text-xs'],
-	truncateClass: string = 'truncate'
-) {
-	element.classList.add('whitespace-nowrap', 'overflow-hidden');
-
-	await nextFrame();
-
-	for (const sizeClass of fontSizes) {
-		fontSizes.forEach(s => element.classList.remove(s));
-		element.classList.add(sizeClass);
-
-		await nextFrame();
-
-		if (element.scrollWidth <= element.clientWidth) {
-			element.classList.remove(truncateClass);
-			return;
-		}
-	}
-
-	element.classList.add(truncateClass);
-}
 
 export async function DashboardPage(): Promise<HTMLElement> {
 	let currentUser: User | null = getUserDataFromStorage();
@@ -119,7 +92,8 @@ export async function DashboardPage(): Promise<HTMLElement> {
 		const avatarImg = createElement('img', {
 			src: user.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.display_name)}&background=random&color=fff&size=128`,
 			alt: `Avatar de ${user.display_name}`,
-			className: 'w-24 h-24 rounded-full object-cover border-4 border-gray-400/30 shadow-lg mb-3'
+			className: 'w-24 h-24 rounded-full object-cover border-4 border-gray-400/30 shadow-lg mb-3',
+			referrerpolicy: 'no-referrer',
 		});
 
 		const profileHeader = createElement('div', { className: 'flex flex-col items-center pb-4 mb-4 border-b border-gray-400/20' }, [

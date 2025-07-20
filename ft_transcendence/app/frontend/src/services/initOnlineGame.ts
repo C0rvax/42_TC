@@ -12,8 +12,6 @@ export async function handleOnlineGame(display_name: string, userId: number, con
         await initOnlineGame(display_name, userId, controller);
     } catch (err: unknown) {
         console.log(err);
-        // showToast(t('msg.error.any'), 'error');
-        // navigateTo('/game');
         throw err;
     }
 }
@@ -24,7 +22,6 @@ type TournamentMatch = {
 };
 
 export async function handleTournamentSearch(size: number, displayName: string, userId: number, controller: AbortController): Promise<void> {
-    // const controller: AbortController = new AbortController();
 
     if (tournamentSocket.connected) {
         tournamentSocket.disconnect();
@@ -69,7 +66,6 @@ export async function handleTournamentSearch(size: number, displayName: string, 
 }
 
 export async function initOnlineGame(display_name: string, userId: number, controller: AbortController): Promise<void> {
-    // const controller: AbortController = new AbortController();
 
     if (socket.connected) {
         socket.disconnect();
@@ -95,13 +91,7 @@ export async function initOnlineGame(display_name: string, userId: number, contr
         sessionStorage.setItem('opponent', opponent);
         removeWaitingToast();
 
-        const countdownContainer = document.createElement('div');    
-        countdownContainer.className = `
-        fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50
-        text-white text-7xl font-beach [text-shadow:_0_3px_6px_rgb(0_0_0_/_50%)]
-    `;  
-        document.body.appendChild(countdownContainer);
-        await initCountdown(countdownContainer);
+        sessionStorage.setItem('showCountdown', 'true');
         navigateTo(`/game-room?matchId=${matchId}`);
     });
     
