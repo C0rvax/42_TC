@@ -194,4 +194,4 @@ J'ai réalisé une sélection de modules pour construire une application robuste
 - **Arthur Duvillaret**
 - **Login 42** : `aduvilla`
 - **GitHub** : [@C0rvax](https://github.com/C0rvax)
-- **LinkedIn** : [Arthur Duvillaret](https://https://www.linkedin.com/in/arthur-duvillaret-427912377/)
+- **LinkedIn** : [Arthur Duvillaret](https://www.linkedin.com/in/arthur-duvillaret-427912377/)
