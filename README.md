@@ -15,7 +15,7 @@ Chaque projet listé ci-dessous représente un défi relevé, des compétences a
 3.  [Le Tronc Commun - Graphisme](#le-tronc-commun---graphisme)
 4.  [Le Tronc Commun - Système & Réseau](#le-tronc-commun---système--réseau)
 5.  [La Branche C++](#la-branche-c)
-6.  [Les Projets Finaux](#les-projets-finaux)
+6.  [Le Projet Final - ft_transcendence](#le-projet-final---ft_transcendence)
 
 ---
 
@@ -103,6 +103,18 @@ Cette section regroupe les projets qui touchent à l'interaction avec le systèm
 - **Description** : Une série d'exercices pratiques pour comprendre et configurer des réseaux TCP/IP, des sous-réseaux, des tables de routage, etc.
 - **Compétences acquises** : Modèle OSI, adresses IP, masques de sous-réseau, routage, configuration réseau.
 
+### `ft_irc`
+![CPP](https://img.shields.io/badge/Language-C++-purple.svg?style=flat-square) ![Network](https://img.shields.io/badge/Tech-Networking-green.svg?style=flat-square)
+
+- **Description** : Créer un serveur IRC (Internet Relay Chat) en C++. Le serveur doit être capable de gérer plusieurs clients simultanément et d'implémenter les commandes de base d'IRC.
+- **Compétences acquises** : Programmation réseau (sockets, TCP/IP), gestion de multiples clients (select/poll), programmation orientée objet en C++.
+
+### `Inception`
+![Docker](https://img.shields.io/badge/Tech-Docker_&_Nginx-blue.svg?style=for-the-badge&logo=docker)
+
+- **Description** : Mettre en place une infrastructure multi-conteneurs (Nginx, WordPress, MariaDB) en utilisant `docker-compose`. Le but est de comprendre la conteneurisation et l'orchestration.
+- **Compétences acquises** : Docker, Dockerfile, `docker-compose`, administration système, réseaux Docker, Nginx, bases de données SQL.
+
 ---
 
 ## La Branche C++
@@ -121,37 +133,65 @@ La découverte de la programmation orientée objet avec le C++.
 
 ---
 
-## Les Projets Finaux
+## Le Projet Final - ft_transcendence
 
-Ces projets de grande envergure combinent de nombreuses technologies et demandent une excellente organisation en groupe.
+![FullStack](https://img.shields.io/badge/Tech-Full_Stack-orange.svg?style=for-the-badge&logo=typescript&logoColor=white) ![Fastify](https://img.shields.io/badge/Fastify-000000?style=for-the-badge&logo=fastify&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-### `Inception`
-![Docker](https://img.shields.io/badge/Tech-Docker_&_Nginx-blue.svg?style=for-the-badge&logo=docker)
+`ft_transcendence` est le projet final du cursus de l'école 42, une épreuve d'endurance qui synthétise l'ensemble des compétences acquises. L'objectif est de créer une plateforme web complète pour jouer à **Pong en temps réel et en multijoueur**.
 
-- **Description** : Mettre en place une infrastructure multi-conteneurs (Nginx, WordPress, MariaDB) en utilisant `docker-compose`. Le but est de comprendre la conteneurisation et l'orchestration.
-- **Compétences acquises** : Docker, Dockerfile, `docker-compose`, administration système, réseaux Docker, Nginx, bases de données SQL.
+Le projet est modulaire : il part d'une base obligatoire et s'enrichit par l'implémentation de modules aux contraintes technologiques imposées.
 
-### `ft_irc`
-![CPP](https://img.shields.io/badge/Language-C++-purple.svg?style=flat-square) ![Network](https://img.shields.io/badge/Tech-Networking-green.svg?style=flat-square)
+### Architecture et Technologies
 
-- **Description** : Créer un serveur IRC (Internet Relay Chat) en C++. Le serveur doit être capable de gérer plusieurs clients simultanément et d'implémenter les commandes de base d'IRC.
-- **Compétences acquises** : Programmation réseau (sockets, TCP/IP), gestion de multiples clients (select/poll), programmation orientée objet en C++.
+- **Backend** : **Node.js** avec le framework **Fastify**, architecturé en **microservices** pour la scalabilité et la maintenabilité.
+- **Frontend** : Application **Single Page (SPA)** développée en **TypeScript** et stylisée avec **Tailwind CSS**.
+- **Base de données** : **SQLite** pour la persistance des données.
+- **Infrastructure & DevOps** : Le projet est entièrement conteneurisé avec **Docker** et `docker-compose`. Le monitoring est assuré par la stack **Prometheus & Grafana**.
+- **Communication temps réel** : **WebSockets** pour le jeu en direct et le chat.
 
-### `ft_transcendence`
-![FullStack](https://img.shields.io/badge/Tech-Full_Stack-orange.svg?style=for-the-badge&logo=typescript&logoColor=white) ![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white) ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+### Modules Implémentés
 
-- **Description** : Le projet final du cursus. Développer une plateforme web complète pour jouer au jeu Pong en ligne et en temps réel, incluant un système de chat, d'amis, d'authentification (via OAuth2) et un matchmaking.
-- **Compétences acquises** :
-  - **Backend** : NestJS (Node.js), TypeScript, WebSockets, API REST, base de données (PostgreSQL), authentification (JWT, OAuth2).
-  - **Frontend** : React/Vue/Angular, gestion d'état, communication avec une API.
-  - **DevOps** : Dockerisation de l'ensemble de l'application.
-  - **Gestion de projet** : Travail en équipe, Git, méthodologie Agile.
+J'ai réalisé une sélection de modules pour construire une application robuste et complète :
+
+- **Web (Major & Minors)** :
+  - `Framework Backend` : Utilisation de **Fastify (Node.js)** pour une API performante.
+  - `Framework Frontend` : Interface moderne avec **TypeScript & Tailwind CSS**.
+  - `Database` : Intégration de **SQLite** pour la gestion des données utilisateurs.
+
+- **User Management (Majors)** :
+  - `Standard User Management` : Système complet de gestion des utilisateurs : inscription, connexion, profil personnalisable avec avatar, liste d'amis avec statut en direct, et historique des matchs.
+  - `Remote Authentication` : Implémentation de l'authentification via un service tiers (**Google Sign-in** - OAuth2).
+
+- **Gameplay & User Experience (Major)** :
+  - `Remote Players` : Le cœur du projet, permettant à deux joueurs de s'affronter à distance en temps réel via le réseau.
+
+- **Cybersecurity (Major)** :
+  - `2FA & JWT` : Sécurisation de l'application avec des **JSON Web Tokens (JWT)** pour les sessions et une authentification à deux facteurs (**2FA**) pour les comptes utilisateurs.
+
+- **DevOps (Major & Minor)** :
+  - `Designing the Backend as Microservices` : Architecture du backend en services indépendants (ex: service utilisateur, service de jeu) pour une meilleure résilience et scalabilité.
+  - `Monitoring System` : Mise en place de **Prometheus** pour la collecte de métriques et de **Grafana** pour la création de dashboards de visualisation.
+
+- **Accessibility (Minor)** :
+  - `Multiple Language Support` : Internationalisation de l'interface pour la rendre accessible en plusieurs langues.
+
+- **AI-Algo (Minor)** :
+  - `User and Game Stats Dashboards` : Création de tableaux de bord pour que les utilisateurs puissent visualiser leurs statistiques de jeu (victoires, défaites, etc.).
+
+### Compétences Clés Démontrées
+
+- **Développement Backend** : Conception d'API RESTful, architecture microservices, programmation asynchrone (Node.js), gestion de bases de données SQL.
+- **Développement Frontend** : Création d'interfaces utilisateur réactives et dynamiques (SPA), gestion d'état, communication avec une API.
+- **DevOps & Infrastructure** : Conteneurisation (Docker), orchestration simple (docker-compose), mise en place de monitoring.
+- **Réseau & Temps Réel** : Utilisation des WebSockets pour une faible latence.
+- **Cybersécurité** : Implémentation de standards d'authentification modernes (OAuth2, JWT, 2FA).
+- **Gestion de projet** : Conception d'une application complexe, décomposition en modules, respect de contraintes techniques fortes.
 
 ---
 
 ### Auteur
 
-- **[Votre Nom]**
-- **Login 42** : `votre-login`
-- **GitHub** : `[@votre-github](https://github.com/votre-github)`
+- **[Arthur Duvillaret]**
+- **Login 42** : `aduvilla`
+- **GitHub** : `[@C0rvax](https://github.com/C0rvax)`
 - **LinkedIn** : `[Votre Profil](https://www.linkedin.com/in/votre-profil/)`
