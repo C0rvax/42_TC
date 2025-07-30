@@ -25,9 +25,6 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 
 	wp plugin install redis-cache --activate --allow-root
 	wp redis enable --allow-root
-	if [ -f /subject.html ]; then
-		mv /subject.html /var/www/html/subject.html
-	fi
 fi
 
 chown -R www-data:www-data /var/www/html/
